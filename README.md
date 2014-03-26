@@ -1,4 +1,9 @@
 Tchat
 =====
 
-This is my first PHP project based on OneThink .
+这是我的第一个PHP项目，基于OneThink内容管理框架.
+
+安装
+1、安装前请先行下载Onethink开发框架，并将框架解压到需要安装的站点目录（注意，此时不要进行安装）；
+2、将本项目所有文件及目录上传到Onethink框架所在目录，并覆盖所有重名文件；
+3、运行install.php，根据提示进行安装
