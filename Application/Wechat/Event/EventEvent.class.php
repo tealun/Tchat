@@ -17,17 +17,17 @@ class EventEvent {
 
 			switch ($event){
 				//如果是关注事件，拉取客户资料进行存储
-				//TODO 此功能为认证帐号才有，这可考虑添加帐号认证判断
+				//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态
 				case 'subscribe':
-/*					if ($info = get_client_info($openId)){
-						$data = $info;
+					if (WEB_ACCOUNT_RZ === '1'){
+						$data = get_client_info($openId);
 						$data['event_key']=$evnetKey;
 						$data['ticket']=$ticket;
-					}*/
+					}else{
 						$data['openid']=$openId;
 						$data['subscribe']='1';
 						$data['subscribe_time']=time();
-
+					}
 					var_dump($data);
 					    $Client = D('Tchat_client'); // 实例化Tchat_client对象
 						$Client->update($data);
