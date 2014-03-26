@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+<meta charset="utf-8">
+<title>微信消息处理接口 自动回复 响应测试工具 BinGuoTester Ver 1.0 - 宾果</title>
+<link rel="stylesheet" href="script/style.css" type="text/css" >
+<link href="http://open.binguo.me/Public/Images/favicon.ico" rel="SHORTCUT ICON">
+<script type="text/javascript" src="script/jquery-1.9.0.min.js"></script>
+<script charset="utf-8" src="http://api.map.soso.com/v1.0/main.js"></script>
+<!-- 本工具由 http://bbs.binguo.me 微信公众平台开发者交流论坛提供 -->
+<!-- Copyright © 2013 BinGuo.Co.Ltd. All rights reserved. -->
+<script type="text/javascript">
+var init = function() {
+    var map = new soso.maps.Map(document.getElementById("container"),{
+        center: new soso.maps.LatLng(39.916527,116.397128),
+        zoomLevel: 10
+    });	
+    soso.maps.Event.addListener(map, 'click', function(event) {
+		$("input[name='input']").val(event.latLng.getLat() + ',' +
+        event.latLng.getLng() + ',' +map.getZoomLevel()).css('color','#09F').css('font-weight','800');
+    });
+}
+$(function(){
+	$("input").dblclick(function(){
+		clear(this);
+	});
+	$("select[name='type']").change(function(){
+		$("input[name='input']").css('color','#333');
+		var i = $(this).val();
+		if(i == 'TEXT'){
+			$("input[name='input']").val("此处输入发送内容,双击清除文本。");
+		}else if(i == 'IMAGE'){
+			$("input[name='input']").val("如有必要，此处可填写图片url。");
+		}else if(i == 'LOCAL'){
+			$("input[name='input']").val("单击此处开始标注位置，点击地图拾取坐标。");
+			$("input[name='input']").click(function(){
+				if($("select[name='type']").val() == 'LOCAL') $("#container").css('display','block').fadeIn('slow');
+			})
+		}else if(i == 'EVENT'){
+			$("input[name='input']").val("输入：1 （关注） 0 （取消关注）");
+		}
+	})
+	
+	$("#close").click(function(){
+			var i = $(this).val();
+			$("#container").hide('fast');
+			$("input[name='input']").css('font-weight','400');
+	})
+	$(".cupid-blue").click(function(){
+		$("#demo").html('');
+		$("#xml").html("数据请求中 >>> ").css("color","#F93");
+		var TOKEN = $("input[name='token']").val();
+		if(TOKEN == 'TOKEN 选填') TOKEN = '';
+		 $.ajax({
+		   type: "POST",
+		   url: "script/Post.php",
+		   processData: false,
+		   dataType: "json",
+		   timeout: 5000,
+		   error: function(XMLHttpRequest, textStatus, errorThrown){
+			   		if(textStatus == 'timeout'){
+						var notice = '响应超时 或 无正确返回！';
+					}else{
+						var notice = '请检查接口代码 或 TOKEN！';
+					}
+					$("#xml").html(notice).css("color","#F00");
+			}, 
+		   data: "url="+$("input[name='url']").val()+"&type="+$("select[name='type']").val()+"&input="+$("input[name='input']").val()+"&token="+TOKEN,
+		   success: function(data){
+								$("#xml").html(data.xml).fadeIn('slow').css("color","#06C");
+								$("#demo").html(data.demo);}
+		 });
+
+	})
+	function clear(me){
+		$(me).val("")
+	}
+})
+</script>
+
+</head>
+<body onload="init()">
+<div class="warp">
+<div class="input">
+<input type="text" name="url" class="bor ipt" value="http://tchat2.guilingo.com/index.php?s=/Wechat/Wechat/index.html"> 
+<select name="type" class="bor set"><option value="TEXT" selected>文本</option><option value="IMAGE">图片</option><option value="LOCAL">位置</option><option value="EVENT">事件</option></select>
+</div>
+<div class="input">
+<input type="text" name="input" class="bor pt" value="介绍">
+<input type="text" name="token" class="bor spt" value="TOKEN 选填">
+ <button class="cupid-blue">Send</button>
+
+</div>
+<div class="echo bor">
+<div id="xml"></div>
+<div id="demo"></div>
+</div>
+</div>
+<div class="footer">BinGuoTester Ver 1.0  © By YangLin   <a href="http://bbs.binguo.me" title="开发者交流论坛" target="_blank">http://bbs.binguo.me</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://open.binguo.me" title="开放平台" target="_blank">http://open.binguo.me</a></div>
+<div id="container"><a href="javascript:;" id="close">X</a></div>
+</body>
+</html>

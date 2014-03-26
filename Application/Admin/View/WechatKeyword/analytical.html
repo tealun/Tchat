@@ -1,0 +1,28 @@
+<extend name="Public/base"/>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="sidemenu" />
+</block>
+
+<block name="body">
+	<div class="main-title">
+		<h2>关键词分析</h2>
+	</div>
+		<div class="tab-wrap">
+		<ul class="tab-nav nav">
+		<volist name="topics" id="group">
+
+			<li <eq name="id" value="$key">class="current"</eq>><a href="{:U('?id='.$key)}">{$group}分析</a></li>
+
+		</volist>
+		</ul>
+		<div class="tab-content">
+			<div class="tips-bar large" >本功能尚待开发</div>
+			</div>
+	</div>
+</block>
+
+<block name="script">
+
+</block>
