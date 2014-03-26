@@ -420,7 +420,7 @@ CREATE TABLE `onethink_tchat_client` (
 	`subscribe_time` int(10) NOT NULL DEFAULT '0' COMMENT'微信客户关注时间',
 	`event_key` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '扫描关注时的EventKey',
 	`ticket` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '扫描时的二维码Ticket,可换取二维码',
-	PRIMARY KEY(`id`)，
+	PRIMARY KEY(`id`),
     UNIQUE KEY `uk_openId` (`openId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '微信客户信息表';
 
