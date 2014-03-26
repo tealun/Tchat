@@ -42,7 +42,10 @@ class ActivityEvent{
 							$map['segment'] = 'activity';
 							$map['name'] = '抢红包';
 							$rs = M('Tchat_keyword_group')->where($map)->find();
-							$reply = A('Reply','Event')->wechatReply($rs);
+							//判断是否过期，过期则回复过期回复文字，有效则进入相应模型查找回应内容。
+							return $reply = $rs['deadline']<time()
+												?get_text_arr(M('Tchat_text')->where('`id`="'.$rs['dead_text'].'"')->getField('content'))
+												:A('Reply','Event')->wechatReply($rs);
 						}
 						break;
 
