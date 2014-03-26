@@ -172,7 +172,7 @@ INSERT INTO `onethink_category` VALUES ('33', 'share_story', '行业故事', '31
 -- -----------------------------
 DELETE FROM `onethink_channel` WHERE `id` = '2' limit 1;
 DELETE FROM `onethink_channel` WHERE `id` = '3' limit 1;
-INSERT INTO `onethink_channel` VALUES ('4', '0', '公司', 'Article/index?category=about', '2', '1379475131', '1379483713', '1', '0');
+INSERT INTO `onethink_channel` VALUES ('4', '0', '关于', 'Article/index?category=about', '2', '1379475131', '1379483713', '1', '0');
 INSERT INTO `onethink_channel` VALUES ('5', '0', '新闻', 'Article/index?category=news', '3', '1379475131', '1379483713', '1', '0');
 INSERT INTO `onethink_channel` VALUES ('6', '0', '分享', 'Article/index?category=share', '4', '1379475131', '1379483713', '1', '0');
 INSERT INTO `onethink_channel` VALUES ('3', '0', '相册', 'Album/index', '5', '1379475131', '1379483713', '1', '0');
@@ -286,7 +286,7 @@ INSERT INTO `onethink_menu` VALUES ('406', '删除', '401', '0', 'Admin/WechatAl
 DROP TABLE IF EXISTS `onethink_tchat_activity`;
 CREATE TABLE `onethink_tchat_activity` (
 	`id` int(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '活动ID',
-	`act_type` ENUM('常规','折扣','优惠券','刮刮卡','大转盘','幸运机','抽奖','邀请','竞拍','秒杀') NOT NULL DEFAULT '常规' COMMENT '对应活动类型',
+	`act_type` ENUM('常规','折扣','优惠券','刮刮卡','大转盘','幸运机','抢红包','抽奖','邀请','竞拍','秒杀') NOT NULL DEFAULT '常规' COMMENT '对应活动类型',
 	`startup` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '启动时间',
 	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`act_add` varchar(100) NOT NULL DEFAULT 'Local' COMMENT '活动地点',
