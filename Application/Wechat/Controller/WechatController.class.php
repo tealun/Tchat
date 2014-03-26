@@ -175,12 +175,14 @@ class WechatController extends Controller {
 				$articles[$i]['Title'] = $var['title'];
 				$articles[$i]['Description']= $var['description'];
 					if($i==0){
-						$defaultPicUrl = 'http://'.$_SERVER['HTTP_HOST'].'/Public/Home/images/intro/'.rand(1,9).'.jpg';
-						$articles[$i]['PicUrl'] = $var['cover_id'] == 0?$defaultPicUrl:M('Picture')->where('`id` = "'.$var['cover_id'].'"')->getField('url');
+						$defaultPicUrl = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Public/Home/images/intro/'.rand(1,9).'.jpg';
+						$articles[$i]['PicUrl'] = $var['cover_id'] == 0?$defaultPicUrl
+						:'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
 					}else{
-						$articles[$i]['PicUrl'] = $var['cover_id'] == 0?'':M('Picture')->where('`id` = "'.$var['cover_id'].'"')->getField('url');
+						$articles[$i]['PicUrl'] = $var['cover_id'] == 0?''
+						:'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
 					}
-				$articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].'/Home/Article/detail/id/'.$var['id'].'.html';
+				$articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Home/Article/detail/id/'.$var['id'].'.html';
 				$i++;
 				if($i >= 9) { break; } //最多只允许10条新闻
 				}
