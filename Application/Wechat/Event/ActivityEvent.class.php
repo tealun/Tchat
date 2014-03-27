@@ -35,6 +35,7 @@ class ActivityEvent{
 						}else{
 							//获取客户数据完整后更新客户资料
 							$data['id']=M('Tchat_client')->where(array('openid'=>$openId))->getField('id');
+							$data['openid']=$openId;
 							$data['name']=$name;
 							$data['phone']=$phone;
 							D('Tchat_client')->update($data);
