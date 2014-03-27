@@ -13,7 +13,7 @@ $(function(){
         query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
         query = query.replace(/^&/g,'');
 		if(segment != ''){
-			query += 'segment=' + segment + "&" + query;
+			query += '&segment=' + segment;
         }
         if( url.indexOf('?')>0 ){
             url += '&' + query;
