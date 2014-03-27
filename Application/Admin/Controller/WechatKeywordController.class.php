@@ -144,7 +144,7 @@ class WechatKeywordController extends WechatController {
         }
         if(isset($_GET['keyword'])){
             $map['name']  = array('like', '%'.(string)I('keyword').'%');
-            $this->assign('keyword', $map['keyword']);
+            $this->assign('keyword', $_GET['keyword']);
         }
         if(isset($_GET['status'])){
             $map['status'] = I('status');
