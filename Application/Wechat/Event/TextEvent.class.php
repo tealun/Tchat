@@ -46,10 +46,16 @@ class TextEvent{
 					//对关键字进行匹配查询
 					$findGroup = $New ->where(array('keyword'=>$keyword))->distinct(true)->field('group_id')->limit(10)-> select();
 					if($findGroup){
-						return $reply = $this->keywordMatch($findGroup);
+						if($reply = $this->keywordMatch($findGroup)){
+							return $reply;
+						}else{
+							$reply = $this-> keywordLike($keyword);
+							return $reply?$reply:get_text_arr("/::< 抱歉，没有为您找到想要的结果。");
+						}
 					}elseif(is_null($findGroup)){
 							//没有全匹配查询结果，返回数据为空时进行一次模糊查询
-							return $reply = $this-> keywordLike($keyword);
+							$reply = $this-> keywordLike($keyword);
+							return $reply?$reply:get_text_arr("/::< 抱歉，没有为您找到想要的结果。");
 					}
 				}
 			}
@@ -63,10 +69,15 @@ class TextEvent{
 			//只一条匹配结果
 			$map['id'] = $findGroup[0]['group_id'];
 			$rs = M('Tchat_keyword_group')->where($map)->find();
+			
+			if($rs['status'] == '0' || $rs['status'] == '-1'){
+				return false;
+			}else{
 			//判断是否过期，0为长期有效，过期则回复过期回复文字，有效则进入相应模型查找回应内容。
 			return $reply = 0<$rs['deadline']&& $rs['deadline']<time()
 								?get_text_arr(M('Tchat_text')->where('`id`="'.$rs['dead_text'].'"')->getField('content'))
 								:A('Reply','Event')->wechatReply($rs);
+			}
 		}
 	}
 	/**
@@ -95,6 +106,7 @@ class TextEvent{
 
 				$Group = M('Tchat_keyword_group');
 				$map['id'] = array('in',$ids);
+				$map['status'] = array('eq','1');
 				$map['deadline'] = array('NOT BETWEEN',array('1',time()));
 				$name = $Group->where($map)->getField('id,name');
 
@@ -106,14 +118,22 @@ class TextEvent{
 					$i++;
 					}
 					$i--;
+					if($i == 1){ //当只找到一条记录符合时，直接回复该关键词组对应的回复
+						$map['id'] = $k;
+						$rs = M('Tchat_keyword_group')->where($map)->find();
+						return $reply = A('Reply','Event')->wechatReply($rs);
+						S($i,NULL);//清除缓存
+					}else{ //找到多个符合的记录是，提供选择并缓存
 					$content = "[愉快]为您找到".$i."个结果：\n"
 							.$contentlist.
 							"您可以回复以上序号查看相关信息。\n (一分钟内有效)\r(づ￣ ³￣)づ";
 					unset($i);
+					return get_text_arr($content);
+					}
 				}else {
-					$content = "/::< 抱歉，没有为您找到想要的结果。";
+					return false;
 				}
-				return get_text_arr($content);
+				
 				exit;
 	}
 	
