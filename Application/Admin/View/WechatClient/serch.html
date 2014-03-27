@@ -1,0 +1,28 @@
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<div class="drop-down">
+					<span id="sch-sort-txt" class="sort-txt" data="{$col}">{$col?'条件':'所有'}</span>
+					<i class="arrow arrow-down"></i>
+					<ul id="sub-sch-menu" class="nav-list hidden">
+						<li><a href="javascript:;" value="">所有</a></li>
+						<li><a href="javascript:;" value="name">姓名</a></li>
+						<li><a href="javascript:;" value="phone">电话</a></li>
+						<li><a href="javascript:;" value="openid">openId</a></li>
+					</ul>
+				</div>
+				<input type="text" name="keyword" class="search-input" value="{:I('keyowrd')}" placeholder="请输入关键词">
+				<a class="sch-btn" href="javascript:;" id="search" url="{:U('index','',false)}"><i class="btn-search"></i></a>
+			</div>
+            <div class="btn-group-click adv-sch-pannel fl">
+                <button class="btn">高 级<i class="btn-arrowdown"></i></button>
+                <div class="dropdown cf">
+                	<div class="row">
+                		<label>关注时间：</label>
+                		<input type="text" id="time-start" name="time-start" class="text input-2x" value="" placeholder="起始时间" /> -
+                		<input type="text" id="time-end" name="time-end" class="text input-2x" value="" placeholder="结束时间" />
+                	</div>
+                </div>
+            </div>
+		</div>
+	</div>

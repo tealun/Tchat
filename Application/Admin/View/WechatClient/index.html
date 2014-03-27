@@ -1,0 +1,58 @@
+<extend name="Public/base"/>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="sidemenu" />
+</block>
+
+<block name="body">
+	<div class="main-title">
+		<h2>{$meta_title}</h2><span>{:C('WECHAT_NICKNAME')}</span>
+	</div>
+		<div class="cf">
+		<div class="fl">
+			<if condition="isset($col)" > <a class="btn" href="{:U('index')}" >全部</a>
+		</div>
+
+		<!-- 高级搜索 -->
+	<include file="serch" />
+
+		<!-- 数据表格 -->
+    <div class="data-table">
+		<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">编号</th>
+		<th class="">姓名</th>
+		<th class="">电话</th>
+		<th class="">OpenID</th>
+		<th class="">关注时间</th>
+		</tr>
+    </thead>
+    <tbody>
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+			<td>{$vo.id} </td>
+			<td><a href=""><span>{$vo.name}</span></a></td>
+			<td><a href=""><span>{$vo.phone}</span></a></td>
+			<td><span>{$vo.openid}</span></td>
+			<td><span>{:Date('Y-m-d H:i:s',$vo['subscribe_time'])}</span></td>
+		</tr>
+		</volist>
+	</tbody>
+    </table> 
+
+        
+	</div>
+
+	<!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+
+</block>
+<block name="script">
+<include file="footjs" />
+</block>
