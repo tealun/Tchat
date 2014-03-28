@@ -45,4 +45,16 @@ class TchatClientModel extends Model{
             }
         }
     }
+    
+    public function getClintId($openId){
+    	$id = $this->where(array('openid'=>$openId))->getField('id');
+    	if(!$id){
+    		$data = array(
+    			'openid'=>$openId,
+    		);
+    		$this->create($data);
+    		$id = $this->add();
+    	}
+    	return $id;
+    }
 }
