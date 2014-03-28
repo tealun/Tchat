@@ -582,6 +582,18 @@ CREATE TABLE `onethink_tchat_music` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '音乐类型回复内容表';
 
 -- -----------------------------
+-- Table structure for `onethink_tchat_suggestion`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_tchat_suggestion`;
+CREATE TABLE `onethink_tchat_suggestion` (
+	`id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '建议条目ID',
+	`client_id` int(10) NOT NULL COMMENT '微信客户ID',
+	`content` varchar(250) NOT NULL COMMENT '建议内容',
+	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+	PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '微信客户建议内容表';
+
+-- -----------------------------
 -- Table structure for `onethink_tchat_text`
 -- -----------------------------
 DROP TABLE IF EXISTS `onethink_tchat_text`;
@@ -598,9 +610,9 @@ CREATE TABLE `onethink_tchat_text` (
 -- -----------------------------
 -- Records of `onethink_tchat_text`
 -- -----------------------------
-INSERT INTO `onethink_tchat_text` VALUES ('1','这是第一条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('2','这是第二条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('3','这是第三条测试用的回复文本内容','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('1','感谢您的关注，如需了解如何使用请回复“帮助”或“?”','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('2','您可以通过回复如下关键字获取我们的信息\n帮助：获得账号的使用帮助\n新闻：了解我们的最新新闻或动态\n活动：了解我们的最新活动\n优惠：了解我们的最新优惠\n建议：给我们提提您的建议','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('3','非常感谢您的配合，祝您生活愉快。','3','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('4','这是第四条测试用的回复文本内容','3','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('5','这是第五条测试用的回复文本内容','3','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('6','这是第六条测试用的回复文本内容','3','1393292899','1393292899');
