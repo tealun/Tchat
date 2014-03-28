@@ -58,7 +58,7 @@ class WechatClientController extends WechatController {
 	
  
     private function getLists($map){
-    	$list   = $this->lists('Tchat_client',$map,'subscribe_time');
+    	$list   = $this->lists('Tchat_client',$map);
 		$this->assign('_list', $list);
     }
     
