@@ -176,7 +176,7 @@ class WechatKeywordController extends WechatController {
     }
     
     private function getLists($map){
-    	$list   = $this->lists('Tchat_keyword_group',$map,'create_time');
+    	$list   = $this->lists('Tchat_keyword_group',$map);
     	col_to_string($list);
 		$this->assign('_list', $list);
     }
