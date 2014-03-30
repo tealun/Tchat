@@ -35,22 +35,7 @@ class TchatKeywordGroupModel extends Model{
         array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
     );
 
-    /**
-     * 获取文档列表
-     * @param  integer  $category 分类ID
-     * @param  string   $order    排序规则
-     * @param  integer  $status   状态
-     * @param  boolean  $count    是否返回总数
-     * @param  string   $field    字段 true-所有字段
-     * @param  string   $limit    分页参数
-     * @param  array    $map      查询条件参数
-     * @return array              文档列表
-     * @author huajie <banhuajie@163.com>
-     */
-    public function lists($category, $order = '`id` DESC', $status = 1, $field = true, $limit = '10', $map = array()){
-        $map = array_merge($this->listMap($category, $status), $map);
-        return $this->field($field)->where($map)->order($order)->limit($limit)->select();
-    }
+
 
     /**
      * 计算列表总数
@@ -92,38 +77,6 @@ class TchatKeywordGroupModel extends Model{
     }
 
     /**
-     * 返回前一篇文档信息
-     * @param  array $info 当前文档信息
-     * @return array
-     */
-    public function prev($info){
-        $map = array(
-            'id'          => array('lt', $info['id']),
-            'category_id' => $info['category_id'],
-            'status'      => 1,
-        );
-
-        /* 返回前一条数据 */
-        return $this->field(true)->where($map)->order('id DESC')->find();
-    }
-
-    /**
-     * 获取下一篇文档基本信息
-     * @param  array    $info 当前文档信息
-     * @return array
-     */
-    public function next($info){
-        $map = array(
-            'id'          => array('gt', $info['id']),
-            'category_id' => $info['category_id'],
-            'status'      => 1,
-        );
-
-        /* 返回下一条数据 */
-        return $this->field(true)->where($map)->order('id')->find();
-    }
-
-    /**
      * 新增或更新一个文档
      * @param array  $data 手动传入的数据
      * @return boolean fasle 失败 ， int  成功 返回完整的数据
@@ -156,7 +109,8 @@ class TchatKeywordGroupModel extends Model{
             }
         }
 
-        /* 添加或新增扩展内容 */
+        /*
+        // 添加或新增扩展内容 
         $logic = $this->logic($data['model_id']);
         if(!$logic->update($id)){
             if(isset($id)){ //新增失败，删除基础数据
@@ -172,7 +126,8 @@ class TchatKeywordGroupModel extends Model{
         if($id){
         	action_log('add_keyword_group', 'group', $id, UID);
         }
-
+        */
+        
         //内容添加或更新完成
         return $data;
     }
@@ -189,73 +144,6 @@ class TchatKeywordGroupModel extends Model{
 		}
 		M('Tchat_keyword')->addAll($dataList);
 	}
-
-    /**
-     * 获取段落列表
-     * @param  integer $id    文档ID
-     * @param  integer $page  显示页码
-     * @param  boolean $field 查询字段
-     * @param  boolean $logic 是否查询模型数据
-     * @return array
-     */
-    public function part($id, $page = 1, $field = true, $logic = true){
-        $map  = array('status' => 1, 'type' => 3, 'pid' => $id);
-        $info = $this->field($field)->where($map)->page($page, 10)->order('id')->select();
-        if(!$info) {
-            $this->error = '该文档没有段落！';
-            return false;
-        }
-
-        /* 不获取段落详情 */
-        if(!$logic){
-            return $info;
-        }
-
-        /* 获取段落详情 */
-        $model = $logic = array();
-        foreach ($info as $value) {
-            $model[$value['model_id']][] = $value['id'];
-        }
-        foreach ($model as $model_id => $ids) {
-            $data   = $this->logic($model_id)->lists($ids);
-            $logic += $data;
-        }
-
-        /* 合并数据 */
-        foreach ($info as &$value) {
-            $value = array_merge($value, $logic[$value['id']]);
-        }
-
-        return $info;
-    }
-
-    /**
-     * 获取指定文档的段落总数
-     * @param  number $id 段落ID
-     * @return number     总数
-     */
-    public function partCount($id){
-        $map = array('status' => 1, 'type' => 3, 'pid' => $id);
-        return $this->where($map)->count('id');
-    }
-
-    /**
-     * 获取推荐位数据列表
-     * @param  number  $pos      推荐位 1-列表推荐，2-频道页推荐，4-首页推荐
-     * @param  number  $category 分类ID
-     * @param  number  $limit    列表行数
-     * @param  boolean $filed    查询字段
-     * @return array             数据列表
-     */
-    public function position($pos, $category = null, $limit = null, $field = true){
-        $map = $this->listMap($category, 1, $pos);
-
-        /* 设置列表数量 */
-        is_numeric($limit) && $this->limit($limit);
-
-        /* 读取数据 */
-        return $this->field($field)->where($map)->select();
-    }
 
     /**
      * 获取数据状态
@@ -318,35 +206,6 @@ class TchatKeywordGroupModel extends Model{
     protected function getDeadTime(){
         $dead_time    =   I('post.deadline');
         return $dead_time?strtotime($dead_time):'0';
-    }
-    
-    /**
-     * 验证分类是否允许发布内容
-     * @param  integer $id 分类ID
-     * @return boolean     true-允许发布内容，false-不允许发布内容
-     */
-    public function checkCategory($id){
-        $publish = get_category($id, 'allow_publish');
-        return $publish ? true : false;
-    }
-
-    /**
-     * 检测分类是否绑定了指定模型
-     * @param  array $info 模型ID和分类ID数组
-     * @return boolean     true-绑定了模型，false-未绑定模型
-     */
-    protected function checkModel($info){
-        $model = get_category($info['category_id'], 'model');
-        return in_array($info['model_id'], $model);
-    }
-
-    /**
-     * 获取扩展模型对象
-     * @param  integer $model 模型编号
-     * @return object         模型对象
-     */
-    private function logic($model){
-        return D(get_document_model($model, 'name'), 'Logic');
     }
 
     /**
@@ -425,25 +284,6 @@ class TchatKeywordGroupModel extends Model{
         }
         return $name;
     }
-
-    /**
-     * 生成推荐位的值
-     * @return number 推荐位
-     * @author huajie <banhuajie@163.com>
-     */
-    protected function getPosition(){
-        $position = I('post.position');
-        if(!is_array($position)){
-            return 0;
-        }else{
-            $pos = 0;
-            foreach ($position as $key=>$value){
-                $pos += $value;		//将各个推荐位的值相加
-            }
-            return $pos;
-        }
-    }
-
 
     /**
      * 删除状态为-1的数据（包含扩展模型）
