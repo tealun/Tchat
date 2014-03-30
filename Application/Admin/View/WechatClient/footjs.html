@@ -13,7 +13,11 @@ $(function(){
         query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
         query = query.replace(/^&/g,'');
 		if(col != ''){
-			query += '&col=' + col;
+			if(query != ''){
+				query += '&col=' + col;
+				}else{
+				query += 'col=' + col;
+				}
         }
         if( url.indexOf('?')>0 ){
             url += '&' + query;
