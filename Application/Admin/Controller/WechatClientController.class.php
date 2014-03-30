@@ -23,13 +23,14 @@ class WechatClientController extends WechatController {
 
 	        $map = array();
 	        
-	    if(isset($_GET['keyword'])){
-	    	if($_GET['col']){
+	    if(isset($_GET['col'])){
+	    	if($_GET['keyword']){
 	    	$map[$_GET['col']]  = array('like', '%'.(string)I('keyword').'%');
 	    	}else{
-            $map['name']  = array('like', '%'.(string)I('keyword').'%');
+            $map[$_GET['col']]  = array('neq', '');
 	    	}
-            $this->assign('keyword', $_GET['keyword']);
+	    	$col = $_GET['col'];
+            $this->assign('col', $col);
         }
         
         if ( isset($_GET['time-start']) ) {
@@ -59,6 +60,7 @@ class WechatClientController extends WechatController {
  
     private function getLists($map){
     	$list   = $this->lists('Tchat_client',$map);
+    	col_to_string($list);
 		$this->assign('_list', $list);
     }
     
