@@ -22,7 +22,7 @@
 	<div class="tab-content">
 	<!-- 表单 -->
 	<form id="form" action="{:U('update')}" method="post" class="form-horizontal">
-		<!-- 基础文档模型 -->
+		<!-- 基础关键词分组模型 -->
 		<volist name=":parse_config_attr($model['field_group'])" id="group">
         <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
             <volist name="fields[$key]" id="field">
@@ -188,9 +188,7 @@
 			</button>
 			</if>
 			<input type="hidden" name="id" value="{$data.id|default=''}"/>
-			<input type="hidden" name="pid" value="{$data.pid|default=''}"/>
 			<input type="hidden" name="model_id" value="{$data.model_id|default=''}"/>
-			<input type="hidden" name="category_id" value="{$data.category_id|default=''}">
 		</div>
 	</form>
 	</div>
