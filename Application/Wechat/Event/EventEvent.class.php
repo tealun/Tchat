@@ -28,9 +28,13 @@ class EventEvent {
 						$data['subscribe']='1';
 						$data['subscribe_time']=time();
 					}
-					var_dump($data);
 					    $Client = D('Tchat_client'); // 实例化Tchat_client对象
 						$Client->update($data);
+				case 'unsubscribe':
+					$data['openid']=$openId;
+					$data['subscribe']='0';
+					$Client = D('Tchat_client'); // 实例化Tchat_client对象
+					$Client->update($data);
 			}
 			
 			$id = M('Tchat_events')->where('`event_type` = "'.$event.'"')->getField('id');
