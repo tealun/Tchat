@@ -51,7 +51,7 @@ class WechatClientController extends WechatController {
 	*
 	*/
 	public function unsubscribe(){
-		$map['subscribe'] = array('eq','-1');
+		$map['subscribe'] = array('eq','0');
 		$this->getLists($map);
 		$this->meta_title = '已取消关注客户';
 		$this->display(); // 输出模板
