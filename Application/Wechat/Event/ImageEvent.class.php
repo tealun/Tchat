@@ -5,8 +5,8 @@ class ImageEvent{
 
 	/**
 	 * 对图片类型消息进行处理
-	 * @param string $openId 客户微信唯一识别码openid
-	 * @param unknown_type $keyword 客户发送的文本信息
+	 * @param $openId 客户openid
+	 * @param $mediaId 图片ID
 	 */
 	public function imageHandle($openId,$mediaId){
 		//认证判断
@@ -61,12 +61,12 @@ private function downloadWeixinFile($url)
 }
 
 /**
- * 存储客户发送的图片
- * @author 方倍工作室  <http://www.cnblogs.com/txw1958/>
+ * 存储客户发送的图片。
  * 有更改，增加一个传入参数$filePath并对此参数进行目录检查，不存在则建立，以解决只能存储在既有目录的问题
- * @param string $filePath
- * @param string $fileName
- * @param object $fileContent
+ * @author 方倍工作室  <http://www.cnblogs.com/txw1958/>
+ * @param string $filePath 存储目录路径
+ * @param string $fileName 文件名
+ * @param object $fileContent 从微信服务器下载到的文件对象
  */
 private function saveWeixinFile($filePath,$fileName, $fileContent)
 {
