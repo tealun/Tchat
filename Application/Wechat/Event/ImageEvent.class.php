@@ -2,44 +2,41 @@
 namespace Wechat\Event;
 
 class ImageEvent{
-		
-	/**
-	 * 图片类型数据处理 
-	 * @param  string $keyword    文本类型
-	 * 
-	 */
-	public function index() {
-	
-	}
-	
+
 	/**
 	 * 对图片类型消息进行处理
 	 * @param string $openId 客户微信唯一识别码openid
 	 * @param unknown_type $keyword 客户发送的文本信息
 	 */
 	public function imageHandle($openId,$mediaId){
-		//下载图片
-		$accessToken = get_access_token();
-		$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$accessToken&media_id=$mediaId";
-		$fileInfo = $this->downloadWeixinFile($url);
+		//认证判断
+		if(WEB_ACCOUNT_RZ === '1'){
+			//下载图片
+			$accessToken = get_access_token();
+			$url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$accessToken&media_id=$mediaId";
+			$fileInfo = $this->downloadWeixinFile($url);
+			
+			$filePath = CLIENT_PHOTO.date('Ym',time())."/";
+			$fileName = time()."-".rand(100, 999).".jpg";
+			$this->saveWeixinFile($filePath,$fileName, $fileInfo["body"]);
+			
+			/* 将图片存储到数据库中，并与微信客户表中的客户ID关联*/
+			$clientId = get_client_detail($openId, array('id'));
+			$data = array(
+				'client_id' =>$clientId,
+				'photo' => $filePath.$fileName,
+				'create_time' => date('Y-m-d H:i:s',time()),
+			);
+			$picId = M('Tchat_client_photo')->data($data)->add();
+			
+			//回复客户内容
+			$filePath = str_replace('./', '/', $filePath);
+	
+			$content = "( ＾-＾)っ您的图片收到啦\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击查看</a>".C('WECHAT_APP_ID');	
+		}else{
+			$content = "( ＾-＾)っ您的图片收到啦";	
+		}
 		
-		$filePath = CLIENT_PHOTO.date('Ym',time())."/";
-		$fileName = time()."-".rand(100, 999).".jpg";
-		$this->saveWeixinFile($filePath,$fileName, $fileInfo["body"]);
-		
-		/* 将图片存储到数据库中，并与微信客户表中的客户ID关联*/
-		$clientId = get_client_detail($openId, array('id'));
-		$data = array(
-			'client_id' =>$clientId,
-			'photo' => $filePath.$fileName,
-			'create_time' => date('Y-m-d H:i:s',time()),
-		);
-		$picId = M('Tchat_client_photo')->data($data)->add();
-		
-		//回复客户内容
-		$filePath = str_replace('./', '/', $filePath);
-		$content = "( ＾-＾)っ您的图片收到啦\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击查看</a>".C('WECHAT_APP_ID');	
-
 		return $reply = get_text_arr($content);
 	}
 	
