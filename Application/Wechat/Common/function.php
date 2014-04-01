@@ -131,7 +131,7 @@ function get_client_info($openId){
 
 /**
  * 查询数据库中客户详情
- * Enter description here ...
+ * TODO 与Tchat_client模型做比较，看是否整合到该模型类中
  * @param string $openId 客户openId
  * @param array $field	想要查询的字段数组
  */
@@ -146,12 +146,11 @@ function get_client_detail($openId,$field=array()){
 
 /**
  * 获取公众账号的accessToken
- * Enter description here ...
+ * 
  */
 function get_access_token(){
-	//return $accessToken =S('accessToken')?S('accessToken'):save_access_token();
-	$appId = WECHAT_APP_ID;
-	$appSecret = WECHAT_APP_SECRET;
+	$appId = get_ot_config('WECHAT_APP_ID');
+	$appSecret = get_ot_config('WECHAT_APP_SECRET');
 	$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appId.'&secret='.$appSecret;
 
 	$str = file_get_contents($url);
@@ -160,10 +159,13 @@ function get_access_token(){
 	return $accessToken;
 }
 
-
+/**
+ * 缓存公众帐号accessToken
+ *
+ */
 function save_access_token(){
-	$appId = WECHAT_APP_ID;
-	$appSecret = WECHAT_APP_SECRET;
+	$appId = get_ot_config('WECHAT_APP_ID');
+	$appSecret = get_ot_config('WECHAT_APP_SECRET');
 	$url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appId.'&secret='.$appSecret;
 
 	$str = file_get_contents($url);
@@ -171,8 +173,12 @@ function save_access_token(){
 	S('accessToken',$arr['access_token'],120);
 	return $accessToken = S('accessToken');
 }
-
-
-function get_host_root(){
-	return WEB_HOST_NAME;
+/**
+ * 为解决不能C到OT配置写的函数
+ * 
+ * @param $string $name 配置的name标识
+ */ 
+function get_ot_config($name){
+	$res = M('Config')->where(array('name'=>$name))->getField('value');
+	return $res;
 }
