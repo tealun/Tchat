@@ -22,8 +22,8 @@
         <!-- 子导航 -->
         <notempty name="sub_menu">
             <h3>
-            	<i class="icon <neq name="sub_menu['current']" value="1">icon-fold</neq>"></i>
-            	<gt name="sub_menu['allow_publish']" value="0"><a class="item" href="{$sub_menu.url|U}">{$sub_menu.title}</a><else/>{$sub_menu.title}</gt>
+              <i class="icon <neq name="sub_menu['current']" value="1">icon-fold</neq>"></i>
+              <gt name="sub_menu['allow_publish']" value="0"><a class="item" href="{$sub_menu.url|U}">{$sub_menu.title}</a><else/>{$sub_menu.title}</gt>
             </h3>
             <ul class="side-sub-menu <neq name='sub_menu["current"]' value="1">subnav-off</neq>">
                 <volist name="sub_menu['_child']" id="menu">
@@ -33,21 +33,21 @@
                         <!-- 一级子菜单 -->
                         <present name="menu['_child']">
                         <ul class="subitem">
-                        	<foreach name="menu['_child']" item="three_menu">
+                          <foreach name="menu['_child']" item="three_menu">
                             <li>
                                 <gt name="three_menu['allow_publish']" value="0"><a class="item" href="{$three_menu.url|U}">{$three_menu.title}</a><else/><a class="item" href="javascript:void(0);">{$three_menu.title}</a></gt>
                                 <!-- 二级子菜单 -->
                                 <present name="three_menu['_child']">
                                 <ul class="subitem">
-                                	<foreach name="three_menu['_child']" item="four_menu">
+                                  <foreach name="three_menu['_child']" item="four_menu">
                                     <li>
                                         <gt name="four_menu['allow_publish']" value="0"><a class="item" href="{:U('index','cate_id='.$four_menu['id'])}">{$four_menu.title}</a><else/><a class="item" href="javascript:void(0);">{$four_menu.title}</a></gt>
                                         <!-- 三级子菜单 -->
                                         <present name="four_menu['_child']">
                                         <ul class="subitem">
-                                        	<volist name="four_menu['_child']" id="five_menu">
+                                          <volist name="four_menu['_child']" id="five_menu">
                                             <li>
-                                            	<gt name="five_menu['allow_publish']" value="0"><a class="item" href="{:U('index','cate_id='.$five_menu['id'])}">{$five_menu.title}</a><else/><a class="item" href="javascript:void(0);">{$five_menu.title}</a></gt>
+                                              <gt name="five_menu['allow_publish']" value="0"><a class="item" href="{:U('index','cate_id='.$five_menu['id'])}">{$five_menu.title}</a><else/><a class="item" href="javascript:void(0);">{$five_menu.title}</a></gt>
                                             </li>
                                             </volist>
                                         </ul>

@@ -2,6 +2,6 @@
 namespace Wechat\Event;
 
 class LinkEvent{
-	
-	
+  
+  
 }

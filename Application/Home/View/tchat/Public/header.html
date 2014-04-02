@@ -12,7 +12,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <think:nav name="nav">
-                    	<eq name="nav.pid" value="0">
+                      <eq name="nav.pid" value="0">
                         <li>
                             <a href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}</a>
                         </li>

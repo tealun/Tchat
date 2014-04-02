@@ -5,59 +5,59 @@
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <script type="text/javascript">
 $(function(){
-	//搜索功能
-	$("#search").click(function(){
-		var url = $(this).attr('url');
-		var col = $("#sch-sort-txt").attr("data");
+  //搜索功能
+  $("#search").click(function(){
+    var url = $(this).attr('url');
+    var col = $("#sch-sort-txt").attr("data");
         var query  = $('.search-form').find('input').serialize();
         query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
         query = query.replace(/^&/g,'');
-		if(col != ''){
-			if(query != ''){
-				query += '&col=' + col;
-				}else{
-				query += 'col=' + col;
-				}
+    if(col != ''){
+      if(query != ''){
+        query += '&col=' + col;
+        }else{
+        query += 'col=' + col;
+        }
         }
         if( url.indexOf('?')>0 ){
             url += '&' + query;
         }else{
             url += '?' + query;
         }
-		window.location.href = url;
-	});
+    window.location.href = url;
+  });
 
-	/* 状态搜索子菜单 */
-	$(".search-form").find(".drop-down").hover(function(){
-		$("#sub-sch-menu").removeClass("hidden");
-	},function(){
-		$("#sub-sch-menu").addClass("hidden");
-	});
-	$("#sub-sch-menu li").find("a").each(function(){
-		$(this).click(function(){
-			var text = $(this).text();
-			$("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
-			$("#sub-sch-menu").addClass("hidden");
-		})
-	});
+  /* 状态搜索子菜单 */
+  $(".search-form").find(".drop-down").hover(function(){
+    $("#sub-sch-menu").removeClass("hidden");
+  },function(){
+    $("#sub-sch-menu").addClass("hidden");
+  });
+  $("#sub-sch-menu li").find("a").each(function(){
+    $(this).click(function(){
+      var text = $(this).text();
+      $("#sch-sort-txt").text(text).attr("data",$(this).attr("value"));
+      $("#sub-sch-menu").addClass("hidden");
+    })
+  });
 
-	//点击排序
-	$('.list_sort').click(function(){
-		var url = $(this).attr('url');
-		var ids = $('.ids:checked');
-		var param = '';
-		if(ids.length > 0){
-			var str = new Array();
-			ids.each(function(){
-				str.push($(this).val());
-			});
-			param = str.join(',');
-		}
+  //点击排序
+  $('.list_sort').click(function(){
+    var url = $(this).attr('url');
+    var ids = $('.ids:checked');
+    var param = '';
+    if(ids.length > 0){
+      var str = new Array();
+      ids.each(function(){
+        str.push($(this).val());
+      });
+      param = str.join(',');
+    }
 
-		if(url != undefined && url != ''){
-			window.location.href = url + '/ids/' + param;
-		}
-	});
+    if(url != undefined && url != ''){
+      window.location.href = url + '/ids/' + param;
+    }
+  });
 
     //回车自动提交
     $('.search-form').find('input').keyup(function(event){
@@ -69,15 +69,15 @@ $(function(){
     $('#time-start').datetimepicker({
         format: 'yyyy-mm-dd',
         language:"zh-CN",
-	    minView:2,
-	    autoclose:true
+      minView:2,
+      autoclose:true
     });
 
     $('#time-end').datetimepicker({
         format: 'yyyy-mm-dd',
         language:"zh-CN",
-	    minView:2,
-	    autoclose:true
+      minView:2,
+      autoclose:true
     });
 })
 </script>

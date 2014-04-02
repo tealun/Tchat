@@ -16,10 +16,10 @@ use Think\Controller;
  */
 class HomeController extends Controller {
 
-	/* 空操作，用于输出404页面 */
-	public function _empty(){
-		$this->redirect('Index/index');
-	}
+  /* 空操作，用于输出404页面 */
+  public function _empty(){
+    $this->redirect('Index/index');
+  }
 
 
     protected function _initialize(){
@@ -32,10 +32,10 @@ class HomeController extends Controller {
         }
     }
 
-	/* 用户登录检测 */
-	protected function login(){
-		/* 用户登录检测 */
-		is_login() || $this->error('您还没有登录，请先登录！', U('User/login'));
-	}
+  /* 用户登录检测 */
+  protected function login(){
+    /* 用户登录检测 */
+    is_login() || $this->error('您还没有登录，请先登录！', U('User/login'));
+  }
 
 }

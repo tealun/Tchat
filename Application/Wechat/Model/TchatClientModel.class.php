@@ -14,13 +14,13 @@ use Think\Model;
  * 客户资料模型
  */
 class TchatClientModel extends Model{
-	
-	/**
-	 * 根据ID或者OPENID更新现有客户资料
-	 * Enter description here ...
-	 * @param $id
-	 * @param $data
-	 */
+  
+  /**
+   * 根据ID或者OPENID更新现有客户资料
+   * Enter description here ...
+   * @param $id
+   * @param $data
+   */
     public function update($data = null){
         /* 获取数据对象 */
         $data = $this->create($data);
@@ -41,20 +41,20 @@ class TchatClientModel extends Model{
                 $this->error = '更新客户出错！';
                 return false;
             }else{
-            	return $status;
+              return $status;
             }
         }
     }
     
     public function getClintId($openId){
-    	$id = $this->where(array('openid'=>$openId))->getField('id');
-    	if(!$id){
-    		$data = array(
-    			'openid'=>$openId,
-    		);
-    		$this->create($data);
-    		$id = $this->add();
-    	}
-    	return $id;
+      $id = $this->where(array('openid'=>$openId))->getField('id');
+      if(!$id){
+        $data = array(
+          'openid'=>$openId,
+        );
+        $this->create($data);
+        $id = $this->add();
+      }
+      return $id;
     }
 }
