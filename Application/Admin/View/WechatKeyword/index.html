@@ -6,69 +6,69 @@
 </block>
 
 <block name="body">
-	<div class="main-title">
-		<h2>{$meta_title}</h2><span>{:C('WECHAT_NICKNAME')}</span>
-	</div>
-		<div class="cf">
-		<div class="fl">
-			<if condition="isset($segment)" > <a class="btn" href="{:U('index')}" >全部</a>
-			<a class="btn" href="{:U("create",array("segnent"=>$segment))}">新增</a>
-			<else/>
-			<a class="btn" href="{:U('create')}">新 增</a> </if>
+  <div class="main-title">
+    <h2>{$meta_title}</h2><span>{:C('WECHAT_NICKNAME')}</span>
+  </div>
+    <div class="cf">
+    <div class="fl">
+      <if condition="isset($segment)" > <a class="btn" href="{:U('index')}" >全部</a>
+      <a class="btn" href="{:U("create",array("segnent"=>$segment))}">新增</a>
+      <else/>
+      <a class="btn" href="{:U('create')}">新 增</a> </if>
             <button class="btn ajax-post" target-form="ids" url="{:U("WechatKeyword/setStatus",array("status"=>1))}">启 用</button>
-			<button class="btn ajax-post" target-form="ids" url="{:U("WechatKeyword/setStatus",array("status"=>0))}">禁 用</button>
-			<input type="hidden" class="hide-data" name="cate_id" value="{$cate_id}"/>
-			<input type="hidden" class="hide-data" name="pid" value="{$pid}"/>
-			<button class="btn ajax-post confirm" target-form="ids" url="{:U("WechatKeyword/setStatus",array("status"=>-1))}">删 除</button>
-		</div>
+      <button class="btn ajax-post" target-form="ids" url="{:U("WechatKeyword/setStatus",array("status"=>0))}">禁 用</button>
+      <input type="hidden" class="hide-data" name="cate_id" value="{$cate_id}"/>
+      <input type="hidden" class="hide-data" name="pid" value="{$pid}"/>
+      <button class="btn ajax-post confirm" target-form="ids" url="{:U("WechatKeyword/setStatus",array("status"=>-1))}">删 除</button>
+    </div>
 
-		<!-- 高级搜索 -->
-	<include file="serch" />
+    <!-- 高级搜索 -->
+  <include file="serch" />
 
-		<!-- 数据表格 -->
+    <!-- 数据表格 -->
     <div class="data-table">
-		<table class="">
+    <table class="">
     <thead>
         <tr>
-		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-		<th class="">编号</th>
-		<th class="">标题</th>
-		<th class="">板块</th>
-		<th class="">回复类型</th>
-		<th class="">回复内容</th>
-		<th class="">关键词</th>
-		<th class="">最后更新</th>
-		<th class="">用户</th>
-		<th class="">状态</th>
-		<th class="">操作</th>
-		</tr>
+    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+    <th class="">编号</th>
+    <th class="">标题</th>
+    <th class="">板块</th>
+    <th class="">回复类型</th>
+    <th class="">回复内容</th>
+    <th class="">关键词</th>
+    <th class="">最后更新</th>
+    <th class="">用户</th>
+    <th class="">状态</th>
+    <th class="">操作</th>
+    </tr>
     </thead>
     <tbody>
-		<volist name="_list" id="vo">
-		<tr>
+    <volist name="_list" id="vo">
+    <tr>
             <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
-			<td>{$vo.id} </td>
-			<td><a href="{:U('edit?id='.$vo['id'].'&name='.$vo['name'])}"><span>{$vo.name}</span></a></td>
-			<td><a href="{:U('index?segment='.$vo['segment'])}"><span>{$vo.segment_text}</span></a></td>
-			<td><span>{$vo.reply_type_text}</span></td>
-			<td><span>{$vo.reply_id}</span></td>
-			<td>{$vo.id|get_keyword}</td>
-			<td><span>{$vo.update_time|time_format}</span></td>
-			<td>{$vo.uid|get_nickname}</td>
-			<td>{$vo.status_text}</td>
-			<td><a href="{:U('edit?id='.$vo['id'])}">编辑</a>
-				<a href="{:U('setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
-				<a href="{:U('setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
+      <td>{$vo.id} </td>
+      <td><a href="{:U('edit?id='.$vo['id'].'&name='.$vo['name'])}"><span>{$vo.name}</span></a></td>
+      <td><a href="{:U('index?segment='.$vo['segment'])}"><span>{$vo.segment_text}</span></a></td>
+      <td><span>{$vo.reply_type_text}</span></td>
+      <td><span>{$vo.reply_id}</span></td>
+      <td>{$vo.id|get_keyword}</td>
+      <td><span>{$vo.update_time|time_format}</span></td>
+      <td>{$vo.uid|get_nickname}</td>
+      <td>{$vo.status_text}</td>
+      <td><a href="{:U('edit?id='.$vo['id'])}">编辑</a>
+        <a href="{:U('setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
+        <a href="{:U('setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
                 </td>
-		</tr>
-		</volist>
-	</tbody>
+    </tr>
+    </volist>
+  </tbody>
     </table> 
 
         
-	</div>
+  </div>
 
-	<!-- 分页 -->
+  <!-- 分页 -->
     <div class="page">
         {$_page}
     </div>
