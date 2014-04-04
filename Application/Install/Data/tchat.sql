@@ -305,10 +305,10 @@ CREATE TABLE `onethink_tchat_activity` (
 -- -----------------------------
 -- Records of `onethink_tchat_activity`
 -- -----------------------------
-INSERT INTO `onethink_tchat_activity` VALUES ('1','折扣','1392825600','1395244800', '各分店', '', '1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('2', '常规','1392825600','0', '各分店', '', '1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('3','优惠券','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('4','折扣','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('1','冬款折扣季','冬款折扣季','折扣','1392825600','1395244800', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('2','满200送50','消费满200送50大酬宾','常规','1392825600','0', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('3','迎春优惠券','迎春优惠券赠送活动','优惠券','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('4','春节大抢购','2013春节大抢购活动','折扣','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity_discount`
@@ -566,9 +566,9 @@ INSERT INTO `onethink_tchat_keyword_group` VALUES ('23','知识分享','costom',
 INSERT INTO `onethink_tchat_keyword_group` VALUES ('24','故事分享','costom','0','news','33','1393292899','0','0','1','3','1393292899','1393292899');
 
 INSERT INTO `onethink_tchat_keyword_group` VALUES ('25','冬款折扣季','activity','1','document','8','1393292899','1395244800','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('26','消费满200送50大酬宾','activity','2','document','5,6,7','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('27','迎春优惠券赠送活动','activity','3','document','3,4','1393292899','1400515200','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('28','春节大抢购活动','activity','4','text','54','1393292899','1393293899','55','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('26','满200送50','activity','2','document','5,6,7','1393292899','0','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('27','迎春优惠券','activity','3','document','3,4','1393292899','1400515200','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('28','春节大抢购','activity','4','text','54','1393292899','1393293899','55','1','3','1393292899','1393292899');
 INSERT INTO `onethink_tchat_keyword_group` VALUES ('29','我要优惠券','activity_ticket','3','text','','1393292899','1400515200','0','1','3','1393292899','1393292899');
 
 INSERT INTO `onethink_tchat_keyword_group` VALUES ('30','所有分享','costom','0','news','31','1393292899','0','0','1','3','1393292899','1393292899');
