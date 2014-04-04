@@ -288,11 +288,14 @@ INSERT INTO `onethink_menu` VALUES ('406', '删除', '401', '0', 'Admin/WechatAl
 DROP TABLE IF EXISTS `onethink_tchat_activity`;
 CREATE TABLE `onethink_tchat_activity` (
 	`id` int(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '活动ID',
-	`act_type` ENUM('常规','折扣','优惠券','刮刮卡','大转盘','幸运机','抢红包','抽奖','邀请','竞拍','秒杀') NOT NULL DEFAULT '常规' COMMENT '对应活动类型',
+	`name` varchar(100) NOT NULL COMMENT '关键词组名',
+	`title` varchar(50) NOT NULL COMMENT '标题',
+	`act_type` ENUM('常规','折扣','优惠券','刮刮卡','大转盘','幸运机','抢红包','抽奖','邀请','竞拍','秒杀','抢楼') NOT NULL DEFAULT '常规' COMMENT '对应活动类型',
 	`startup` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '启动时间',
 	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`act_add` varchar(100) NOT NULL DEFAULT 'Local' COMMENT '活动地点',
 	`act_image` varchar(250) NOT NULL DEFAULT './Uploads/Wechat/Tchat/Picture/Activity/default.jpg',
+	`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '活动状态，-1-删除，0-禁用，1-正常，2-待审核，3-草稿',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	`update_time` TIMESTAMP COMMENT '更新时间',
@@ -302,10 +305,10 @@ CREATE TABLE `onethink_tchat_activity` (
 -- -----------------------------
 -- Records of `onethink_tchat_activity`
 -- -----------------------------
-INSERT INTO `onethink_tchat_activity` VALUES ('1','折扣','1392825600','1395244800', '各分店', '', '3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('2', '常规','1392825600','0', '各分店', '', '3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('3','优惠券','1392825600','1400515200', '各分店', '', '3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('4','折扣','1392825600','1400515200', '各分店', '', '3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('1','折扣','1392825600','1395244800', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('2', '常规','1392825600','0', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('3','优惠券','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('4','折扣','1392825600','1400515200', '各分店', '', '1','3', '1393292899', '1393292899');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity_discount`
@@ -375,7 +378,7 @@ CREATE TABLE `onethink_tchat_album` (
 DROP TABLE IF EXISTS `onethink_tchat_album_cat`;
 CREATE TABLE `onethink_tchat_album_cat` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',
-	`name` varchar(30) NOT NULL COMMENT '标志',
+	`name` varchar(30) NOT NULL COMMENT '标识',
 	`title` varchar(50) NOT NULL COMMENT '标题',
 	`sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序（同级有效）',
 	`list_row` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '列表每页行数',
@@ -540,7 +543,7 @@ CREATE TABLE `onethink_tchat_keyword_group` (
 	`start_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '开始时间',
 	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`dead_text` int(5) unsigned  NOT NULL DEFAULT '0' COMMENT '结束后回复文本',
-	`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '关键词使用状态，0为停用，1为使用，-1为删除',
+	`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '关键词使用状态，-1为删除，0为禁用，1为正常，',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	`update_time` TIMESTAMP COMMENT '更新时间',

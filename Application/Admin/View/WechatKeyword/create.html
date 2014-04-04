@@ -40,8 +40,13 @@
                             <case value="num">
                                 <input type="text" class="text input-medium" name="{$field.name}" value="{$field.value}">
                             </case>
-                            <case value="string">
-                                <input type="text" class="text input-large" name="{$field.name}" value="{$field.value}">
+                            <case value="string">                          
+                                <if condition="$field['name'] eq 'reply_id'">
+                                  <input type="text" class="text input-large" name="{$field.name}" id="keywords" value="{$field.value}">
+                                  <span data-trigger="modal" href="{:U('catlist')}" data-title="Modal title" class="btn">选择</span>
+                                <else />
+                                  <input type="text" class="text input-large" name="{$field.name}" value="{$field.value}">
+                                </if>
                             </case>
                             <case value="textarea">
                                 <label class="textarea input-large">
@@ -59,11 +64,12 @@
                                 </select>
                             </case>
                             <case value="select">
-                                <select name="{$field.name}">
+                                <select id="{$field.name}" name="{$field.name}">
                                     <volist name=":parse_field_attr($field['extra'])" id="vo">
                                         <option value="{$key}" <eq name="field.value" value="$key">selected</eq>>{$vo}</option>
                                     </volist>
                                 </select>
+								<span style="color: #ffffff; background-color: #f89406;padding:0 5px;">请选择</span>
                             </case>
                             <case value="radio">
                                 <volist name=":parse_field_attr($field['extra'])" id="vo">
@@ -209,6 +215,8 @@
 <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="__STATIC__/sco/js/sco.modal.js"></script>
+<link href="__STATIC__/sco/css/scojs.css" rel="stylesheet">
 <script type="text/javascript">
 
 $('#submit').click(function(){
@@ -279,5 +287,6 @@ $(function(){
   </if>
 
 });
+
 </script>
 </block>
