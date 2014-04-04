@@ -23,10 +23,24 @@
 	<!-- 按钮工具栏 -->
 	<div class="cf">
 		<div class="fl">
-      <if condition="isset($actType)" > <a class="btn" href="{:U('index')}" >全部</a>
-      <a class="btn" href="{:U("create",array("segnent"=>$actType))}">新增</a>
-      <else/>
-      <a class="btn" href="{:U('create')}">新 增</a> </if>
+			<div class="btn-group">
+				<gt name="allow" value="0">
+					<button class="btn document_add" <if condition="count($model) eq 1">url="{:U('article/add',array('cate_id'=>$cate_id,'pid'=>I('pid',0),'model_id'=>$model[0]))}"</if>>新 增
+						<if condition="count($model) gt 1"><i class="btn-arrowdown"></i></if>
+					</button>
+					<if condition="count($model) gt 1">
+					<ul class="dropdown nav-list">
+						<volist name="model" id="vo">
+						<li><a href="{:U('article/add',array('cate_id'=>$cate_id,'model_id'=>$vo,'pid'=>I('pid',0)))}">{$vo|get_document_model='title'}</a></li>
+						</volist>
+					</ul>
+					</if>
+				<else/>
+					<button class="btn disabled" >新 增
+						<if condition="count($model) gt 1"><i class="btn-arrowdown"></i></if>
+					</button>
+				</gt>
+			</div>
             <button class="btn ajax-post" target-form="ids" url="{:U("Article/setStatus",array("status"=>1))}">启 用</button>
 			<button class="btn ajax-post" target-form="ids" url="{:U("Article/setStatus",array("status"=>0))}">禁 用</button>
 			<button class="btn ajax-post" target-form="ids" url="{:U("Article/move")}">移 动</button>
@@ -74,45 +88,31 @@
 
 	<!-- 数据表格 -->
     <div class="data-table">
-    <!-- 数据表格 -->
-    <div class="data-table">
-    <table class="">
-    <thead>
-        <tr>
-    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
-    <th class="">编号</th>
-    <th class="">标题</th>
-    <th class="">类型</th>
-    <th class="">开始时间</th>
-    <th class="">结束时间</th>
-    <th class="">活动地点</th>
-    <th class="">最后更新</th>
-    <th class="">用户</th>
-    <th class="">状态</th>
-    <th class="">操作</th>
-    </tr>
-    </thead>
-    <tbody>
-    <volist name="_list" id="vo">
-    <tr>
-            <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
-      <td>{$vo.id} </td>
-      <td><a href="{:U('edit?id='.$vo['id'].'&name='.$vo['name'])}"><span>{$vo.title}</span></a></td>
-      <td><a href="{:U('index?segment='.$vo['segment'])}"><span>{$vo.act_type}</span></a></td>
-      <td><span>{$vo.startup|time_format}</span></td>
-      <td><span>{$vo.deadline|time_format}</span></td>
-      <td>{$vo.act_add}</td>
-      <td><span>{$vo.update_time}</span></td>
-      <td>{$vo.uid|get_nickname}</td>
-      <td>{$vo.status_text}</td>
-      <td><a href="{:U('edit?id='.$vo['id'])}">编辑</a>
-        <a href="{:U('setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
-        <a href="{:U('setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
-                </td>
-    </tr>
-    </volist>
-  </tbody>
-    </table> 
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th class="row-selected row-selected">
+                        <input class="check-all" type="checkbox">
+                    </th>
+                    <volist name="list_grids" id="field">
+                        <th>{$field.title}</th>
+                    </volist>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody>
+                <volist name="list" id="data">
+                    <tr>
+                        <td><input class="ids" type="checkbox" value="{$data['id']}" name="ids[]"></td>
+                        <volist name="list_grids" id="grid">
+                            <td>{:get_list_field($data,$grid,$model_list)}</td>
+                        </volist>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
 	</div>
 	<!-- 分页 -->
     <div class="page">
