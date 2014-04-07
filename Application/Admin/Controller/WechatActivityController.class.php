@@ -15,6 +15,10 @@ namespace Admin\Controller;
  */
 class WechatActivityController extends WechatController {
 
+	/**
+	 * 正常活动列表
+	 * @see Application/Admin/Controller/WechatController::index()
+	 */
 	public function index(){
     $map=$this->indexOfMap();
     $map['deadline'] = array('not between',array(1,time()));
@@ -59,7 +63,67 @@ class WechatActivityController extends WechatController {
     }
     
     /**
-     * 获取列表
+     * 设置一条或者多条数据的状态
+     * @author huajie <banhuajie@163.com>
+     */
+    public function setStatus($model='Tchat_activity'){
+        return parent::setStatus('Tchat_activity');
+    }
+    
+    /**
+     * 草稿箱
+     * @author huajie <banhuajie@163.com>
+     */
+    public function draftBox(){
+        $Document   =   D('Tchat_activity');
+        $map        =   array('status'=>3,'uid'=>UID);
+        $list       =   $this->lists($Document,$map);
+        //获取状态文字
+        //int_to_string($list);
+
+        $this->assign('list', $list);
+        $this->meta_title = '草稿箱';
+        $this->display();
+    }
+    
+  public function disabled(){
+    $map['status'] = array('eq',0);
+    $map['deadline'] = array('not between',array(1,time()));
+    $this->getLists($map);
+    $this->meta_title = '已禁用关键词';
+    $this->display(); // 输出模板
+  }
+  
+  public function recycle(){
+    $map['status'] = array('eq',-1);
+    $this->getLists($map);
+    $this->meta_title = '关键词回收站';
+    $this->display(); // 输出模板
+  }
+  
+  public function restore($Model='Tchat_activity'){
+      $ids    =   I('request.ids');
+        if(empty($ids)){
+            $this->error('请选择要操作的数据');
+        }
+        $map['id'] = array('in',$ids);
+         return parent::restore('Tchat_activity',$map);
+  }
+  
+    /**
+     * 清空回收站
+     * @author huajie <banhuajie@163.com>
+     */
+    public function clear(){
+        $res = D('Tchat_activity')->remove();
+        if($res !== false){
+            $this->success('清空回收站成功！');
+        }else{
+            $this->error('清空回收站失败！');
+        }
+    }
+    /**
+     * 获取数据列表
      * 
      * @param array $map
      */
