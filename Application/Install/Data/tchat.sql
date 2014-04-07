@@ -109,15 +109,16 @@ INSERT INTO `onethink_auth_rule` VALUES ('314', 'admin', '1', 'Admin/WechatActiv
 INSERT INTO `onethink_auth_rule` VALUES ('315', 'admin', '1', 'Admin/WechatActivity/setStatus','改变状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('316', 'admin', '1', 'Admin/WechatActivity/update','保存', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('317', 'admin', '1', 'Admin/WechatActivity/autoSave','保存草稿', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('318', 'admin', '1', 'Admin/WechatActivity/move','移动', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('319', 'admin', '1', 'Admin/WechatActivity/copy','复制', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatActivity/paste','粘贴', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatActivity/batchOperate','导入', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatActivity/delete','删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatActivity/analytical','活动分析', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('318', 'admin', '1', 'Admin/WechatActivity/copy','复制', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('319', 'admin', '1', 'Admin/WechatActivity/paste','粘贴', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatActivity/batchOperate','导入', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatActivity/delete','删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatActivity/draft','活动草稿箱', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatActivity/analytical','活动分析', '1', '');
+
+INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatActivity/disabled','禁用箱', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatActivity/draftBox','活动草稿箱', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('325', 'admin', '1', 'Admin/WechatActivity/recycle','活动回收站', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatActivity/restore','还原', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatActivity/clean','彻底删除', '1', '');
@@ -242,15 +243,18 @@ INSERT INTO `onethink_menu` VALUES ('344', '编辑', '341', '0', 'Admin/WechatAc
 INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '341', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('346', '保存', '341', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '341', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('348', '移动', '341', '0', 'Admin/WechatActivity/move', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('349', '复制', '341', '0', 'Admin/WechatActivity/copy', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('350', '粘贴', '341', '0', 'Admin/WechatActivity/paste', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('351', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('352', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('353', '活动分析', '300', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('348', '复制', '341', '0', 'Admin/WechatActivity/copy', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('349', '粘贴', '341', '0', 'Admin/WechatActivity/paste', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('350', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('351', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('354', '活动草稿箱', '300', '0', 'Admin/WechatActivity/draft', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('352', '活动分析', '300', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
+
+INSERT INTO `onethink_menu` VALUES ('353', '活动禁用箱', '300', '0', 'Admin/WechatActivity/disabled', '0', '', '活动管理', '0');
+
+INSERT INTO `onethink_menu` VALUES ('354', '活动草稿箱', '300', '0', 'Admin/WechatActivity/draftBox', '0', '', '活动管理', '0');
+
 INSERT INTO `onethink_menu` VALUES ('355', '活动回收站', '300', '0', 'Admin/WechatActivity/recycle', '0', '', '活动管理', '0');
 INSERT INTO `onethink_menu` VALUES ('356', '还原', '355', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('357', '彻底删除', '355', '0', 'Admin/WechatActivity/clean', '0', '', '', '0');
