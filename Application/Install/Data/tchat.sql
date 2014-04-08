@@ -242,7 +242,6 @@ INSERT INTO `onethink_menu` VALUES ('344', '编辑', '341', '0', 'Admin/WechatAc
 INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '341', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('346', '保存', '341', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '341', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('348', '移动', '341', '0', 'Admin/WechatActivity/move', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('349', '复制', '341', '0', 'Admin/WechatActivity/copy', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('350', '粘贴', '341', '0', 'Admin/WechatActivity/paste', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('351', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
