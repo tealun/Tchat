@@ -62,6 +62,55 @@ class WechatActivityController extends WechatController {
     return $map;
     }
     
+  /**
+   * 创建新活动
+   */
+  public function create(){
+        //获取关键词分组模型
+    $model = M('Model')->where(array('id'=>5))->find();
+    $info['model_id']= '5';
+            //获取表单字段排序
+        $fields = get_model_attribute($model['id']);
+    $this->assign('info',$info);
+    $this->assign('fields',     $fields);
+        $this->assign('model', $model);
+        $this->meta_title = '新增关键词分组';
+        $this->display();
+
+  }
+  
+  /**
+   * edit one keyword group
+   */
+  public function edit(){
+    $id     =   I('get.id','');
+        if(empty($id)){
+            $this->error('参数不能为空！');
+        }
+    
+        $info['model_id']= '5';
+      
+      /*获取一条记录的详细数据*/
+        $KeywordGroup =D('Tchat_keyword_group');
+        $data = $KeywordGroup->detail($id);
+        if(!$data){
+            $this->error($KeywordGroup->getError());
+        }
+        $this->assign('data',$data);
+      
+        //获取关键词分组模型
+        $model = M('Model')->where(array('id'=>$info['model_id']))->find();
+    
+            //获取表单字段排序
+        $fields = get_model_attribute($model['id']);
+        $this->assign('info',$info);
+        $this->assign('fields',     $fields);
+        $this->assign('model', $model);
+        $this->meta_title = '编辑关键词分组';
+        $this->display();
+
+  }
+  
     /**
      * 设置一条或者多条数据的状态
      * @author huajie <banhuajie@163.com>
@@ -85,7 +134,10 @@ class WechatActivityController extends WechatController {
         $this->meta_title = '草稿箱';
         $this->display();
     }
-    
+
+  /**
+   * 禁用箱
+   */
   public function disabled(){
     $map['status'] = array('eq',0);
     $map['deadline'] = array('not between',array(1,time()));
@@ -94,6 +146,9 @@ class WechatActivityController extends WechatController {
     $this->display(); // 输出模板
   }
   
+  /**
+   * 回收站
+   */
   public function recycle(){
     $map['status'] = array('eq',-1);
     $this->getLists($map);
@@ -101,6 +156,10 @@ class WechatActivityController extends WechatController {
     $this->display(); // 输出模板
   }
   
+  /**
+   * \(non-PHPdoc)还原数据
+   * @see Application/Admin/Controller/AdminController::restore()
+   */
   public function restore($Model='Tchat_activity'){
       $ids    =   I('request.ids');
         if(empty($ids)){
@@ -121,6 +180,11 @@ class WechatActivityController extends WechatController {
         }else{
             $this->error('清空回收站失败！');
         }
+    }
+    
+    //TODO 导入活动
+    public function batchOperate(){
+    
     }
     /**
      * 获取数据列表
