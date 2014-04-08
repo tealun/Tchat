@@ -24,13 +24,12 @@ class WechatKeywordController extends WechatController {
     $this->display(); // 输出模板
   }
   
-  public function keywords($segment_id){
-    $this->getKeywords($segmentId);
-  }
-  
+  /**
+   * create new keyword group
+   */
   public function create(){
         //获取关键词分组模型
-        $model = M('Model')->where(array('id'=>5))->find();
+    $model = M('Model')->where(array('id'=>5))->find();
     $info['model_id']= '5';
             //获取表单字段排序
         $fields = get_model_attribute($model['id']);
@@ -43,7 +42,7 @@ class WechatKeywordController extends WechatController {
   }
   
     /**
-     * 更新一条数据
+     * update one record
      * @author huajie <banhuajie@163.com>
      */
     public function update(){
@@ -59,6 +58,9 @@ class WechatKeywordController extends WechatController {
         }
     }
   
+  /**
+   * edit one keyword group
+   */
   public function edit(){
     $id     =   I('get.id','');
         if(empty($id)){
@@ -80,20 +82,27 @@ class WechatKeywordController extends WechatController {
     
             //获取表单字段排序
         $fields = get_model_attribute($model['id']);
-    $this->assign('info',$info);
-    $this->assign('fields',     $fields);
+        $this->assign('info',$info);
+        $this->assign('fields',     $fields);
         $this->assign('model', $model);
         $this->meta_title = '编辑关键词分组';
         $this->display();
 
   }
-
+  
+  /**
+   * Analytical of keywords
+   */
   public function analytical(){
     $topics = array('接收','热门','建议');
     $this->assign('topics',$topics);
     $this->display();
   }
   
+  /**
+   * List of keyword group that allready dead.
+   * Enter description here ...
+   */
   public function deadList(){
     $map['status'] = array('egt',0);
     $map['deadline'] = array('between',array(1,time()));
@@ -102,6 +111,10 @@ class WechatKeywordController extends WechatController {
     $this->display(); // 输出模板
   }
   
+  /**
+   * List of keyword group that be disabled.
+   * Enter description here ...
+   */
   public function disabled(){
     $map['status'] = array('eq',0);
     $map['deadline'] = array('not between',array(1,time()));
@@ -110,6 +123,9 @@ class WechatKeywordController extends WechatController {
     $this->display(); // 输出模板
   }
   
+  /**
+   * List of keyword group that were deleted
+   */
   public function recycle(){
     $map['status'] = array('eq',-1);
     $this->getLists($map);
@@ -117,6 +133,10 @@ class WechatKeywordController extends WechatController {
     $this->display(); // 输出模板
   }
   
+  /**
+   * (non-PHPdoc) restore a keyword group which was deleted.
+   * @see Application/Admin/Controller/AdminController::restore()
+   */
   public function restore($Model='Tchat_keyword_group'){
       $ids    =   I('request.ids');
         if(empty($ids)){
@@ -126,9 +146,22 @@ class WechatKeywordController extends WechatController {
          return parent::restore('Tchat_keyword_group',$map);
   }
   
-  public function clean(){
+    /**
+     * clear the recycle box
+     * @author huajie <banhuajie@163.com>
+     */
+    public function clear(){
+        $res = D('Document')->remove();
+        if($res !== false){
+            $this->success('清空回收站成功！');
+        }else{
+            $this->error('清空回收站失败！');
+        }
+    }
   
-  }
+  /**
+   * List categoris
+   */
   public function catlist(){
     if(IS_POST || IS_AJAX){
       $this->display();
@@ -136,12 +169,12 @@ class WechatKeywordController extends WechatController {
       $this->error('访问错误','index.php',2);
     }
   }
-      /**
-     * 默认文档列表方法
-     * @param $cate_id 分类id
-     * @author huajie <banhuajie@163.com>
-     */
-    protected function indexOfKeyword(){
+
+  
+  /**
+   * 初始化查询条件
+   */
+  protected function indexOfKeyword(){
         /* 查询条件初始化 */
         $map = array();
         if(isset($_GET['segment'])){
@@ -186,13 +219,6 @@ class WechatKeywordController extends WechatController {
       col_to_string($list);
     $this->assign('_list', $list);
     }
-    
-    private function getKeywords($segmentId){
-      $map = array(
-            'segment_id'=>$segmentId,
-      );
-      $lists = M('Tchat_keyword')->where($map)->getField('keyword');
-      return $keywords = arr2str($lists);
-    }
+
 
 }
