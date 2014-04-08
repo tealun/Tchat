@@ -2,8 +2,10 @@
 -- Records of  `onethink_attribute`
 -- -----------------------------
 
+-- Attribute of keyword model
 INSERT INTO `onethink_attribute` VALUES ('33', 'keyword', '关键词', 'varchar(100) NOT NULL ', 'string', '', '多个关键词请用英文半角逗号隔开', '1', '', '4', '0', '1', '1394597230', '1394597230', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('34', 'group_id', '关键词分组ID', 'int(8) unsigned NOT NULL ', 'string', '', '', '0', '', '4', '0', '1', '1394597230', '1394597230', '', '0', '', '', '', '0', '');
+-- Attribute of keyword group model
 INSERT INTO `onethink_attribute` VALUES ('35', 'name', '关键词标题', 'varchar(100) NOT NULL ', 'string', '', '为本组关键词取个标题', '1', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('36', 'segment', '板块', 'enum(''costom'',''activity'',''events'',''activity_ticket'') NOT NULL', 'select', 'costom', '关键词组所属板块', '1', 'costom:自定义\r\nactivity:活动\r\nevents:事件\r\nactivity_ticket:优惠券', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('37', 'segment_id', '板块条目ID', 'int(5) NOT NULL ', 'num', '0', '', '0', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
@@ -12,22 +14,46 @@ INSERT INTO `onethink_attribute` VALUES ('39', 'reply_id', '回复内容', 'varc
 INSERT INTO `onethink_attribute` VALUES ('40', 'start_time', '生效时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '设置关键词的<strong>生效时间</strong>', '1', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('41', 'deadline', '失效时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '设置关键词的<strong>失效时间</strong>', '1', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('42', 'dead_text', '失效后回复文本', 'varchar(255) NOT NULL ', 'string', '55', '', '1', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('43', 'status', '是否启用', 'tinyint(2) NOT NULL ', 'bool', '1', '设置添加后的状态', '1', '1:启用\r\n0:禁用', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('43', 'status', '是否现在启用', 'tinyint(2) NOT NULL ', 'bool', '1', '设置添加后的状态', '1', '1:启用\r\n0:禁用', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('44', 'uid', '用户ID', 'int(10) unsigned NOT NULL ', 'num', '0', '', '0', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('45', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'datetime', 'CURRENT_TIMESTAMP', '', '0', '', '5', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 
+-- Attribute of activity model
+INSERT INTO `onethink_attribute` VALUES ('46', 'name', '关键词组名', 'varchar(100) NOT NULL ', 'string', '', '活动对应的关键词组名', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('47', 'title', '标题', 'varchar(50) NOT NULL ', 'string', '', '活动的标题', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('48', 'act_type', '对应活动类型', 'enum(''常规'',''折扣'',''优惠券'',''刮刮卡'',''大转盘'',''幸运机'',''抢红包'',''抽奖'',''邀请'',''竞拍'',''秒杀'',''抢楼'') NOT NULL ', 'string', '常规', '选择活动的类型', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('49', 'startup', '启动时间', 'int(10) unsigned NOT NULL ', 'string', '0', '活动启动时间', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('50', 'deadline', '结束时间', 'int(10) unsigned NOT NULL ', 'string', '0', '活动结束时间', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('51', 'act_add', '活动地点', 'varchar(100) NOT NULL ', 'string', 'Local', '活动举办地地点', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('52', 'act_image', '', 'varchar(250) NOT NULL ', 'string', './Uploads/Wechat/Tchat/Picture/Activity/default.jpg', '活动封面图片', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('53', 'status', '是否现在启用', 'tinyint(2) NOT NULL ', 'bool', '1', '设置添加后的状态', '1', '1:启用\r\n0:禁用', '6', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('54', 'uid', '用户ID', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('55', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 
+-- Attribute of activity discount model
+INSERT INTO `onethink_attribute` VALUES ('56', 'discount', '折扣率', 'float(3,2) NOT NULL ', 'string', '0.80', '', '1', '', '7', '0', '1', '1396968844', '1396968844', '', '0', '', '', '', '0', '');
+
+-- Attribute of activity discount model
+INSERT INTO `onethink_attribute` VALUES ('57', 'ticket_prefix', '优惠券前缀', 'char(4) NOT NULL ', 'string', '', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('58', 'max', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+
+-- Attribute of album model
+INSERT INTO `onethink_attribute` VALUES ('59', 'name', '相册标识', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('60', 'title', '相册名称', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('61', 'cat_id', '所属分类ID', 'int(10) NOT NULL ', 'string', '', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('62', 'vote', '投票设置', 'tinyint(2) NOT NULL ', 'bool', '0', '是否启用投票', '1', '1:启用\r\n0:禁用', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('63', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 
 -- -----------------------------
 -- Records of  `onethink_model`
 -- -----------------------------
 
 INSERT INTO `onethink_model`  VALUES ('4', 'tchat_keyword', '关键词', '0', '', '1', '{"1":["33","34"]}', '1:基础', '', '', '', '', 'keyword:关键词\r\ngroup_id:分组', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', '1', '{"1":["35","33","36","37","38","39","40","41","42","43","44","45"]}', '1:微信设置', '', '', '', '', 'name:关键词组\r\nsegment:所属板块\r\nreply_type:回复类型\r\nstatus:状态', '10', '', '', '1394597354', '1394602636', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('6', 'activity', '关键词分组', '0', '', '1', '{"1":["35","33","36","37","38","39","40","41","42","43","44","45","46"]}', '1:基础2:', '', '', '', '', 'name:关键词组\r\nsegment:所属板块\r\nreply_type:回复类型\r\nstatus:状态', '10', '', '', '1394597354', '1394602636', '1', 'MyISAM');
-
-
-
+INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', '1', '{"1":["35","33","36","37","38","39","40","41","42","43","44","45"]}', '1:基础', '', '', '', '', 'name:关键词组\r\nsegment:所属板块\r\nreply_type:回复类型\r\nstatus:状态', '10', '', '', '1394597354', '1394602636', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('6', 'tchat_activity', '活动', '0', '', '1', '{"1":["47","46","48","49","50","51","52","53"]}', '1:基础', '', '', '', '', '', '10', '', '', '1396965384', '1396965384', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣活动', '0', '6', '1', '"1":["47","46","56","48","49","50","51","52","53"]}', '1:基础', '', '', '', '', '', '10', '', '', '1396968844', '1396968844', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券活动', '0', '6', '1', '"1":["47","46","57","58","48","49","50","51","52","53"]}', '1:基础', '', '', '', '', '', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('9', 'tchat_album', '相册', '0', '', '1', '', '1:基础', '', '', '', '', '', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
 -- -----------------------------
@@ -101,7 +127,7 @@ INSERT INTO `onethink_auth_rule` VALUES ('307', 'admin', '1', 'Admin/WechatKeywo
 INSERT INTO `onethink_auth_rule` VALUES ('308', 'admin', '1', 'Admin/WechatKeyword/disabled','禁用箱', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('309', 'admin', '1', 'Admin/WechatKeyword/recycle','回收站', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('310', 'admin', '1', 'Admin/WechatKeyword/restore','还原', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('311', 'admin', '1', 'Admin/WechatKeyword/clean','彻底删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('311', 'admin', '1', 'Admin/WechatKeyword/clear','彻底删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('312', 'admin', '1', 'Admin/WechatActivity/index','活动列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('313', 'admin', '1', 'Admin/WechatActivity/create','新增', '1', '');
@@ -109,9 +135,6 @@ INSERT INTO `onethink_auth_rule` VALUES ('314', 'admin', '1', 'Admin/WechatActiv
 INSERT INTO `onethink_auth_rule` VALUES ('315', 'admin', '1', 'Admin/WechatActivity/setStatus','改变状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('316', 'admin', '1', 'Admin/WechatActivity/update','保存', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('317', 'admin', '1', 'Admin/WechatActivity/autoSave','保存草稿', '1', '');
-
-INSERT INTO `onethink_auth_rule` VALUES ('318', 'admin', '1', 'Admin/WechatActivity/copy','复制', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('319', 'admin', '1', 'Admin/WechatActivity/paste','粘贴', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatActivity/batchOperate','导入', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatActivity/delete','删除', '1', '');
 
@@ -121,7 +144,7 @@ INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatActiv
 INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatActivity/draftBox','活动草稿箱', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('325', 'admin', '1', 'Admin/WechatActivity/recycle','活动回收站', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatActivity/restore','还原', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatActivity/clean','彻底删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatActivity/clear','彻底删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatClient/index','客户列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatClient/detail','客户信息', '1', '');
@@ -235,36 +258,26 @@ INSERT INTO `onethink_menu` VALUES ('326', '过期箱', '300', '0', 'Admin/Wecha
 INSERT INTO `onethink_menu` VALUES ('327', '禁用箱', '300', '0', 'Admin/WechatKeyword/disabled', '0', '', '关键词管理', '0');
 INSERT INTO `onethink_menu` VALUES ('328', '回收站', '300', '0', 'Admin/WechatKeyword/recycle', '0', '', '关键词管理', '0');
 INSERT INTO `onethink_menu` VALUES ('329', '还原', '328', '0', 'Admin/WechatKeyword/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('330', '彻底删除', '328', '0', 'Admin/WechatKeyword/clean', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('330', '彻底删除', '328', '0', 'Admin/WechatKeyword/clear', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('341', '活动列表', '300', '0', 'Admin/WechatActivity/index', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('343', '新增', '341', '0', 'Admin/WechatActivity/create', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('341', '新增活动', '300', '0', 'Admin/WechatActivity/create', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('342', '活动列表', '300', '0', 'Admin/WechatActivity/index', '0', '', '活动管理', '0');
 INSERT INTO `onethink_menu` VALUES ('344', '编辑', '341', '0', 'Admin/WechatActivity/edit', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '341', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('346', '保存', '341', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '341', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
-<<<<<<< HEAD
-INSERT INTO `onethink_menu` VALUES ('349', '复制', '341', '0', 'Admin/WechatActivity/copy', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('350', '粘贴', '341', '0', 'Admin/WechatActivity/paste', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('351', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('352', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
-=======
->>>>>>> 5098f72314184ab499cb8d548e73d42c5fbc97c6
+INSERT INTO `onethink_menu` VALUES ('348', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('349', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('348', '复制', '341', '0', 'Admin/WechatActivity/copy', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('349', '粘贴', '341', '0', 'Admin/WechatActivity/paste', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('350', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('351', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('350', '活动分析', '300', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('352', '活动分析', '300', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('351', '活动禁用箱', '300', '0', 'Admin/WechatActivity/disabled', '0', '', '活动管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('353', '活动禁用箱', '300', '0', 'Admin/WechatActivity/disabled', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('352', '活动草稿箱', '300', '0', 'Admin/WechatActivity/draftBox', '0', '', '活动管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('354', '活动草稿箱', '300', '0', 'Admin/WechatActivity/draftBox', '0', '', '活动管理', '0');
-
-INSERT INTO `onethink_menu` VALUES ('355', '活动回收站', '300', '0', 'Admin/WechatActivity/recycle', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('356', '还原', '355', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('357', '彻底删除', '355', '0', 'Admin/WechatActivity/clean', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('353', '活动回收站', '300', '0', 'Admin/WechatActivity/recycle', '0', '', '活动管理', '0');
+INSERT INTO `onethink_menu` VALUES ('354', '还原', '355', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '355', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('361', '客户列表', '300', '0', 'Admin/WechatClient/index', '0', '', '客户管理', '0');
 INSERT INTO `onethink_menu` VALUES ('362', '客户信息', '300', '0', 'Admin/WechatClient/detail', '0', '', '客户管理', '0');
@@ -309,7 +322,7 @@ CREATE TABLE `onethink_tchat_activity` (
 	`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '活动状态，-1-删除，0-禁用，1-正常，2-待审核，3-草稿',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-	`update_time` TIMESTAMP COMMENT '更新时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '活动总表';
 
@@ -377,17 +390,17 @@ CREATE TABLE `onethink_tchat_album` (
 	`name` varchar(200) NOT NULL COMMENT '相册标识',
 	`title` varchar(200) NOT NULL COMMENT '相册名称',
 	`cat_id` int(10) NOT NULL COMMENT '所属分类ID',
-	`vote` tinyint(2) NOT NULL COMMENT '投票设置,1为启用，0为禁用',
+	`vote` tinyint(2) NOT NULL DEFAULT '0' COMMENT '投票设置,1为启用，0为禁用',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	PRIMARY KEY (`id`) 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT '相册存储表';
 
 
 -- -----------------------------
--- Table structure for `onethink_tchat_album_cat`
+-- Table structure for `onethink_tchat_album_category`
 -- -----------------------------
-DROP TABLE IF EXISTS `onethink_tchat_album_cat`;
-CREATE TABLE `onethink_tchat_album_cat` (
+DROP TABLE IF EXISTS `onethink_tchat_album_category`;
+CREATE TABLE `onethink_tchat_album_category` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类ID',
 	`name` varchar(30) NOT NULL COMMENT '标识',
 	`title` varchar(50) NOT NULL COMMENT '标题',
@@ -401,10 +414,10 @@ CREATE TABLE `onethink_tchat_album_cat` (
 	`template_detail` varchar(100) NOT NULL COMMENT '详情页模板',
 	`template_edit` varchar(100) NOT NULL COMMENT '编辑页模板',
 	`link_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '外链',
-	`allow_publish` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否允许发布内容',
+	`allow_publish` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否允许投稿',
 	`display` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '可见性',
 	`reply` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否允许回复',
-	`check` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '发布的文章是否需要审核',
+	`check` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '发布的图片是否需要审核',
 	`reply_model` varchar(100) NOT NULL DEFAULT '',
 	`extend` text NOT NULL COMMENT '扩展设置',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
@@ -557,7 +570,7 @@ CREATE TABLE `onethink_tchat_keyword_group` (
 	`status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '关键词使用状态，-1为删除，0为禁用，1为正常，',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-	`update_time` TIMESTAMP COMMENT '更新时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 	PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '关键词组回复内容表';
 
@@ -593,7 +606,7 @@ CREATE TABLE `onethink_tchat_music` (
 	`music_content` varchar(250) NOT NULL COMMENT '音乐描述',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-	`update_time` TIMESTAMP COMMENT '更新时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '音乐类型回复内容表';
 
@@ -618,7 +631,7 @@ CREATE TABLE `onethink_tchat_text` (
 	`content` varchar(250) NOT NULL UNIQUE COMMENT '文本回复内容',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
-	`update_time` TIMESTAMP COMMENT '更新时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 	PRIMARY KEY(`id`),
 	INDEX(`content`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '文本类型回复内容表';
