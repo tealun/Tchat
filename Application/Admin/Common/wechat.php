@@ -76,7 +76,7 @@ function get_keyword_model($id = null, $field = null){
 
 /**
  * 获取指定关键词分组的关键词列表
- * Enter description here ...
+ * 
  * @param $groupId
  */
 function get_keyword($groupId){
