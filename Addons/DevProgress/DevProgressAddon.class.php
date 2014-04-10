@@ -29,6 +29,7 @@ use Common\Controller\Addon;
 
         //实现的AdminIndex钩子方法
         public function AdminIndex(){
+        	
                 $this->display('widget');
         }
 
