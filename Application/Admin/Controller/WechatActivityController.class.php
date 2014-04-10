@@ -66,17 +66,21 @@ class WechatActivityController extends WechatController {
    * 创建新活动
    */
   public function create(){
-        //获取关键词分组模型
-    $model = M('Model')->where(array('id'=>5))->find();
-    $info['model_id']= '5';
+        //获取活动模型
+    if(isset($_GET['model_id'])){
+        $info['model_id']= $_GET['model_id'];
+        $info['model_name'] = get_model_by_id($_GET['model_id']);
+	    $model = M('Model')->where(array('id'=>$info['model_id']))->find();
             //获取表单字段排序
         $fields = get_model_attribute($model['id']);
-    $this->assign('info',$info);
-    $this->assign('fields',     $fields);
+	    $this->assign('info',$info);
+ 		$this->assign('fields',$fields);
         $this->assign('model', $model);
-        $this->meta_title = '新增关键词分组';
+        $this->meta_title = '新增活动';
         $this->display();
-
+     }else{
+     	$this->display('modellist');
+     }
   }
   
   /**
