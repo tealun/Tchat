@@ -32,14 +32,6 @@ class WechatController extends Controller {
   }
 
   /**
-   * just for test
-   * 
-   */
-  public function test(){
-
-  }
-
-  /**
    * 响应用户消息
    * 
    */
@@ -85,17 +77,17 @@ class WechatController extends Controller {
    */
   private function reply($data){
     $openId= $data['FromUserName'];
-    if('text' == $data['MsgType']){
+    if('text' == $data['MsgType']){ //客户文本消息类型回复
       $TextRe = A('Text','Event');
       $keyword = $data['Content'];
       $reply = $TextRe->textHandle($openId,$keyword);
-    } elseif('event' == $data['MsgType']){
+    } elseif('event' == $data['MsgType']){ //客户事件消息类型回复
       $EventRe = A('Event','Event');
       $event = $data['Event'];
       $eventKey = $data['EventKey'];
       $ticket = $data['Ticket'];
       $reply = $EventRe -> eventHandle($openId,$event,$eventKey,$ticket);
-    } elseif('image' == $data['MsgType']){
+    } elseif('image' == $data['MsgType']){ //客户图片消息类型回复
       $ImageRe = A('Image','Event');
       $mediaId = $data['MediaId'];
       $reply = $ImageRe->imageHandle($openId,$mediaId);
