@@ -1,4 +1,13 @@
 -- -----------------------------
+-- Records of  `onethink_addons`
+-- -----------------------------
+UPDATE `onethink_addons` SET `status` = '0' WHERE `onethink_addons`.`id` IN (3,4);
+
+-- -----------------------------
+-- Records of  `onethink_hooks`
+-- -----------------------------
+INSERT INTO `onethink_hooks`  VALUES (30, 'wechatIndex', '微信控制栏目首页钩子', 1, 1397114797, 'TchatIndex');
+-- -----------------------------
 -- Records of  `onethink_attribute`
 -- -----------------------------
 
@@ -115,8 +124,6 @@ INSERT INTO `onethink_auth_group_access` VALUES ('7','6');
 -- -----------------------------
 INSERT INTO `onethink_auth_rule` VALUES ('300', 'admin', '2', 'Admin/Wechat/index', '微信', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('301', 'admin', '1', 'Admin/Config/group?id=5','配置微信', '1', '');
-
 INSERT INTO `onethink_auth_rule` VALUES ('302', 'admin', '1', 'Admin/WechatKeyword/index','关键词列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('303', 'admin', '1', 'Admin/WechatKeyword/create','新增', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('304', 'admin', '1', 'Admin/WechatKeyword/edit','编辑', '1', '');
@@ -205,13 +212,15 @@ INSERT INTO `onethink_channel` VALUES ('3', '0', '相册', 'Album/index', '5', '
 -- Records of `onethink_config`
 -- -----------------------------
 UPDATE `onethink_config` SET `value` = '1:基本\r\n2:内容\r\n3:用户\r\n4:系统\r\n5:微信' WHERE `id`= '20' limit 1;
-INSERT INTO `onethink_config` VALUES ('40', 'WECHAT_NAME', '1', '微信帐号', '5', '', '公众帐号官方账号', '1378898976', '1379235841', '1', '', '5');
-INSERT INTO `onethink_config` VALUES ('41', 'WECHAT_NICKNAME', '1', '微信昵称', '5', '', '公众帐号昵称', '1378898976', '1379235841', '1', '', '5');
-INSERT INTO `onethink_config` VALUES ('42', 'WECHAT_TOKEN', '1', '微信TOKEN', '5', '', '公众帐号的接入本地验证码', '1378898976', '1379235841', '1', 'Tchat', '5');
-INSERT INTO `onethink_config` VALUES ('43', 'WECHAT_APP_ID', '1', 'APPID', '5', '', '公众帐号的APPID', '1378898976', '1379235841', '1', '', '6');
-INSERT INTO `onethink_config` VALUES ('44', 'WECHAT_APP_SECRET', '1', 'APP_SECRET', '5', '', '公众帐号的APPSECRET', '1378898976', '1379235841', '1', '', '7');
-INSERT INTO `onethink_config` VALUES ('45', 'WECHAT_ACCOUNT_TYPE', '4', '账号类型', '5', '0:订阅号\r\n1:服务号', '公众帐号类型', '1378898976', '1379235841', '1', '0', '7');
-INSERT INTO `onethink_config` VALUES ('46', 'WECHAT_ACCOUNT_RZ', '4', '认证状态', '5', '0:未认证\r\n1:已认证\r\n2:微博认证', '公众账号的认证状态', '1378898976', '1379235841', '1', '0', '7');
+INSERT INTO `onethink_config` VALUES ('40', 'WECHAT_GHID', '1', '微信原始ID', '5', '', '公众帐号原始ID', '1378898976', '1379235841', '1', '', '5');
+INSERT INTO `onethink_config` VALUES ('41', 'WECHAT_NAME', '1', '微信号', '5', '', '公众帐号官方账号', '1378898976', '1379235841', '1', '', '5');
+INSERT INTO `onethink_config` VALUES ('42', 'WECHAT_NICKNAME', '1', '微信昵称', '5', '', '公众帐号昵称', '1378898976', '1379235841', '1', '', '5');
+INSERT INTO `onethink_config` VALUES ('43', 'WECHAT_TOKEN', '1', '微信TOKEN', '5', '', '公众帐号的接入本地验证码', '1378898976', '1379235841', '1', 'Tchat', '5');
+INSERT INTO `onethink_config` VALUES ('44', 'WECHAT_APP_ID', '1', 'APPID', '5', '', '公众帐号的APPID', '1378898976', '1379235841', '1', '', '6');
+INSERT INTO `onethink_config` VALUES ('45', 'WECHAT_APP_SECRET', '1', 'APP_SECRET', '5', '', '公众帐号的APPSECRET', '1378898976', '1379235841', '1', '', '7');
+INSERT INTO `onethink_config` VALUES ('46', 'WECHAT_ACCOUNT_TYPE', '4', '账号类型', '5', '0:订阅号\r\n1:服务号', '公众帐号类型', '1378898976', '1379235841', '1', '0', '7');
+INSERT INTO `onethink_config` VALUES ('47', 'WECHAT_ACCOUNT_RZ', '4', '认证状态', '5', '0:未认证\r\n1:已认证\r\n2:微博认证', '公众账号的认证状态', '1378898976', '1379235841', '1', '0', '7');
+
 
 -- -----------------------------
 -- Records of `onethink_document`
@@ -245,8 +254,6 @@ INSERT INTO `onethink_document_article` VALUES ('8', '0', '<h1>\r\n	这里是公
 -- -----------------------------
 UPDATE `onethink_menu` SET `title` = '新闻', `tip` = '新闻类型文档管理'  WHERE `id`= '2' limit 1;
 INSERT INTO `onethink_menu` VALUES ('300', '微信', '0', '1', 'Admin/Wechat/index', '0', '微信后台模块管理目录', '', '0');
-
-INSERT INTO `onethink_menu` VALUES ('301', '配置微信', '300', '0', 'Admin/Config/group?id=5', '0', '', '配置微信', '0');
 
 INSERT INTO `onethink_menu` VALUES ('321', '关键词列表', '300', '0', 'Admin/WechatKeyword/index', '0', '', '关键词管理', '0');
 INSERT INTO `onethink_menu` VALUES ('322', '新增', '321', '0', 'Admin/WechatKeyword/create', '0', '', '', '0');
