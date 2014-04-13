@@ -83,8 +83,25 @@ class WechatActivityController extends WechatController {
      }
   }
   
+    /**
+     * update one record
+     * @author huajie <banhuajie@163.com>
+     */
+    public function update(){
+        if(IS_POST || IS_AJAX){
+          $res = D('Tchat_activity')->update($_POST);
+          if(!$res){
+              $this->error(D('Tchat_activity')->getError());
+          }else{
+              $this->success($res['id']?'更新成功':'新增成功', U('index'),1);
+          }
+        }else{
+          $this->error('访问错误',U('index'),3);
+        }
+    }
+    
   /**
-   * edit one keyword group
+   * edit one Activity
    */
   public function edit(){
     $id     =   I('get.id','');
@@ -95,7 +112,7 @@ class WechatActivityController extends WechatController {
         $info['model_id']= '5';
       
       /*获取一条记录的详细数据*/
-        $KeywordGroup =D('Tchat_keyword_group');
+        $KeywordGroup =D('Tchat_activity');
         $data = $KeywordGroup->detail($id);
         if(!$data){
             $this->error($KeywordGroup->getError());
