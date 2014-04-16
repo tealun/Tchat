@@ -17,9 +17,9 @@ class EventEvent {
 
       switch ($event){
         //如果是关注事件，拉取客户资料进行存储
-        //TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态
+        //TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题 及解决方法
         case 'subscribe':
-          if (get_wechat_rz()){
+          if (check_wechat_rz()===TRUE){
             $data = get_client_info($openId);
             $data['event_key']=$evnetKey;
             $data['ticket']=$ticket;

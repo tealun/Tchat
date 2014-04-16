@@ -174,18 +174,18 @@ function save_access_token(){
   return $accessToken = S('accessToken');
 }
 
-function get_wechat_rz(){
+function check_wechat_rz(){
   $value = get_ot_config('WECHAT_ACCOUNT_RZ');
-  return $value === '1'?TRUE:FALSE;
+	  if($value === '2'){
+	  	return $value;
+	  }else{
+	  	return $value === '1'?TRUE:FALSE;
+  }
 }
 
-function get_wechat_type(){
+function check_wechat_type(){
   $value = get_ot_config('WECHAT_ACCOUNT_TYPE');
-  if($value === '1' || get_ot_config('WECHAT_ACCOUNT_RZ') === '2' ){
-    return TRUE;
-  }else{
-    return FALSE;
-  }
+  return $value === '1'?TRUE:FALSE;
 }
 
 /**

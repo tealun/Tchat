@@ -9,8 +9,9 @@ class ImageEvent{
    * @param $mediaId 图片ID
    */
   public function imageHandle($openId,$mediaId){
+  	$content = "( ＾-＾)っ您的图片收到啦";
     //认证判断
-    if(get_wechat_rz()){
+    if(check_wechat_rz()===TRUE){
       //下载图片
       $accessToken = get_access_token();
       $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$accessToken&media_id=$mediaId";
@@ -32,11 +33,8 @@ class ImageEvent{
       //回复客户内容
       $filePath = str_replace('./', '/', $filePath);
   
-      $content = "( ＾-＾)っ您的图片收到啦\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击查看</a>".C('WECHAT_APP_ID');  
-    }else{
-      $content = "( ＾-＾)っ您的图片收到啦";  
+      $content .= "\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击查看</a>";  
     }
-    
     return $reply = get_text_arr($content);
   }
   
