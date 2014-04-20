@@ -26,7 +26,7 @@ class TextEvent{
    */
   public function textHandle($openId,$keyword){
     //TODO 对是否属于当前活动进行关键字匹配
-    if($reply = A('Activity','Logic')->activPreg($openId,$keyword)){
+    if($reply = A('Segment','Logic')->findPreg($openId,$keyword)){
       return $reply;
       exit;
       //查看是否有客户缓存

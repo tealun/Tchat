@@ -46,12 +46,13 @@ class TchatClientModel extends Model{
         }
     }
     
-    public function getClintId($openId){
+    public function getClientId($openId){
       $id = $this->where(array('openid'=>$openId))->getField('id');
       if(!$id){
-        $data = array(
+      	$data = array(
           'openid'=>$openId,
         );
+        if(check_wechat_rz()) $data = get_client_info($openId);
         $this->create($data);
         $id = $this->add();
       }
