@@ -14,11 +14,6 @@ class ReplyEvent {
     switch ($this->rs['segment']){
       //模型为activity时处理流程
       case 'activity':
-      	$item = M('Tchat_activity')->where(array('id'=>$rs['segment_id']))->find();
-      	if(!empty($item['check_info'])){
-      		$checkInfo = str2arr($item['check_info']);
-      		
-      	}
         return $reply=$this->reply();
         break;
       //默认处理流程,针对无特殊业务流程
