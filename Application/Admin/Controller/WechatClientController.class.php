@@ -60,8 +60,7 @@ class WechatClientController extends WechatController {
  
 	/**
 	 * 获取客户数据
-	 * Enter description here ...
-	 * @param unknown_type $map
+	 * @param array $map
 	 */
     private function getLists($map){
     	$list   = $this->lists('Tchat_client',$map);

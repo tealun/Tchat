@@ -10,38 +10,45 @@ namespace Wechat\Logic;
 
 /**
  * 板块逻辑类
- * Enter description here ...
  * @author Tealun Du
  *
  */
 class SegmentLogic{
 	//对验证方式进行位赋值 0为验证条件组合连接符验证 1为姓名验证 2为电话号码验证 4为QQ号码验证 5为邮箱验证
 	private $pregs = array(
-	  0 => '[ \-\+]?',
-	  1 => '(?<clientName>[^ \+\f\n\r\t\v0-9]+)?',
-	  2 => '(?<clientPhone>1[34578]\d{9}$|(0\d{2,3})?-?(\d{7,8})$)?',
-	  4 => '(?<clientQQ>\d{5,11}$)?',
-	  8 => '(?<clientEmail>^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$)?'
-	);
+					  0 => array(
+					  	'preg'=>'[ \-\+]?',
+					  	'name'=>'间隔符号'
+					  	),
+					  1 => array(
+					  	'preg'=>'(?<name>[^ \+\f\n\r\t\v0-9]+)?',
+					  	'name'=>'name'
+					  	),
+					  2 => array(
+					  	'preg'=>'(?<phone>1[34578]\d{9}$|(0\d{2,3})?-?(\d{7,8})$)?',
+					  	'name'=>'phone'
+					  	),
+					  4 => array(
+					  	'preg'=>'(?<QQ>\d{5,11}$)?',
+					  	'name'=>'QQ'
+					  	),
+					  8 =>  array(
+					  	'preg'=>'(?<email>^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$)?',
+					    'name'=>'email'
+					    )
+					);
 	
-	private $pregsName = array(
-	  0 => '间隔符号',
-	  1 => 'clientName',
-	  2 => 'clientPhone',
-	  4 => 'clientQQ',
-	  8 => 'clientEmail'
-	);
+		private $tip = array(
+						  'name' => '姓名',
+						  'phone' => '联系电话',
+						  'cellPhone'=>'手机号',
+						  'tel' => '固定电话',
+						  'QQ' => 'QQ号',
+						  'email' => '电子邮件'
+						);
 	
-	private $tip = array(
-	  'clientName' => '姓名',
-	  'clientPhone' => '联系电话',
-	  'cellPhone'=>'手机号',
-	  'tel' => '固定电话',
-	  'clientQQ' => 'QQ号',
-	  'clientEmail' => '电子邮件'
-	);
 	/**
-	 * 查找当前安装板块,将任务流分发到各板块逻辑类
+	 * 查找当前安装板块,获取各板块需要验证的条目
 	 * TODO 待完善
 	 */
 	private function segmentPreg(){
@@ -75,38 +82,47 @@ class SegmentLogic{
 	
   /**
    * 对有需要验证提取客户信息的板块进行信息提取
-   * 
+   * TODO 未完善
    * @param $openId 微信openid
    * @param $keyword 客户发送的信息
    */
   public function findPreg($openId,$keyword){
 	$pregs = $this->pregs;
   	$patternArr = $this->segmentPreg();
-  	var_dump($patternArr);
   	if(is_null($patternArr)){
+  		//没有需要的验证项，则回复FALSE
   		return FALSE;
   	}else{
   		foreach ($patternArr as $pattern){
+  			//获取检测项
   			$check = $this->checkInfo($pattern['check_info']);
+  			//建立需要检测项名称数组
   			$pattern['needs'] = str2arr($check['need']);
+  			//建立针对该条项目的验证规则
   			$pattern['rule']= "/^(?:".$pattern['ex_keyword'].")".$check['rule']."/";
+  			//进行验证
   			 if(preg_match($pattern['rule'], $keyword,$matches)){
-  				 S($openId,NULL);
+  				//清除缓存 
+  			 	S($openId,NULL);
+  			 	 //遍历所需验证项目
   				 foreach ($pattern['needs'] as $v){
 	  				if(empty($matches[$v])){
 						$tips .= $tips?"、".$this->tip[$v]:$this->tip[$v];
-						$needs[$v] = '';
+						$needs[$v] = '';//没有提取到则设置为空
 					}else{
 						$needs[$v] = $matches[$v];
 					}
+					//如果存在未提取到的所需信息，则回复提示并缓存
 					if ($tips){
 		              $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效）";
+		              //缓存需要检测项目
 		              S($openId,array('segment'=>$pattern['segment'],
-		              		//TODO 这里需要进行所有需要获取的信息的缓存
 		              		'needs'=>$needs),120);
 		              var_dump(S($openId));
 					$reply = get_text_arr($content);
 					}else{
+						//匹配客户信息完整后存储客户资料
+						$this->saveClientInfo($openId, $matches);
 					$reply = get_text_arr('信息已经完整');
 					}
   				 }
@@ -193,30 +209,48 @@ class SegmentLogic{
     }*/
   }
   
-  	
+  	/**
+  	 * 检测条目需要验证的内容，将检测到的内容名称及检测正则表达式字符串组成数组返回
+  	 * @param int $num
+  	 * @return array
+  	 */
   	private function checkInfo($num){
   		$pregs = $this->pregs;
   		foreach ($pregs as $key =>$val){
   			if($this->check($num,$key)){
-  				$preg['need'] .= $preg['need']?",".$this->pregsName[$key]:$this->pregsName[$key];
-  				$preg['rule'] .= $pregs[0].$val;
+  				$preg['need'] .= $preg['need']?",".$val['name']:$val['name'];
+  				$preg['rule'] .= $pregs[0]['preg'].$val['preg'];
   			}
   		}
   		return $preg;
   	}
   	
-  	//位与运算筛选
+  	/**
+  	 * 存储客户资料
+  	 * @param string $openId
+  	 * @param array $matches
+  	 */
+  	private function saveClientInfo($openId,$matches){
+  		$data = $matches;
+  	    $data['openid']=$openId;
+        D('Tchat_client')->update($data);
+  	}
+  	
+  	/**
+  	 * 位与运算筛选
+  	 * @param unknown_type $pos
+  	 * @param unknown_type $contain
+  	 */
 	private function check($pos = 0, $contain = 0){
-    if(empty($pos) || empty($contain)){
-        return false;
-    }
-
-    //将两个参数进行按位与运算，不为0则表示$contain属于$pos
-    $res = $pos & $contain;
-    if($res !== 0){
-        return true;
-    }else{
-        return false;
-    }
-}
+	    if(empty($pos) || empty($contain)){
+	        return false;
+	    }
+	    //将两个参数进行按位与运算，不为0则表示$contain属于$pos
+	    $res = $pos & $contain;
+	    if($res !== 0){
+	        return true;
+	    }else{
+	        return false;
+	    }
+	}
 }
