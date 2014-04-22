@@ -63,7 +63,7 @@ class SegmentLogic{
           'status'=>array('eq','1'),
           'check_info'=>array('gt','0')
         );
-        $field = array('id','ex_keyword','check_info','cheked_reply');
+        $field = array('id','ex_keyword','check_info','checked_reply');
         $rs = M('Tchat_'.$seg['name'])->where($map)->field($field)->select();
         //查找到符合条目则整合到需要匹配的项的二维数组中
         if(!is_null($rs)){
@@ -106,40 +106,38 @@ class SegmentLogic{
            S($openId,NULL);
             //遍历所需验证项目
            foreach ($pattern['needs'] as $v){
-            if(empty($matches[$v])){
-            $tips .= $tips?"、".$this->tip[$v]:$this->tip[$v];
-            $needs[$v] = '';//没有提取到则设置为空
-          }else{
-            $needs[$v] = $matches[$v];
-          }
-          //如果存在未提取到的所需信息，则回复提示并缓存
-          if ($tips){
+	            if(empty($matches[$v])){
+	            $tips .= $tips?"、".$this->tip[$v]:$this->tip[$v];
+	            $needs[$v] = '';//没有提取到则设置为空
+		          }else{
+		            $needs[$v] = $matches[$v];
+		          }
+	          //如果存在未提取到的所需信息，则回复提示并缓存
+	          if ($tips){
                   $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效）";
                   //缓存需要检测项目
                   S($openId,array('segment'=>$pattern['segment'],
                       'needs'=>$needs),120);
-                  var_dump(S($openId));
-          $reply = get_text_arr($content);
-          }else{
-            //匹配客户信息完整后存储客户资料
-            $this->saveClientInfo($openId, $matches);
-            //获取针对性的回复内容
-            if(!empty($pattern['cheked_reply'])){
-            	//TODO 如果是不需要客户设定但是又要回复客户不同于关键字触发的回复内容，比如优惠券活动，待解决。
-            	$replyConfig = implode(':', $pattern['cheked_reply']);
-            	var_dump($replyConfig);
-            	$rs['segment']=$pattern['segment'];
-            	$rs['reply_type']= $replyConfig['type'];
-            	$rs['reply_id']= $replyConfig['ids'];
-            	//根据设定的获取客户信息后的回复内容回复客户
-            	$reply = A('Reply','Event')->wechatReply($rs);
-            	unset($replyConfig,$rs);
-            }else{
-           		A($pattern['segment'],'Logic');
-         		$reply = get_text_arr('信息已经完整');
-            }
-
-          }
+	          $reply = get_text_arr($content);
+	          }else{
+	            //匹配客户信息完整后存储客户资料
+	            $this->saveClientInfo($openId, $matches);
+	            //获取针对性的回复内容
+	            if(!empty($pattern['checked_reply'])){
+	            	//TODO 如果是不需要设定但是又要回复客户不同于关键字触发的回复内容，比如优惠券活动，待解决。
+	            	$replyConfig = str2arr($pattern['checked_reply'],':');
+	            	$rs['segment']=$pattern['segment'];
+	            	$rs['reply_type']= $replyConfig[0];
+	            	$rs['reply_id']= $replyConfig[1];
+	            	//根据设定的获取客户信息后的回复内容回复客户
+	            	$reply = A('Reply','Event')->wechatReply($rs);
+	            	unset($replyConfig,$rs);
+	            }else{
+	           		A($pattern['segment'],'Logic');
+	         		$reply = get_text_arr('信息已经完整');
+	            }
+	
+	          }
            }
        
          }else{

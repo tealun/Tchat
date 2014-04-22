@@ -329,7 +329,7 @@ CREATE TABLE `onethink_tchat_activity` (
 	`act_type` tinyint(3) NOT NULL DEFAULT '0' COMMENT '对应活动类型',
     `check_info` int(5) NOT NULL DEFAULT '0' COMMENT '参与活动是否需审核客户信息',
     `ex_keyword` varchar(10) NOT NULL DEFAULT '' COMMENT '客户个人信息时的前置关键词',
-    `cheked_reply` varchar(100) NOT NULL DEFAULT '' COMMENT '获取客户资料后的回复内容',
+    `checked_reply` varchar(100) NOT NULL DEFAULT '' COMMENT '获取客户资料后的回复内容',
 	`startup` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '启动时间',
 	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '结束时间',
 	`act_add` varchar(100) NOT NULL DEFAULT 'Local' COMMENT '活动地点',
@@ -345,11 +345,11 @@ CREATE TABLE `onethink_tchat_activity` (
 -- -----------------------------
 -- Records of `onethink_tchat_activity`
 -- -----------------------------
-INSERT INTO `onethink_tchat_activity` VALUES ('1','冬款折扣季','冬款折扣季','1','','','','1392825600','1395244800', '各分店', '','0','1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('2','满200送50','消费满200送50大酬宾','0','','','','1392825600','0', '各分店', '','4','1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('3','迎春优惠券','迎春优惠券赠送活动','2','2','我要优惠券','text:4','1392825600','1400515200', '各分店', '','0','1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('4','春节大抢购','2013春节大抢购活动','1','','','','1392825600','1400515200', '各分店', '','0','1','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('5','春节抢红包','2013春节抢红包活动','6','3','抢红包','document:3,5','1392825600','1400515200', '各分店', '','4','1','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('1','冬款折扣季','冬款折扣季','1','','','','1392825600','1395244800', '各分店', '','0','0','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('2','满200送50','消费满200送50大酬宾','0','','','','1392825600','0', '各分店', '','1','0','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('3','迎春优惠券','迎春优惠券赠送活动','2','2','我要优惠券','text:4','1392825600','1400515200', '各分店', '','1','4','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('4','春节大抢购','2013春节大抢购活动','1','','','','1392825600','1400515200', '各分店', '','1','0','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('5','春节抢红包','2013春节抢红包活动','6','3','抢红包','document:3,5','1392825600','1400515200', '各分店', '','1','4','3', '1393292899', '1393292899');
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity_discount`
 -- -----------------------------
