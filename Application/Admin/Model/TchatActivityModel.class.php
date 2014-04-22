@@ -28,6 +28,7 @@ class TchatKeywordGroupModel extends Model{
     protected $_auto = array(
         array('uid', 'is_login', self::MODEL_INSERT, 'function'),
         array('name', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
+        array('check_info','renewPatternArr', self::MODEL_BOTH, 'callback'),
         array('start_time', 'getStartTime', self::MODEL_BOTH, 'callback'),
         array('deadline', 'getDeadTime', self::MODEL_BOTH, 'callback'),
         array('create_time', 'getCreateTime', self::MODEL_BOTH,'callback'),
@@ -143,7 +144,11 @@ class TchatKeywordGroupModel extends Model{
 		}
 		M('Tchat_keyword')->addAll($dataList);
 	}
-
+	
+	protected function renewPatternArr(){
+		A('Pattern','Wechat/Logic')->renewPatternArr();
+	}
+	
     /**
      * 获取数据状态
      * @return integer 数据状态

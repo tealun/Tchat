@@ -26,12 +26,12 @@ class TextEvent{
    */
   public function textHandle($openId,$keyword){
     //TODO 对是否属于当前活动进行关键字匹配
-    if($reply = A('Segment','Logic')->findPreg($openId,$keyword)){
+    if($reply = A('Pattern','Logic')->findPreg($openId,$keyword)){
       return $reply;
       exit;
       //查看是否有客户缓存
       }elseif(S($openId)){
-        return $reply = A('Reply','Event')->cacheReply($openId,$keyword);
+        return $reply = A('Cache','Logic')->cacheReply($openId,$keyword);
       //对发送的关键字进行缓存查询
       }elseif ($id=S($keyword)){
         $rs = M('Tchat_keyword_group')->where('id="'.$id.'"')->find();
