@@ -17,24 +17,17 @@ class CacheLogic{
   	$data =  S($openId);
 	$action = str2arr($data['action']['c']);
     $methed = $data['action']['a'];
-    $p = $data['action']['p'];
-        var_dump($action);
 
     if(!empty($data['p'])){
-      foreach ($data['p'] as $k => $v){
-      $$k = $v;
-      };
+   	 $data['p']['keyword']=$keyword;
+     $action = A($action[0],$action[1]);
+     $reply = call_user_func_array(array($action,$methed), $data['p']);
     }
-	$reply = A($action[0],$action[1])->$methed($p);
     return $reply;
   }
 	  
   private function judgeNamePhone($data,$openId,$keyword,$segment,$keyWordGropName,$second='120'){
-          if(preg_match('/^(qx)$/',$keyword)){
-            S($openId,NULL);
-            return $reply = get_text_arr('您已取消参与，谢谢您的合作。');
-            exit;
-          }
+
     
           if(preg_match('/^([^ \+\f\n\r\t\v0-9]+)$/',$keyword)){
           $data['name']= $keyword;

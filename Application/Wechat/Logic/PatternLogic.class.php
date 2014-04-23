@@ -100,25 +100,42 @@ class PatternLogic{
         $pattern['needs'] = str2arr($preg['need']);
         //建立针对该条项目的验证规则
         $pattern['rule']= "/^(?:".$pattern['ex_keyword'].")".$preg['rule']."/";
-        //进行验证
-         if(preg_match($pattern['rule'], $keyword,$matches)){
-          //清除缓存 
-          S($openId,NULL);
-      		$reply = $this->checkInfo($openId,$pattern, $matches);
-         }else{
-         unset($pattern,$preg);
-         }
+		$reply = $this->startPreg($openId, $pattern, $keyword, $matches);
+		if($reply){
+		 return $reply;
+		}
       }
-      return $reply;
+      
     }
   }
   
   	
+  public function startPreg($openId,$pattern,$keyword){
+            if(preg_match('/^(qx)$/',$keyword)){
+            S($openId,NULL);
+            return $reply = get_text_arr('您已取消参与，谢谢您的合作。');
+            exit;
+          }
+          //进行验证
+         if(preg_match($pattern['rule'], $keyword,$matches)){
+         	$arr =  S($openId);
+         	if($arr['matches']){
+         	$matches = array_merge($matches,$arr['matches']);
+
+         	}
+         	var_dump($matches);
+         	S($openId,NULL);
+      		return $reply = $this->checkInfo($openId,$pattern, $matches);
+         }else{
+			return false;
+         }
+  }
+  
   	/**
   	 * 检测必要信息
   	 */
-    public function checkInfo($openId,$pattern,$matches){
-        var_dump($pattern);  
+    public function checkInfo($openId,$pattern,$matches){ 
+
     	//遍历所需验证项目
           foreach ($pattern['needs'] as $v){
 	          if(empty($matches[$v])){
@@ -130,19 +147,18 @@ class PatternLogic{
           if ($tips){
           	  $preg = $this->getPreg($num);
           	  $pattern['rule']= "/^".$preg['rule']."/";
-          	  $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效）";
+          	  $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效,取消请回复qx）";
                   //缓存需要检测项目
                   S($openId,array(
                       'action'=>array(
                         'c'=>"Pattern,Logic",
-                        'a'=>'checkInfo',
-                        'p'=>'$pattern,$matches'
+                        'a'=>'startPreg',
                         ),
                       'p'=>array(
                          'openId'=>$openId,
-	                     'pattern'=>$pattern,
-	                     'matches'=>$matches
-                        )
+	                     'pattern'=>$pattern
+                        ),
+                      'matches'=>$matches
                       ),
                       120);
           $reply = get_text_arr($content);
