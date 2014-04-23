@@ -14,20 +14,18 @@ class CacheLogic{
 	}
 	
   public function cacheReply($openId,$keyword){
-    $data =  S($openId);
-    
-    
-    if($data['activity']){
-      switch ($data['activity']){
-      //红包活动所需客户信息收集判断，含客户姓名及客户联系电话
-      case 'hongbao':
-        $reply = $this->judgeNamePhone($data,$openId, $keyword, 'activity', '抢红包');
-        break;
-      case 'suggest':
-        $reply = $this->judgeNamePhone($data,$openId, $keyword, 'costom', '建议');
-        break;
-      }
+  	$data =  S($openId);
+	$action = str2arr($data['action']['c']);
+    $methed = $data['action']['a'];
+    $p = $data['action']['p'];
+        var_dump($action);
+
+    if(!empty($data['p'])){
+      foreach ($data['p'] as $k => $v){
+      $$k = $v;
+      };
     }
+	$reply = A($action[0],$action[1])->$methed($p);
     return $reply;
   }
 	  

@@ -104,7 +104,7 @@ class PatternLogic{
          if(preg_match($pattern['rule'], $keyword,$matches)){
           //清除缓存 
           S($openId,NULL);
-      		$reply = $this->checkInfo($pattern, $matches);
+      		$reply = $this->checkInfo($openId,$pattern, $matches);
          }else{
          unset($pattern,$preg);
          }
@@ -117,14 +117,14 @@ class PatternLogic{
   	/**
   	 * 检测必要信息
   	 */
-    public function checkInfo($pattern,$matches){
-          //遍历所需验证项目
+    public function checkInfo($openId,$pattern,$matches){
+        var_dump($pattern);  
+    	//遍历所需验证项目
           foreach ($pattern['needs'] as $v){
-          if(empty($matches[$v])){
-          	$tips .= $tips?"、".$this->tip[$v]:$this->tip[$v];
-          	$num = $num?$num+$this->getPregKey($v):$this->getPregKey($v);
-          	var_dump($num);
-          }
+	          if(empty($matches[$v])){
+	          	$tips .= $tips?"、".$this->tip[$v]:$this->tip[$v];
+	          	$num = $num?$num+$this->getPregKey($v):$this->getPregKey($v);
+	          }
           }
 	      //如果存在未提取到的所需信息，则回复提示并缓存
           if ($tips){
@@ -132,9 +132,19 @@ class PatternLogic{
           	  $pattern['rule']= "/^".$preg['rule']."/";
           	  $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效）";
                   //缓存需要检测项目
-                  S($openId,array('pattern'=>$pattern,
-                      'matches'=>$matches),120);
-                  var_dump(S($openId));
+                  S($openId,array(
+                      'action'=>array(
+                        'c'=>"Pattern,Logic",
+                        'a'=>'checkInfo',
+                        'p'=>'$pattern,$matches'
+                        ),
+                      'p'=>array(
+                         'openId'=>$openId,
+	                     'pattern'=>$pattern,
+	                     'matches'=>$matches
+                        )
+                      ),
+                      120);
           $reply = get_text_arr($content);
           }else{
             //匹配客户信息完整后存储客户资料
