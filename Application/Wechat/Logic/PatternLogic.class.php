@@ -48,8 +48,9 @@ class PatternLogic{
             );
   
   /**
-   * 查找当前安装板块,获取各板块需要验证的条目
-   * TODO 待完善
+   * 查找当前安装板块,获取各板块需要验证的条目然后生成需匹配项目缓存
+   * 实效性为1小时
+   * 注意：在设计添加有需要进行验证的模型时,模型统一使用字段"check_info"并在自动完成配置中配置运行一次本公共方法,以便实时更新
    */
   public function renewPatternArr(){
     //加载现有板块
@@ -75,6 +76,7 @@ class PatternLogic{
           unset($rs);
         }
       }
+    //如果存在$parrerArr
    	IF($patternArr)S(patternArr,$patternArr?$patternArr:'',600);
    	return S(patternArr);
    	unset($i,$map,$field,$segs,$seg,$patternArr);
@@ -82,7 +84,6 @@ class PatternLogic{
 
   /**
    * 对有需要验证提取客户信息的板块进行信息提取
-   * TODO 未完善
    * @param $openId 微信openid
    * @param $keyword 客户发送的信息
    */
@@ -100,7 +101,9 @@ class PatternLogic{
         $pattern['needs'] = str2arr($preg['need']);
         //建立针对该条项目的验证规则
         $pattern['rule']= "/^(?:".$pattern['ex_keyword'].")".$preg['rule']."/";
+        //将$pattern数组传递到开始验证方法中进行正则匹配
 		$reply = $this->startPreg($openId, $pattern, $keyword, $matches);
+		unset($pattern,$preg);
 		if($reply){
 		 return $reply;
 		}
@@ -109,21 +112,31 @@ class PatternLogic{
     }
   }
   
-  	
+  /**
+   * 匹配需要提取客户信息内容的条目关键字
+   * @param string $openId 客户openID
+   * @param array $pattern 匹配项目内容数组
+   * $pattern的内容为renewPatternArr方法获取到的数组中
+   * @param string $keyword 客户发送的关键字
+   */
   public function startPreg($openId,$pattern,$keyword){
-            if(preg_match('/^(qx)$/',$keyword)){
+            if(S($openId) && preg_match('/^(qx)$/',$keyword)){
             S($openId,NULL);
             return $reply = get_text_arr('您已取消参与，谢谢您的合作。');
             exit;
           }
-          //进行验证
+          //进行正则表达式验证
          if(preg_match($pattern['rule'], $keyword,$matches)){
          	$arr =  S($openId);
          	if($arr['matches']){
-         	$matches = array_merge($matches,$arr['matches']);
-
+         	 $matches = array_merge($matches,$arr['matches']);
+         	 //清理正则表达式匹配时产生的数字键名垃圾,只留下字符串键名的键值
+              foreach ($matches as $k => $v){
+	              if(is_numeric($k))  unset($matches[$k]);
+              }
          	}
-         	var_dump($matches);
+         	//删除不再使用的变量及缓存
+         	unset($arr,$k,$v);
          	S($openId,NULL);
       		return $reply = $this->checkInfo($openId,$pattern, $matches);
          }else{
@@ -132,9 +145,13 @@ class PatternLogic{
   }
   
   	/**
-  	 * 检测必要信息
+  	 * 检测验证条目的必要信息
+  	 *@param string $openId 客户openID
+     * @param array $pattern 匹配项目内容数组
+     * $pattern的内容为renewPatternArr方法获取到的数组中
+     * @param string $keyword 客户发送的关键字
   	 */
-    public function checkInfo($openId,$pattern,$matches){ 
+    private function checkInfo($openId,$pattern,$matches){ 
 
     	//遍历所需验证项目
           foreach ($pattern['needs'] as $v){
@@ -147,18 +164,18 @@ class PatternLogic{
           if ($tips){
           	  $preg = $this->getPreg($num);
           	  $pattern['rule']= "/^".$preg['rule']."/";
-          	  $content = "您的".$tips."输入有误，请重新回复您的".$tips."\n（2分钟内有效,取消请回复qx）";
+          	  $content = "您的".$tips."输入有误，请重新回复您的".$tips.",取消请回复'qx'\n（2分钟内有效）";
                   //缓存需要检测项目
                   S($openId,array(
                       'action'=>array(
-                        'c'=>"Pattern,Logic",
-                        'a'=>'startPreg',
+                        'c'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
+                        'a'=>'startPreg', //需要后续处理的公共方法
                         ),
-                      'p'=>array(
-                         'openId'=>$openId,
+                      'p'=>array( //需要传递到上述公共发放的变量及赋值
+                         'openId'=>$openId, 
 	                     'pattern'=>$pattern
                         ),
-                      'matches'=>$matches
+                      'matches'=>$matches //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
                       ),
                       120);
           $reply = get_text_arr($content);
@@ -218,14 +235,14 @@ class PatternLogic{
      */
     private function saveClientInfo($openId,$matches){
       $data = $matches;
-        $data['openid']=$openId;
+        $data['id']=D('Tchat_client')->getClientId($openId);
         D('Tchat_client')->update($data);
     }
     
     /**
      * 位与运算筛选
-     * @param unknown_type $pos
-     * @param unknown_type $contain
+     * @param num $pos
+     * @param num $contain
      */
   private function check($pos = 0, $contain = 0){
       if(empty($pos) || empty($contain)){

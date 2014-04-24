@@ -1,10 +1,10 @@
 <?php
 // +----------------------------------------------------------------------
-// | OneThink [ WE CAN DO IT JUST THINK IT ]
+// | Tchat 
 // +----------------------------------------------------------------------
-// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
+// | Copyright (c) 2014 http://www.tealun.com
 // +----------------------------------------------------------------------
-// | Author: huajie <banhuajie@163.com>
+// | Author: Tealun Du <tealun@tealun.com> <http://www.tealun.com>
 // +----------------------------------------------------------------------
 
 namespace Wechat\Model;
@@ -29,7 +29,7 @@ class TchatClientModel extends Model{
 
         /* 添加或新增基础内容 */
         if(empty($data['id'])){ //新增数据
-            $id = $this->getClientId($data['openId']); 
+            $id = $this->add(); 
             if(!$id){
                 $this->error = '新增客户出错！';
                 return false;
@@ -50,6 +50,8 @@ class TchatClientModel extends Model{
      * 如果不存在，则根据openId新建客户资料
      * 如果公众帐号通过了微信认证则提取客户在微信服务器上的资料存储到本地
      * 没有认证的帐号则忽略提取，直接存储openId
+     * 因此开发时如果涉及到存储客户信息或者查看客户信息，最好是先通过openId查找对应的客户ID，然后再进行查看或存储
+     * 这样会自动从微信服务器上下载更新客户资料并返回ID值
      * @param string $openId
      */
     public function getClientId($openId){
@@ -58,7 +60,7 @@ class TchatClientModel extends Model{
       	$data = array(
           'openid'=>$openId,
         );
-        if(check_wechat_rz()) $data = array_merge($data,get_client_info($openId));
+        if(check_wechat_rz()) $data = get_client_info($openId);
         $this->create($data);
         $id = $this->add();
       }

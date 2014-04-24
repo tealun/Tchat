@@ -111,7 +111,7 @@ function get_wchat_error($action,$openId,$clientContent) {
 }
 
 /**
- * 获取用户详细信息
+ * 从微信服务器端获取用户详细信息
  * 通过微信接口获取详细用户信息
  * @param string $openId 发送消息用户的openid
  * @param string $appId 公众帐号APPID，当前为测试赋值，可在系统完成后台设置后调用赋值
@@ -121,7 +121,7 @@ function get_wchat_error($action,$openId,$clientContent) {
 function get_client_info($openId){
 
   $accessToken = get_access_token();
-  
+
   $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$accessToken.'&openid='.$openId.'&lang=zh_CN';
 
   $str = file_get_contents($url);
@@ -130,7 +130,7 @@ function get_client_info($openId){
 }
 
 /**
- * 查询数据库中客户详情
+ * 查询本地数据库中客户详情
  * TODO 与Tchat_client模型做比较，看是否整合到该模型类中
  * @param string $openId 客户openId
  * @param array $field  想要查询的字段数组
