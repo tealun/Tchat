@@ -5,48 +5,104 @@ use Think\Model;
 use Admin\Model\AuthGroupModel;
 
 /**
- * 文档基础模型
+ * 关键词模型
  */
 class TchatKeywordModel extends Model{
+	    //初始化参数定义
+		private $new = array();
+		private $old = array();
+		
+		/**
+		 * 新增或编辑关键词
+		 * @param string $keywordStr
+		 * @param int $groupId
+		 */
+        public function update($keywordStr,$groupId){
+    	$condition = array('，',' ','|');
+    	$keywordStr = str_replace($condition, ',', $keywordStr);
+		//将接收到的关键字进行转换成新的数组
+    	$this->new = str2arr($keywordStr);
+		//查看数据库中是否存在该GROUP_ID的关键字，并赋值到OLD数组变量中
+    	$this->old = $this->where(array('group_id'=>$groupId))->getField('id,keyword');
+		//存在该GROUP_ID的关键字，则进行关键字的过滤
+    	if(!empty($this->old)){
+    		//对新旧关键字进行过滤，过滤出需要删除和新添加的关键字
+			$filter = $this->keywordFilter($this->new, $this->old);
+			//删除关键字
+			if(!empty($filter['delete'])){
+			$map['id']  = array('in',$filter['delete']);
+			  $this->where($map)->delete();
+			}
+			//新增关键字
+			if(!empty($filter['create'])){
+				foreach ($filter['create'] as $v){
+				$dataList[] = array(
+					'keyword'=>$v,
+					'group_id' =>$groupId,
+					);
+				}
+				$this->addAll($dataList);
+			}
+		//系统数据库中没有该GROUP_ID时，则新增关键字
+		}else{
+			foreach ($this->new as $v){
+				$dataList[] = array(
+					'keyword'=>$v,
+					'group_id' =>$groupId,
+					);
+				}
+			$this->addAll($dataList);
+		}
+	}
 	
-	    /* 自动验证规则 */
-    protected $_validate = array(
-        array('name', '/^[a-zA-Z]\w{0,39}$/', '文档标识不合法', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
-        array('name', 'checkName', '标识已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
-        array('title', 'require', '标题不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-        array('title', '1,80', '标题长度不能超过80个字符', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
-    	array('level', '/^[\d]+$/', '优先级只能填正整数', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
-        //TODO: 外链编辑验证
-        //array('link_id', 'url', '外链格式不正确', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
-        array('description', '1,140', '简介长度不能超过140个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
-        array('category_id', 'require', '分类不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_INSERT),
-        array('category_id', 'require', '分类不能为空', self::EXISTS_VALIDATE , 'regex', self::MODEL_UPDATE),
-        array('category_id', 'checkCategory', '该分类不允许发布内容', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
-        array('model_id,category_id', 'checkModel', '该分类没有绑定当前模型', self::MUST_VALIDATE , 'callback', self::MODEL_INSERT),
-        array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
-        array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
-    );
+	/**
+	 * 新旧关键字过滤方法
+	 * @param array $new
+	 * @param array $old
+	 */
+	private function keywordFilter($new,$old){
+
+		//获取旧关键字中新关键词没有的词的ID，用于删除记录
+		$delete = $this->deleteFilter($old);
+		$filter['delete'] = array_keys($delete);
+		unset($delete);
+		
+		//获取新关键字中旧关键词没有的值，用于新增记录
+		$create = $this->createFilter($new);
+		$filter['create'] = array_values($create);
+		unset($create);
+		
+		return $filter;
+		}
 	
-    /**
-     * 设置where查询条件
-     * @param  number  $category 分类ID
-     * @param  number  $pos      推荐位
-     * @param  integer $status   状态
-     * @return array             查询条件
-     */
-    private function listMap($model, $status = 1, $pos = null){
-        /* 设置状态 */
-        $map = array('status' => $status);
-
-        /* 设置分类 */
-        if(!is_null($model)){
-            if(is_numeric($category)){
-                $map['category_id'] = $category;
-            } else {
-                $map['category_id'] = array('in', str2arr($category));
-            }
-        }
-
-        return $map;
-    }
+	/**
+	 * 过滤粗来需要删除的关键词
+	 * 返回以ID为键名，关键词为键值的数组
+	 * @param array $old
+	 */
+	private function deleteFilter($old){
+		$new = $this->new;
+	foreach ($old as $k=>$v){
+		if (!in_array($v, $new)){
+		$delete[$k] = $v;
+		}
+	}
+	return $delete?$delete:false;
+	}
+	
+	/**
+	 * 过滤粗来需要新增的关键词
+	 * 返回要新增的关键词数组
+	 * @param array $new
+	 */
+	private function createFilter($new){
+		$old = $this->old;
+	foreach ($new as $v){
+		if (!in_array($v, $old)){
+		$create[] = $v;
+		}
+	}
+	return $create?$create:false;
+	}
 }
+

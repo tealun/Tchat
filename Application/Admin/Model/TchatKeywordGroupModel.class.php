@@ -77,7 +77,7 @@ class TchatKeywordGroupModel extends Model{
     }
 
     /**
-     * 新增或更新一个文档
+     * 新增或更新一个关键词组
      * @param array  $data 手动传入的数据
      * @return boolean fasle 失败 ， int  成功 返回完整的数据
      * @author huajie <banhuajie@163.com>
@@ -93,7 +93,7 @@ class TchatKeywordGroupModel extends Model{
         /* 添加或新增基础内容 */
         if(empty($data['id'])){ //新增数据
             $id = $this->add(); //添加关键词分组条目
-			$this->addKeywords($keywordStr,$id); //添加关键词
+			D('Tchat_keyword')->update($keywordStr,$id); //添加关键词
             if(!$id){
                 $this->error = '新增关键词分组出错！';
                 return false;
@@ -104,13 +104,12 @@ class TchatKeywordGroupModel extends Model{
                 $this->error = '更新关键词分组出错！';
                 return false;
             }else{
-            	M('Tchat_keyword')->where(array('group_id'=>$data['id']))->delete();
-            	$this->addKeywords($keywordStr,$data['id']);
+			D('Tchat_keyword')->update($keywordStr,$data['id']);
             }
         }
 
         /*
-        // 添加或新增扩展内容 
+        //TODO 添加或新增扩展内容 
         $logic = $this->logic($data['model_id']);
         if(!$logic->update($id)){
             if(isset($id)){ //新增失败，删除基础数据
@@ -132,19 +131,6 @@ class TchatKeywordGroupModel extends Model{
         return $data;
     }
     
-    private function addKeywords($keywordStr,$id){
-    	$condition = array('，',' ','|');
-    	$keywordStr = str_replace($condition, ',', $keywordStr);
-		$keywords = str2arr($keywordStr);
-		foreach ($keywords as $keyword){
-			$dataList[] = array(
-				'keyword'=>$keyword,
-				'group_id' =>$id,
-			);
-		}
-		M('Tchat_keyword')->addAll($dataList);
-	}
-
     /**
      * 获取数据状态
      * @return integer 数据状态
