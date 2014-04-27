@@ -23,7 +23,7 @@ class WechatActivityController extends WechatController {
     $map=$this->indexOfMap();
     $map['deadline'] = array('not between',array(1,time()));
     $this->getLists($map);
-    $this->meta_title = '关键词列表';
+    $this->meta_title = '活动列表';
     $this->display(); // 输出模板
 	}
 
@@ -69,7 +69,6 @@ class WechatActivityController extends WechatController {
         //获取活动模型
     if(isset($_GET['model_id'])){
         $info['model_id']= $_GET['model_id'];
-        $info['model_name'] = get_model_by_id($_GET['model_id']);
 	    $model = M('Model')->where(array('id'=>$info['model_id']))->find();
             //获取表单字段排序
         $fields = get_model_attribute($model['id']);
@@ -100,6 +99,13 @@ class WechatActivityController extends WechatController {
         }
     }
     
+    /**
+     * 保存草稿
+     * TODO 将活动详情保存草稿
+     */
+    public function autoSave(){
+    echo ('This page is under construction');
+    }
   /**
    * edit one Activity
    */
@@ -127,7 +133,7 @@ class WechatActivityController extends WechatController {
         $this->assign('info',$info);
         $this->assign('fields',     $fields);
         $this->assign('model', $model);
-        $this->meta_title = '编辑关键词分组';
+        $this->meta_title = '编辑活动';
         $this->display();
 
   }
@@ -163,7 +169,7 @@ class WechatActivityController extends WechatController {
     $map['status'] = array('eq',0);
     $map['deadline'] = array('not between',array(1,time()));
     $this->getLists($map);
-    $this->meta_title = '已禁用关键词';
+    $this->meta_title = '已禁用活动';
     $this->display(); // 输出模板
   }
   
@@ -173,7 +179,7 @@ class WechatActivityController extends WechatController {
   public function recycle(){
     $map['status'] = array('eq',-1);
     $this->getLists($map);
-    $this->meta_title = '关键词回收站';
+    $this->meta_title = '活动回收站';
     $this->display(); // 输出模板
   }
   

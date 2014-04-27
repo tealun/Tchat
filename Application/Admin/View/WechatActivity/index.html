@@ -9,13 +9,7 @@
 	<!-- 标题 -->
 	<div class="main-title">
 		<h2>
-		文档列表({$_total}) [
-		<volist name="rightNav" id="nav">
-		<a href="{:U('article/index','cate_id='.$nav['id'])}">{$nav.title}</a>
-			<if condition="count($rightNav) gt $i"><i class="ca"></i></if>
-		</volist>
-		<present name="article">：<a href="{:U('article/index','cate_id='.$cate_id.'&pid='.$article['id'])}">{$article.title}</a></present>
-		]
+		活动列表({$_total}) 
 		<eq name="allow" value="0">（该分类不允许发布内容）</eq>
 		</h2>
 	</div>
@@ -27,14 +21,14 @@
       <a class="btn" href="{:U("create",array("segnent"=>$actType))}">新增</a>
       <else/>
       <a class="btn" href="{:U('create')}">新 增</a> </if>
-            <button class="btn ajax-post" target-form="ids" url="{:U("Article/setStatus",array("status"=>1))}">启 用</button>
-			<button class="btn ajax-post" target-form="ids" url="{:U("Article/setStatus",array("status"=>0))}">禁 用</button>
-			<button class="btn ajax-post" target-form="ids" url="{:U("Article/move")}">移 动</button>
-			<button class="btn ajax-post" target-form="ids" url="{:U("Article/copy")}">复 制</button>
-			<button class="btn ajax-post" target-form="ids" hide-data="true" url="{:U("Article/paste")}">粘 贴</button>
+            <button class="btn ajax-post" target-form="ids" url="{:U("WechatActivity/setStatus",array("status"=>1))}">启 用</button>
+			<button class="btn ajax-post" target-form="ids" url="{:U("WechatActivity/setStatus",array("status"=>0))}">禁 用</button>
+			<button class="btn ajax-post" target-form="ids" url="{:U("WechatActivity/move")}">移 动</button>
+			<button class="btn ajax-post" target-form="ids" url="{:U("WechatActivity/copy")}">复 制</button>
+			<button class="btn ajax-post" target-form="ids" hide-data="true" url="{:U("WechatActivity/paste")}">粘 贴</button>
 			<input type="hidden" class="hide-data" name="cate_id" value="{$cate_id}"/>
 			<input type="hidden" class="hide-data" name="pid" value="{$pid}"/>
-			<button class="btn ajax-post confirm" target-form="ids" url="{:U("Article/setStatus",array("status"=>-1))}">删 除</button>
+			<button class="btn ajax-post confirm" target-form="ids" url="{:U("WechatActivity/setStatus",array("status"=>-1))}">删 除</button>
 			<!-- <button class="btn document_add" url="{:U('article/batchOperate',array('cate_id'=>$cate_id,'pid'=>I('pid',0)))}">导入</button> -->
 			<button class="btn list_sort" url="{:U('sort',array('cate_id'=>$cate_id,'pid'=>I('pid',0)),'')}">排序</button>
 		</div>
@@ -102,7 +96,7 @@
       <td><span>{$vo.startup|time_format}</span></td>
       <td><span>{$vo.deadline|time_format}</span></td>
       <td>{$vo.act_add}</td>
-      <td><span>{$vo.update_time}</span></td>
+      <td><span>{$vo.update_time|time_format}</span></td>
       <td>{$vo.uid|get_nickname}</td>
       <td>{$vo.status_text}</td>
       <td><a href="{:U('edit?id='.$vo['id'])}">编辑</a>
