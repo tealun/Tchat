@@ -36,6 +36,84 @@ function col_to_string(&$data,$map=array(
 	}
 	
 	/**
+ * 从微信服务器端获取用户详细信息
+ * 通过微信接口获取详细用户信息
+ * @param string $openId 发送消息用户的openid
+ * @param string $appId 公众帐号APPID，当前为测试赋值，可在系统完成后台设置后调用赋值
+ * @param string $appsecret 公众帐号APPSECRET，当前为测试赋值，可在系统完成后台设置后调用赋值
+ * @return Array
+ */
+function get_client_info($openId){
+
+  $accessToken = get_access_token();
+
+  $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$accessToken.'&openid='.$openId.'&lang=zh_CN';
+
+  $str = file_get_contents($url);
+  return $client = json_decode($str, true);
+
+}
+
+/**
+ * 查询本地数据库中客户详情
+ * TODO 与Tchat_client模型做比较，看是否整合到该模型类中
+ * @param string $openId 客户openId
+ * @param array $field  想要查询的字段数组
+ */
+function get_client_detail($openId,$field=array()){
+  if(!empty($field)){
+    $rs = M('Tchat_client')->where(array('openid'=>$openId))->field($field)->find();
+  }else{
+    $rs = M('Tchat_client')->where(array('openid'=>$openId))->find();
+  }
+  return $rs;
+}
+
+/**
+ * 获取公众账号的accessToken
+ * 
+ */
+function get_access_token(){
+  $appId = C('WECHAT_APP_ID');
+  $appSecret = C('WECHAT_APP_SECRET');
+  $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appId.'&secret='.$appSecret;
+
+  $str = file_get_contents($url);
+  $arr = json_decode($str, true);
+  $accessToken = S('accessToken')?S('accessToken'):save_access_token();
+  return $accessToken;
+}
+
+/**
+ * 缓存公众帐号accessToken
+ *
+ */
+function save_access_token(){
+  $appId = C('WECHAT_APP_ID');
+  $appSecret = C('WECHAT_APP_SECRET');
+  $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$appId.'&secret='.$appSecret;
+
+  $str = file_get_contents($url);
+  $arr = json_decode($str, true);
+  S('accessToken',$arr['access_token'],120);
+  return $accessToken = S('accessToken');
+}
+
+function check_wechat_rz(){
+  $value = C('WECHAT_ACCOUNT_RZ');
+	  if($value === '2'){
+	  	return $value;
+	  }else{
+	  	return $value === '1'?TRUE:FALSE;
+  }
+}
+
+function check_wechat_type(){
+  $value = C('WECHAT_ACCOUNT_TYPE');
+  return $value === '1'?TRUE:FALSE;
+}
+	
+	/**
  * 获取关键字模型信息
  * @param  integer $id    模型ID
  * @param  string  $field 模型字段

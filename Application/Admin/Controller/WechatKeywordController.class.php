@@ -161,6 +161,7 @@ class WechatKeywordController extends WechatController {
   
   /**
    * List categoris
+   * TODO 此方法未生成目录及规则
    */
   public function catlist(){
     if(IS_POST || IS_AJAX){

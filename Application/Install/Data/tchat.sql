@@ -30,9 +30,9 @@ INSERT INTO `onethink_attribute` VALUES ('45', 'create_time', '创建时间', 'i
 -- Attribute of activity model
 INSERT INTO `onethink_attribute` VALUES ('46', 'name', '关键词组名', 'varchar(100) NOT NULL ', 'string', '', '活动对应的关键词组名', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('47', 'title', '标题', 'varchar(50) NOT NULL ', 'string', '', '活动的标题', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('48', 'act_type', '对应活动类型', 'tinyint(3) unsigned NOT NULL ', 'select', '0', '选择活动的类型', '1', '0:常规\r\n1:折扣\r\n2:优惠券\r\n3:刮刮卡\r\n4:大转盘\r\n5:幸运机\r\n6:抢红包\r\n7:抽奖\r\n8:邀请\r\n9:竞拍\r\n10:秒杀\r\n11:抢楼', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('48', 'act_type', '对应活动类型', 'tinyint(3) unsigned NOT NULL ', 'select', '0', '选择活动的类型', '1', '0:常规\r\n7:折扣\r\n8:优惠券\r\n9:刮刮卡\r\n10:大转盘\r\n11:幸运机\r\n12:抢红包\r\n13:抽奖\r\n14:邀请\r\n15:竞拍\r\n16:秒杀\r\n17:抢楼', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('49','check_info','参与活动是否需审核客户信息', 'smallint(5) unsigned NOT NULL ', 'checkbox', '0', '请选择需要客户发送的个人信息项', '1', '1:姓名\r\n2:电话\r\n4:QQ\r\n8:Email', '6', '0', '1', '1383895640', '1383891233', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('50', 'ex_keyword', '前置关键词', 'varchar(10) NOT NULL ', 'string', '', '需要客户个人信息时的前置关键词', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('50', 'ex_keyword', '前置关键词', 'varchar(10) NOT NULL ', 'string', '', '触发参与报名或获取资格告知的关键词，比如\"我要优惠券\"', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('51', 'cheked_reply', '验证后回复内容', 'varchar(100) NOT NULL', 'string', '', '获取客户资料后的回复内容', '1', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('52', 'startup', '启动时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '设置活动的<strong>启动时间</strong>', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('53', 'deadline', '结束时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '设置活动的<strong>截止时间</strong>', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
@@ -41,7 +41,7 @@ INSERT INTO `onethink_attribute` VALUES ('55', 'act_image', '', 'varchar(250) NO
 INSERT INTO `onethink_attribute` VALUES ('56', 'status', '是否现在启用', 'tinyint(2) NOT NULL ', 'bool', '1', '设置添加后的状态', '1', '1:启用\r\n0:禁用', '6', '0', '1', '1394597354', '1394597354', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('57', 'uid', '用户ID', 'int(10) unsigned NOT NULL ', 'num', '2', '添加该活动的用户', '0', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('58', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '该活动创建时间', '0', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('59', 'keyword', '关键词', 'varchar(100) NOT NULL ', 'string', '', '多个关键词请用英文半角逗号隔开', '1', '', '6', '0', '1', '1394597230', '1394597230', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('59', 'keyword', '详情信息关键词', 'varchar(100) NOT NULL ', 'string', '', '客户发送的获取详情的关键词，多个请用英文半角逗号隔开', '1', '', '6', '0', '1', '1394597230', '1394597230', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('60', 'pid', '所属父级活动ID', 'int(10) unsigned NOT NULL ', 'num', '0', '父活动编号', '1', '', '6', '0', '1', '1384508543', '1383891233', '', '0', '', '', '', '0', '');
 
 -- Attribute of activity discount model
@@ -52,23 +52,23 @@ INSERT INTO `onethink_attribute` VALUES ('82', 'ticket_prefix', '优惠券前缀
 INSERT INTO `onethink_attribute` VALUES ('83', 'max', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 
 -- Attribute of album model
-INSERT INTO `onethink_attribute` VALUES ('200', 'name', '相册标识', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('201', 'title', '相册名称', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('202', 'cat_id', '所属分类ID', 'int(10) NOT NULL ', 'num', '0', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('203', 'vote', '投票设置', 'tinyint(2) NOT NULL ', 'bool', '0', '是否启用投票', '1', '1:是\r\n0:否', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('204', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '9', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('200', 'name', '相册标识', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('201', 'title', '相册名称', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('202', 'cat_id', '所属分类ID', 'int(10) NOT NULL ', 'num', '0', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('203', 'vote', '投票设置', 'tinyint(2) NOT NULL ', 'bool', '0', '是否启用投票', '1', '1:是\r\n0:否', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('204', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 
 
 -- -----------------------------
 -- Records of  `onethink_model`
 -- -----------------------------
 
-INSERT INTO `onethink_model`  VALUES ('4', 'tchat_keyword', '关键词', '0', '', '1', '{"1":["33","34"]}', '1:基础', '', '', '', '', 'keyword:关键词\r\ngroup_id:分组', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', '1', '{"1":["35","33","36","37","38","39","40","41","42","43","44","45"]}', '1:基础', '', '', '', '', 'name:关键词组\r\nsegment:所属板块\r\nreply_type:回复类型\r\nstatus:状态', '10', '', '', '1394597354', '1394602636', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('6', 'tchat_activity', '活动', '0', '', '1', '{"1":["60","47","59","46","48","49","50","51","52","53","54","55","56","57","58"]}', '1:基础', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ncheck_info:验证信息\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态\r\nact_add:活动地点', '10', '', '', '1396965384', '1396965384', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣', '6', '', '1', '{"1":["60","47","46","81","48","49","50","51","52","53","54","55","56","57","58"]}', '1:基础', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ndiscount:折扣率\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态', '10', '', '', '1396968844', '1396968844', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', '{"1":["60","47","46","82","83","48","49","50","51","52","53","54","55","56","57","58"]}', '1:基础', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\nticket_prefix:优惠券前缀\r\nstartup:开始时间\r\ndeadline:结束时间\r\nmax:发行总量', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('9', 'tchat_album', '相册', '0', '', '1', '{"1":["201","202","203","204"}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('4', 'tchat_keyword', '关键词', '0', '', '1', '{\"1\":[\"33\",\"34\"]}', '1:基础', '', '', '', '', 'keyword:关键词\r\ngroup_id:分组', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', '1', '{\"1\":[\"35\",\"33\",\"36\",\"37\",\"38\",\"39\",\"40\",\"41\",\"42\",\"43\",\"44\",\"45\"]}', '1:基础', '', '', '', '', 'name:关键词组\r\nsegment:所属板块\r\nreply_type:回复类型\r\nstatus:状态', '10', '', '', '1394597354', '1394602636', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('6', 'tchat_activity', '活动', '0', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ncheck_info:验证信息\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态\r\nact_add:活动地点', '10', '', '', '1396965384', '1396965384', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"81\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ndiscount:折扣率\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态', '10', '', '', '1396968844', '1396968844', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"82\",\"83\",\"50\",\"49\",\"51\"]}', '1:基础,2:报名发放设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\nticket_prefix:优惠券前缀\r\nstartup:开始时间\r\ndeadline:结束时间\r\nmax:发行总量', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
 -- -----------------------------
@@ -130,9 +130,10 @@ INSERT INTO `onethink_auth_group_access` VALUES ('7','6');
 -- -----------------------------
 INSERT INTO `onethink_auth_rule` VALUES ('300', 'admin', '2', 'Admin/Wechat/index', '微信', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('302', 'admin', '1', 'Admin/WechatKeyword/index','关键词列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('303', 'admin', '1', 'Admin/WechatKeyword/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('304', 'admin', '1', 'Admin/WechatKeyword/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('301', 'admin', '1', 'Admin/WechatKeyword/index','关键词列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('302', 'admin', '1', 'Admin/WechatKeyword/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('303', 'admin', '1', 'Admin/WechatKeyword/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('304', 'admin', '1', 'Admin/WechatKeyword/update','保存', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('305', 'admin', '1', 'Admin/WechatKeyword/setStatus','改变状态', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('306', 'admin', '1', 'Admin/WechatKeyword/analytical','关键词分析', '1', '');
@@ -149,7 +150,6 @@ INSERT INTO `onethink_auth_rule` VALUES ('315', 'admin', '1', 'Admin/WechatActiv
 INSERT INTO `onethink_auth_rule` VALUES ('316', 'admin', '1', 'Admin/WechatActivity/update','保存', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('317', 'admin', '1', 'Admin/WechatActivity/autoSave','保存草稿', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatActivity/batchOperate','导入', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatActivity/delete','删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatActivity/analytical','活动分析', '1', '');
 
@@ -160,30 +160,28 @@ INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatActiv
 INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatActivity/clear','彻底删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatClient/index','客户列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatClient/detail','客户信息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatClient/group','客户分组', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('330', 'admin', '1', 'Admin/WechatMessage/index','消息列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('331', 'admin', '1', 'Admin/WechatMessage/text','文字消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('332', 'admin', '1', 'Admin/WechatMessage/photo','图片消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('333', 'admin', '1', 'Admin/WechatMessage/audio','声讯消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('334', 'admin', '1', 'Admin/WechatMessage/video','视频消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('335', 'admin', '1', 'Admin/WechatMessage/location','位置消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('336', 'admin', '1', 'Admin/WechatMessage/url','链接消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('331', 'admin', '1', 'Admin/WechatMessage/setStar','星标消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('332', 'admin', '1', 'Admin/WechatMessage/archive','存档消息', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('337', 'admin', '1', 'Admin/WechatMessage/analytical','消息分析', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('333', 'admin', '1', 'Admin/WechatMessage/analytical','消息分析', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('338', 'admin', '1', 'Admin/WechatMessage/handle','处理消息', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('339', 'admin', '1', 'Admin/WechatMessage/delete','删除消息', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('340', 'admin', '1', 'Admin/WechatMessage/reply','回复消息', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('341', 'admin', '1', 'Admin/WechatMenu/view','菜单预览', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('342', 'admin', '1', 'Admin/WechatMenu/create','生成菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('341', 'admin', '1', 'Admin/WechatMenu/getMenu','查看菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('342', 'admin', '1', 'Admin/WechatMenu/setMenu','生成菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('343', 'admin', '1', 'Admin/WechatMenu/deleteMenu','删除菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/WechatMenu/recoverMenu','恢复菜单', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('343', 'admin', '1', 'Admin/WechatAlbum/index','相册列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/WechatAlbum/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '1', 'Admin/WechatAlbum/edit','编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatAlbum/setStatus','改变状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatAlbum/delete','删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '1', 'Admin/WechatAlbum/index','相册列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatAlbum/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatAlbum/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/WechatAlbum/setStatus','改变状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/WechatAlbum/delete','删除', '1', '');
 
 
 -- -----------------------------
@@ -293,24 +291,22 @@ INSERT INTO `onethink_menu` VALUES ('354', '还原', '355', '0', 'Admin/WechatAc
 INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '355', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('361', '客户列表', '300', '0', 'Admin/WechatClient/index', '0', '', '客户管理', '0');
-INSERT INTO `onethink_menu` VALUES ('362', '客户信息', '300', '0', 'Admin/WechatClient/detail', '0', '', '客户管理', '0');
+INSERT INTO `onethink_menu` VALUES ('362', '客户分组', '300', '0', 'Admin/WechatClient/group', '0', '', '客户管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('371', '消息列表', '300', '0', 'Admin/WechatMessage/index', '0', '', '消息管理', '0');
-INSERT INTO `onethink_menu` VALUES ('372', '文字消息', '371', '0', 'Admin/WechatMessage/text', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('373', '图片消息', '371', '0', 'Admin/WechatMessage/photo', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('374', '声讯消息', '371', '0', 'Admin/WechatMessage/audio', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('375', '视频消息', '371', '0', 'Admin/WechatMessage/video', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('376', '位置消息', '371', '0', 'Admin/WechatMessage/location', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('377', '链接消息', '371', '0', 'Admin/WechatMessage/url', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('372', '星标消息', '300', '0', 'Admin/WechatMessage/setStar', '0', '', '消息管理', '0');
+INSERT INTO `onethink_menu` VALUES ('373', '存档消息', '300', '0', 'Admin/WechatMessage/archive', '0', '', '消息管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('378', '消息分析', '300', '0', 'Admin/WechatMessage/analytical', '0', '', '消息管理', '0');
+INSERT INTO `onethink_menu` VALUES ('374', '消息分析', '300', '0', 'Admin/WechatMessage/analytical', '0', '', '消息管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('379', '处理消息', '300', '0', 'Admin/WechatMessage/handle', '0', '', '消息管理', '0');
-INSERT INTO `onethink_menu` VALUES ('380', '删除消息', '379', '0', 'Admin/WechatMessage/delete', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('381', '回复消息', '379', '0', 'Admin/WechatMessage/reply', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('375', '处理消息', '300', '0', 'Admin/WechatMessage/handle', '0', '', '消息管理', '0');
+INSERT INTO `onethink_menu` VALUES ('376', '删除消息', '379', '0', 'Admin/WechatMessage/delete', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('377', '回复消息', '379', '0', 'Admin/WechatMessage/reply', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('391', '菜单预览', '300', '0', 'Admin/WechatMenu/view', '0', '', '自定义菜单', '0');
-INSERT INTO `onethink_menu` VALUES ('392', '生成菜单', '300', '0', 'Admin/WechatMenu/create', '0', '', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('391', '查看菜单', '300', '0', 'Admin/WechatMenu/getMenu', '0', '', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('392', '生成菜单', '300', '0', 'Admin/WechatMenu/setMenu', '0', '', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('393', '删除菜单', '300', '0', 'Admin/WechatMenu/deleteMenu', '0', '', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('394', '恢复菜单', '300', '0', 'Admin/WechatMenu/recoverMenu', '0', '', '自定义菜单', '0');
 
 INSERT INTO `onethink_menu` VALUES ('401', '相册列表', '300', '0', 'Admin/WechatAlbum/index', '0', '', '相册管理', '0');
 INSERT INTO `onethink_menu` VALUES ('402', '新增', '401', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
@@ -346,11 +342,11 @@ CREATE TABLE `onethink_tchat_activity` (
 -- -----------------------------
 -- Records of `onethink_tchat_activity`
 -- -----------------------------
-INSERT INTO `onethink_tchat_activity` VALUES ('1','冬款折扣季','冬款折扣季','1','','','','1392825600','1395244800', '各分店', '','0','0','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('2','满200送50','消费满200送50大酬宾','0','','','','1392825600','0', '各分店', '','1','0','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('3','迎春优惠券','迎春优惠券赠送活动','2','2','我要优惠券','text:4','1392825600','1400515200', '各分店', '','1','4','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('4','春节大抢购','2013春节大抢购活动','1','','','','1392825600','1400515200', '各分店', '','1','0','3', '1393292899', '1393292899');
-INSERT INTO `onethink_tchat_activity` VALUES ('5','春节抢红包','2013春节抢红包活动','6','3','抢红包','document:3,5','1392825600','1400515200', '各分店', '','1','4','3', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('1','冬款折扣季','冬款折扣季','1','','','','1392825600','1395244800', '各分店', '','0','0','2', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('2','满200送50','消费满200送50大酬宾','0','','','','1392825600','0', '各分店', '','1','0','2', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('3','迎春优惠券','迎春优惠券赠送活动','2','2','我要优惠券','text:4','1392825600','1400515200', '各分店', '','1','4','2', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('4','春节大抢购','2013春节大抢购活动','1','','','','1392825600','1400515200', '各分店', '','1','0','2', '1393292899', '1393292899');
+INSERT INTO `onethink_tchat_activity` VALUES ('5','春节抢红包','2013春节抢红包活动','6','3','抢红包','document:3,5','1392825600','1400515200', '各分店', '','1','4','2', '1393292899', '1393292899');
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity_discount`
 -- -----------------------------
@@ -599,29 +595,42 @@ CREATE TABLE `onethink_tchat_keyword_group` (
 -- -----------------------------
 -- Records of `onethink_tchat_keyword_group`
 -- -----------------------------
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('9','关注事件','events','1','text','21','1393292899','0','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('9','关注事件','events','1','text','21','1393292899','0','0','1','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('10','公司介绍','costom','0','news','12','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('11','业务介绍','costom','0','news','13','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('12','联系我们','costom','0','news','33','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('19','全部新闻','costom','0','news','21','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('20','公司新闻','costom','0','news','22','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('21','活动新闻','costom','0','news','23','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('22','业态新闻','costom','0','news','24','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('23','知识分享','costom','0','news','32','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('24','故事分享','costom','0','news','33','1393292899','0','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('10','公司介绍','costom','0','news','12','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('11','业务介绍','costom','0','news','13','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('12','联系我们','costom','0','news','33','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('19','全部新闻','costom','0','news','21','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('20','公司新闻','costom','0','news','22','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('21','活动新闻','costom','0','news','23','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('22','业态新闻','costom','0','news','24','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('23','知识分享','costom','0','news','32','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('24','故事分享','costom','0','news','33','1393292899','0','0','1','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('25','冬款折扣季','activity','1','document','8','1393292899','1395244800','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('26','满200送50','activity','2','document','5,6,7','1393292899','0','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('27','迎春优惠券','activity','3','document','3,4','1393292899','1400515200','0','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('28','春节大抢购','activity','4','text','54','1393292899','1393293899','55','1','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('29','我要优惠券','activity_ticket','3','text','','1393292899','1400515200','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('25','冬款折扣季','activity','1','document','8','1393292899','1395244800','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('26','满200送50','activity','2','document','5,6,7','1393292899','0','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('27','迎春优惠券','activity','3','document','3,4','1393292899','1400515200','0','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('28','春节大抢购','activity','4','text','54','1393292899','1393293899','55','1','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('29','我要优惠券','activity_ticket','3','text','','1393292899','1400515200','0','1','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('30','所有分享','costom','0','news','31','1393292899','0','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('30','所有分享','costom','0','news','31','1393292899','0','0','1','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('31','春节抢红包','activity','5','document','28','1393292899','0','0','1','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_keyword_group` VALUES ('31','春节抢红包','activity','5','document','28','1393292899','0','0','1','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_keyword_group` VALUES ('32','建议板块功能','suggest','0','text','56','1393292899','0','0','1','1','1393292899','1393292899');
+-- -----------------------------
+-- Table structure for `onethink_tchat_message`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_tchat_message`;
+CREATE TABLE `onethink_tchat_message` (
+  `id` int(10) unsigned NOT NULL auto_increment COMMENT '编号',
+  `client_id` int(10) unsigned NOT NULL COMMENT'客户ID号',
+  `type` varchar(100) NOT NULL COMMENT '消息类型',
+  `content` text NOT NULL COMMENT '内容',
+  `create_time` int(10) unsigned NOT NULL COMMENT '时间',
+  `is_reply` tinyint(1) NOT NULL default '0' COMMENT '是否回复',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微信插件消息数据表' AUTO_INCREMENT=1 ;
+
 -- -----------------------------
 -- Table structure for `onethink_tchat_music`
 -- -----------------------------
@@ -686,36 +695,36 @@ CREATE TABLE `onethink_tchat_text` (
 -- -----------------------------
 -- Records of `onethink_tchat_text`
 -- -----------------------------
-INSERT INTO `onethink_tchat_text` VALUES ('1','感谢您的关注，如需了解如何使用请回复“帮助”或“?”','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('2','您可以通过回复如下关键字获取我们的信息\n帮助：获得账号的使用帮助\n新闻：了解我们的最新新闻或动态\n活动：了解我们的最新活动\n优惠：了解我们的最新优惠\n建议：给我们提提您的建议','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('3','非常感谢您的配合，祝您生活愉快。','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('4','您的优惠券编码是：','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('5','这是第五条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('6','这是第六条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('7','这是第七条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('8','这是第八条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('9','这是第九条测试用的回复文本内容','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('10','这是第十条测试用的回复文本内容','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('1','感谢您的关注，如需了解如何使用请回复“帮助”或“?”','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('2','您可以通过回复如下关键字获取我们的信息\n帮助：获得账号的使用帮助\n新闻：了解我们的最新新闻或动态\n活动：了解我们的最新活动\n优惠：了解我们的最新优惠\n建议：给我们提提您的建议','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('3','非常感谢您的配合，祝您生活愉快。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('4','您的优惠券编码是：','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('5','这是第五条测试用的回复文本内容','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('6','这是第六条测试用的回复文本内容','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('7','这是第七条测试用的回复文本内容','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('8','这是第八条测试用的回复文本内容','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('9','这是第九条测试用的回复文本内容','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('10','这是第十条测试用的回复文本内容','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_text` VALUES ('21','感谢您的关注','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('21','感谢您的关注','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_text` VALUES ('31','这是一条公司介绍的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('32','这是一条业务介绍的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('33','这是一条联系我们的回复','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('31','这是一条公司介绍的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('32','这是一条业务介绍的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('33','这是一条联系我们的回复','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_text` VALUES ('40','这是一条所有栏目下最新新闻的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('41','这是一条公司最新新闻的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('42','这是一条优惠活动最新新闻的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('43','这是一条行业最新新闻的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('44','这是一条分享行业知识的回复','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('45','这是一条分享行业故事的回复','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('40','这是一条所有栏目下最新新闻的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('41','这是一条公司最新新闻的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('42','这是一条优惠活动最新新闻的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('43','这是一条行业最新新闻的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('44','这是一条分享行业知识的回复','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('45','这是一条分享行业故事的回复','2','1393292899','1393292899');
 
-INSERT INTO `onethink_tchat_text` VALUES ('51','新春换季，店内所有冬款全部7折，时间有限，错过不再～','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('52','入店消费满200均可获赠50元抵用券，满400送100，以此类推，特价折扣商品不参与哦。','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('53','本优惠券限量200份，回复‘我要优惠券’，即可获得一张，每人限领一张，亲，要快发哦，不然就被抢光啦。','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('54','春节来临的脚步如此匆忙，我们不仅为您准备好了新年礼物，更有多款产品享受折上折优惠，购物划算，还有积分翻倍哦','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('55','哎呀，真不好意思，这个活动已经截止啦，好遗憾没能在那个疯狂的日子里见到你的身影，不过我们还有很多其他的活动正在进行，您可以回复“优惠”或“活动”，看看我们有哪些活动吧，这次可不要再错过咯。','3','1393292899','1393292899');
-INSERT INTO `onethink_tchat_text` VALUES ('56','感谢您的配合，您的建议我们会送达相关部门处理，如有需要我们会跟您取得联系，谢谢。','3','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('51','新春换季，店内所有冬款全部7折，时间有限，错过不再～','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('52','入店消费满200均可获赠50元抵用券，满400送100，以此类推，特价折扣商品不参与哦。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('53','本优惠券限量200份，回复‘我要优惠券’，即可获得一张，每人限领一张，亲，要快发哦，不然就被抢光啦。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('54','春节来临的脚步如此匆忙，我们不仅为您准备好了新年礼物，更有多款产品享受折上折优惠，购物划算，还有积分翻倍哦','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('55','哎呀，真不好意思，这个活动已经截止啦，好遗憾没能在那个疯狂的日子里见到你的身影，不过我们还有很多其他的活动正在进行，您可以回复“优惠”或“活动”，看看我们有哪些活动吧，这次可不要再错过咯。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('56','感谢您的配合，您的建议我们会送达相关部门处理，如有需要我们会跟您取得联系，谢谢。','2','1393292899','1393292899');
 -- -----------------------------
 -- Table structure for `onethink_tchat_vote`
 -- -----------------------------

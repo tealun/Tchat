@@ -18,6 +18,7 @@ class WechatClientController extends WechatController {
 	
 	/**
 	*客户列表
+	*TODO 将客户列表分为两个选项卡显示，一个为正在关注列表，一个为已取消关注列表
 	*/
 	public function index(){
 
@@ -46,17 +47,9 @@ class WechatClientController extends WechatController {
 		$this->display(); // 输出模板
 	}
 
-	/**
-	*已取消客户列表
-	*
-	*/
-	public function unsubscribe(){
-		$map['subscribe'] = array('eq','0');
-		$this->getLists($map);
-		$this->meta_title = '已取消关注客户';
-		$this->display(); // 输出模板
+	public function group(){
+	echo ('This page is under construction');
 	}
-	
  
 	/**
 	 * 获取客户数据

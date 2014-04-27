@@ -126,6 +126,15 @@ class InstallController extends Controller{
 			session('step', 3);
 			$this->redirect('Index/complete');
 		}
-	}	
+	}
+
+	//TODO Tchat 提供是否安装测试数据以及选择安装模块选项（用以配置不同行业功能模块）
+/*	public function step4(){
+		if(session('step') = 3){
+			$this->display();
+		}else{
+		show_msg();
+		}
+	}*/
 }
 

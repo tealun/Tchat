@@ -31,7 +31,8 @@ class TchatKeywordGroupModel extends Model{
         array('name', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
         array('start_time', 'getStartTime', self::MODEL_BOTH, 'callback'),
         array('deadline', 'getDeadTime', self::MODEL_BOTH, 'callback'),
-        array('create_time', 'getCreateTime', self::MODEL_BOTH,'callback'),
+        array('create_time', 'getCreateTime', self::MODEL_INSERT,'callback'),
+        array('update_time', 'getCreateTime', self::MODEL_BOTH,'callback'),
         array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
     );
 
