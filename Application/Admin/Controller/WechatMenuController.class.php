@@ -34,7 +34,7 @@ class WechatMenuController extends WechatController {
 		$smenu = S('WECHATADDONS_MENU');
 		if ($smenu == false) {
 			$access_token = get_access_token();
-			$this->delMenu($access_token);
+			$this->deleteMenu($access_token);
 			$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$access_token}";
 			$menustr = $this->http($url, $data, 'POST', array("Content-type: text/html; charset=utf-8"), true);
 			$_url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token={$access_token}";
