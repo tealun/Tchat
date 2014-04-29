@@ -17,20 +17,51 @@ namespace Admin\Controller;
  */
 class WechatMenuController extends WechatController {
 	
-	 protected function getRZ(){
-	 if(0 == C('WECHAT_ACCOUNT_RZ')){
-	 	return false;
-	 }else{
-	   return true;
-	 }
-	 
-}
 	/**
-	 * 生成菜单
+	 * 获取微信账号的验证状态
+	 * 在微信后台配置中设置WECHAT_ACCOUNT_RZ配置项
+	 * Enter description here ...
+	 */
+	 protected function getRZ(){
+		 if(0 == C('WECHAT_ACCOUNT_RZ')){
+		 	return false;
+		 }else{
+		   return true;
+		 }
+	}
+	
+	public function viewMenu(){
+	
+	}
+	
+	public function configMenu(){
+	
+	}
+	
+	public function setStatus(){
+	
+	}
+	
+	public function recycle(){
+	
+	}
+	
+	public function restore(){
+	
+	}
+	
+	public function clear(){
+	
+	}
+	
+	
+	/**
+	 * 生成菜单到微信服务器
 	 * @param  string $data 菜单的str
 	 * @return string  返回的结果；
 	 */
 	public function setMenu($data = NULL){
+
 		$smenu = S('WECHATADDONS_MENU');
 		if ($smenu == false) {
 			$access_token = get_access_token();
@@ -43,37 +74,33 @@ class WechatMenuController extends WechatController {
 		} else {
 			$menustr = $smenu;
 		}
-		print_r(S('WECHATADDONS_MENU'));
 		return $menustr;
+
 	}
 	/**
-	 * 查询菜单
+	 * 查询微信服务器菜单
 	 * @return string  返回的结果；
 	 */
-	public function getMenu(){
-		if($this->getRZ()){
+	private function getMenu(){
+
 		$access_token = get_access_token();
 		$url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token={$access_token}";
 		$menustr = $this->http($url, $data);
-		return $menustr;
-		}else{
-		$this->error('您的账号未进行任何认证,不能使用本功能');
-		}
+
 	}
 	/**
-	 * 删除菜单
+	 * 删除微信服务器菜单
 	 * @return string  返回的结果；
 	 */
-	public function deleteMenu(){
+	private function deleteMenu(){
+
 		$access_token = get_access_token();
 		$url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={$access_token}";
 		$menustr = $this->http($url, $data);
 		return $menustr;
+
 	}
-	
-	public function recoverMenu(){
-	
-	}
+
 	
 	/**
 	 * 发送HTTP请求方法，目前只支持CURL发送请求
