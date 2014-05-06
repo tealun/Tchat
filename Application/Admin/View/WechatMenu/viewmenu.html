@@ -1,0 +1,22 @@
+<extend name="Public/base"/>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="sidemenu" />
+</block>
+
+<block name="body">
+  <div class="main-title">
+    <h2>{$meta_title}</h2>
+  </div>
+    <div class="cf">
+
+    <!-- 查看目录 -->
+    <div class="data-table">
+	<p>This is page of Menu view.</p>
+  </div>
+
+</block>
+<block name="script">
+<include file="menujs" />
+</block>

@@ -108,7 +108,7 @@ INSERT INTO `onethink_auth_extend` VALUES ('5','23','1');
 -- -----------------------------
 -- Records of `onethink_auth_group`
 -- -----------------------------
-UPDATE `onethink_auth_group` SET `title`='管理组',`description` = '用于公司管理人员的帐号组',`rules` = '1,2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,26,36,37,38,39,40,41,65,67,68,69,70,71,72,73,74,79,88,89,90,91,92,93,107,108,109,110,211,214,215,216,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375' WHERE `id` ='2' limit 1;
+UPDATE `onethink_auth_group` SET `title`='管理组',`description` = '用于公司管理人员的帐号组',`rules` = '1,2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,26,36,37,38,39,40,41,65,67,68,69,70,71,72,73,74,79,88,89,90,91,92,93,107,108,109,110,211,214,215,216,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351' WHERE `id` ='2' limit 1;
 INSERT INTO `onethink_auth_group` VALUES ('3', 'admin', '1', '领导组', '用于领导人员的帐号组', '1', '1,2,17,316,318,322,323,335,337,349,350,351,352,353,354,355,356,357,358,362,364,370');
 INSERT INTO `onethink_auth_group` VALUES ('4', 'admin', '1', '行政组', '用于行政人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,334,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,364,365,366,367,368,369,370,371,372,373,374,375');
 INSERT INTO `onethink_auth_group` VALUES ('5', 'admin', '1', '活动组', '用于活动管理人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,335,336,337,343,349,350,351,352,353,354,355,356,357,358,359,361,362,364,365,366,367,368,370,371,372,373,374');
@@ -177,15 +177,14 @@ INSERT INTO `onethink_auth_rule` VALUES ('342', 'admin', '1', 'Admin/WechatMenu/
 INSERT INTO `onethink_auth_rule` VALUES ('343', 'admin', '1', 'Admin/WechatMenu/setStatus','改变状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatMenu/setMenu','生成菜单', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
 
 
-INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/WechatAlbum/index','相册列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/WechatAlbum/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('350', 'admin', '1', 'Admin/WechatAlbum/edit','编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('351', 'admin', '1', 'Admin/WechatAlbum/setStatus','改变状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('352', 'admin', '1', 'Admin/WechatAlbum/delete','删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatAlbum/index','相册列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/WechatAlbum/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/WechatAlbum/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('350', 'admin', '1', 'Admin/WechatAlbum/setStatus','改变状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('351', 'admin', '1', 'Admin/WechatAlbum/delete','删除', '1', '');
 
 
 -- -----------------------------
@@ -277,12 +276,11 @@ INSERT INTO `onethink_menu` VALUES ('330', '彻底删除', '328', '0', 'Admin/We
 
 INSERT INTO `onethink_menu` VALUES ('341', '新增活动', '300', '0', 'Admin/WechatActivity/create', '0', '', '活动管理', '0');
 INSERT INTO `onethink_menu` VALUES ('342', '活动列表', '300', '0', 'Admin/WechatActivity/index', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('344', '编辑', '341', '0', 'Admin/WechatActivity/edit', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '341', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('346', '保存', '341', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '341', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('348', '导入', '341', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('349', '删除', '341', '0', 'Admin/WechatActivity/delete', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('344', '编辑', '342', '0', 'Admin/WechatActivity/edit', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '342', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('346', '保存', '342', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '342', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('348', '导入', '342', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('350', '活动分析', '300', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
 
@@ -291,31 +289,30 @@ INSERT INTO `onethink_menu` VALUES ('351', '活动禁用箱', '300', '0', 'Admin
 INSERT INTO `onethink_menu` VALUES ('352', '活动草稿箱', '300', '0', 'Admin/WechatActivity/draftBox', '0', '', '活动管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('353', '活动回收站', '300', '0', 'Admin/WechatActivity/recycle', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('354', '还原', '355', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '355', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('354', '还原', '353', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('361', '客户列表', '300', '0', 'Admin/WechatClient/index', '0', '', '客户管理', '0');
 INSERT INTO `onethink_menu` VALUES ('362', '客户分组', '300', '0', 'Admin/WechatClient/group', '0', '', '客户管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('371', '消息列表', '300', '0', 'Admin/WechatMessage/index', '0', '', '消息管理', '0');
-INSERT INTO `onethink_menu` VALUES ('372', '星标消息', '300', '0', 'Admin/WechatMessage/setStar', '0', '', '消息管理', '0');
-INSERT INTO `onethink_menu` VALUES ('373', '存档消息', '300', '0', 'Admin/WechatMessage/archive', '0', '', '消息管理', '0');
+INSERT INTO `onethink_menu` VALUES ('372', '星标消息', '371', '0', 'Admin/WechatMessage/setStar', '0', '', '消息管理', '0');
+INSERT INTO `onethink_menu` VALUES ('373', '存档消息', '371', '0', 'Admin/WechatMessage/archive', '0', '', '消息管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('374', '消息分析', '300', '0', 'Admin/WechatMessage/analytical', '0', '', '消息管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('375', '处理消息', '300', '0', 'Admin/WechatMessage/handle', '0', '', '消息管理', '0');
-INSERT INTO `onethink_menu` VALUES ('376', '删除消息', '379', '0', 'Admin/WechatMessage/delete', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('377', '回复消息', '379', '0', 'Admin/WechatMessage/reply', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('376', '删除消息', '375', '0', 'Admin/WechatMessage/delete', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('377', '回复消息', '375', '0', 'Admin/WechatMessage/reply', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('391', '查看菜单', '300', '0', 'Admin/WechatMenu/viewMenu', '0', '', '自定义菜单', '0');
 
 INSERT INTO `onethink_menu` VALUES ('392', '设置菜单', '300', '0', 'Admin/WechatMenu/configMenu', '0', '', '自定义菜单', '0');
 INSERT INTO `onethink_menu` VALUES ('393', '改变状态', '392', '0', 'Admin/WechatMenu/setStatus', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('394', '生成菜单', '392', '0', 'Admin/WechatMenu/setMenu', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('395', '回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
-INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('394', '菜单回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('395', '还原', '394', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('396', '彻底删除', '394', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('401', '相册列表', '300', '0', 'Admin/WechatAlbum/index', '0', '', '相册管理', '0');
 INSERT INTO `onethink_menu` VALUES ('402', '新增', '401', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
