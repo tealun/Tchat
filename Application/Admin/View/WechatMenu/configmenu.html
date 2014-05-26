@@ -40,15 +40,15 @@
 				   	<div class="btn-group">
 					<button class="btn" tabindex="-1">类型</button>
 					</div>
-					  <select>
+					  <select name="type">
 					  <volist name="ButtonType" id="type">
-					  <option value="$type" <eq name="$vo.type" value="$type">selected</eq>> {$type}</option>
+					  <option value="{$type}" <eq name="$vo.type" value="$type">selected</eq>>{$type}</option>
 					  </volist>
 				 		</select>
 				   	<div class="btn-group">
 					<button class="btn" tabindex="-1">KEY</button>
 					</div>
-					  <input type="text" class="text input-medium" name="type" value="{$vo.key}">
+					  <input type="text" class="text input-medium" name="key" value="{$vo.key}">
 				  </div>
 				</div>
 				
@@ -84,15 +84,15 @@
 						   	<div class="btn-group">
 							<button class="btn" tabindex="-1">类型</button>
 							</div>
-							  <select>
+							  <select name="type">
 							  <volist name="ButtonType" id="type">
-							  <option value="$type" <eq name="$vol.type" value="$type">selected</eq>> {$type}</option>
+							  <option value="{$type}" <eq name="$vol.type" value="$type">selected</eq>> {$type}</option>
 							  </volist>
 						 		</select>
 						   	<div class="btn-group">
 							<button class="btn" tabindex="-1">KEY</button>
 							</div>
-							  <input type="text" class="text input-medium" name="type" value="{$vol.key}">
+							  <input type="text" class="text input-medium" name="key" value="{$vol.key}">
 						  </div>
 						</div>
 					</div>
