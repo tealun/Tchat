@@ -37,6 +37,11 @@ class WechatMenuController extends WechatController {
 	 */
 	public function viewMenu(){
 		if($this->getRZ()){
+			$json = '{"menu":{"button":[{"type":"click","name":"今日歌曲","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}';
+			//$json = $this->getMenu();
+			$WXmenu = json_decode($json,true);
+			print_r($WXmenu['menu']['button']);
+			$this->assign('WXmenu',$WXmenu['menu']['button']);
 			$this->assign('meta_title','查看自定义菜单');
 			$this->display();
 		}else{
@@ -51,7 +56,11 @@ class WechatMenuController extends WechatController {
 	 */
 	public function configMenu(){
 		if($this->getRZ()){
-			
+			$json = '{"menu":{"button":[{"type":"click","name":"今日歌曲","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}';
+			//$json = $this->getMenu();
+			$WXmenu = json_decode($json,true);
+			$this->assign('WXmenu',$WXmenu['menu']['button']);
+			$this->assign('ButtonType',array('view','click'));
 			$this->assign('meta_title','配置自定义菜单');
 			$this->display();
 		}else{

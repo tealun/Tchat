@@ -13,10 +13,109 @@
 
     <!-- 配置目录 -->
     <div class="data-table">
+ 
+  <div class="container-fluid">
+	<div class="row-fluid">
+		  	
+		<div class="span3">
+		this is veiw model
+		</div>
+	
+		<div class="span9">
+		  <form id="form" action="{:U('update')}" method="post" class="form-horizontal">
+			<div class="row-fluid">
+			<volist name="WXmenu" id="vo">
+	 			 <if condition="EMPTY($vo['sub_button'])" >
+	 			 <table>
+	 			 <thead>
+	 			 <tr><th>一级菜单</th></tr>
+	 			 </thead>
+	 			 </table>
+	 			 <div class="controls">
+	 			   <div class="input-prepend">
+				    <div class="btn-group">
+					<button class="btn" tabindex="-1">名称</button>
+					</div>
+				   <input type="text" class="text input-small" name="name" value="{$vo.name}">
+				   	<div class="btn-group">
+					<button class="btn" tabindex="-1">类型</button>
+					</div>
+					  <select>
+					  <volist name="ButtonType" id="type">
+					  <option value="$type" <eq name="$vo.type" value="$type">selected</eq>> {$type}</option>
+					  </volist>
+				 		</select>
+				   	<div class="btn-group">
+					<button class="btn" tabindex="-1">KEY</button>
+					</div>
+					  <input type="text" class="text input-medium" name="type" value="{$vo.key}">
+				  </div>
+				</div>
+				
+				  <else />
+				 <table>
+	 			 <thead>
+	 			 <tr><th>一级菜单</th></tr>
+	 			 </thead>
+	 			 </table>
+	 			 
+				  {$vo.name}<br />
+				  <assign name="WXsubMenu" value="$vo['sub_button']" />
+				  <div class="row-fluid">
+	 			  <div class="span2"></div>
+	 			  <div class="span10">
+				  		 	<table>
+				 			 <thead>
+				 			 <tr><th>二级菜单</th></tr>
+				 			 </thead>
+				 			 </table>
+				 </div>
+					<volist name="WXsubMenu" id = "vol">
+					<div class="row-fluid">
+	 				 <div class="span2"></div>
+	 			 
+		 			 <div class="span10">
+			 			 <div class="controls">
+			 			   <div class="input-prepend">
+						    <div class="btn-group">
+							<button class="btn" tabindex="-1">名称</button>
+							</div>
+						   <input type="text" class="text input-small" name="name" value="{$vol.name}">
+						   	<div class="btn-group">
+							<button class="btn" tabindex="-1">类型</button>
+							</div>
+							  <select>
+							  <volist name="ButtonType" id="type">
+							  <option value="$type" <eq name="$vol.type" value="$type">selected</eq>> {$type}</option>
+							  </volist>
+						 		</select>
+						   	<div class="btn-group">
+							<button class="btn" tabindex="-1">KEY</button>
+							</div>
+							  <input type="text" class="text input-medium" name="type" value="{$vol.key}">
+						  </div>
+						</div>
+					</div>
+					</div>
+					</volist>
+				  </if>
+			  </volist>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
+
+
 	<p>This is page of Menu configuration.</p>
+	
+
+  
+  
   </div>
 
 </block>
 <block name="script">
+<link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap/css/bootstrap-responsive.css" media="all">
 <include file="menujs" />
 </block>
