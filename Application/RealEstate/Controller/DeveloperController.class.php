@@ -10,11 +10,23 @@
 namespace Realestate\Controller;
 use Think\Controller;
 
-class RealController extends Controller {
+class DeveloperController extends Controller{
 
-	public function index(){
-		$test[0] = M('Config')->where(array('name'=>'CONFIG_GROUP_LIST'))->getField('value');
-		$test[1] = C('CONFIG_GROUP_LIST');
-		var_dump($test);
+	public function brief (){
+	$brief = S("DEVELOPERBRIEF")?S("DEVELOPERBRIEF"):"还没有介绍文字呢。";
+	var_dump($brief);
 	}
+	
+	public function projects(){
+	
+	}
+	
+	public function history(){
+	
+	}
+	
+	public function honors (){
+	
+	}
+	
 }

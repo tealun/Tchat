@@ -7,14 +7,16 @@
 // | Author: Tealun Du <tealun@tealun.com> <http://www.tealun.com>
 // +----------------------------------------------------------------------
 
-namespace Realestate\Controller;
-use Think\Controller;
+namespace Admin\Controller;
 
-class RealController extends Controller {
+/**
+ * 客户消息管理控制器
+ * 
+ */
+class WechatQrcodeController extends WechatController {
 
 	public function index(){
-		$test[0] = M('Config')->where(array('name'=>'CONFIG_GROUP_LIST'))->getField('value');
-		$test[1] = C('CONFIG_GROUP_LIST');
-		var_dump($test);
+	 echo ('This page is under construction');
 	}
+	
 }

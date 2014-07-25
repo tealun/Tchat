@@ -35,6 +35,11 @@ class EventEvent {
           $data['subscribe']='0';
           $Client = D('Tchat_client'); // 实例化Tchat_client对象
           $Client->update($data);
+        case 'SCAN':
+        	$i=F('tickets/'.$ticket);
+        	$num = $i?$i++:1;
+			F('tickets/'.$ticket,$num);
+			unset($i,$num);
       }
       
       $id = M('Tchat_events')->where('`event_type` = "'.$event.'"')->getField('id');

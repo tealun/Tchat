@@ -10,11 +10,33 @@
 namespace Realestate\Controller;
 use Think\Controller;
 
-class RealController extends Controller {
-
+class ProjectsController extends Controller{
+	
 	public function index(){
-		$test[0] = M('Config')->where(array('name'=>'CONFIG_GROUP_LIST'))->getField('value');
-		$test[1] = C('CONFIG_GROUP_LIST');
-		var_dump($test);
+	
 	}
+	
+	/**
+	 * 项目简介
+	 * 
+	 */
+	public function brief(){
+	
+	}
+	
+	/**
+	 * 项目详细信息
+	 * 
+	 */
+	public function details(){
+	
+	}
+	
+	/**
+	 * 常见问题
+	 */
+	public function faq(){
+	
+	}
+
 }

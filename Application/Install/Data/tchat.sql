@@ -51,6 +51,9 @@ INSERT INTO `onethink_attribute` VALUES ('81', 'discount', '折扣率', 'float(3
 INSERT INTO `onethink_attribute` VALUES ('82', 'ticket_prefix', '优惠券前缀', 'char(4) NOT NULL ', 'string', '', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('83', 'max', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 
+-- Attribute of tchat_tickets
+INSERT INTO `onethink_attribute` VALUES ('180','expire_seconds');
+
 -- Attribute of album model
 INSERT INTO `onethink_attribute` VALUES ('200', 'name', '相册标识', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('201', 'title', '相册名称', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
@@ -68,6 +71,7 @@ INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', 
 INSERT INTO `onethink_model`  VALUES ('6', 'tchat_activity', '活动', '0', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ncheck_info:验证信息\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态\r\nact_add:活动地点', '10', '', '', '1396965384', '1396965384', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"81\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ndiscount:折扣率\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态', '10', '', '', '1396968844', '1396968844', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"82\",\"83\",\"50\",\"49\",\"51\"]}', '1:基础,2:报名发放设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\nticket_prefix:优惠券前缀\r\nstartup:开始时间\r\ndeadline:结束时间\r\nmax:发行总量', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('30','tchat_tickets','场景二维码','0', '', '1', '{\"1\":[\"33\",\"34\"]}', '1:长久二维码,2:临时二维码', '', '', '', '', 'expire_seconds:有效期\r\naction_name:二维码类型\r\ninfo:应用类型\r\nscene_id:场景值ID', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
@@ -750,6 +754,24 @@ INSERT INTO `onethink_tchat_text` VALUES ('53','本优惠券限量200份，回�
 INSERT INTO `onethink_tchat_text` VALUES ('54','春节来临的脚步如此匆忙，我们不仅为您准备好了新年礼物，更有多款产品享受折上折优惠，购物划算，还有积分翻倍哦','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('55','哎呀，真不好意思，这个活动已经截止啦，好遗憾没能在那个疯狂的日子里见到你的身影，不过我们还有很多其他的活动正在进行，您可以回复“优惠”或“活动”，看看我们有哪些活动吧，这次可不要再错过咯。','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('56','感谢您的配合，您的建议我们会送达相关部门处理，如有需要我们会跟您取得联系，谢谢。','2','1393292899','1393292899');
+
+
+-- -----------------------------
+-- Table structure for `onethink_tchat_tickets`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_tchat_tickets`;
+CREATE TABLE `onethink_tchat_text` (
+	`id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '微信二维码ID',
+	`expire_seconds ` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '该二维码有效时间，以秒为单位。 最大不超过1800。',
+	`content` varchar(250) NOT NULL UNIQUE COMMENT 'Ticket编码',
+	`action_name` varchar(10) NOT NULL DEFAULT '' COMMENT '二维码类型，QR_SCENE为临时,QR_LIMIT_SCENE为永久',
+	`info` varchar(250) NOT NULL DEFAULT '' COMMENT '应用场景',
+	`scene_id` int(5) unsigned NOT NULL DEFAULT '0' COMMENT '场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000） ', 
+	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+	PRIMARY KEY(`id`),
+	INDEX(`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '文本类型回复内容表';
+
 -- -----------------------------
 -- Table structure for `onethink_tchat_vote`
 -- -----------------------------
