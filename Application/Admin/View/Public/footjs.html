@@ -84,7 +84,6 @@ $(function(){
     $('#getticket').click(function(){
       $.post(ticketPostUrl,'',function(ticket){
 			$('input[name=ticket]').val(ticket.ticket);
-			$('input[name=scene_id]').val(ticket.scene_id);
            },'json');
         });
 });
