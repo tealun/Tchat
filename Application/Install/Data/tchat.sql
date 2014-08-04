@@ -51,8 +51,12 @@ INSERT INTO `onethink_attribute` VALUES ('81', 'discount', '折扣率', 'float(3
 INSERT INTO `onethink_attribute` VALUES ('82', 'ticket_prefix', '优惠券前缀', 'char(4) NOT NULL ', 'string', '', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('83', 'max', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 
--- Attribute of tchat_tickets
-INSERT INTO `onethink_attribute` VALUES ('180','expire_seconds');
+-- Attribute of tchat_qrcode
+INSERT INTO `onethink_attribute` VALUES ('191','ticket','Ticket编码','varchar(250) NOT NULL','string','','获取到的Ticket值','1','','41', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('192','action_name','编码类型','varchar(10) NOT NULL','string','','编码的类型，永久型及临时型','0','','41', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('193','scene','场景','varchar(50) NOT NULL','string','','二维码应用场景，自定义一个场景名称，如“海报、公交广告等”','1','','41','0','1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('194','scan_num','扫描次数','int(5) unsigned NOT NULL','num','0','二维码扫描次数','0','','41', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('195', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '41', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 
 -- Attribute of album model
 INSERT INTO `onethink_attribute` VALUES ('200', 'name', '相册标识', 'varchar(200) NOT NULL ', 'string', '', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
@@ -71,8 +75,8 @@ INSERT INTO `onethink_model`  VALUES ('5', 'group', '关键词分组', '4', '', 
 INSERT INTO `onethink_model`  VALUES ('6', 'tchat_activity', '活动', '0', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ncheck_info:验证信息\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态\r\nact_add:活动地点', '10', '', '', '1396965384', '1396965384', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"81\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"50\",\"49\",\"51\"]}', '1:基础,2:客户参与设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\ndiscount:折扣率\r\nstartup:开始时间\r\ndeadline:结束时间\r\nstatus:状态', '10', '', '', '1396968844', '1396968844', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"82\",\"83\",\"50\",\"49\",\"51\"]}', '1:基础,2:报名发放设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\nticket_prefix:优惠券前缀\r\nstartup:开始时间\r\ndeadline:结束时间\r\nmax:发行总量', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('30','tchat_tickets','场景二维码','0', '', '1', '{\"1\":[\"33\",\"34\"]}', '1:长久二维码,2:临时二维码', '', '', '', '', 'expire_seconds:有效期\r\naction_name:二维码类型\r\ninfo:应用类型\r\nscene_id:场景值ID', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('41','tchat_qrcode','场景二维码','0', '', '1', '{\"1\":[\"191\",\"193\"]}', '1:永久二维码', '', '', '', '', 'action_name:二维码类型\r\nticket:获取二维码Ticket\r\nscene:场景\r\nscene_id:场景值ID', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"]}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
 -- -----------------------------
@@ -190,6 +194,10 @@ INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/WechatAlbum
 INSERT INTO `onethink_auth_rule` VALUES ('350', 'admin', '1', 'Admin/WechatAlbum/setStatus','改变状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('351', 'admin', '1', 'Admin/WechatAlbum/delete','删除', '1', '');
 
+INSERT INTO `onethink_auth_rule` VALUES ('352', 'admin', '1', 'Admin/WechatQrcode/index','二维码列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('353', 'admin', '1', 'Admin/WechatQrcode/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('354', 'admin', '1', 'Admin/WechatQrcode/getTicket','获得Ticket', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('355', 'admin', '1', 'Admin/WechatQrcode/showQrcode','查看二维码', '1', '');
 
 -- -----------------------------
 -- Records of `onethink_category`
@@ -322,8 +330,12 @@ INSERT INTO `onethink_menu` VALUES ('401', '相册列表', '300', '0', 'Admin/We
 INSERT INTO `onethink_menu` VALUES ('402', '新增', '401', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('403', '编辑', '401', '0', 'Admin/WechatAlbum/edit', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('404', '改变状态', '401', '0', 'Admin/WechatAlbum/setStatus', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('406', '删除', '401', '0', 'Admin/WechatAlbum/delete', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('405', '删除', '401', '0', 'Admin/WechatAlbum/delete', '0', '', '', '0');
 
+INSERT INTO `onethink_menu` VALUES ('421', '二维码列表', '300', '0', 'Admin/WechatQrcode/index', '0', '', '二维码管理', '0');
+INSERT INTO `onethink_menu` VALUES ('422', '新增二维码', '300', '0', 'Admin/WechatQrcode/create', '0', '', '二维码管理', '0');
+INSERT INTO `onethink_menu` VALUES ('423', '获取TICKET', '422', '0', 'Admin/WechatQrcode/getTicket', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('424', '查看二维码', '421', '0', 'Admin/WechatQrcode/showQrcode', '0', '', '', '0');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity`
@@ -473,7 +485,6 @@ CREATE TABLE `onethink_tchat_client` (
 	`headimgurl` VARCHAR(200) NOT NULL DEFAULT '' COMMENT'微信客户头像',
 	`subscribe_time` int(10) NOT NULL DEFAULT '0' COMMENT'微信客户关注时间',
 	`event_key` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '扫描关注时的EventKey',
-	`ticket` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '扫描时的二维码Ticket,可换取二维码',
 	PRIMARY KEY(`id`),
     UNIQUE KEY `uk_openId` (`openId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '微信客户信息表';
@@ -757,20 +768,19 @@ INSERT INTO `onethink_tchat_text` VALUES ('56','感谢您的配合，您的建�
 
 
 -- -----------------------------
--- Table structure for `onethink_tchat_tickets`
+-- Table structure for `onethink_tchat_qrcode`
 -- -----------------------------
-DROP TABLE IF EXISTS `onethink_tchat_tickets`;
-CREATE TABLE `onethink_tchat_text` (
+DROP TABLE IF EXISTS `onethink_tchat_qrcode`;
+CREATE TABLE `onethink_tchat_qrcode` (
 	`id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '微信二维码ID',
-	`expire_seconds ` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '该二维码有效时间，以秒为单位。 最大不超过1800。',
-	`content` varchar(250) NOT NULL UNIQUE COMMENT 'Ticket编码',
+	`ticket` varchar(250) NOT NULL UNIQUE COMMENT 'Ticket编码',
 	`action_name` varchar(10) NOT NULL DEFAULT '' COMMENT '二维码类型，QR_SCENE为临时,QR_LIMIT_SCENE为永久',
-	`info` varchar(250) NOT NULL DEFAULT '' COMMENT '应用场景',
-	`scene_id` int(5) unsigned NOT NULL DEFAULT '0' COMMENT '场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000） ', 
+	`scene` varchar(50) NOT NULL DEFAULT '' COMMENT '应用场景',
+	`scan_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '二维码扫描次数', 	
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	PRIMARY KEY(`id`),
-	INDEX(`content`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '文本类型回复内容表';
+	INDEX(`ticket`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '二维码存储表';
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_vote`

@@ -8,15 +8,15 @@ $(function(){
   //搜索功能
   $("#search").click(function(){
     var url = $(this).attr('url');
-    var col = $("#sch-sort-txt").attr("data");
+    var segment = $("#sch-sort-txt").attr("data");
         var query  = $('.search-form').find('input').serialize();
         query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
         query = query.replace(/^&/g,'');
-    if(col != ''){
+    if(segment != ''){
       if(query != ''){
-        query += '&col=' + col;
+        query += '&segment=' + segment;
         }else{
-        query += 'col=' + col;
+        query += 'segment=' + segment;
         }
         }
         if( url.indexOf('?')>0 ){
@@ -79,5 +79,13 @@ $(function(){
       minView:2,
       autoclose:true
     });
-})
+    
+	//获取二维码TICKET
+    $('#getticket').click(function(){
+      $.post(ticketPostUrl,'',function(ticket){
+			$('input[name=ticket]').val(ticket.ticket);
+			$('input[name=scene_id]').val(ticket.scene_id);
+           },'json');
+        });
+});
 </script>

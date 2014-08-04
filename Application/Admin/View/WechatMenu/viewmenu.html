@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <div class="main-title">
     <h2>{$meta_title}</h2>
@@ -33,8 +28,11 @@
   </if>
   </foreach>
   </div>
-
+</div>
 </block>
+
+<!-- 加载底部JS -->
 <block name="script">
+<include file="Public/footjs" />
 <include file="menujs" />
 </block>

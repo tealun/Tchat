@@ -3,50 +3,76 @@ namespace Wechat\Event;
 
 class EventEvent {
 
+	/**
+	 * 客户发送事件消息处理
+	 *
+	 * @param $openId
+	 * @param $event
+	 * @param $evnetKey
+	 * @param $ticket
+	 */
+	public function eventHandle($openId, $event, $evnetKey = '', $ticket = '') {
 
+		switch ($event) {
+			//如果是关注事件，拉取客户资料进行存储
+			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题 及解决方法
+			case 'subscribe' :
+				//实例化客户模型
+				$Client = D('Tchat_client');
+				if (check_wechat_rz() === TRUE) {
+					//如果是认证服务号，更新一次客户的详细信息
+					$data = get_client_info($openId);
 
-  /**
-   * 客户发送事件消息处理
-   * 
-   * @param unknown_type $openId
-   * @param unknown_type $event
-   * @param unknown_type $evnetKey
-   * @param unknown_type $ticket
-   */
-  public function eventHandle($openId,$event,$evnetKey='',$ticket=''){
+					$clientId = $Client -> where('`openid` = "' . $openId . '"') -> getField('id');
+					if ($clientId) {//如果有存储，则设置ID值
+						$data['id'] = $clientId;
+					}
 
-      switch ($event){
-        //如果是关注事件，拉取客户资料进行存储
-        //TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题 及解决方法
-        case 'subscribe':
-          if (check_wechat_rz()===TRUE){
-            $data = get_client_info($openId);
-            $data['event_key']=$evnetKey;
-            $data['ticket']=$ticket;
-          }else{
-            $data['openid']=$openId;
-            $data['subscribe']='1';
-            $data['subscribe_time']=time();
-          }
-            $Client = D('Tchat_client'); // 实例化Tchat_client对象
-            $Client->update($data);
-        case 'unsubscribe':
-          $data['openid']=$openId;
-          $data['subscribe']='0';
-          $Client = D('Tchat_client'); // 实例化Tchat_client对象
-          $Client->update($data);
-        case 'SCAN':
-        	$i=F('tickets/'.$ticket);
-        	$num = $i?$i++:1;
-			F('tickets/'.$ticket,$num);
-			unset($i,$num);
-      }
-      
-      $id = M('Tchat_events')->where('`event_type` = "'.$event.'"')->getField('id');
-        $map['segment'] = 'events';
-        $map['segment_id'] = $id;
-      $rs = M('Tchat_keyword_group')->where($map)->find();
-      
-      return $reply = A('Reply','Event')->wechatReply($rs);
-  }
+					if (!empty($ticket)) {//检测tiket是否为空
+						$this -> qrcodePlusOne($ticket);
+					}
+
+					//获取客户信息
+					$data['event_key'] = $evnetKey;
+
+				} else {//公众号未认证且未存储过客户信息的情况下只存储openid
+					$data['openid'] = $openId;
+				}
+
+				$data['subscribe'] = '1';
+				$data['subscribe_time'] = time();
+
+				$Client -> update($data);
+
+			//取消关注事件
+			case 'unsubscribe' :
+				$Client = M('Tchat_client');
+				$Client -> getByOpenid($openId);
+				$Client -> subscribe = "0";
+				//更改关注状态
+				$Client -> save($data);
+			case 'SCAN' :
+				$this -> qrcodePlusOne($ticket);
+		}
+
+		$id = M('Tchat_events') -> where('`event_type` = "' . $event . '"') -> getField('id');
+		$map['segment'] = 'events';
+		$map['segment_id'] = $id;
+		$rs = M('Tchat_keyword_group') -> where($map) -> find();
+
+		return $reply = A('Reply', 'Event') -> wechatReply($rs);
+	}
+
+	/**
+	 * 扫描带参数的二维码事件
+	 * @param $ticket 二维码TICKET
+	 */
+	protected function qrcodePlusOne($ticket) {
+
+		$QRcode = M('Tchat_qrcode');
+		$QRcode -> getByTicket($ticket);
+		$QRcode -> scan_num++;
+		$QRcode -> save();
+	}
+
 }

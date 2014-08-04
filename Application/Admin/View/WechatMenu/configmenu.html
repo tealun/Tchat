@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <div class="main-title">
     <h2>{$meta_title}</h2>
@@ -627,9 +622,12 @@
   
   
   </div>
-
+</div>
 </block>
+
+<!-- 加载底部JS -->
 <block name="script">
+<include file="Public/footjs" />
 <link rel="stylesheet" type="text/css" href="__STATIC__/bootstrap/css/bootstrap-responsive.css" media="all">
 <link rel="stylesheet" type="text/css" href="__CSS__/base.css" media="all">
 <link rel="stylesheet" type="text/css" href="__CSS__/advanced_menu_setting.css" media="all">

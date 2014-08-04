@@ -161,3 +161,85 @@ function get_keyword($groupId){
     	$arr = M('Tchat_keyword')->where(array('group_id'=>$groupId))->getField('id,keyword');
     	return $keywords = arr2str($arr);
 }
+
+/**
+ * 获取二维码扫描关注人数
+ */
+function get_scan_sub_count($id){
+	$sum = M('Tchat_client')->where('`event_key` = "qrscene_'.$id.'"')->count();
+	return $sum;
+}
+
+/* Curl所需参数 */
+//$cookie_file = dirname ( __FILE__ ) . "/cookie_" . md5 ( basename ( __FILE__ ) ) . ".txt"; // 设置Cookie文件保存路径及文件名
+$user_agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.1.4322)";//模拟客户浏览器
+
+/**
+ * 模拟登录获取Cookie函数
+ * TODO 有关Cookie的部分需要重新写
+ */
+function vlogin($url, $data) { 
+    $curl = curl_init (); // 启动一个CURL会话
+    curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
+    curl_setopt ( $curl, CURLOPT_USERAGENT, $GLOBALS ['user_agent'] ); // 模拟用户使用的浏览器
+    @curl_setopt ( $curl, CURLOPT_FOLLOWLOCATION, 1 ); // 使用自动跳转
+    curl_setopt ( $curl, CURLOPT_AUTOREFERER, 1 ); // 自动设置Referer
+    curl_setopt ( $curl, CURLOPT_POST, 1 ); // 发送一个常规的Post请求
+    curl_setopt ( $curl, CURLOPT_POSTFIELDS, $data ); // Post提交的数据包
+  //curl_setopt ( $curl, CURLOPT_COOKIEJAR, $GLOBALS ['cookie_file'] ); // 存放Cookie信息的文件名称
+  //curl_setopt ( $curl, CURLOPT_COOKIEFILE, $GLOBALS ['cookie_file'] ); // 读取上面所储存的Cookie信息
+    curl_setopt ( $curl, CURLOPT_TIMEOUT, 30 ); // 设置超时限制防止死循环
+    curl_setopt ( $curl, CURLOPT_HEADER, 0 ); // 显示返回的Header区域内容
+    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 ); // 获取的信息以文件流的形式返回
+    $tmpInfo = curl_exec ( $curl ); // 执行操作
+    if (curl_errno ( $curl )) {
+        echo 'Errno' . curl_error ( $curl );
+    }
+    curl_close ( $curl ); // 关闭CURL会话
+    return $tmpInfo; // 返回数据
+}
+ 
+function vget($url) { // 模拟获取内容函数
+    $curl = curl_init (); // 启动一个CURL会话
+    curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
+    curl_setopt ( $curl, CURLOPT_USERAGENT, $GLOBALS ['user_agent'] ); // 模拟用户使用的浏览器
+    @curl_setopt ( $curl, CURLOPT_FOLLOWLOCATION, 1 ); // 使用自动跳转
+    curl_setopt ( $curl, CURLOPT_AUTOREFERER, 1 ); // 自动设置Referer
+    curl_setopt ( $curl, CURLOPT_HTTPGET, 1 ); // 发送一个常规的Post请求
+  //curl_setopt ( $curl, CURLOPT_COOKIEFILE, $GLOBALS ['cookie_file'] ); // 读取上面所储存的Cookie信息
+    curl_setopt ( $curl, CURLOPT_TIMEOUT, 120 ); // 设置超时限制防止死循环
+    curl_setopt ( $curl, CURLOPT_HEADER, 0 ); // 显示返回的Header区域内容
+    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 ); // 获取的信息以文件流的形式返回
+    $tmpInfo = curl_exec ( $curl ); // 执行操作
+    if (curl_errno ( $curl )) {
+        echo 'Errno' . curl_error ( $curl );
+    }
+    curl_close ( $curl ); // 关闭CURL会话
+    return $tmpInfo; // 返回数据
+}
+ 
+function vpost($url, $data) { // 模拟提交数据函数
+    $curl = curl_init (); // 启动一个CURL会话
+    curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
+    curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
+    curl_setopt ( $curl, CURLOPT_USERAGENT, $GLOBALS ['user_agent'] ); // 模拟用户使用的浏览器
+    @curl_setopt ( $curl, CURLOPT_FOLLOWLOCATION, 1 ); // 使用自动跳转
+    curl_setopt ( $curl, CURLOPT_AUTOREFERER, 1 ); // 自动设置Referer
+    curl_setopt ( $curl, CURLOPT_POST, 1 ); // 发送一个常规的Post请求
+    curl_setopt ( $curl, CURLOPT_POSTFIELDS, $data ); // Post提交的数据包
+  //curl_setopt ( $curl, CURLOPT_COOKIEFILE, $GLOBALS ['cookie_file'] ); // 读取上面所储存的Cookie信息
+    curl_setopt ( $curl, CURLOPT_TIMEOUT, 120 ); // 设置超时限制防止死循环
+    curl_setopt ( $curl, CURLOPT_HEADER, 0 ); // 显示返回的Header区域内容
+    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 ); // 获取的信息以文件流的形式返回
+    $tmpInfo = curl_exec ( $curl ); // 执行操作
+    if (curl_errno ( $curl )) {
+        echo 'Errno' . curl_error ( $curl );
+    }
+    curl_close ( $curl ); // 关键CURL会话
+    return $tmpInfo; // 返回数据
+}

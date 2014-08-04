@@ -14,7 +14,7 @@ use Admin\Model\AuthGroupModel;
 /**
  * 关键词分组模型
  */
-class TchatKeywordGroupModel extends Model{
+class TchatActivityModel extends Model{
 
     /* 自动验证规则 */
     protected $_validate = array(

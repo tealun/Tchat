@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <div class="main-title">
     <h2>{$meta_title}</h2>
@@ -65,7 +60,8 @@
     </div>
 
 </block>
-<block name="script">
+
 <!-- 加载底部JS -->
-<include file="footjs" />
+<block name="script">
+<include file="Public/footjs" />
 </block>

@@ -6,8 +6,8 @@
     <volist name="__MENU__.child" id="sub_menu">
         <!-- 子导航 -->
         <notempty name="sub_menu">
-            <notempty name="key"><h3><i class="icon icon-unfold"></i>{$key}</h3></notempty>
-            <ul class="side-sub-menu">
+            <notempty name="key"><h3><i class="icon icon-fold"></i>{$key}</h3></notempty>
+            <ul class="side-sub-menu"  style="display: none;">
                 <volist name="sub_menu" id="menu">
                     <li>
                         <a class="item" href="{$menu.url|U}">{$menu.title}</a>

@@ -61,7 +61,7 @@
                 <volist name="__MENU__.child" id="sub_menu">
                     <!-- 子导航 -->
                     <notempty name="sub_menu">
-                        <notempty name="key"><h3><i class="icon icon-unfold"></i>{$key}</h3></notempty>
+                        <notempty name="key"><h3><i class="icon icon-fold"></i>{$key}</h3></notempty>
                         <ul class="side-sub-menu">
                             <volist name="sub_menu" id="menu">
                                 <li>
@@ -195,6 +195,11 @@
                     }
                 });
             }
+
+            //边栏菜单折叠状态
+            $('.side-sub-menu').css("display","none");
+            $('.side-sub-menu > .current').parent().css("display","block");
+
         }();
     </script>
     <block name="script"></block>

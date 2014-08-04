@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
   <div class="main-title cf">
@@ -199,13 +194,7 @@
 </block>
 
 <block name="script">
-<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
-<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
-<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-<script type="text/javascript" src="__STATIC__/sco/js/sco.modal.js"></script>
-<link href="__STATIC__/sco/css/scojs.css" rel="stylesheet">
+
 <script type="text/javascript">
 
 $('#submit').click(function(){

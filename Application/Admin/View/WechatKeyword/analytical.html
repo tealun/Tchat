@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <div class="main-title">
     <h2>关键词分析</h2>
@@ -23,6 +18,7 @@
   </div>
 </block>
 
+<!-- 加载底部JS -->
 <block name="script">
-
+<include file="Public/footjs" />
 </block>

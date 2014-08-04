@@ -1,9 +1,5 @@
 <extend name="Public/base" />
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
 
 <block name="body">
 	<div class="main-title cf">
@@ -40,7 +36,9 @@
 	</div>
 </block>
 
+<!-- 加载底部JS -->
 <block name="script">
+<include file="Public/footjs" />
 	<script type="text/javascript">
 		$(function(){
 			sort();

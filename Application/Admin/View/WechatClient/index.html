@@ -1,10 +1,5 @@
 <extend name="Public/base"/>
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
   <div class="main-title">
     <h2>{$meta_title}</h2><span>{:C('WECHAT_NICKNAME')}</span>
@@ -53,6 +48,8 @@
     </div>
 
 </block>
+
+<!-- 加载底部JS -->
 <block name="script">
-<include file="footjs" />
+<include file="Public/footjs" />
 </block>
