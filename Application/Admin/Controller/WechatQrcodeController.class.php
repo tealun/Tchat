@@ -36,7 +36,14 @@ class WechatQrcodeController extends WechatController {
 		$this -> assign('info', $info);
 		$this -> assign('fields', $fields);
 		$this -> assign('model', $model);
-		$this -> meta_title = '新增二维码';
+		
+		if ($_GET['id']) {
+			$data = M('Tchat_qrcode') -> find($_GET['id']);
+			$this -> assign('data',$data);
+			$this -> meta_title = '编辑二维码';
+		} else {
+			$this -> meta_title = '新增二维码';
+		}
 		$this -> display();
 	}
 
@@ -45,12 +52,12 @@ class WechatQrcodeController extends WechatController {
 	 */
 	public function update() {
         if(IS_POST || IS_AJAX){
-		$id = D('Tchat_qrcode')->update($_POST);
-		if($id){
+		$res = D('Tchat_qrcode')->update($_POST);
+		if(!$res){
               $this->error(D('Tchat_qrcode')->getError());
           }else{
 		      //TODO 待解决不能成功跳转
-              $this->success('新增成功', U('showQrcode',array('sceneId'=>$id)),1);
+              $this->success($res['id']?'更新成功':'新增成功', U('showQrcode?id='.$res['id']),1);
           }
 
         }else{

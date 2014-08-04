@@ -37,6 +37,7 @@
       <td>{$vo.id|get_scan_sub_count}</td>
       <td><span>{$vo.create_time|time_format}</span></td>
       <td><a href="{:U('showQrcode?id='.$vo['id'])}">预览</a>
+      	  <a href="{:U('create?id='.$vo['id'])}">编辑</a>
           <a href="{:U('setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
       </td>
     </tr>

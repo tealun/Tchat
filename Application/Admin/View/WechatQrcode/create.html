@@ -50,6 +50,19 @@
 								</div>
 							</if>
 						</volist>
+						
+						<input type="hidden" name="id" value="{$data.id|default=''}"/>
+						
+						<!-- 检测到如果是GET方式提交了ID的话，将该ID对应内容填入到相应表单域 -->
+						<if condition="isset($data)" >
+							<script  type="text/javascript">
+								$(function(){
+									$('input[name=ticket]').val("{$data.ticket}");
+									$('input[name=scene]').val("{$data.scene}");
+								})
+							</script>
+						</if>
+						
 					</div>
 				</volist>
 

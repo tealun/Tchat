@@ -69,9 +69,28 @@ class TchatQrcodeModel extends Model {
 	 * @author huajie <banhuajie@163.com>
 	 */
 	public function update($data = null) {
-		/* 获取数据对象 */
-		$data = $this -> create($data);
-		return $this -> add();
+        /* 获取数据对象 */
+        $data = $this->create($data);
+        if(empty($data)){
+            return false;
+        }
+
+        /* 添加或新增基础内容 */
+        if(empty($data['id'])){ //新增数据
+            $id = $this->add(); //添加关键词分组条目
+            if(!$id){
+                $this->error = '新增关键词分组出错！';
+                return false;
+            }
+        } else { //更新数据
+            $status = $this->save(); //更新基础内容
+            if(false === $status){
+                $this->error = '更新关键词分组出错！';
+                return false;
+            }
+        }
+		
+		return $data;
 
 	}
 
