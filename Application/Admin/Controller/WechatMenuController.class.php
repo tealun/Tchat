@@ -40,7 +40,6 @@ class WechatMenuController extends WechatController {
 			$this -> assign('meta_title', '查看自定义菜单');
 			$this -> assign('menu',$menu);
 			$this -> display();
-			var_dump($menu);
 		} else {
 			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
 		}
@@ -53,16 +52,14 @@ class WechatMenuController extends WechatController {
 	 */
 	public function configMenu() {
 		if ($this -> getRZ()) {
-			$map = array(
-			  'status'=>'1',
-			  );
-			$menu = M('Tchat_menu') ->where($map) -> selecte();
-			if (is_null($menu)) {
-				var_dump($menu);
+			$menu = M('Tchat_menu')->where('status = 1')->select();
+			if ($menu) {
+			$this -> assign('menu',$menu);
 			} else {
-				
+			$this -> error('请注意，您还没有配置任何有效菜单项。');
 			}
-			
+			$this -> assign('meta_title', '编辑自定义菜单');
+			$this -> display();
 		}
 	}
 

@@ -7,7 +7,7 @@
 	<div class="cf">
 
 	</div>
-	<volist name="tree" id="list">
+	<volist name="menu" id="list">
 		<dl class="cate-item">
 			<dt class="cf">
 				<form action="{:U('edit')}" method="post">
@@ -35,11 +35,7 @@
 					</div>
 				</form>
 			</dt>
-			<notempty name="list['_']">
-				<dd>
-					{:R('Category/tree', array($list['_']))}
-				</dd>
-			</notempty>
+
 		</dl>
 	</volist>
 
