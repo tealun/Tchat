@@ -9,30 +9,9 @@
     <!-- 查看目录 -->
     <div class="data-table">
 	<p>This is page of Menu view.</p>
-  <foreach name="WXmenu" item="vo">
-  <if condition="EMPTY($vo['sub_button'])" >
-  
-    {$vo.type}<br />
-  {$vo.name}<br />
-  {$vo.key}<br />
-  
-  <else />
-  {$vo.name}<br />
-	<assign name="WXsubMenu" value="$vo['sub_button']" />
-	<foreach name="WXsubMenu" item = "vol">
-	  {$vol.type}<br />
-      {$vol.name}<br />
-      {$vol.key}<br />
-	</foreach>
 
-  </if>
-  </foreach>
+<p>{$menu}</p>
+
   </div>
 </div>
-</block>
-
-<!-- 加载底部JS -->
-<block name="script">
-<include file="Public/footjs" />
-<include file="menujs" />
 </block>

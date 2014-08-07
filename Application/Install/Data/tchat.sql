@@ -65,7 +65,18 @@ INSERT INTO `onethink_attribute` VALUES ('202', 'cat_id', '所属分类ID', 'int
 INSERT INTO `onethink_attribute` VALUES ('203', 'vote', '投票设置', 'tinyint(2) NOT NULL ', 'bool', '0', '是否启用投票', '1', '1:是\r\n0:否', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('204', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '51', '0', '1', '1396970452', '1396970452', '', '0', '', '', '', '0', '');
 
-
+-- Attribute of menu model
+INSERT INTO `onethink_attribute` VALUES ('210', 'order', '排序', 'tinyint(2) NOT NULL ', 'string', '0', '菜单的排列顺序，同一级别下有效', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('211', 'type', '点击类型', 'varchar(20) NOT NULL ', 'select', 'click', '点击类型', '1', 'click:获取回复\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('212', 'name', '显示名称', 'varchar(50) NOT NULL ', 'string', '', '菜单上显示的名称', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('213', 'key', '系统识别码', 'varchar(50) NOT NULL ', 'string', '', '用于识别菜单的指令代码，可以自己随便写,注意不要用中文', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('214', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组、功能、分类号、文章号、URL', '1', 'keyword:触发关键词\r\nsegement:触发功能\r\ncategory:选择分类\r\ndocuments:选择文章\r\nurl:转接网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('215', 'action', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个），如果是转接到网页，请填写网址，注意要带上“http://”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('216', 'status', '状态', 'tinyint(2) NOT NULL ', 'string', '1', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('217', 'pid', '上级菜单ID', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('218', 'uid', '用户ID', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('219', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('220', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 -- -----------------------------
 -- Records of  `onethink_model`
 -- -----------------------------
@@ -77,6 +88,7 @@ INSERT INTO `onethink_model`  VALUES ('7', 'discount', '折扣', '6', '', '1', '
 INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', '{\"1\":[\"60\",\"47\",\"59\",\"46\",\"48\",\"52\",\"53\",\"54\",\"55\",\"56\",\"57\",\"58\"],\"2\":[\"82\",\"83\",\"50\",\"49\",\"51\"]}', '1:基础,2:报名发放设置', '', '', '', '', 'name:关键词组\r\ntitle:活动标题\r\nact_type:活动类型\r\nticket_prefix:优惠券前缀\r\nstartup:开始时间\r\ndeadline:结束时间\r\nmax:发行总量', '10', '', '', '1396968858', '1396968858', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('41','tchat_qrcode','场景二维码','0', '', '1', '{\"1\":[\"191\",\"193\"]}', '1:永久二维码', '', '', '', '', 'action_name:二维码类型\r\nticket:获取二维码Ticket\r\nscene:场景\r\nscene_id:场景值ID', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"]}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('52', 'tchat_menu', '自定义菜单', '0', '', '1', '{"1":["239","237","238","235","236","234","233","232","231","230","229"]}', '1:基础', '', '', '', '', 'id:编号\r\norder:排序\r\nname:显示名称\r\nkey:系统识别码\r\ntype:点击类型\r\naction_type:触发类型\r\naction:动作指令\r\nstatus:状态\r\nuid:用户\r\n', '10', '', '', '1407334493', '1407334851', '1', 'MyISAM');
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
 -- -----------------------------
@@ -660,9 +672,10 @@ CREATE TABLE `onethink_tchat_menu` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '编号',
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '菜单类型',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '显示名称',
-  `key` varchar(50) NOT NULL DEFAULT '' COMMENT '触发关键词',
-  `url` varchar(250) NOT NULL DEFAULT '' COMMENT '链接URL',
+  `key` varchar(50) NOT NULL DEFAULT '' COMMENT '识别EventKey',
   `order` tinyint(2) NOT NULL default '0' COMMENT '排序',
+  `action_type` varchar(20) NOT NULL default '' COMMENT '触发类型',
+  `action` varchar(100) NOT NULL DEFAULT '' COMMENT '动作指令“关键词、功能、分类号、文章号、URL”',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级菜单ID',
   `status` tinyint(2) NOT NULL default '1' COMMENT '状态',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
