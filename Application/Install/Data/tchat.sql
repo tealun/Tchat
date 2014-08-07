@@ -67,10 +67,10 @@ INSERT INTO `onethink_attribute` VALUES ('204', 'create_time', '创建时间', '
 
 -- Attribute of menu model
 INSERT INTO `onethink_attribute` VALUES ('210', 'order', '排序', 'tinyint(2) NOT NULL ', 'string', '0', '菜单的排列顺序，同一级别下有效', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('211', 'type', '点击类型', 'varchar(20) NOT NULL ', 'select', 'click', '点击类型', '1', 'click:获取回复\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('211', 'type', '点击类型', 'varchar(20) NOT NULL ', 'select', 'click', '点击类型', '1', 'click:获取回复\r\nbutton:一级菜单\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('212', 'name', '显示名称', 'varchar(50) NOT NULL ', 'string', '', '菜单上显示的名称', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('213', 'key', '系统识别码', 'varchar(50) NOT NULL ', 'string', '', '用于识别菜单的指令代码，可以自己随便写,注意不要用中文', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('214', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组、功能、分类号、文章号、URL', '1', 'keyword:触发关键词\r\nsegement:触发功能\r\ncategory:选择分类\r\ndocuments:选择文章\r\nurl:转接网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('214', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组、功能、分类号、文章号、URL', '1', 'keyword:触发关键词\r\nsegement:触发功能\r\ncategory:选择分类\r\ndocument:选择文章\r\nurl:转接网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('215', 'action', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个），如果是转接到网页，请填写网址，注意要带上“http://”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('216', 'status', '状态', 'tinyint(2) NOT NULL ', 'string', '1', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('217', 'pid', '上级菜单ID', 'int(10) unsigned NOT NULL ', 'string', '0', '', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
@@ -672,7 +672,7 @@ CREATE TABLE `onethink_tchat_menu` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '编号',
   `type` varchar(20) NOT NULL DEFAULT '' COMMENT '菜单类型',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '显示名称',
-  `key` varchar(50) NOT NULL DEFAULT '' COMMENT '识别EventKey',
+  `key` varchar(50) NOT NULL DEFAULT '' COMMENT '系统识别码',
   `order` tinyint(2) NOT NULL default '0' COMMENT '排序',
   `action_type` varchar(20) NOT NULL default '' COMMENT '触发类型',
   `action` varchar(100) NOT NULL DEFAULT '' COMMENT '动作指令“关键词、功能、分类号、文章号、URL”',

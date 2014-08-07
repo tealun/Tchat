@@ -173,13 +173,17 @@ function get_scan_sub_count($id){
 /* Curl所需参数 */
 //$cookie_file = dirname ( __FILE__ ) . "/cookie_" . md5 ( basename ( __FILE__ ) ) . ".txt"; // 设置Cookie文件保存路径及文件名
 $user_agent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.1.4322)";//模拟客户浏览器
-
+$this_header = array(
+"content-type: application/x-www-form-urlencoded; 
+charset=UTF-8"
+);
 /**
  * 模拟登录获取Cookie函数
  * TODO 有关Cookie的部分需要重新写
  */
 function vlogin($url, $data) { 
     $curl = curl_init (); // 启动一个CURL会话
+    curl_setopt ( $curl,CURLOPT_HTTPHEADER,$this_header); // 设置页头
     curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
@@ -204,6 +208,7 @@ function vlogin($url, $data) {
 function vget($url) { // 模拟获取内容函数
     $curl = curl_init (); // 启动一个CURL会话
     curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
+    curl_setopt ( $curl,CURLOPT_HTTPHEADER,$this_header); // 设置页头
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
     curl_setopt ( $curl, CURLOPT_USERAGENT, $GLOBALS ['user_agent'] ); // 模拟用户使用的浏览器
@@ -225,6 +230,7 @@ function vget($url) { // 模拟获取内容函数
 function vpost($url, $data) { // 模拟提交数据函数
     $curl = curl_init (); // 启动一个CURL会话
     curl_setopt ( $curl, CURLOPT_URL, $url ); // 要访问的地址
+    curl_setopt ( $curl,CURLOPT_HTTPHEADER,$this_header); // 设置页头
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, 0 ); // 对认证证书来源的检查
     curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, 1 ); // 从证书中检查SSL加密算法是否存在
     curl_setopt ( $curl, CURLOPT_USERAGENT, $GLOBALS ['user_agent'] ); // 模拟用户使用的浏览器

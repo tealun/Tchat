@@ -40,13 +40,13 @@ class ReplyEvent {
       //TODO 对分类进行多层子分类查询，并对含多个子目录的分类从子分类中平均提取新闻条目
       case 'news' :
         $catIdarr = M('Category')->where(array('id'=>$rs['reply_id'],'pid'=>$rs['reply_id'],'_logic'=>'OR'))->getField('id',true);
-        $news = M('Document')->where(array('category_id'=>array('in',$catIdarr)))->order('id')->getField('id,title,description,cover_id,link_id',8);
+        $news = M('Document')->where(array('category_id'=>array('in',$catIdarr),'status'=>array('eq',1)))->order('level desc')->getField('id,title,description,cover_id,link_id',8);
         $reply = !empty($news)?get_news_arr($news):get_text_arr("哎呀，仓库里空空如也，啥也没找到！>_<|||\n你有哆啦A梦的口袋么？");
         unset($catIdarr,$news);
         break;
       //document类型回复其实也是图文类型的方式，它是一篇或多篇图文的集合，reply_id的值可以多个,以英文半角逗号分隔。
       case 'document' :
-        $news= M('Document')->field('id,title,description,cover_id,link_id')->order('id')->select($rs['reply_id']);
+        $news= M('Document')->where(array('status'=>array('eq',1)))->field('id,title,description,cover_id,link_id')->order('id desc')->select($rs['reply_id']);
         $reply = get_news_arr($news);
         unset($news);
         break;

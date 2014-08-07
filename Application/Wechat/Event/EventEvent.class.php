@@ -53,6 +53,41 @@ class EventEvent {
 				$Client -> save($data);
 			case 'SCAN' :
 				$this -> qrcodePlusOne($ticket);
+			case 'CLICK' :
+				$rs = M('Tchat_menu') -> where(array('key' => $evnetKey)) -> find();
+				switch ($rs['action_type']) {
+					case 'keyword' :
+						$TextRe = A('Text', 'Event');
+						$keyword = $rs['action'];
+						return $reply = $TextRe -> textHandle($openId, $keyword);
+						break;
+					
+					//当自定义菜单点击的回复类型为分类时
+					case 'category':
+						$re = array(
+							'reply_type' => 'news',
+							'reply_id' => $rs['action'],
+						);
+						
+						//直接回复图文列表
+						return $reply = A('Reply', 'Event') -> wechatReply($re);
+						break;
+						
+					case 'document':
+						$re = array(
+							'reply_type' => 'document',
+							'reply_id' => $rs['action'],
+						);
+						
+						//直接回复图文列表
+						return $reply = A('Reply', 'Event') -> wechatReply($re);
+						break;
+						
+					default :
+						return $reply = get_text_arr('功能尚在完善，请稍后尝试');
+						break;
+				}
+				exit ;
 		}
 
 		$id = M('Tchat_events') -> where('`event_type` = "' . $event . '"') -> getField('id');

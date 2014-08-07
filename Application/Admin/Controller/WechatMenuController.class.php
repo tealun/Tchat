@@ -53,7 +53,16 @@ class WechatMenuController extends WechatController {
 	 */
 	public function configMenu() {
 		if ($this -> getRZ()) {
-
+			$map = array(
+			  'status'=>'1',
+			  );
+			$menu = M('Tchat_menu') ->where($map) -> selecte();
+			if (is_null($menu)) {
+				var_dump($menu);
+			} else {
+				
+			}
+			
 		}
 	}
 
@@ -118,11 +127,15 @@ class WechatMenuController extends WechatController {
 				$content = $data;
 				//POST提交地址
 				$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
-				vpost($url, $content)?
-					$this->success('更新成功！') : 
+				$rs = vpost($url, $content);
+				if ($rs) {
+					S('WECHAT_MENU',$data);
+					$this->success('更新成功！');
+				} else {
 					$this->error('更新失败！');
+				}
 			}
-		return $menustr;
+		return $content;
 	}
 
 	/**
