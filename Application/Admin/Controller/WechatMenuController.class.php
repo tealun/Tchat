@@ -36,37 +36,113 @@ class WechatMenuController extends WechatController {
 	 */
 	public function viewMenu() {
 		if ($this -> getRZ()) {
-			$menu = M('Tchat_menu')->where('status = 1')->select();
-			if ($menu) {
-			$this -> assign('data',$menu);
-			} else {
-			$this -> error('请注意，您还没有配置任何有效菜单项。');
-			}
-			$this -> assign('meta_title', '编辑自定义菜单');
-			$this -> display();
-		} else {
-			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
+        $tree = D('Tchat_menu')->getTree(0,'id,sort,name,pid,status');
+        $this->assign('tree', $tree);
+		C('_TCHAT_GET_MENU_TREE_', true); //标记系统获取分类树模板
+		$this -> assign('meta_title', '查看自定义菜单');
+		$this -> display();
+		}else{
+		$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
 		}
 	}
 	
-	/**
-	 * 增加菜单
-	 */
-	public function add(){
-		
-		
-	}
-	
-	/**
-	 * 编辑菜单
-	 */
-	public function edit(){
-		if(IS_AJAX){
-			
-			
-		}
-		
-	}
+
+    /**
+     * 显示菜单树，仅支持内部调
+     * @param  array $tree 菜单树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function tree($tree = null){
+        C('_TCHAT_GET_MENU_TREE_') || $this->_empty();
+        $this->assign('tree', $tree);
+        $this->display('tree');
+    }
+
+    /* 编辑菜单 */
+    public function edit($id = null, $pid = 0){
+        $TchatMenu = D('Tchat_menu');
+
+        if(IS_POST){ //提交表单
+            if(false !== $TchatMenu->update()){
+                $this->success('编辑成功！', U('viewMenu'));
+            } else {
+                $error = $TchatMenu->getError();
+                $this->error(empty($error) ? '未知错误！' : $error);
+            }
+        } else {
+            $menu= '';
+            if($pid){
+                /* 获取上级菜单信息 */
+                $menu= $TchatMenu->info($pid, 'id,name,status');
+                if(!($menu&& 1 == $menu['status'])){
+                    $this->error('指定的上级菜单不存在或被禁用！');
+                }
+            }
+
+            /* 获取菜单信息 */
+            $info = $id ? $TchatMenu->info($id) : '';
+
+            $this->assign('info',       $info);
+            $this->assign('menu',   $menu);
+            $this->meta_title = '编辑菜单';
+            $this->display();
+        }
+    }
+
+    /* 新增菜单 */
+    public function add($pid = 0){
+        $TchatMenu = D('Tchat_menu');
+
+        if(IS_POST){ //提交表单
+            if(false !== $TchatMenu->update()){
+                $this->success('新增成功！', U('viewMenu'));
+            } else {
+                $error = $TchatMenu->getError();
+                $this->error(empty($error) ? '未知错误！' : $error);
+            }
+        } else {
+            $menu= array();
+            if($pid){
+                /* 获取上级菜单信息 */
+                $menu= $TchatMenu->info($pid, 'id,name,status');
+                if(!($menu&& 1 == $menu['status'])){
+                    $this->error('指定的上级菜单不存在或被禁用！');
+                }
+            }
+
+            /* 获取菜单信息 */
+            $this->assign('menu', $menu);
+            $this->meta_title = '新增菜单';
+            $this->display('edit');
+        }
+    }
+
+    /**
+     * 删除一个菜单
+     * @author huajie <banhuajie@163.com>
+     */
+    public function remove(){
+        $menu_id = I('id');
+        if(empty($menu_id)){
+            $this->error('参数错误!');
+        }
+
+        //判断该菜单下有没有子菜单，有则不允许删除
+        $child = M('Tchat_menu')->where(array('pid'=>$menu_id))->field('id')->select();
+        if(!empty($child)){
+            $this->error('请先删除该菜单下的子菜单');
+        }
+
+        //删除该菜单信息
+        $res = M('Tchat_menu')->delete($menu_id);
+        if($res !== false){
+            //记录行为
+            action_log('update_tchat_menu', 'tchatMenu', $menu_id, UID);
+            $this->success('删除菜单成功！');
+        }else{
+            $this->error('删除菜单失败！');
+        }
+    }
 
 	/**
 	 * 对目录条目状态进行操作
