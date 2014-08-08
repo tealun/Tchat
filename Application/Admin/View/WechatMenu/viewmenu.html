@@ -17,35 +17,66 @@
 				<div class="order">排序</div>
 				<div class="name">显示名称</div>
 			</div>
-	<volist name="data" id="list">
-		<dl class="cate-item">
-			<dt class="cf">
-				<form action="{:U('edit')}" method="post">
-					<div class="btn-toolbar opt-btn cf">
-						<a title="编辑" href="{:U('edit?id='.$list['id'].'&pid='.$list['pid'])}">编辑</a>
-						<a title="{$list.status|show_status_op}" href="{:U('setStatus?ids='.$list['id'].'&status='.abs(1-$list['status']))}" class="ajax-get">{$list.status|show_status_op}</a>
-						<a title="删除" href="{:U('remove?id='.$list['id'])}" class="confirm ajax-get">删除</a>
-						<a title="移动" href="{:U('operate?type=move&from='.$list['id'])}">移动</a>
-					</div>
-					<div class="fold">
-						<i></i>
-					</div>
-					<div class="order">
-						<input type="text" name="sort" class="text input" value="{$list.order}">
-					</div>
-					<div class="name">
-						<span class="tab-sign"></span>
-						<input type="hidden" name="id" value="{$list.id}">
-						<input type="text" name="title" class="text input" style="width: 100px" value="{$list.title}">
-						<a class="add-sub-cate" title="添加二级菜单" href="{:U('add?pid='.$list['id'])}"> <i class="icon-add"></i> </a>
-						<span class="help-inline msg"></span>
-					</div>
-				</form>
-			</dt>
-		</dl>
-	</volist>
+			
+			{:R('WechatMenu/tree', array($tree))}
+			<span style="line-height: 40px;margin: 0 10px;">添加一级菜单</span><a class="button" title="添加一级菜单" href="{:U('add?pid=0')}"><i class="icon-add"></i> </a>
 		</div>
 	</div>
+	<!-- /表格列表 -->
 </block>
-<!-- 加载底部JS -->
-<block name="script"></block>
+
+<block name="script">
+	<script type="text/javascript">
+		(function($){
+			/* 菜单展开收起 */
+			$(".category dd").prev().find(".fold i").addClass("icon-unfold")
+				.click(function(){
+					var self = $(this);
+					if(self.hasClass("icon-unfold")){
+						self.closest("dt").next().slideUp("fast", function(){
+							self.removeClass("icon-unfold").addClass("icon-fold");
+						});
+					} else {
+						self.closest("dt").next().slideDown("fast", function(){
+							self.removeClass("icon-fold").addClass("icon-unfold");
+						});
+					}
+				});
+
+			/* 二级级菜单删除新增按钮 */
+			$(".category dd .add-sub-cate").remove();
+
+			/* 实时更新菜单信息 */
+			$(".category")
+				.on("submit", "form", function(){
+					var self = $(this);
+					$.post(
+						self.attr("action"),
+						self.serialize(),
+						function(data){
+							/* 提示信息 */
+							var name = data.status ? "success" : "error", msg;
+							msg = self.find(".msg").addClass(name).text(data.info)
+									  .css("display", "inline-block");
+							setTimeout(function(){
+								msg.fadeOut(function(){
+									msg.text("").removeClass(name);
+								});
+							}, 1000);
+						},
+						"json"
+					);
+					return false;
+				})
+                .on("focus","input",function(){
+                    $(this).data('param',$(this).closest("form").serialize());
+
+                })
+                .on("blur", "input", function(){
+                    if($(this).data('param')!=$(this).closest("form").serialize()){
+                        $(this).closest("form").submit();
+                    }
+                });
+		})(jQuery);
+	</script>
+</block>
