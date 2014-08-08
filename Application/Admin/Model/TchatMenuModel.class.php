@@ -18,7 +18,6 @@ class TchatMenuModel extends Model {
     /* 自动验证规则 */
     protected $_validate = array(
         array('name', 'checkName', '名称已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
-        array('name', 'require', '名称不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
         array('name', 'checkLength', '标题长度不能超过4个字符', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
 		array('pid','checkPid','一级菜单数目不能超过3个,同一级别二级菜单数目不能超过5个', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
    );
@@ -41,38 +40,6 @@ class TchatMenuModel extends Model {
 	public function listCount($pid, $status = 1, $map = array()) {
 		$map = array_merge($this -> listMap($pid, $status), $map);
 		return $this -> where($map) -> count('id');
-	}
-
-	/**
-	 * 新增目录
-	 * @param array  $data 手动传入的数据
-	 * @return boolean fasle 失败 ， int  成功 返回新增数据ID
-	 * @author huajie <banhuajie@163.com>
-	 */
-	public function update($data = null) {
-        /* 获取数据对象 */
-        $data = $this->create($data);
-        if(empty($data)){
-            return false;
-        }
-
-        /* 添加或新增基础内容 */
-        if(empty($data['id'])){ //新增数据
-            $id = $this->add(); //添加关键词分组条目
-            if(!$id){
-                $this->error = '新增菜单出错！';
-                return false;
-            }
-        } else { //更新数据
-            $status = $this->save(); //更新基础内容
-            if(false === $status){
-                $this->error = '更新菜单出错！';
-                return false;
-            }
-        }
-		
-		return $data;
-
 	}
 
     /**
@@ -157,10 +124,10 @@ class TchatMenuModel extends Model {
         }
 
         //更新菜单缓存
-        S('sys_category_list', null);
+        S('tchat_menu_list', null);
 
         //记录行为
-        action_log('update_category', 'category', $data['id'] ? $data['id'] : $res, UID);
+       // action_log('update_tchat_menu', 'tchat_menu', $data['id'] ? $data['id'] : $res, UID);
 
         return $res;
     }
