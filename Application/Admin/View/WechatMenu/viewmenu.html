@@ -1,17 +1,51 @@
 <extend name="Public/base"/>
 
 <block name="body">
-  <div class="main-title">
-    <h2>{$meta_title}</h2>
-  </div>
-    <div class="cf">
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
 
-    <!-- 查看目录 -->
-    <div class="data-table">
-	<p>This is page of Menu view.</p>
-
-<p>{$menu}</p>
-
-  </div>
-</div>
+	</div>
+		<div class="tb-unit posr">
+		<div class="tb-unit-bar">
+			<a class="btn" href="{:U('add')}">新 增</a>
+		</div>
+		<div class="category">
+			<div class="hd cf">
+				<div class="fold">折叠</div>
+				<div class="order">排序</div>
+				<div class="name">显示名称</div>
+			</div>
+	<volist name="data" id="list">
+		<dl class="cate-item">
+			<dt class="cf">
+				<form action="{:U('edit')}" method="post">
+					<div class="btn-toolbar opt-btn cf">
+						<a title="编辑" href="{:U('edit?id='.$list['id'].'&pid='.$list['pid'])}">编辑</a>
+						<a title="{$list.status|show_status_op}" href="{:U('setStatus?ids='.$list['id'].'&status='.abs(1-$list['status']))}" class="ajax-get">{$list.status|show_status_op}</a>
+						<a title="删除" href="{:U('remove?id='.$list['id'])}" class="confirm ajax-get">删除</a>
+						<a title="移动" href="{:U('operate?type=move&from='.$list['id'])}">移动</a>
+					</div>
+					<div class="fold">
+						<i></i>
+					</div>
+					<div class="order">
+						<input type="text" name="sort" class="text input" value="{$list.order}">
+					</div>
+					<div class="name">
+						<span class="tab-sign"></span>
+						<input type="hidden" name="id" value="{$list.id}">
+						<input type="text" name="title" class="text input" style="width: 100px" value="{$list.title}">
+						<a class="add-sub-cate" title="添加二级菜单" href="{:U('add?pid='.$list['id'])}"> <i class="icon-add"></i> </a>
+						<span class="help-inline msg"></span>
+					</div>
+				</form>
+			</dt>
+		</dl>
+	</volist>
+		</div>
+	</div>
 </block>
+<!-- 加载底部JS -->
+<block name="script"></block>

@@ -34,7 +34,7 @@ class TchatMenuModel extends Model {
 
 	/**
 	 * 计算列表总数
-	 * @param  number  $category 分类ID
+	 * @param  number  $category 菜单ID
 	 * @param  integer $status   状态
 	 * @return integer           总数
 	 */
@@ -74,6 +74,128 @@ class TchatMenuModel extends Model {
 		return $data;
 
 	}
+
+    /**
+     * 获取菜单详细信息
+	 * 源自分类模型
+     * @param  milit   $id 菜单ID或标识
+     * @param  boolean $field 查询字段
+     * @return array     菜单信息
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function info($id, $field = true){
+        /* 获取菜单信息 */
+        $map = array();
+        if(is_numeric($id)){ //通过ID查询
+            $map['id'] = $id;
+        } else { //通过标识查询
+            $map['name'] = $id;
+        }
+        return $this->field($field)->where($map)->find();
+    }
+
+    /**
+     * 获取菜单树，指定菜单则返回指定菜单及其子菜单，不指定则返回所有菜单树
+	 * 源自分类模型
+     * @param  integer $id    菜单D
+     * @param  boolean $field 查询字段
+     * @return array          菜单树
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function getTree($id = 0, $field = true){
+        /* 获取当前菜单信息 */
+        if($id){
+            $info = $this->info($id);
+            $id   = $info['id'];
+        }
+
+        /* 获取所有菜单 */
+        $map  = array('status' => array('eq', 1));
+        $list = $this->field($field)->where($map)->order('sort')->select();
+        $list = list_to_tree($list, $pk = 'id', $pid = 'pid', $child = '_', $root = $id);
+
+        /* 获取返回数据 */
+        if(isset($info)){ //指定菜单则返回当前菜单及其子菜单
+            $info['_'] = $list;
+        } else { //否则返回所有菜单
+            $info = $list;
+        }
+
+        return $info;
+    }
+
+    /**
+     * 获取指定菜单的同级菜单
+	 * 源自分类模型
+     * @param  integer $id    菜单ID
+     * @param  boolean $field 查询字段
+     * @return array
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function getSameLevel($id, $field = true){
+        $info = $this->info($id, 'pid');
+        $map = array('pid' => $info['pid'], 'status' => 1);
+        return $this->field($field)->where($map)->order('sort')->select();
+    }
+
+    /**
+     * 更新菜单信息
+     * @return boolean 更新状态
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    public function update(){
+        $data = $this->create();
+        if(!$data){ //数据对象创建错误
+            return false;
+        }
+
+        /* 添加或更新数据 */
+        if(empty($data['id'])){
+            $res = $this->add();
+        }else{
+            $res = $this->save();
+        }
+
+        //更新菜单缓存
+        S('sys_category_list', null);
+
+        //记录行为
+        action_log('update_category', 'category', $data['id'] ? $data['id'] : $res, UID);
+
+        return $res;
+    }
+
+    /**
+     * 查询后解析扩展信息
+     * @param  array $data 菜单数据
+     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+     */
+    protected function _after_find(&$data, $options){
+        /* 分割模型 */
+        if(!empty($data['model'])){
+            $data['model'] = explode(',', $data['model']);
+        }
+
+        /* 分割文档类型 */
+        if(!empty($data['type'])){
+            $data['type'] = explode(',', $data['type']);
+        }
+
+        /* 分割模型 */
+        if(!empty($data['reply_model'])){
+            $data['reply_model'] = explode(',', $data['reply_model']);
+        }
+
+        /* 分割文档类型 */
+        if(!empty($data['reply_type'])){
+            $data['reply_type'] = explode(',', $data['reply_type']);
+        }
+
+        /* 还原扩展数据 */
+        if(!empty($data['extend'])){
+            $data['extend'] = json_decode($data['extend'], true);
+        }
+    }
 
 	/**
 	 * 创建时间不写则取当前时间

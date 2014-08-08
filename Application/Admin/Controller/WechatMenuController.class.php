@@ -31,36 +31,41 @@ class WechatMenuController extends WechatController {
 	}
 
 	/**
-	 * 查看目录
+	 * 查看菜单
 	 * 查看现有服务器上的目录
 	 */
 	public function viewMenu() {
 		if ($this -> getRZ()) {
-			$menu = $this->getMenu();
-			$this -> assign('meta_title', '查看自定义菜单');
-			$this -> assign('menu',$menu);
-			$this -> display();
-		} else {
-			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
-		}
-	}
-
-	/**
-	 * 配置目录
-	 * 对目录进行配置，并接表单数据，将数据整理成为JSON格式的数据变量$data。
-	 * 调用本类中setMenu私有方法，将$data传入生成服务器新菜单。
-	 */
-	public function configMenu() {
-		if ($this -> getRZ()) {
 			$menu = M('Tchat_menu')->where('status = 1')->select();
 			if ($menu) {
-			$this -> assign('menu',$menu);
+			$this -> assign('data',$menu);
 			} else {
 			$this -> error('请注意，您还没有配置任何有效菜单项。');
 			}
 			$this -> assign('meta_title', '编辑自定义菜单');
 			$this -> display();
+		} else {
+			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
 		}
+	}
+	
+	/**
+	 * 增加菜单
+	 */
+	public function add(){
+		
+		
+	}
+	
+	/**
+	 * 编辑菜单
+	 */
+	public function edit(){
+		if(IS_AJAX){
+			
+			
+		}
+		
 	}
 
 	/**
