@@ -36,6 +36,21 @@ function col_to_string(&$data,$map=array(
 	}
 	
 	/**
+	 * 去除数组中空值键位函数
+	 */
+	function arr_no_empty($arr) {
+    if (is_array($arr)) {
+        foreach ( $arr as $k => $v ) {
+            if (empty($v)) unset($arr[$k]);
+            elseif (is_array($v)) {
+                $arr[$k] = arr_no_empty($v);
+            }
+        }
+    }
+    return $arr;
+}
+	
+	/**
  * 从微信服务器端获取用户详细信息
  * 通过微信接口获取详细用户信息
  * @param string $openId 发送消息用户的openid

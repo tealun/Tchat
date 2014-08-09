@@ -17,8 +17,8 @@ class TchatMenuModel extends Model {
 
     /* 自动验证规则 */
     protected $_validate = array(
-        array('name', 'checkName', '名称已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
-        array('name', 'checkLength', '标题长度不能超过4个字符', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
+        array('name', '', '名称已经存在', self::VALUE_VALIDATE, 'unique', self::MODEL_BOTH),
+        array('name', '1,4', '标题长度不能超过4个汉字', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
 		array('pid','checkPid','一级菜单数目不能超过3个,同一级别二级菜单数目不能超过5个', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
    );
 
@@ -131,6 +131,29 @@ class TchatMenuModel extends Model {
 
         return $res;
     }
+
+    /**
+     * 设置where查询条件
+     * @param  number  $category 分类ID
+     * @param  integer $status   状态
+     * @return array             查询条件
+     */
+    private function listMap($menu, $status = 1){
+        /* 设置状态 */
+        $map = array('status' => $status);
+
+        /* 设置分类 */
+        if(!is_null($menu)){
+            if(is_numeric($menu)){
+                $map['id'] = $menu;
+            } else {
+                $map['id'] = array('in', str2arr($menu));
+            }
+        }
+
+        return $map;
+    }
+
 
     /**
      * 查询后解析扩展信息

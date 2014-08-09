@@ -36,113 +36,113 @@ class WechatMenuController extends WechatController {
 	 */
 	public function viewMenu() {
 		if ($this -> getRZ()) {
-        $tree = D('Tchat_menu')->getTree(0,'id,sort,name,pid,status');
-        $this->assign('tree', $tree);
-		C('_TCHAT_GET_MENU_TREE_', true); //标记系统获取分类树模板
-		$this -> assign('meta_title', '查看自定义菜单');
-		$this -> display();
-		}else{
-		$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
+			$tree = D('Tchat_menu') -> getTree(0, 'id,sort,name,pid,status');
+			$this -> assign('tree', $tree);
+			C('_TCHAT_GET_MENU_TREE_', true);
+			//标记系统获取分类树模板
+			$this -> assign('meta_title', '查看自定义菜单');
+			$this -> display();
+		} else {
+			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
 		}
 	}
-	
 
-    /**
-     * 显示菜单树，仅支持内部调
-     * @param  array $tree 菜单树
-     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
-     */
-    public function tree($tree = null){
-        C('_TCHAT_GET_MENU_TREE_') || $this->_empty();
-        $this->assign('tree', $tree);
-        $this->display('tree');
-    }
+	/**
+	 * 显示菜单树，仅支持内部调
+	 * @param  array $tree 菜单树
+	 * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+	 */
+	public function tree($tree = null) {
+		C('_TCHAT_GET_MENU_TREE_') || $this -> _empty();
+		$this -> assign('tree', $tree);
+		$this -> display('tree');
+	}
 
-    /* 编辑菜单 */
-    public function edit($id = null, $pid = 0){
-        $TchatMenu = D('Tchat_menu');
+	/* 编辑菜单 */
+	public function edit($id = null, $pid = 0) {
+		$TchatMenu = D('Tchat_menu');
 
-        if(IS_POST){ //提交表单
-            if(false !== $TchatMenu->update()){
-                $this->success('编辑成功！', U('viewMenu'));
-            } else {
-                $error = $TchatMenu->getError();
-                $this->error(empty($error) ? '未知错误！' : $error);
-            }
-        } else {
-            $menu= '';
-            if($pid){
-                /* 获取上级菜单信息 */
-                $menu= $TchatMenu->info($pid, 'id,name,status');
-                if(!($menu&& 1 == $menu['status'])){
-                    $this->error('指定的上级菜单不存在或被禁用！');
-                }
-            }
+		if (IS_POST) {//提交表单
+			if (false !== $TchatMenu -> update()) {
+				$this -> success('编辑成功！', U('viewMenu'));
+			} else {
+				$error = $TchatMenu -> getError();
+				$this -> error(empty($error) ? '未知错误！' : $error);
+			}
+		} else {
+			$menu = '';
+			if ($pid) {
+				/* 获取上级菜单信息 */
+				$menu = $TchatMenu -> info($pid, 'id,name,status');
+				if (!($menu && 1 == $menu['status'])) {
+					$this -> error('指定的上级菜单不存在或被禁用！');
+				}
+			}
 
-            /* 获取菜单信息 */
-            $info = $id ? $TchatMenu->info($id) : '';
+			/* 获取菜单信息 */
+			$info = $id ? $TchatMenu -> info($id) : '';
 
-            $this->assign('info',       $info);
-            $this->assign('menu',   $menu);
-            $this->meta_title = '编辑菜单';
-            $this->display();
-        }
-    }
+			$this -> assign('info', $info);
+			$this -> assign('menu', $menu);
+			$this -> meta_title = '编辑菜单';
+			$this -> display();
+		}
+	}
 
-    /* 新增菜单 */
-    public function add($pid = 0){
-        $TchatMenu = D('Tchat_menu');
+	/* 新增菜单 */
+	public function add($pid = 0) {
+		$TchatMenu = D('Tchat_menu');
 
-        if(IS_POST){ //提交表单
-            if(false !== $TchatMenu->update()){
-                $this->success('新增成功！', U('viewMenu'));
-            } else {
-                $error = $TchatMenu->getError();
-                $this->error(empty($error) ? '未知错误！' : $error);
-            }
-        } else {
-            $menu= array();
-            if($pid){
-                /* 获取上级菜单信息 */
-                $menu= $TchatMenu->info($pid, 'id,name,status');
-                if(!($menu&& 1 == $menu['status'])){
-                    $this->error('指定的上级菜单不存在或被禁用！');
-                }
-            }
+		if (IS_POST) {//提交表单
+			if (false !== $TchatMenu -> update()) {
+				$this -> success('新增成功！', U('viewMenu'));
+			} else {
+				$error = $TchatMenu -> getError();
+				$this -> error(empty($error) ? '未知错误！' : $error);
+			}
+		} else {
+			$menu = array();
+			if ($pid) {
+				/* 获取上级菜单信息 */
+				$menu = $TchatMenu -> info($pid, 'id,name,status');
+				if (!($menu && 1 == $menu['status'])) {
+					$this -> error('指定的上级菜单不存在或被禁用！');
+				}
+			}
 
-            /* 获取菜单信息 */
-            $this->assign('menu', $menu);
-            $this->meta_title = '新增菜单';
-            $this->display('edit');
-        }
-    }
+			/* 获取菜单信息 */
+			$this -> assign('menu', $menu);
+			$this -> meta_title = '新增菜单';
+			$this -> display('edit');
+		}
+	}
 
-    /**
-     * 删除一个菜单
-     * @author huajie <banhuajie@163.com>
-     */
-    public function remove(){
-        $menu_id = I('id');
-        if(empty($menu_id)){
-            $this->error('参数错误!');
-        }
+	/**
+	 * 删除一个菜单
+	 * @author huajie <banhuajie@163.com>
+	 */
+	public function remove() {
+		$menu_id = I('id');
+		if (empty($menu_id)) {
+			$this -> error('参数错误!');
+		}
 
-        //判断该菜单下有没有子菜单，有则不允许删除
-        $child = M('Tchat_menu')->where(array('pid'=>$menu_id))->field('id')->select();
-        if(!empty($child)){
-            $this->error('请先删除该菜单下的子菜单');
-        }
+		//判断该菜单下有没有子菜单，有则不允许删除
+		$child = M('Tchat_menu') -> where(array('pid' => $menu_id)) -> field('id') -> select();
+		if (!empty($child)) {
+			$this -> error('请先删除该菜单下的子菜单');
+		}
 
-        //删除该菜单信息
-        $res = M('Tchat_menu')->delete($menu_id);
-        if($res !== false){
-            //记录行为
-            action_log('update_tchat_menu', 'tchatMenu', $menu_id, UID);
-            $this->success('删除菜单成功！');
-        }else{
-            $this->error('删除菜单失败！');
-        }
-    }
+		//删除该菜单信息
+		$res = M('Tchat_menu') -> delete($menu_id);
+		if ($res !== false) {
+			//记录行为
+			action_log('update_tchat_menu', 'tchatMenu', $menu_id, UID);
+			$this -> success('删除菜单成功！');
+		} else {
+			$this -> error('删除菜单失败！');
+		}
+	}
 
 	/**
 	 * 对目录条目状态进行操作
@@ -200,20 +200,27 @@ class WechatMenuController extends WechatController {
 	 * @param  string $data 菜单的array
 	 * @return string  返回的结果；
 	 */
-	private function setMenu($data = array()) {
-			if (IS_POST) {
-				$content = $data;
-				//POST提交地址
-				$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
-				$rs = vpost($url, $content);
-				if ($rs) {
-					S('WECHAT_MENU',$data);
-					$this->success('更新成功！');
-				} else {
-					$this->error('更新失败！');
-				}
+	public function setMenu() {
+		//if (IS_POST) {
+		$tree = D('Tchat_menu') -> getTree(0, 'id,pid,type,name,key,url');
+
+		$tree = $this -> clearTreeArr($tree);
+		$menu['button'] = $tree;
+
+		$content = json_encode($menu, true);
+
+//		if ($this -> deleteMenu()) {
+			//POST提交地址
+			$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
+			$rs = vpost($url, $content);
+			if ($rs) {
+				S('WECHAT_MENU', $data);
+				$this -> success('更新成功！');
+			} else {
+				$this -> error('更新失败！');
 			}
-		return $content;
+//		}
+
 	}
 
 	/**
@@ -225,7 +232,38 @@ class WechatMenuController extends WechatController {
 		$access_token = get_access_token();
 		$url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token={$access_token}";
 		return $menustr = vget($url);
-		
+
+	}
+
+	/**
+	 * 将获取到的目录树整理成为符合微信目录JSON数据的结构
+	 */
+	private function clearTreeArr($arr) {
+		if (is_array($arr)) {
+			foreach ($arr as $key => $value) {
+				//删除不必要的ID PID选项
+				unset($arr[$key]['id'], $arr[$key]['pid']);
+
+				//如果类型是BUTTON的话，就删除TYPE键位和键值
+				if ($arr[$key]['type'] == 'button')
+					unset($arr[$key]['type']);
+
+				//如果键值为空的字段，则直接去掉
+				if (empty($arr[$key]['key']))
+					unset($arr[$key]['key']);
+				if (empty($arr[$key]['url']))
+					unset($arr[$key]['url']);
+
+				//判断是否有二级菜单，有则再进行一次自身遍历
+				if (is_array($arr[$key]['_'])) {
+
+					//将目录树里的二级键位替换为sub_button，并清空原键位数据
+					$arr[$key]['sub_button'] = $this -> clearTreeArr($arr[$key]['_']);
+					unset($arr[$key]['_']);
+				}
+			}
+		}
+		return $arr;
 	}
 
 	/**
@@ -235,10 +273,15 @@ class WechatMenuController extends WechatController {
 	private function deleteMenu() {
 
 		$access_token = get_access_token();
-		$url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token={$access_token}";
-		$menustr = $this -> http($url, $data);
-		return $menustr;
-
+		$url = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=".$access_token;
+		$menustr = vget($url);
+		$status = json_decode($menustr);
+		var_dump($status);
+		if ($status) {
+			$this -> error($status);
+		} else {
+			return TRUE;
+		}
 	}
 
 }

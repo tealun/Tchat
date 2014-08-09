@@ -1,5 +1,4 @@
 <extend name="Public/base"/>
-
 <block name="body">
 	<div class="main-title">
 		<h2>{$meta_title}</h2>
@@ -9,7 +8,8 @@
 	</div>
 		<div class="tb-unit posr">
 		<div class="tb-unit-bar">
-			<a class="btn" href="{:U('add')}">新 增</a>
+    <button class="btn submit-btn ajax-post" id="setMenu" type="submit">重新生成</button>
+    <span class="help-inline menumsg"></span>
 		</div>
 		<div class="category">
 			<div class="hd cf">
@@ -19,10 +19,14 @@
 			</div>
 			
 			{:R('WechatMenu/tree', array($tree))}
-			<span style="line-height: 40px;margin: 0 10px;">添加一级菜单</span><a class="button" title="添加一级菜单" href="{:U('add?pid=0')}"><i class="icon-add"></i> </a>
+			<span style="line-height: 40px;margin: 0 10px;">添加一级菜单</span><a title="添加一级菜单" href="{:U('add?pid=0')}"><i class="icon-add"></i> </a>
 		</div>
 	</div>
 	<!-- /表格列表 -->
+	
+	<div style="margin: 5px;padding: 5px;background-color: #FF6600;color: #F3F3F3;border:#F4BF75 solid 1px;">注意：本页面仅可实时编辑排序及菜单名称，详细的菜单配置请点击菜单后面的<span style="background-color:#F2777A;color:#FFFFFF;margin:2px;padding:2px; border-radius: 2px;">编辑</span>链接进入编辑页面。</div>
+
+
 </block>
 
 <block name="script">
@@ -43,7 +47,7 @@
 					}
 				});
 
-			/* 二级级菜单删除新增按钮 */
+			/* 二级菜单删除新增按钮 */
 			$(".category dd .add-sub-cate").remove();
 
 			/* 实时更新菜单信息 */
@@ -62,7 +66,7 @@
 								msg.fadeOut(function(){
 									msg.text("").removeClass(name);
 								});
-							}, 1000);
+							}, 2000);
 						},
 						"json"
 					);
@@ -77,6 +81,26 @@
                         $(this).closest("form").submit();
                     }
                 });
+                
+		/*重新生成菜单*/
+		$('#setMenu').click(function(){
+			var setMenuUrl = '{:U("setMenu","","")}';
+			$.post(
+				setMenuUrl,
+				'',
+				function(menuMsg){
+					/* 菜单生成后提示信息 */
+					var name = menuMsg.status ? "success" : "error", msg;
+					msg = $(".menumsg").addClass(name).text(menuMsg.info)
+							  .css("display", "inline-block");
+					setTimeout(function(){
+						msg.fadeOut(function(){
+							msg.text("").removeClass(name);
+						});
+					}, 2000);
+				},
+			'json');
+		});
 		})(jQuery);
 	</script>
 </block>
