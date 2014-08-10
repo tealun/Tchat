@@ -79,12 +79,5 @@ $(function(){
       minView:2,
       autoclose:true
     });
-    
-	//获取二维码TICKET
-    $('#getticket').click(function(){
-      $.post(ticketPostUrl,'',function(ticket){
-			$('input[name=ticket]').val(ticket.ticket);
-           },'json');
-        });
-});
+   
 </script>
