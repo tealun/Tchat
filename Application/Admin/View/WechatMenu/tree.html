@@ -1,7 +1,7 @@
 <volist name="tree" id="list">
 	<dl class="cate-item">
 		<dt class="cf">
-				<form action="{:U('edit')}" method="post">
+				<form action="{:U('update')}" method="post">
 					<div class="btn-toolbar opt-btn cf">
 						<a title="编辑" href="{:U('edit?id='.$list['id'].'&pid='.$list['pid'])}"><span style="background-color:#F2777A;color:#FFFFFF;margin:2px;padding:2px; border-radius: 2px;">编辑</span></a>
 						<a title="{$list.status|show_status_op}" href="{:U('setStatus?ids='.$list['id'].'&status='.abs(1-$list['status']))}" class="ajax-get">{$list.status|show_status_op}</a>
