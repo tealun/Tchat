@@ -15,7 +15,7 @@ class EventEvent {
 
 		switch ($event) {
 			//如果是关注事件，拉取客户资料进行存储
-			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题 及解决方法
+			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题及解决方法
 			case 'subscribe' :
 				//实例化客户模型
 				$Client = D('Tchat_client');
@@ -51,8 +51,10 @@ class EventEvent {
 				$Client -> subscribe = "0";
 				//更改关注状态
 				$Client -> save($data);
+
 			case 'SCAN' :
 				$this -> qrcodePlusOne($ticket);
+
 			case 'CLICK' :
 				$rs = M('Tchat_menu') -> where(array('key' => $evnetKey)) -> find();
 				switch ($rs['action_type']) {
@@ -61,41 +63,28 @@ class EventEvent {
 						$keyword = $rs['action'];
 						return $reply = $TextRe -> textHandle($openId, $keyword);
 						break;
-					
+
 					//当自定义菜单点击的回复类型为分类时
-					case 'category':
-						$re = array(
-							'reply_type' => 'news',
-							'reply_id' => $rs['action'],
-						);
-						
+					case 'category' :
+						$re = array('reply_type' => 'news', 'reply_id' => $rs['action'], );
+
 						//直接回复图文列表
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
-						
-					case 'document':
-						$re = array(
-							'reply_type' => 'document',
-							'reply_id' => $rs['action'],
-						);
-						
+                   //当自定义菜单点击的回复类型为文档列表时
+					case 'document' :
+						$re = array('reply_type' => 'document', 'reply_id' => $rs['action'], );
+
 						//直接回复图文列表
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
-						
-					default :
-						return $reply = get_text_arr('功能尚在完善，请稍后尝试');
-						break;
+
 				}
-				exit ;
 		}
 
-		$id = M('Tchat_events') -> where('`event_type` = "' . $event . '"') -> getField('id');
-		$map['segment'] = 'events';
-		$map['segment_id'] = $id;
-		$rs = M('Tchat_keyword_group') -> where($map) -> find();
-
-		return $reply = A('Reply', 'Event') -> wechatReply($rs);
+		//根据EVENT值找到EVENT表中相应的回复类型
+		$re = M('Tchat_events') -> where('`event_type` = "' . $event . '"') ->find();
+		return $reply = A('Reply', 'Event') -> wechatReply($re);
 	}
 
 	/**
