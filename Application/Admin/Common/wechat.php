@@ -264,3 +264,20 @@ function vpost($url, $data) { // 模拟提交数据函数
     curl_close ( $curl ); // 关键CURL会话
     return $tmpInfo; // 返回数据
 }
+
+/**
+ * 用于解决系统因为json_encode()方法转换中文为UNICODE编码的问题
+ * 将Unicode编码的汉字转换回去
+ * 
+ * @param $str string 传入的解码前JSON数据格式字符串
+ * @author 贵贵的博客  http://blog.linuxphp.org/archives/1498/
+ */
+function decodeUnicode($str)
+{
+    return preg_replace_callback('/\\\\u([0-9a-f]{4})/i',
+        create_function(
+            '$matches',
+            'return mb_convert_encoding(pack("H*", $matches[1]), "UTF-8", "UCS-2BE");'
+        ),
+        $str);
+}
