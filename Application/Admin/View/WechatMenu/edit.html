@@ -1,0 +1,32 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<include file="Public/create" />
+</block>
+
+<!-- 加载底部JS -->
+<block name="script">
+	<script type="text/javascript">
+	
+  <if condition="isset($data)" >
+  var str = '{$data}';
+  
+  var obj = $.parseJSON(str);
+  
+  $(function(){
+  	
+  $('input[name=pid]').val(obj.pid);
+    $('input[name=name]').val(obj.name);
+      $('input[name=type]').val(obj.type);
+        $('input[name=sort]').val(obj.sort);
+          $('input[name=key]').val(obj.key);
+            $('input[name=action_type]').val(obj.action_type);
+              $('input[name=action]').val(obj.action);
+                $('input[name=status]').val(obj.status);
+                $('input[name=url]').val(obj.url);
+  });
+  
+  </if>
+	
+	</script>
+</block>
