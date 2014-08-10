@@ -40,6 +40,7 @@
 													</button>
 													<script type="text/javascript">
 														var ticketPostUrl = '{:U("getTicket","","")}';
+														
 													</script>
 												</if>
 											</case>
@@ -80,5 +81,16 @@
 
 <!-- 加载底部JS -->
 <block name="script">
-	<include file="Public/footjs" />
+
+	<script type="text/javascript">
+	$(function(){
+		//获取二维码TICKET
+	    $('#getticket').click(function(){
+	      $.post(ticketPostUrl,'',function(ticket){
+				$('input[name=ticket]').val(ticket.ticket);
+	           },'json');
+	        });
+	});
+
+</script>
 </block>
