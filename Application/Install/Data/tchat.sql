@@ -539,13 +539,16 @@ CREATE TABLE `onethink_tchat_events` (
 	`id` int(2) unsigned NOT NULL AUTO_INCREMENT COMMENT '事件ID',
 	`event_name` varchar(100) NOT NULL COMMENT '事件名称,用于中文注释识别',
 	`event_type` varchar(50) NOT NULL COMMENT '对应微信事件类型',
+	`reply_type` varchar(20) NOT NULL DEFAULT'text' COMMENT '回应类型',
+	`reply_id` varchar(250) NOT NULL DEFAULT '2' COMMENT '回复类型的自定义文章ID，文本及新闻分类只需要一个值',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '事件判断回复表';
 
 -- -----------------------------
 -- Records of `onethink_tchat_events`
 -- -----------------------------
-INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe');
+INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2');
+INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','text','2');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_keyword`
