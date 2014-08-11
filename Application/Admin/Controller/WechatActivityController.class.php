@@ -114,22 +114,21 @@ class WechatActivityController extends WechatController {
         if(empty($id)){
             $this->error('参数不能为空！');
         }
-    
-        $info['model_id']= '5';
       
       /*获取一条记录的详细数据*/
-        $KeywordGroup =D('Tchat_activity');
-        $data = $KeywordGroup->detail($id);
+        $Activity =D('Tchat_activity');
+        $data = $Activity->detail($id);
         if(!$data){
-            $this->error($KeywordGroup->getError());
+            $this->error( $Activity->getError());
         }
-        $this->assign('data',$data);
-      
-        //获取关键词分组模型
+        //读取该条目模型ID
+        $info['model_id']= $data['model_id'];
+        //获取所属模型属性列表
         $model = M('Model')->where(array('id'=>$info['model_id']))->find();
     
             //获取表单字段排序
         $fields = get_model_attribute($model['id']);
+		$this->assign('data',$data);
         $this->assign('info',$info);
         $this->assign('fields',     $fields);
         $this->assign('model', $model);
@@ -213,6 +212,7 @@ class WechatActivityController extends WechatController {
     public function batchOperate(){
     
     }
+	
     /**
      * 获取数据列表
      * 

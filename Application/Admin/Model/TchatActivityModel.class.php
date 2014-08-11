@@ -28,7 +28,6 @@ class TchatActivityModel extends Model{
     protected $_auto = array(
         array('uid', 'is_login', self::MODEL_INSERT, 'function'),
         array('name', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
-        array('check_info','renewPatternArr', self::MODEL_BOTH, 'callback'),
         array('start_time', 'getStartTime', self::MODEL_BOTH, 'callback'),
         array('deadline', 'getDeadTime', self::MODEL_BOTH, 'callback'),
         array('create_time', 'getCreateTime', self::MODEL_INSERT,'callback'),
@@ -131,10 +130,6 @@ class TchatActivityModel extends Model{
         //内容添加或更新完成
         return $data;
     }
-	
-	protected function renewPatternArr(){
-		A('Pattern','Wechat/Logic')->renewPatternArr();
-	}
 	
     /**
      * 获取数据状态

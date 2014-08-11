@@ -53,8 +53,8 @@ class PatternLogic{
    * 注意：在设计添加有需要进行验证的模型时,模型统一使用字段"check_info"并在自动完成配置中配置运行一次本公共方法,以便实时更新
    */
   public function renewPatternArr(){
-    //加载现有板块
-    $segs = M('Tchat_segment')->field('name')->select();
+    //加载现有安装的板块
+    $segs = M('Tchat_segment')->where(array('status'=>1))->field('name')->select();
     $i = 0;
       foreach ($segs as $seg){
         //查找各板块需要匹配前置关键词+验证匹配的条目
@@ -76,11 +76,8 @@ class PatternLogic{
           unset($rs);
         }
       }
-    //如果存在$parrerArr
-   	IF($patternArr)S(patternArr,$patternArr?$patternArr:'',600);
-   	return S(patternArr);
-   	unset($i,$map,$field,$segs,$seg,$patternArr);
-  }
+	 S(patternArr,$patternArr,600); //存进缓存，实效1小时
+ }
 
   /**
    * 对有需要验证提取客户信息的板块进行信息提取
@@ -88,8 +85,15 @@ class PatternLogic{
    * @param $keyword 客户发送的信息
    */
   public function findPreg($openId,$keyword){
+  	
   $pregs = $this->pregs;
-    $patternArr = S(patternArr)?S(patternArr):$this->renewPatternArr();
+  
+	if (is_null(S(patternArr))) {
+		$this->renewPatternArr();
+	}
+
+	 $patternArr = S(patternArr);
+	 
     if(empty($patternArr)){
       //没有需要的验证项，则回复FALSE
       return FALSE;

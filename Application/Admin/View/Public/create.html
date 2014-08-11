@@ -1,16 +1,14 @@
 	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
 	<div class="main-title cf">
-		<h2> 新增 [{:get_model_by_id($info['model_id'])}] </h2>
+		<h2> 编辑 [{:get_model_by_id($info['model_id'])}] </h2>
 	</div>
-	<!-- 标签页导航 -->
-	<div class="tab-wrap">
-		<ul class="tab-nav nav">
-			<volist name=":parse_config_attr($model['field_group'])" id="group">
-				<li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>>
-					<a href="javascript:void(0);">{$group}</a>
-				</li>
-			</volist>
-		</ul>
+  <!-- 标签页导航 -->
+<div class="tab-wrap">
+  <ul class="tab-nav nav">
+    <volist name=":parse_config_attr($model['field_group'])" id="group">
+      <li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
+    </volist>
+  </ul>
   <div class="tab-content">
   <!-- 表单 -->
   <form id="form" action="{:U('update','','')}" method="post" class="form-horizontal">
