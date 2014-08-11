@@ -67,17 +67,17 @@ INSERT INTO `onethink_attribute` VALUES ('204', 'create_time', '创建时间', '
 
 -- Attribute of menu model
 INSERT INTO `onethink_attribute` VALUES ('210', 'sort', '排序', 'tinyint(2) NOT NULL ', 'string', '0', '菜单的排列顺序，同一级别下有效', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('211', 'type', '菜单类型', 'varchar(20) NOT NULL ', 'select', 'click', '设置本菜单的类型，是作为一级菜单还是获取回复信息又或者是跳转到网页', '1', 'click:获取回复\r\nbutton:一级菜单\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('211', 'menu_type', '菜单类型', 'varchar(20) NOT NULL ', 'select', 'click', '设置本菜单的类型，是作为一级菜单还是获取回复信息又或者是跳转到网页', '1', 'click:获取回复\r\nbutton:一级菜单\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('212', 'name', '显示名称', 'varchar(50) NOT NULL ', 'string', '', '菜单上显示的名称', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('213', 'key', '系统识别码', 'varchar(50) NOT NULL ', 'string', '', '用于识别菜单的指令代码，可以自己随便写,注意不要用中文', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('213', 'event_key', '系统识别码', 'varchar(50) NOT NULL ', 'string', '', '用于识别菜单的指令代码，可以自己随便写,注意不要用中文', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('214', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组、功能、分类号、文章号', '1', 'keyword:触发关键词\r\nsegement:触发功能\r\ncategory:选择分类\r\ndocument:选择文章', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('215', 'action', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个）”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('215', 'action_code', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个）”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('216', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('217', 'pid', '上级菜单', 'int(10) unsigned NOT NULL ', 'string', '0', '请选择上级菜单', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('218', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('219', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('220', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('221', 'url', '跳转链接', 'varchar(250) NOT NULL ', 'string', '0', '请填写点击后跳转到的网址，注意一定要带上“http://”或“https://”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('221', 'url', '跳转链接', 'varchar(250) NOT NULL ', 'string', '0', '请填写点击后跳转到的网址，注意一定要带上"htt://"或者"https://"', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 -- -----------------------------
 -- Records of  `onethink_model`
 -- -----------------------------
@@ -197,9 +197,9 @@ INSERT INTO `onethink_auth_rule` VALUES ('341', 'admin', '1', 'Admin/WechatMenu/
 INSERT INTO `onethink_auth_rule` VALUES ('342', 'admin', '1', 'Admin/WechatMenu/add','新增菜单', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('343', 'admin', '1', 'Admin/WechatMenu/edit','编辑菜单', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/WechatMenu/setStatus','改变状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/WechatAlbum/index','相册列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/WechatAlbum/create','新增', '1', '');
@@ -336,9 +336,9 @@ INSERT INTO `onethink_menu` VALUES ('393', '改变状态', '391', '0', 'Admin/We
 
 INSERT INTO `onethink_menu` VALUES ('394', '新增菜单', '300', '0', 'Admin/WechatMenu/add', '0', '', '自定义菜单', '0');
 
-INSERT INTO `onethink_menu` VALUES ('395', '菜单回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
-INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
+-- INSERT INTO `onethink_menu` VALUES ('395', '菜单回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
+-- INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
+-- INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('401', '相册列表', '300', '0', 'Admin/WechatAlbum/index', '0', '', '相册管理', '0');
 INSERT INTO `onethink_menu` VALUES ('402', '新增', '401', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
@@ -667,7 +667,7 @@ CREATE TABLE `onethink_tchat_message` (
   `create_time` int(10) unsigned NOT NULL COMMENT '时间',
   `is_reply` tinyint(1) NOT NULL default '0' COMMENT '是否回复',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微信消息数据表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微信消息数据表';
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_menu`
@@ -675,20 +675,20 @@ CREATE TABLE `onethink_tchat_message` (
 DROP TABLE IF EXISTS `onethink_tchat_menu`;
 CREATE TABLE `onethink_tchat_menu` (
   `id` int(10) unsigned NOT NULL auto_increment COMMENT '编号',
-  `type` varchar(20) NOT NULL DEFAULT '' COMMENT '菜单类型',
+  `menu_type` varchar(20) NOT NULL DEFAULT '' COMMENT '菜单类型',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '显示名称',
-  `key` varchar(50) NOT NULL DEFAULT '' COMMENT '系统识别码',
+  `event_key` varchar(50) NOT NULL DEFAULT '' COMMENT '系统识别码',
   `sort` tinyint(2) NOT NULL default '0' COMMENT '排序',
   `url` varchar(250) NOT NULL DEFAULT '' COMMENT '跳转地址',
   `action_type` varchar(20) NOT NULL default '' COMMENT '触发类型',
-  `action` varchar(100) NOT NULL DEFAULT '' COMMENT '动作指令“关键词、功能、分类号、文章号”',
+  `action_code` varchar(100) NOT NULL DEFAULT '' COMMENT '动作指令“关键词、功能、分类号、文章号”',
   `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级菜单ID',
   `status` tinyint(2) NOT NULL default '1' COMMENT '状态',
   `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
   `create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微信菜单数据表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='微信菜单数据表';
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_music`

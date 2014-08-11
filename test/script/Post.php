@@ -31,6 +31,12 @@ class wxtool{
 			}elseif($data == 0){
 				$arr[0] = 'unsubscribe';
 				$arr[1]	=	'';
+			}elseif($data == 2){
+				$arr[0] = 'SCAN';
+				$arr[1]	=	'';
+			}elseif($data == 3){
+				$arr[0] = 'CLICK';
+				$arr[1]	=	'';
 			}else{
 				echo "Error Data!";
 				exit;

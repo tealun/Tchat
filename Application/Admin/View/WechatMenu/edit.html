@@ -1,32 +1,32 @@
 <extend name="Public/base"/>
 
 <block name="body">
-<include file="Public/create" />
+	<include file="Public/create" />
 </block>
 
-<!-- 加载底部JS -->
-<block name="script">
-	<script type="text/javascript">
-	
-  <if condition="isset($data)" >
-  var str = '{$data}';
-  
-  var obj = $.parseJSON(str);
-  
-  $(function(){
-  	
-  $('input[name=pid]').val(obj.pid);
-    $('input[name=name]').val(obj.name);
-      $('input[name=type]').val(obj.type);
-        $('input[name=sort]').val(obj.sort);
-          $('input[name=key]').val(obj.key);
-            $('input[name=action_type]').val(obj.action_type);
-              $('input[name=action]').val(obj.action);
-                $('input[name=status]').val(obj.status);
-                $('input[name=url]').val(obj.url);
-  });
-  
-  </if>
-	
-	</script>
-</block>
+	<block name="script">
+		
+		
+<include file="Public/footjs" />
+<if condition="isset($data)" >
+	<!-- 如果获取到指定ID的条目数据的话，就加载JS代码将数据写入到表单中 -->
+		<script type="text/javascript">
+			var str = '{$data}';
+
+			var obj = $.parseJSON(str);
+
+			$(function() {
+				$('input[name=pid]').val(obj.pid);//上级菜单id
+				$('input[name=name]').val(obj.name);//菜单名称
+				$('input[name=menu_type]').val(obj.menu_type);//菜单类型
+				$('input[name=sort]').val(obj.sort);//排序
+				$('input[name=event_key]').val(obj.event_key);//系统识别码
+				$('input[name=action_type]').val(obj.action_type);//触发类型
+				$('input[name=action_code]').val(obj.action_code);//执行指令
+				$('input[name=status]').val(obj.status);//状态
+				$('input[name=url]').val(obj.url);//转接地址
+			});
+
+		</script>
+</if>
+	</block>

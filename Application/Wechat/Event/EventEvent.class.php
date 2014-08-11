@@ -8,15 +8,16 @@ class EventEvent {
 	 *
 	 * @param $openId
 	 * @param $event
-	 * @param $evnetKey
+	 * @param $eventKey
 	 * @param $ticket
 	 */
-	public function eventHandle($openId, $event, $evnetKey = '', $ticket = '') {
+	public function eventHandle($openId, $event, $eventKey = '', $ticket = '') {
 
 		switch ($event) {
 			//如果是关注事件，拉取客户资料进行存储
 			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题及解决方法
 			case 'subscribe' :
+
 				//实例化客户模型
 				$Client = D('Tchat_client');
 				if (check_wechat_rz() === TRUE) {
@@ -33,7 +34,7 @@ class EventEvent {
 					}
 
 					//获取客户信息
-					$data['event_key'] = $evnetKey;
+					$data['event_key'] = $eventKey;
 
 				} else {//公众号未认证且未存储过客户信息的情况下只存储openid
 					$data['openid'] = $openId;
@@ -43,7 +44,7 @@ class EventEvent {
 				$data['subscribe_time'] = time();
 
 				$Client -> update($data);
-
+				break;
 			//取消关注事件
 			case 'unsubscribe' :
 				$Client = M('Tchat_client');
@@ -51,42 +52,47 @@ class EventEvent {
 				$Client -> subscribe = "0";
 				//更改关注状态
 				$Client -> save($data);
-
+				break;
 			case 'SCAN' :
 				$this -> qrcodePlusOne($ticket);
-
+				break;
 			case 'CLICK' :
-				$rs = M('Tchat_menu') -> where(array('key' => $evnetKey)) -> find();
+				
+				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
+
 				switch ($rs['action_type']) {
 					case 'keyword' :
 						$TextRe = A('Text', 'Event');
-						$keyword = $rs['action'];
+						$keyword = $rs['action_code'];
 						return $reply = $TextRe -> textHandle($openId, $keyword);
+
 						break;
 
 					//当自定义菜单点击的回复类型为分类时
 					case 'category' :
-						$re = array('reply_type' => 'news', 'reply_id' => $rs['action'], );
+						$re = array('reply_type' => 'news', 'reply_id' => $rs['action_code'], );
 
 						//直接回复图文列表
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
                    //当自定义菜单点击的回复类型为文档列表时
 					case 'document' :
-						$re = array('reply_type' => 'document', 'reply_id' => $rs['action'], );
+						$re = array('reply_type' => 'document', 'reply_id' => $rs['action_code'], );
 
 						//直接回复图文列表
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
 
 				}
+			break;
 		}
 
 		//根据EVENT值找到EVENT表中相应的回复类型
-		$re = M('Tchat_events') -> where('`event_type` = "' . $event . '"') ->find();
+		$re = M('Tchat_events') -> where(array('event_type'=>$event)) ->find();
 		return $reply = A('Reply', 'Event') -> wechatReply($re);
-	}
 
+ 	}
+ 
 	/**
 	 * 扫描带参数的二维码事件
 	 * @param $ticket 二维码TICKET

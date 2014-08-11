@@ -1,96 +1,31 @@
 <extend name="Public/base"/>
 
 <block name="body">
-	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
-	<div class="main-title cf">
-		<h2> 新增 [{:get_model_by_id($info['model_id'])}] </h2>
-	</div>
-	<!-- 标签页导航 -->
-	<div class="tab-wrap">
-		<ul class="tab-nav nav">
-			<volist name=":parse_config_attr($model['field_group'])" id="group">
-				<li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>>
-					<a href="javascript:void(0);">{$group}</a>
-				</li>
-			</volist>
-		</ul>
-		<div class="tab-content">
-			<!-- 表单 -->
-			<form id="form" action="{:U('update')}" method="post" class="form-horizontal">
-				<!-- 二维码模型 -->
-				<volist name=":parse_config_attr($model['field_group'])" id="group">
-					<div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
-						<volist name="fields[$key]" id="field">
-							<if condition="$field['is_show'] == 1 || $field['is_show'] == 2">
-								<div class="form-item cf">
-									<label class="item-label">{$field['title']}<span class="check-tips">
-											<notempty name="field['remark']">
-												（{$field['remark']}）
-											</notempty></span></label>
-									<div class="controls">
-										<switch name="field.type">
-											<case value="num">
-												<input type="text" class="text input-medium" name="{$field.name}" value="{$field.value}">
-											</case>
-											<case value="string">
-												<input type="text" class="text input-large" name="{$field.name}" value="{$field.value}">
-												<if condition="$field['name'] == ticket">
-													<button class="btn ajax-post" id="getticket" type="submit" >
-														获取TICKET
-													</button>
-													<script type="text/javascript">
-														var ticketPostUrl = '{:U("getTicket","","")}';
-														
-													</script>
-												</if>
-											</case>
-											<default/>
-											<input type="text" class="text input-large" name="{$field.name}" value="{$field.value}">
-										</switch>
-									</div>
-								</div>
-							</if>
-						</volist>
-						
-						<input type="hidden" name="id" value="{$data.id|default=''}"/>
-						
-						<!-- 检测到如果是GET方式提交了ID的话，将该ID对应内容填入到相应表单域 -->
-						<if condition="isset($data)" >
-							<script  type="text/javascript">
-								$(function(){
-									$('input[name=ticket]').val("{$data.ticket}");
-									$('input[name=scene]').val("{$data.scene}");
-								})
-							</script>
-						</if>
-						
-					</div>
-				</volist>
-
-				<div class="form-item cf">
-					<button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">
-						确 定
-					</button>
-					<a class="btn btn-return" href="{:U('WechatQrcode/index')}">返 回</a>
-
-				</div>
-			</form>
-		</div>
-	</div>
+	<include file="Public/create" />
 </block>
 
 <!-- 加载底部JS -->
 <block name="script">
 
 	<script type="text/javascript">
-	$(function(){
-		//获取二维码TICKET
-	    $('#getticket').click(function(){
-	      $.post(ticketPostUrl,'',function(ticket){
-				$('input[name=ticket]').val(ticket.ticket);
-	           },'json');
-	        });
-	});
 
-</script>
+		$(function(){
+		//在ticket输入框后添加获取TICKET按钮
+		$('input[name=ticket]').after(
+			'<button class="btn ajax-post" id="getticket" type="submit" >获取TICKET</button>'
+		);	
+						
+		//获取二维码TICKET
+		var ticketPostUrl = '{:U("getTicket","","")}';
+		
+		$('#getticket').click(function(){
+		$.post(ticketPostUrl,
+		'',
+		function(ticket){
+		$('input[name=ticket]').val(ticket.ticket);
+		},
+		'json');
+		});
+		});
+	</script>
 </block>
