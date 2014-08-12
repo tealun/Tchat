@@ -41,10 +41,11 @@ class WechatQrcodeController extends WechatController {
 			$data = M('Tchat_qrcode') -> find($_GET['id']);
 			$this -> assign('data',$data);
 			$this -> meta_title = '编辑二维码';
+			$this -> display(edit);
 		} else {
 			$this -> meta_title = '新增二维码';
+			$this -> display();
 		}
-		$this -> display();
 	}
 
 	/**
