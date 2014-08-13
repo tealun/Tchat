@@ -60,7 +60,7 @@ class PatternLogic{
         //查找各板块需要匹配前置关键词+验证匹配的条目
         $map = array(
           'startup'=>array('lt',time()),
-          'deadline'=>array('gt',time()),
+          'deadline'=>array('not between',array(1,time())),
           'status'=>array('eq','1'),
           'check_info'=>array('gt','0')
         );
@@ -168,7 +168,7 @@ class PatternLogic{
           if ($tips){
           	  $preg = $this->getPreg($num);
           	  $pattern['rule']= "/^".$preg['rule']."/";
-          	  $content = "您的".$tips."输入有误，请重新回复您的".$tips.",取消请回复'qx'\n（2分钟内有效）";
+          	  $content = "请回复您的".$tips.",取消请回复'qx'\n（2分钟内有效）";
                   //缓存需要检测项目
                   S($openId,array(
                       'action'=>array(

@@ -14,9 +14,9 @@ class WechatController extends Controller {
   /*
    * 定义所需变量 
    * $token 公众帐号接口TOKEN设置
-   * $textTpl $newsTpl $musicTpl 文字、图文、音乐回复模板
+   * $data 与微信后台进行交换数据的数组
    */
-  private $token = "Tchat";
+  private $token = '';
   private $data = array();
 
   /*
@@ -25,11 +25,22 @@ class WechatController extends Controller {
   //微信后台RUL设置CONTROLLER方法，检测是否是验证，非验证则进行消息回应
   public function index(){
     if(IS_GET){
+     //如果是接入认证的话，就读取系统配置的TOKEN，然后转入认证流程
+      $this-> token = get_ot_config('WECHAT_TOKEN');
       $this->valid();
     }else {
+      //如果不是接入验证，则进入正常的客户消息响应流程
       $this->responseMsg();
     }
   }
+
+/**
+ * 本方法用于测试本版块内的功能所用
+ */
+public function test(){
+
+	
+}
 
   /**
    * 响应用户消息

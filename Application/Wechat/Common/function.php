@@ -174,6 +174,9 @@ function save_access_token(){
   return $accessToken = S('accessToken');
 }
 
+/**
+ * 检查账号认证状态
+ */
 function check_wechat_rz(){
   $value = get_ot_config('WECHAT_ACCOUNT_RZ');
 	  if($value === '2'){
@@ -183,6 +186,9 @@ function check_wechat_rz(){
   }
 }
 
+/**
+ * 检查账号类型
+ */
 function check_wechat_type(){
   $value = get_ot_config('WECHAT_ACCOUNT_TYPE');
   return $value === '1'?TRUE:FALSE;
