@@ -171,6 +171,7 @@ public function test(){
   /**
    * 回复的图文信息写入变量data
    * @param  string $news 要回复的图文内容
+   * TODO 对于多于10条记录的，进行缓存分页，并设定查看下一页的回复关键字，可参考青龙老贼的教程
    */
   private function news($news){
     $i=0;
