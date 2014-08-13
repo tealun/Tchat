@@ -121,7 +121,9 @@ class WechatActivityController extends WechatController {
         if(!$data){
             $this->error( $Activity->getError());
         }
-        //读取该条目模型ID
+        //读取该条目id及pid、模型ID
+        $info['id'] = $data['id'];
+        $info['pid'] = $data['pid'];
         $info['model_id']= $data['model_id'];
         //获取所属模型属性列表
         $model = M('Model')->where(array('id'=>$info['model_id']))->find();
