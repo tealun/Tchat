@@ -247,7 +247,7 @@ UPDATE `onethink_config` SET `value` = '1:基本\r\n2:内容\r\n3:用户\r\n4:�
 INSERT INTO `onethink_config` VALUES ('40', 'WECHAT_GHID', '1', '微信原始ID', '5', '', '公众帐号原始ID', '1378898976', '1379235841', '1', '', '5');
 INSERT INTO `onethink_config` VALUES ('41', 'WECHAT_NAME', '1', '微信号', '5', '', '公众帐号官方账号', '1378898976', '1379235841', '1', '', '5');
 INSERT INTO `onethink_config` VALUES ('42', 'WECHAT_NICKNAME', '1', '微信昵称', '5', '', '公众帐号昵称', '1378898976', '1379235841', '1', '', '5');
-INSERT INTO `onethink_config` VALUES ('43', 'WECHAT_TOKEN', '1', '微信TOKEN', '5', '', '公众帐号的接入本地验证码,可自行设定', '1378898976', '1379235841', '1', 'Tchat', '5');
+INSERT INTO `onethink_config` VALUES ('43', 'WECHAT_TOKEN', '1', '微信TOKEN', '5', '', '公众帐号的接入本地验证码,可自行设定，请确保微信后台开发者模式TOKEN填写与此保持一致', '1378898976', '1379235841', '1', 'Tchat', '5');
 INSERT INTO `onethink_config` VALUES ('44', 'WECHAT_APP_ID', '1', 'APPID', '5', '', '公众帐号的APPID', '1378898976', '1379235841', '1', '', '6');
 INSERT INTO `onethink_config` VALUES ('45', 'WECHAT_APP_SECRET', '1', 'APP_SECRET', '5', '', '公众帐号的APPSECRET', '1378898976', '1379235841', '1', '', '7');
 INSERT INTO `onethink_config` VALUES ('46', 'WECHAT_ACCOUNT_TYPE', '4', '账号类型', '5', '0:订阅号\r\n1:服务号', '公众帐号类型', '1378898976', '1379235841', '1', '0', '7');
