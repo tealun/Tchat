@@ -28,6 +28,7 @@ class TchatActivityModel extends Model{
     protected $_auto = array(
         array('uid', 'is_login', self::MODEL_INSERT, 'function'),
         array('name', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
+        array('check_info','sumChecked',self::MODEL_BOTH,'callback'),
         array('start_time', 'getStartTime', self::MODEL_BOTH, 'callback'),
         array('deadline', 'getDeadTime', self::MODEL_BOTH, 'callback'),
         array('create_time', 'getCreateTime', self::MODEL_INSERT,'callback'),
@@ -193,6 +194,20 @@ class TchatActivityModel extends Model{
         $dead_time    =   I('post.deadline');
         return $dead_time?strtotime($dead_time):'0';
     }
+
+	protected function sumChecked(){
+		$checkInfo = I('post.check_info');
+		if (empty($checkInfo)) {
+			return '0';
+		} else {
+			$sum = '0';
+			foreach ($checkInfo as $value) {
+				$sum =$sum+$value; 
+			}
+			return $sum;
+		}
+		
+	}
 
     /**
      * 设置where查询条件
