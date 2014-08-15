@@ -57,8 +57,8 @@ class WechatQrcodeController extends WechatController {
 		if(!$res){
               $this->error(D('Tchat_qrcode')->getError());
           }else{
-		      //TODO 待解决不能成功跳转
-              $this->success($res['id']?'更新成功':'新增成功', U('showQrcode?id='.$res['id']),1);
+		      //新增或更新成功后跳转至相应二维码的查看页面
+              $this->success($res['id']?'更新成功':'新增成功', U('showQrcode',array('id',$res['id'])),1);
           }
 
         }else{
@@ -66,6 +66,14 @@ class WechatQrcodeController extends WechatController {
         }
 	}
 
+    /**
+     * 设置一条或者多条数据的状态
+     * @author huajie <banhuajie@163.com>
+     */
+    public function setStatus($model='Tchat_qrcode'){
+        return parent::setStatus('Tchat_qrcode');
+    }
+	
 	/**
 	 * 获取二维码TICKET
 	 */

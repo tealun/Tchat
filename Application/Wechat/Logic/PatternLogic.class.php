@@ -85,15 +85,15 @@ class PatternLogic{
    * @param $keyword 客户发送的信息
    */
   public function findPreg($openId,$keyword){
-  	
+
   $pregs = $this->pregs;
   
-	if (is_null(S(patternArr))) {
+	if (!(S(patternArr))) {
 		$this->renewPatternArr();
 	}
 
 	 $patternArr = S(patternArr);
-	 
+
     if(empty($patternArr)){
       //没有需要的验证项，则回复FALSE
       return FALSE;
@@ -198,7 +198,7 @@ class PatternLogic{
             	unset($replyConfig,$rs);
             }else{
            		A($pattern['segment'],'Logic');
-         		$reply = get_text_arr('信息已经完整');
+         		$reply = get_text_arr('非常感谢您的参与，所需信息已经完整，稍后我们会联系您，请留意您所留联系方式。');
             }
 
           }

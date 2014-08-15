@@ -350,7 +350,7 @@ INSERT INTO `onethink_menu` VALUES ('421', '二维码列表', '300', '0', 'Admin
 INSERT INTO `onethink_menu` VALUES ('422', '新增二维码', '300', '0', 'Admin/WechatQrcode/create', '0', '', '二维码管理', '0');
 INSERT INTO `onethink_menu` VALUES ('423', '获取TICKET', '422', '0', 'Admin/WechatQrcode/getTicket', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('424', '查看二维码', '421', '0', 'Admin/WechatQrcode/showQrcode', '0', '', '', '0');
-
+INSERT INTO `onethink_menu` VALUES ('425', '改变状态', '421', '0', 'Admin/WechatQrcode/setStatus', '0', '', '', '0');
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity`
 -- -----------------------------

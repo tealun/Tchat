@@ -81,6 +81,8 @@ class TchatQrcodeModel extends Model {
             if(!$id){
                 $this->error = '新增关键词分组出错！';
                 return false;
+            }else{
+            	$data[id] = $id;
             }
         } else { //更新数据
             $status = $this->save(); //更新基础内容

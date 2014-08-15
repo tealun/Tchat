@@ -25,7 +25,7 @@ class TextEvent{
    * @param string $keyword 客户发送的文本信息
    */
   public function textHandle($openId,$keyword){
-    //TODO 对是否属于当前活动进行关键字匹配
+    //对是否需要验证客户信息的项目进行关键字匹配
     if($reply = A('Pattern','Logic')->findPreg($openId,$keyword)){
       return $reply;
       exit;
