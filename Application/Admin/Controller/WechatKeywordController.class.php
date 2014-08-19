@@ -19,7 +19,7 @@ class WechatKeywordController extends WechatController {
   public function index(){
     $map=$this->indexOfKeyword();
     $map['deadline'] = array('not between',array(1,time()));
-	//$map['segment'] = array('like','%costom%');
+	//$map['segment'] = array('in',array('0'));
     $this->getLists($map);
     $this->meta_title = '关键词组列表';
     $this->display(); // 输出模板
