@@ -12,7 +12,6 @@ class EventEvent {
 	 * @param $ticket
 	 */
 	public function eventHandle($openId, $event, $eventKey = '', $ticket = '') {
-
 		switch ($event) {
 			//如果是关注事件，拉取客户资料进行存储
 			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题及解决方法
