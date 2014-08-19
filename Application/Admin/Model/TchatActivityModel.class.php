@@ -58,12 +58,15 @@ class TchatActivityModel extends Model{
         /* 获取关键词列表数据 */
         $info = $this->field(true)->find($id);
         if(!(is_array($info) || 1 !== $info['status'])){
-            $this->error = '文档被禁用或已删除！';
+            $this->error = '活动被禁用或已删除！';
             return false;
         }
 
         /*获取关键词数据*/
-        $info['keyword'] = get_keyword($id);
+        $keyWordGroup = M('Tchat_keyword_group')->getByName($info['title']); 
+        $info['keyword'] = get_keyword($keyWordGroup['id']);
+		$info['reply_type'] = $keyWordGroup['reply_type'];
+		$info['reply_id'] = $keyWordGroup['reply_id'];
         /*TODO 获取模型数据 */
         /*
         $logic  = $this->logic($info['segment_id']);
@@ -84,7 +87,12 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     public function update($data = null){
-		$keywordStr = $data['keyword'];
+		$keywords['keyword'] = $data['keyword'];
+		$keywords['name'] = $data['title'];
+		$keywords['reply_type'] = $data['reply_type'];
+		$keywords['reply_id'] = $data['reply_id'];
+		$keywords['segment'] = $data['model_id'];
+
         /* 获取数据对象 */
         $data = $this->create($data);
         if(empty($data)){
@@ -94,19 +102,25 @@ class TchatActivityModel extends Model{
         /* 添加或新增基础内容 */
         if(empty($data['id'])){ //新增数据
             $id = $this->add(); //添加关键词分组条目
-			D('Tchat_keyword')->update($keywordStr,$id); //添加关键词
             if(!$id){
                 $this->error = '新增活动出错！';
                 return false;
+            }else{
+            	$keywords['segment_id'] = $id;
+				D('Tchat_keyword_group')->update($keywords); //添加关键词组
             }
         } else { //更新数据
+        	$keywords['segment_id'] = $data['id'];
             $status = $this->save(); //更新基础内容
             if(false === $status){
                 $this->error = '更新活动出错！';
                 return false;
             }else{
-            	D('Tchat_keyword')->update($keywordStr,$data['id']);
-            }
+            	//根据活动ID获得对应的关键词组内容
+               	$keywords['id'] = M('Tchat_keyword_group')->where(array('segment'=> $keywords['segment'],'segment_id' => $keywords['segment_id']))->getField('id'); 
+            	//更新关键词组
+            	D('Tchat_keyword_group')->update($keywords);
+			}
         }
 
         /*
