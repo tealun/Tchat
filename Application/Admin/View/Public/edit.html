@@ -48,6 +48,7 @@
                                         <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
                                     </volist>
                                 </select>
+                                <span style="color: #ffffff; background-color: #f89406;padding:0 5px;">请确认选择</span>
                             </case>
                             <case value="radio">
                                 <volist name=":parse_field_attr($field['extra'])" id="vo">
@@ -175,7 +176,6 @@
       <a class="btn btn-return" href="">返 回</a>
       <input type="hidden" name="id" value="{$info.id|default=''}"/>
       <input type="hidden" name="pid" value="{$info.pid|default=''}"/>
-      <input type="hidden" name="model_id" value="{$info.model_id|default=''}"/>
     </div>
   </form>
   </div>
