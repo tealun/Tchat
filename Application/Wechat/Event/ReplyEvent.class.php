@@ -11,17 +11,18 @@ class ReplyEvent {
    */
   public function wechatReply($rs){
     $this->rs = $rs;
-    switch ($this->rs['segment']){
-      //模型为activity时处理流程
-      case 'activity':
+	return $reply=$this->reply();
+/*    switch ($this->rs['segment']){
+      //模型为自定义时处理流程
+      case 0:
         return $reply=$this->reply();
         break;
-      //默认处理流程,针对无特殊业务流程
+      //TODO 默认处理流程,针对殊业务流程有待开发
       default :
         return $reply=$this->reply();
-        break;
+       break;
     }
-
+*/
   }
   
   /**

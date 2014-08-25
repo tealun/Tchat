@@ -18,8 +18,8 @@
 	 */
 function col_to_string(&$data,$map=array(
 										'status'=>array(1=>'正常',-1=>'已删',0=>'禁用'),
-										'reply_type'=>array('text'=>'文本','news'=>'分类','document'=>'文章','music'=>'音乐','special','专属'),
-										'segment'=>array('events'=>'事件','costom'=>'自定义','activity'=>'活动','activity_ticket'=>'优惠券')
+										'reply_type'=>array('text'=>'文本','news'=>'分类','document'=>'文章','music'=>'音乐','special'=>'专属'),
+										'segment'=>array('0'=>'自定义','6'=>'活动','7'=>'折扣','8'=>'优惠券')
 										)) {
 	    if($data === false || $data === null ){
 	        return $data;
