@@ -293,8 +293,15 @@ INSERT INTO `onethink_document_article` VALUES ('8', '0', '<h1>\r\n	这里是公
 -- -----------------------------
 -- Records of `onethink_menu`
 -- -----------------------------
-UPDATE `onethink_menu` SET `title` = '新闻', `tip` = '新闻类型文档管理'  WHERE `id`= '2' limit 1;
-INSERT INTO `onethink_menu` VALUES ('300', '微信', '0', '1', 'Admin/Wechat/index', '0', '微信后台模块管理目录', '', '0');
+UPDATE `onethink_menu` SET `title` = '新闻', `tip` = '新闻类型文档管理',`sort`='3'  WHERE `id`= '2' limit 1;
+UPDATE `onethink_menu` SET `sort`='20'  WHERE `id`= '16' limit 1;
+UPDATE `onethink_menu` SET `sort`='22'  WHERE `id`= '43' limit 1;
+UPDATE `onethink_menu` SET `sort`='21'  WHERE `id`= '68' limit 1;
+UPDATE `onethink_menu` SET `sort`='30'  WHERE `id`= '93' limit 1;
+
+-- 新增微信板块管理目录
+
+INSERT INTO `onethink_menu` VALUES ('300', '微信', '0', '2', 'Admin/Wechat/index', '0', '微信后台模块管理目录', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('321', '关键词列表', '300', '0', 'Admin/WechatKeyword/index', '0', '', '关键词管理', '0');
 INSERT INTO `onethink_menu` VALUES ('322', '新增', '321', '0', 'Admin/WechatKeyword/create', '0', '', '', '0');
@@ -308,25 +315,7 @@ INSERT INTO `onethink_menu` VALUES ('328', '回收站', '300', '0', 'Admin/Wecha
 INSERT INTO `onethink_menu` VALUES ('329', '还原', '328', '0', 'Admin/WechatKeyword/restore', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('330', '彻底删除', '328', '0', 'Admin/WechatKeyword/clear', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('340', '活动', '0', '1', 'Admin/Activity/index', '0', '相册模块管理目录', '', '0');
-
-INSERT INTO `onethink_menu` VALUES ('341', '新增活动', '340', '0', 'Admin/WechatActivity/create', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('342', '活动列表', '340', '0', 'Admin/WechatActivity/index', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('344', '编辑', '342', '0', 'Admin/WechatActivity/edit', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '342', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('346', '保存', '342', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '342', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('348', '导入', '342', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
-
-INSERT INTO `onethink_menu` VALUES ('350', '活动分析', '340', '0', 'Admin/WechatActivity/analytical', '0', '', '活动管理', '0');
-
-INSERT INTO `onethink_menu` VALUES ('351', '活动禁用箱', '340', '0', 'Admin/WechatActivity/disabled', '0', '', '活动管理', '0');
-
-INSERT INTO `onethink_menu` VALUES ('352', '活动草稿箱', '340', '0', 'Admin/WechatActivity/draftBox', '0', '', '活动管理', '0');
-
-INSERT INTO `onethink_menu` VALUES ('353', '活动回收站', '340', '0', 'Admin/WechatActivity/recycle', '0', '', '活动管理', '0');
-INSERT INTO `onethink_menu` VALUES ('354', '还原', '353', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
+-- 原本活动归到微信下的，但出于管理方便，另行开设顶级菜单，占了此处几个ID
 
 INSERT INTO `onethink_menu` VALUES ('361', '客户列表', '300', '0', 'Admin/WechatClient/index', '0', '', '客户管理', '0');
 INSERT INTO `onethink_menu` VALUES ('362', '客户分组', '300', '0', 'Admin/WechatClient/group', '0', '', '客户管理', '0');
@@ -351,23 +340,51 @@ INSERT INTO `onethink_menu` VALUES ('394', '新增菜单', '300', '0', 'Admin/We
 -- INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
 -- INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('401', '相册列表', '300', '0', 'Admin/WechatAlbum/index', '0', '', '相册管理', '0');
-INSERT INTO `onethink_menu` VALUES ('402', '新增', '401', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('403', '编辑', '401', '0', 'Admin/WechatAlbum/edit', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('404', '改变状态', '401', '0', 'Admin/WechatAlbum/setStatus', '0', '', '', '0');
-INSERT INTO `onethink_menu` VALUES ('405', '删除', '401', '0', 'Admin/WechatAlbum/delete', '0', '', '', '0');
-
 INSERT INTO `onethink_menu` VALUES ('421', '二维码列表', '300', '0', 'Admin/WechatQrcode/index', '0', '', '二维码管理', '0');
 INSERT INTO `onethink_menu` VALUES ('422', '新增二维码', '300', '0', 'Admin/WechatQrcode/create', '0', '', '二维码管理', '0');
 INSERT INTO `onethink_menu` VALUES ('423', '获取TICKET', '422', '0', 'Admin/WechatQrcode/getTicket', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('424', '查看二维码', '421', '0', 'Admin/WechatQrcode/showQrcode', '0', '', '', '0');
 INSERT INTO `onethink_menu` VALUES ('425', '改变状态', '421', '0', 'Admin/WechatQrcode/setStatus', '0', '', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('500', '产品', '0', '1', 'Admin/Product/index', '0', '产品后台模块管理目录', '', '0');
+-- 新增活动板块管理目录
 
-INSERT INTO `onethink_menu` VALUES ('600', '相册', '0', '1', 'Admin/Album/index', '0', '相册模块管理目录', '', '0');
+INSERT INTO `onethink_menu` VALUES ('340', '活动', '0', '3', 'Admin/Activity/index', '0', '活动模块管理目录', '', '0');
 
---若有其他板块的目录，可在此添加或在功能板块安装程序中向onethink_menu中添加目录数据，比如针对房地产行业的【地产】板块
+INSERT INTO `onethink_menu` VALUES ('341', '新增活动', '340', '0', 'Admin/WechatActivity/create', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('342', '活动列表', '340', '0', 'Admin/WechatActivity/index', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('344', '编辑', '342', '0', 'Admin/WechatActivity/edit', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('345', '改变状态', '342', '0', 'Admin/WechatActivity/setStatus', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('346', '保存', '342', '0', 'Admin/WechatActivity/update', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('347', '保存草稿', '342', '0', 'Admin/WechatActivity/autoSave', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('348', '导入', '342', '0', 'Admin/WechatActivity/batchOperate', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('350', '活动分析', '340', '0', 'Admin/WechatActivity/analytical', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('351', '活动禁用箱', '340', '0', 'Admin/WechatActivity/disabled', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('352', '活动草稿箱', '340', '0', 'Admin/WechatActivity/draftBox', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('353', '活动回收站', '340', '0', 'Admin/WechatActivity/recycle', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('354', '还原', '353', '0', 'Admin/WechatActivity/restore', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/WechatActivity/clear', '0', '', '', '0');
+
+-- 新增产品板块管理目录
+
+INSERT INTO `onethink_menu` VALUES ('500', '产品', '0', '4', 'Admin/Product/index', '0', '产品后台模块管理目录', '', '0');
+
+-- 新增相册板块管理目录
+
+INSERT INTO `onethink_menu` VALUES ('600', '相册', '0', '5', 'Admin/Album/index', '0', '相册模块管理目录', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('601', '相册列表', '600', '0', 'Admin/WechatAlbum/index', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('602', '编辑', '601', '0', 'Admin/WechatAlbum/edit', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('603', '改变状态', '601', '0', 'Admin/WechatAlbum/setStatus', '0', '', '', '0');
+INSERT INTO `onethink_menu` VALUES ('604', '删除', '601', '0', 'Admin/WechatAlbum/delete', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('605', '新增相册', '600', '0', 'Admin/WechatAlbum/create', '0', '', '', '0');
+
+-- 若有其他板块的目录，可在此添加或在功能板块安装程序中向onethink_menu中添加目录数据，比如针对房地产行业的【地产】板块
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity`
