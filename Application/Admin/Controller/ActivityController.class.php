@@ -13,7 +13,7 @@ namespace Admin\Controller;
  * 微信活动板块控制器
  * 
  */
-class WechatActivityController extends WechatController {
+class ActivityController extends AdminController {
 
 	/**
 	 * 正常活动列表
