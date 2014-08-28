@@ -231,7 +231,7 @@ INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/Activity/cl
 
 INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '2', 'Admin/Product/index', '产品', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/Product/list', '产品列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/Product/myProduct', '产品列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/Product/edit', '编辑', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/Product/setStatus', '更改状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/Product/remove', '删除', '1', '');
@@ -419,7 +419,7 @@ INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/Ac
 -- 新增产品板块管理目录
 
 INSERT INTO `onethink_menu` VALUES ('500', '产品', '0', '4', 'Admin/Product/index', '0', '产品后台模块管理目录', '', '0');
-INSERT INTO `onethink_menu` VALUES ('501', '产品列表', '500', '0', 'Admin/Product/list', '0', '列出所有的产品', '产品管理', '0');
+INSERT INTO `onethink_menu` VALUES ('501', '产品列表', '500', '0', 'Admin/Product/myProduct', '0', '列出我的产品', '产品管理', '0');
 INSERT INTO `onethink_menu` VALUES ('502', '编辑', '501', '1', 'Admin/Product/edit', '0', '编辑一种产品的详细信息', '', '0');
 INSERT INTO `onethink_menu` VALUES ('503', '改变状态', '501', '2', 'Admin/Product/setStatus', '0', '改变一种产品的启用（上架）状态', '', '0');
 INSERT INTO `onethink_menu` VALUES ('504', '删除', '501', '3', 'Admin/Product/remove', '0', '删除一种产品', '', '0');
