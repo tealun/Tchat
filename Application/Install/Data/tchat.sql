@@ -485,13 +485,14 @@ INSERT INTO `onethink_tchat_activity` VALUES ('2','200song50','消费满200送50
 INSERT INTO `onethink_tchat_activity` VALUES ('3','yingchunyouhuiquan','迎春优惠券赠送活动','8','2','我要优惠券','text:4','1392825600','1400515200', '各分店', '','0','4','2', '1393292899', '1393292899');
 INSERT INTO `onethink_tchat_activity` VALUES ('4','chunjieqianggou','2013春节大抢购活动','7','','','','1392825600','1400515200', '各分店', '','0','0','2', '1393292899', '1393292899');
 INSERT INTO `onethink_tchat_activity` VALUES ('5','chunjiehongbao','2013春节抢红包活动','6','3','抢红包','document:3,5','1392825600','1400515200', '各分店', '','0','4','2', '1393292899', '1393292899');
+
 -- -----------------------------
 -- Table structure for `onethink_tchat_activity_discount`
 -- -----------------------------
 DROP TABLE IF EXISTS `onethink_tchat_activity_discount`;
 CREATE TABLE `onethink_tchat_activity_discount` (
 	`id` int(5) unsigned NOT NULL COMMENT '折扣活动ID',
-	`discount` FLOAT('3',2) NOT NULL DEFAULT '0.80' COMMENT '折扣率',
+	`discount` FLOAT(3,2) NOT NULL DEFAULT '0.80' COMMENT '折扣率',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '折扣表';
 
