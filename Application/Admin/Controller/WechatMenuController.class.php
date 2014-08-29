@@ -79,9 +79,7 @@ class WechatMenuController extends WechatController {
 			if (!$data) {
 				$this -> error($TchatMenu -> getError());
 			}
-
-			$data = json_encode($data);
-			$data = decodUnicode($data);
+			//赋值data变量，将作为字段的已有数据值对应设置为字段值
 			$this -> assign('data', $data);
 
 			//获取菜单模型
@@ -101,7 +99,7 @@ class WechatMenuController extends WechatController {
 			if (!($pidInfo && 1 == $pidInfo['status'])) {
 				$this -> error('指定的上级菜单不存在或被禁用！');
 			}
-			//赋值上级菜单信息
+			//赋值上级菜单信息,这个变量要以JSON格式发送到页面的JAVASCRIPT脚本使用
 			$pidInfo = json_encode($pidInfo);
 			$pidInfo = decodeUnicode($pidInfo);
 			$this -> assign('pidInfo', $pidInfo);

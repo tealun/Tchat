@@ -38,14 +38,14 @@
                             <case value="bool">
                                 <select name="{$field.name}">
                                     <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected="selected"</eq>>{$vo}</option>
                                     </volist>
                                 </select>
                             </case>
                             <case value="select">
                                 <select name="{$field.name}">
                                     <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
+                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected="selected"</eq>>{$vo}</option>
                                     </volist>
                                 </select>
                                 <span style="color: #ffffff; background-color: #f89406;padding:0 5px;">请确认选择</span>
