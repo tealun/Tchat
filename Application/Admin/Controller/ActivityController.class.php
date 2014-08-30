@@ -10,14 +10,14 @@
 namespace Admin\Controller;
 
 /**
- * 微信活动板块控制器
+ * 活动板块控制器
  * 
  */
 class ActivityController extends AdminController {
 
 	/**
-	 * 正常活动列表
-	 * @see Application/Admin/Controller/WechatController::index()
+	 * 活动列表
+	 * 
 	 */
 	public function index(){
     $map=$this->indexOfMap();
