@@ -73,7 +73,7 @@ class ProductController extends AdminController {
         $cate_auth  =   AuthGroupModel::getAuthCategories(UID);	//获取当前用户所有的内容权限节点
         $cate_auth  =   $cate_auth == null ? array() : $cate_auth;
         $cate       =   M('Category')->where(array('status'=>1,'model'=>53))->field('id,title,pid,allow_publish')->order('pid,sort')->select();
-
+		print_r($cate);
         //没有权限的分类则不显示
         if(!IS_ROOT){
             foreach ($cate as $key=>$value){
