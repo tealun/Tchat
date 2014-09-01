@@ -286,7 +286,7 @@ INSERT INTO `onethink_auth_rule` VALUES ('801', 'admin', '1', 'Admin/WechatClien
 -- -----------------------------
 -- Records of `onethink_category`
 -- -----------------------------
-INSERT INTO `onethink_category` VALUES ('80', 'product', '分类查看', '0', '0', '10', '', '', '', '', '', '', '', '53', '2,1', '0', '0', '1', '0', '0', '1', '', '1379474947', '1382701539', '1', '0');
+INSERT INTO `onethink_category` VALUES ('80', 'product', '产品分类', '0', '0', '10', '', '', '', '', '', '', '', '53', '2,1', '0', '0', '1', '0', '0', '1', '', '1379474947', '1382701539', '1', '0');
 INSERT INTO `onethink_category` VALUES ('81', 'product_cat1', '产品系列一', '80', '0', '10', '', '', '', '', '', '', '', '53', '2,1,3', '0', '1', '1', '0', '0', '1', '', '1379474947', '1382701539', '1', '0');
 INSERT INTO `onethink_category` VALUES ('82', 'product_cat2', '产品系列二', '80', '0', '10', '', '', '', '', '', '', '', '53', '2,1,3', '0', '1', '1', '0', '0', '1', '', '1379474947', '1382701539', '1', '0');
 INSERT INTO `onethink_category` VALUES ('83', 'product_cat3', '产品系列三', '80', '0', '10', '', '', '', '', '', '', '', '53', '2,1,3', '0', '1', '1', '0', '0', '1', '', '1379474947', '1382701539', '1', '0');
@@ -442,14 +442,17 @@ INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/Ac
 -- 新增产品板块管理目录
 
 INSERT INTO `onethink_menu` VALUES ('500', '产品', '0', '4', 'Admin/Product/myProduct', '0', '产品后台模块管理目录', '', '0');
-INSERT INTO `onethink_menu` VALUES ('501', '产品列表', '500', '0', 'Admin/Product/myProduct', '0', '列出我的产品', '产品汇总', '0');
+INSERT INTO `onethink_menu` VALUES ('501', '产品列表', '500', '0', 'Admin/Product/index?cate_id=80', '0', '列出我的产品', '产品管理', '0');
 INSERT INTO `onethink_menu` VALUES ('502', '编辑', '501', '1', 'Admin/Product/edit', '0', '编辑一种产品的详细信息', '', '0');
 INSERT INTO `onethink_menu` VALUES ('503', '改变状态', '501', '2', 'Admin/Product/setStatus', '0', '改变一种产品的启用（上架）状态', '', '0');
 INSERT INTO `onethink_menu` VALUES ('504', '删除', '501', '3', 'Admin/Product/remove', '0', '删除一种产品', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('520', '新增产品', '500', '0', 'Admin/Product/add', '0', '新增一种产品', '产品管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('521', '管理分类', '500', '0', 'Admin/Product/add', '0', '新增一种产品', '产品管理', '0');
+INSERT INTO `onethink_menu` VALUES ('521', '查看分类', '500', '0', 'Admin/ProductCategory/index', '0', '查看当前的产品分类', '分类管理', '0');
+INSERT INTO `onethink_menu` VALUES ('522', '新增', '521', '0', 'Admin/ProductCategory/add', '0', '新增一个产品分类', '', '0');
+INSERT INTO `onethink_menu` VALUES ('523', '编辑', '521', '0', 'Admin/ProductCategory/edit', '0', '编辑一个产品分类', '', '0');
+INSERT INTO `onethink_menu` VALUES ('524', '编辑', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('540', '套餐列表', '500', '1', 'Admin/Product/plan', '0', '多种产品构成的组合套餐', '套餐管理', '0');
 INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/Product/addPlan', '0', '新增一款套餐', '套餐管理', '0');

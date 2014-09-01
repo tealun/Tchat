@@ -73,7 +73,6 @@ class ProductController extends AdminController {
         $cate_auth  =   AuthGroupModel::getAuthCategories(UID);	//获取当前用户所有的内容权限节点
         $cate_auth  =   $cate_auth == null ? array() : $cate_auth;
         $cate       =   M('Category')->where(array('status'=>1,'model'=>53))->field('id,title,pid,allow_publish')->order('pid,sort')->select();
-		print_r($cate);
         //没有权限的分类则不显示
         if(!IS_ROOT){
             foreach ($cate as $key=>$value){
@@ -366,9 +365,23 @@ class ProductController extends AdminController {
         $cate_id    =   I('get.cate_id',0);
         $model_id   =   I('get.model_id',0);
 
-        empty($cate_id) && $this->error('参数不能为空！');
-        empty($model_id) && $this->error('该分类未绑定模型！');
-
+        if(empty($cate_id)){
+		//获取动态分类
+        $cate_auth  =   AuthGroupModel::getAuthCategories(UID);	//获取当前用户所有的内容权限节点
+        $cate_auth  =   $cate_auth == null ? array() : $cate_auth;
+        $cate       =   M('Category')->where(array('status'=>1,'pid'=>80,'model'=>53))->field('id,title,pid,allow_publish')->order('pid,sort')->select();
+        //没有权限的分类则不显示
+        if(!IS_ROOT){
+            foreach ($cate as $key=>$value){
+                if(!in_array($value['id'], $cate_auth)){
+                    unset($cate[$key]);
+                }
+            }
+        }
+		
+		$this-> assign('cates',$cate);
+		$this->meta_title = '新增产品';
+        }else{
         //检查该分类是否允许发布
         $allow_publish = D('Document')->checkCategory($cate_id);
         !$allow_publish && $this->error('该分类不允许发布内容！');
@@ -385,14 +398,14 @@ class ProductController extends AdminController {
             $article            =   M('Document')->field('id,title,type')->find($info['pid']);
             $this->assign('article',$article);
         }
-
-        //获取表单字段排序
+		//获取表单字段排序
         $fields = get_model_attribute($model['id']);
         $this->assign('info',       $info);
         $this->assign('fields',     $fields);
         $this->assign('type_list',  get_type_bycate($cate_id));
         $this->assign('model',      $model);
-        $this->meta_title = '新增'.$model['title'];
+		$this->meta_title = '新增'.$model['title'];
+		}
         $this->display();
     }
 

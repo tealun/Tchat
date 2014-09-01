@@ -21,6 +21,11 @@ class ProductCategoryController extends CategoryController {
      */
     public function index(){
         $tree = D('Category')->getTree('product','id,name,title,sort,pid,allow_publish,status');
+		if(isset($tree['_'])){
+			$tree = $tree['_'];
+		}else{
+			$this->assign('noTree', '还没有产品分类，请先新增分类');
+		}
         $this->assign('tree', $tree);
         C('_SYS_GET_CATEGORY_TREE_', true); //标记系统获取分类树模板
         $this->meta_title = '分类管理';
