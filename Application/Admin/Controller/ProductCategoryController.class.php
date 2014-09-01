@@ -21,10 +21,10 @@ class ProductCategoryController extends CategoryController {
      */
     public function index(){
         $tree = D('Category')->getTree('product','id,name,title,sort,pid,allow_publish,status');
-		if(isset($tree['_'])){
+		if(isset($tree['_'])){//原语句指定分类编号获取目录树会出问题，因此添加了此IF判断代码筛选出指定目录的子目录树
 			$tree = $tree['_'];
 		}else{
-			$this->assign('noTree', '还没有产品分类，请先新增分类');
+			$this->error( '还没有产品分类，请先新增分类');
 		}
         $this->assign('tree', $tree);
         C('_SYS_GET_CATEGORY_TREE_', true); //标记系统获取分类树模板
@@ -32,46 +32,12 @@ class ProductCategoryController extends CategoryController {
         $this->display();
     }
 
-    /**
-     * 显示分类树，仅支持内部调
-     * @param  array $tree 分类树
-     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
-     */
-    public function tree($tree = null){
-        C('_SYS_GET_CATEGORY_TREE_') || $this->_empty();
-        $this->assign('tree', $tree);
-        $this->display('tree');
-    }
-
     /* 编辑分类 */
-    public function edit($id = null, $pid = 0){
-        $Category = D('Category');
-
-        if(IS_POST){ //提交表单
-            if(false !== $Category->update()){
-                $this->success('编辑成功！', U('index'));
-            } else {
-                $error = $Category->getError();
-                $this->error(empty($error) ? '未知错误！' : $error);
-            }
-        } else {
-            $cate = '';
-            if($pid){
-                /* 获取上级分类信息 */
-                $cate = $Category->info($pid, 'id,name,title,status');
-                if(!($cate && 1 == $cate['status'])){
-                    $this->error('指定的上级分类不存在或被禁用！');
-                }
-            }
-
-            /* 获取分类信息 */
-            $info = $id ? $Category->info($id) : '';
-
-            $this->assign('info',       $info);
-            $this->assign('category',   $cate);
-            $this->meta_title = '编辑分类';
-            $this->display();
-        }
+    public function edit($id = null, $pid = 80){
+		if($pid != 80) {
+			$this->error('非法操作！');
+		}
+		parent::edit($id,$pid);
     }
 
     /* 新增分类 */
