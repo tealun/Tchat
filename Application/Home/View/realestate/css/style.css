@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+* { margin:0 auto;}
+body { font-size:14px; color:#666666; font-family:"微软雅黑",Arial Narrow,arial,serif; }
+ul,li,dl,dt,dd,h3,p,h4 { margin:0; padding:0; list-style:none;}
+h1,h2,h3{margin-top:15px;!important}
+img { border:0; width:100%;}
+a:link, a:visited { color:#000000; text-decoration:none;}
+a:hover { color:#ff6600; text-decoration:none;}
+hr {margin:0;}
+.fl { float:left;}
+.fr { float:right;}
+.hidden { display:none;}
+input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; padding:0; margin:0;}
+.clear { clear:both; width:100%; height:1px; overflow:hidden;}
+.hight { width:100px; height:10px; overflow:hidden;}
+.container {padding: 0 1%;}
+/*首页*/
+.header { width:100%; line-height:2.5; font-size:22px; background:#003366; overflow:hidden;}
+.header p { float:left; color:#ffffff; width:70%; text-align:center;}
+.header h1 { float:left; color:#ffffff; width:70%; margin-left:15%; margin-top:15px;text-align:left;line-height:1.5; font-size:30px; font-weight:normal;}
+.header a.return { float:left; width:10%; height:100%; background:url(images/top_sub_1_03.jpg) no-repeat center center; background-size:100%; overflow:hidden; margin-left:5%;}
+
+.header .menu_top { float:right; width:10%; height:100%; background:url(images/top_sub_1_05.jpg) no-repeat center center; background-size:100%; overflow:hidden; margin-right:5%;}
+.header .menu_top span { display:block; width:100%; }
+
+.menu_down { width:100%; display:none; overflow:hidden; position:absolute; z-index:999;  }
+.menu_down li { float:left; width:25%;}
+.menu_down li img { width:100%; display:block; overflow:hidden;}
+.menu_down li:nth-child(9) { margin-left:37.5%;}
+.menu_down li a { color:#FFFFFF; display:block; width:100%; height:100%;}
+.menu_down li a:hover { color:#ffea00;}
+
+.link_1 { width:100%; overflow:hidden; margin:15px auto;}
+.link_1 li { float:left; width:33%; overflow:hidden; text-align:center;}
+.link_1 li img { width:95%;}
+.link_2 { width:100%; background:#f7f7f7; overflow:hidden; margin:10px auto;}
+.link_2 dt { float:left; width:20%; margin-left:10px; padding:10px inherit;}
+.link_2 dt img { width:80%;}
+.link_2 dd { float:right; width:75%;}
+.link_2 dd  h3{ font-size:larger;}
+
+.footer { width:95%; overflow:hidden; margin:15px auto 0 auto; border-top:1px solid #666666;}
+.footer ul li { float:left; width:33%; overflow:hidden; text-align:center;}
+.footer ul img { width:100%;}
+.navbar-default {background-color:#003366;}
+/*------img_ad-------*/
+.module { width:100%; overflow:hidden;position:relative;}
+.img_ad{ height:200px; width:340px; margin:0 auto; overflow:hidden;position:relative;}
+.img_ad img{height:200px; width:340px;}
+.img_ad_titleP1{ text-transform:uppercase; margin-right:20px;}
+.img_wrap{position:absolute;left:0; top:0;height:200px; width:340px; background:#666;}
+.img_wrap ul{position:absolute; left:0px;}
+.img_wrap ul li{ float:left;display:inline;height:200px; width:340px;}
+.imgFlashIco{width:140px;overflow:hidden; margin:0 auto; position:absolute; margin-top:-20px; right:10px;}
+.imgFlashIco li{display: inline-block;margin: 0 4px;width: 10px;height: 10px; border-radius: 6px;background: rgba(144, 144, 144, 0.8);}
+.imgFlashIco li.on{ background:#ffb334;}
+
+/*内页*/
+.content { width:95%; overflow:hidden; margin:10px auto; min-height:400px;}
+.top_link { width:100%;  background:#e1e1e1;}
+.top_link a { float:left; width:50%; display:inline-block;font-size:16px; line-height:2.5; text-align:center;}
+.top_link a:hover { background:#f1f1f1;}
+.top_link a.hover { background:#f1f1f1; color:#ff6600;}
+.text { width:100%;}
+.text h3 { width:100%; font-size:16px; line-height:2.0; text-align:center; color:#000000;}
+.text p { width:100%; margin:10px auto; line-height:2.0; }
+.text p img { width:100%; display:block; height:auto;}
+.dtl {width:100%;  line-height:2.0; font-size:12px; text-align:center; border-bottom:1px solid #d6d6d6;}
+
+/*优惠活动*/
+.list { width:100%;}
+.list dl { width:100%; background:#f7f7f7; overflow:hidden; margin:10px auto;}
+.list dl dt { float:left; width:20%; margin-left:10px; padding:10px inherit;}
+.list dl dt p { float:left; width:45%; margin:0 2%; background:#ffa61b; text-align:center; color:#FFFFFF; font-size:14px; line-height:2.0;}
+.list dl dd { float:right; width:75%;}
+.list dl dd a { display:block; width:100%; height:100%;}
+.list dl dd h3 { width:100%; line-height:1.7; margin-top:10px; font-size:16px;}
+.list dl dd p { width:100%; line-height:0.5; margin-top:10px;}
+
+.list_hx { width:100%;}
+.list_hx dl { float:left; width:45%; margin:2%; border:1px solid #ececec;}
+.list_hx dl dt { width:100%; overflow:hidden;}
+.list_hx dl dt img { width:100%;}
+.list_hx dl dd { width:95%; border-top:1px solid #ececec; margin:0 auto; font-size:12px; line-height:1.8; text-align:center; padding:10px 0;}
+
+/*置业顾问*/
+.list_gw { width:100%;}
+.list_gw dl { width:100%; background:#f7f7f7; overflow:hidden; margin:10px auto; padding:10px 0;}
+.list_gw dl dt { float:left; width:35%; margin-left:10px;}
+.list_gw dl dt img { width:100%;}
+.list_gw dl dd { float:right; width:60%;}
+.list_gw dl dd p { width:100%; line-height:1.9; color:#000000;}
+
+/*预约*/
+.table_1 { width:100%; margin:20px auto;}
+.table_1 table { width:100%;}
+.table_1 table tr td {font-size:14px; color:#000000; line-height:3.0; padding-right:3%;}
+.table_1 table td .text1,.table_1 table td .text2 {-webkit-border-radius:5px;border-radius: 5px;background-color: #fff;
+-webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.19);box-shadow: inset 0 2px 2px rgba(0,0,0,.19);border: solid 1px #cecece;}
+.table_1 table td .text1 { width:70%; line-height:2.0; margin-left:5%; }
+.table_1 table td .text2 {width:70%; height:5em; margin-left:5%;}
+.table_1 .sub_1 { width:40%; text-align:center; margin:10px auto; font-size:14px; color:#FFFFFF; font-weight:bold; line-height:2.0; background:#ff9b00; border:0;}
+
+.re_sub { width:50%; font-size:16px; line-height:2.0; margin:10px auto;}
+.re_sub a { display:block; width:100%; height:100%; background:#c91400; color:#FFFFFF; text-align:center; text-shadow:1px 1px 1px #000000;border-radius:5px;}

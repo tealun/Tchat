@@ -1,0 +1,119 @@
+<extend name="Base/common"/>
+
+<block name="header">
+
+</block>
+
+<block name="body">
+
+<div class="module">
+		<div class="banner">
+			<ul>
+				    <li><a href="#">
+				    	<img src="{$Think.THEME_PATH}images/banner_01.png" alt=""></a>
+				    <div class="inner">
+						<p>华鼎·雍王府，准现房热销</p>
+					</div>
+				    </li>
+				    
+				    <li><a href="#">
+				    	<img src="{$Think.THEME_PATH}images/banner_02.png" alt=""></a>
+				    <div class="inner">
+						<p>精致户型，阳光满屋</p>
+					</div>
+				    </li>
+
+				    <li><a href="#">
+				    	<img src="{$Think.THEME_PATH}images/banner_03.png" alt=""></a>
+				    <div class="inner">
+						<p>皇家园林，王府风范</p>
+					</div>
+				    </li>
+
+				    <li><a href="#">
+				    	<img src="{$Think.THEME_PATH}images/banner_04.png" alt=""></a>
+				    <div class="inner">
+						<p>I just wanted to show you another slide.</p>
+					</div>
+				    </li>
+			</ul>
+		</div>
+</div>
+<hr />
+<ul class="link_1">
+    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_02.png" alt=""></a></li>
+    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_05.png" alt=""></a></li>
+    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_03.png" alt=""></a></li>
+</ul>
+<hr />
+<volist name="category" id="vo" >
+	<if condition="($vo['id'] eq 1) OR ($vo['id'] eq 40)" >
+	
+	<else />
+	
+	<dl class="link_2">
+	    <dt><img src="{$vo.icon}" alt=""></dt>
+	    <dd>
+	        <a href="{:U('Article/list')}?category={$vo.id}"><h3>{$vo.title}</h3></a>
+	        <p>{$vo.description}</p>
+	    </dd>
+	</dl>
+	
+	</if>
+
+</volist>
+
+</block>
+
+<block name="script">
+<script src="{$Think.THEME_PATH}js/jquery-1.js"></script>
+
+<script src="__STATIC__/flatui/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="__STATIC__/flatui/js/jquery.ui.touch-punch.min.js"></script>
+<script src="__STATIC__/flatui/js/bootstrap.min.js"></script>
+<script src="__STATIC__/flatui/js/bootstrap-select.js"></script>
+<script src="__STATIC__/flatui/js/bootstrap-switch.js"></script>
+<script src="__STATIC__/flatui/js/flatui-checkbox.js"></script>
+<script src="__STATIC__/flatui/js/flatui-radio.js"></script>
+<script src="__STATIC__/flatui/js/jquery.tagsinput.js"></script>
+<script src="__STATIC__/flatui/js/jquery.placeholder.js"></script>
+
+<script src="__JS__/unslider.min.js"></script>
+
+<script>
+			if(window.chrome) {
+				$('.banner li').css('background-size', '100% 100%');
+			}
+
+			$('.banner').unslider({
+				arrows: true,
+				fluid: true,
+				dots: true
+			});
+
+			//  Find any element starting with a # in the URL
+			//  And listen to any click events it fires
+			$('a[href^="#"]').click(function() {
+				//  Find the target element
+				var target = $($(this).attr('href'));
+
+				//  And get its position
+				var pos = target.offset(); // fallback to scrolling to top || {left: 0, top: 0};
+
+				//  jQuery will return false if there's no element
+				//  and your code will throw errors if it tries to do .offset().left;
+				if(pos) {
+					//  Scroll the page
+					$('html, body').animate({
+						scrollTop: pos.top,
+						scrollLeft: pos.left
+					}, 1000);
+				}
+
+				//  Don't let them visit the url, we'll scroll you there
+				return false;
+			});
+
+			
+		</script>
+</block>

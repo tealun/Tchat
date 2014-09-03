@@ -121,7 +121,7 @@ INSERT INTO `onethink_model`  VALUES ('41','tchat_qrcode','场景二维码','0',
 INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"]}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('52', 'tchat_menu', '自定义菜单', '0', '', '1', '{"1":["217","212","211","210","213","214","215","216"]}', '1:基础', '', '', '', '', 'id:编号\r\nsort:排序\r\nname:显示名称\r\nkey:系统识别码\r\ntype:菜单类型\r\nurl:跳转链接\r\naction_type:触发类型\r\naction:动作指令\r\nstatus:状态\r\nuid:用户\r\n', '10', '', '', '1407334493', '1407334851', '1', 'MyISAM');
 
-INSERT INTO `onethink_model`  VALUES ('53', 'product', '产品', '1', '', '1', '{"1":["2","3","254","253","5","252","12","19"],"2":["10","11","9","13","14","16","17","20"]}', '1:基础,2:高级', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('53', 'product', '产品', '1', '', '1', '{"1":["2","3","254","253","252","5","12","19"],"2":["10","11","9","13","14","16","17","20"]}', '1:基础,2:高级', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
 
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
