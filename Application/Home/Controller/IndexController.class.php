@@ -19,7 +19,7 @@ class IndexController extends HomeController {
 	//系统首页
     public function index(){
 
-        $category = D('Category')->getSameLevel(1,'id,title,icon,description');
+        $category = D('Category')->getSameLevel(1,'id,name,title,icon,description');
         //$lists    = D('Document')->lists(null);
 
         $this->assign('category',$category);//栏目

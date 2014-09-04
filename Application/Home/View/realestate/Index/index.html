@@ -40,10 +40,15 @@
 		</div>
 </div>
 <hr />
-<ul class="link_1">
-    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_02.png" alt=""></a></li>
-    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_05.png" alt=""></a></li>
-    <li><a href="#"><img src="{$Think.THEME_PATH}images/nav_03.png" alt=""></a></li>
+<ul class="link_box">
+    <li><a href="#"><img src="{$Think.THEME_PATH}images/favorite.png" alt=""></a><br />
+    	<span>户型鉴赏</span>
+    </li>
+    
+    <li><a href="{:U('Home/Article/lists?category=activity_news')}"><img src="{$Think.THEME_PATH}images/tag.png" alt=""></a><br />
+    	<span>优惠活动</span></li>
+    <li><a href="#"><img src="{$Think.THEME_PATH}images/pencil.png" alt=""></a><br />
+    	<span>房贷计算</span></li>
 </ul>
 <hr />
 <volist name="category" id="vo" >
@@ -51,11 +56,11 @@
 	
 	<else />
 	
-	<dl class="link_2">
-	    <dt><img src="{$vo.icon}" alt=""></dt>
+	<dl class="link_list">
+	    <dt><img src="{:get_cover($vo['icon'],'path')}" alt=""></dt>
 	    <dd>
-	        <a href="{:U('Article/lists')}?category={$vo.id}"><h3>{$vo.title}</h3></a>
-	        <p>{$vo.description}</p>
+	        <a href="{:U('Home/Article/index?category='.$vo['name'])}"><h3>{$vo.title}</h3>
+	        <p>{$vo.description}</p></a>
 	    </dd>
 	</dl>
 	
