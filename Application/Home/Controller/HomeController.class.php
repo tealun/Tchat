@@ -30,6 +30,9 @@ class HomeController extends Controller {
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
         }
+		/*读取系统频道配置*/
+		$channel = D('Channel')->lists();
+		$this->assign('channel',$channel);//配置频道
     }
 
   /* 用户登录检测 */
