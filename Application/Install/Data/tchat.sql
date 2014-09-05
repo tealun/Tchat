@@ -101,7 +101,7 @@ INSERT INTO `onethink_attribute` VALUES ('219', 'create_time', '创建时间', '
 INSERT INTO `onethink_attribute` VALUES ('220', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('221', 'url', '跳转链接', 'varchar(250) NOT NULL ', 'string', '0', '请填写点击后跳转到的网址，注意一定要带上"htt://"或者"https://"', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 
--- Attribute of menu model
+-- Attribute of product model
 INSERT INTO `onethink_attribute` VALUES ('252', 'content', '产品详情', 'text NOT NULL', 'editor', '', '产品详情介绍','1', '', '53','1','1','1408933941','1408933941', '','3', '', 'regex', '','3', 'function');
 INSERT INTO `onethink_attribute` VALUES ('253', 'special_price', '特价', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0.00', '商品特价','1', '', '53','0','1','1408934868','1408934580', '','3', '', 'regex', '','3', 'function');
 INSERT INTO `onethink_attribute` VALUES ('254', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '商品价格','1', '', '53','0','1','1408934711','1408934711', '','3', '', 'regex', '','3', 'function');

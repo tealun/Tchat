@@ -1,11 +1,11 @@
 @charset "utf-8";
-/* CSS Document */
+/*整站*/
 * { margin:0 auto;}
 body { font-size:14px; font-family:"微软雅黑",Arial Narrow,arial,serif; }
 ul,li,dl,dt,dd,p,h4 { margin:0; padding:0; list-style:none;font-size:14px;}
 h1,h2,h3{font-size:16px;margin-top:15px;!important}
 img { border:0; width:100%;}
-a:link, a:visited { color:#000000; text-decoration:none;}
+/*a:link, a:visited { color:#000000; text-decoration:none;}*/
 a:hover { color:#ff6600; text-decoration:none;}
 hr {margin:5px 0;}
 .fl { float:left;}
@@ -37,7 +37,6 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
     float: left;
     font-size: 14px;
     padding-left: 10px;
-    padding-top: 10px;
 }
 
 
@@ -45,7 +44,6 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
     float: right;
     font-size: 14px;
     padding-right: 10px;
-    padding-top: 10px;
 }
 /*首页*/
 .header { width:100%; line-height:2.5; font-size:22px; background:#003366; overflow:hidden;}
@@ -88,6 +86,14 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
 .imgFlashIco{width:140px;overflow:hidden; margin:0 auto; position:absolute; margin-top:-20px; right:10px;}
 .imgFlashIco li{display: inline-block;margin: 0 4px;width: 10px;height: 10px; border-radius: 6px;background: rgba(144, 144, 144, 0.8);}
 .imgFlashIco li.on{ background:#ffb334;}
+
+/*列表页*/
+.listTitle{}
+.listContent{margin-bottom:10px;}
+.listContent img{margin-bottom:10px;}
+.lead{font-size: 14px;font-weight: 100;text-indent:2em;margin-bottom:0;}
+.listMeta{}
+
 
 /*内页*/
 .content { width:95%; overflow:hidden; margin:10px auto; min-height:400px;}

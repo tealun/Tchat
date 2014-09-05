@@ -1,6 +1,20 @@
 <!-- 导航条
 ================================================== -->
-<!--    <header class="header" id="overview">
-		<h1>华鼎雍王府</h1>
-    </header>
--->
+<block name="header">
+<div id="top" class="sub_nav">
+	<div class="sub_nav_l">
+		<a href="{:U('Home/Index/index')}">首页</a>
+		<if condition="$category['pid'] eq 0">
+			&gt;<a href="{:U('Home/Article/index?category='.$category['name'])}" alt="">{$category['title']}</a>
+		<elseif condition="$category['pid'] gt 0" />
+			&gt;<a href="{:U('Home/Article/index?category='.get_category_name($category['pid']))}" alt="">{:get_category_title($category['pid'])}</a>	
+			&gt;<a href="{:U('Home/Article/lists?category='.$category['name'])}" alt="">{$category['title']}</a>	
+		<else />
+
+		</if>
+	</div>    
+	  <div class="sub_nav_r">{:C('WEB_SITE_TITLE')}</div>
+	  <div style="clear:both;"></div>
+</div>
+</block>
+

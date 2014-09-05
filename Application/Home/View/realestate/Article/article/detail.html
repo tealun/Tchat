@@ -1,37 +1,29 @@
 <extend name="Base/common"/>
 
-<block name="header">
-<div id="top" class="sub_nav">
-<div class="sub_nav_l">
-	<a href="{:U('Home/Index/index')}">首页</a> &gt;<a href="{:U('Article/lists?category='.get_category_name($info['category_id']))}">{:get_category_title($info['category_id'])}</a></div>    
-  <div class="sub_nav_r">华鼎雍王府</div>
-  <div style="clear:both;"></div>
-</div>
-    <header id="overview">
-		<div class="container">
-			<h2>{$info.title}</h2>
-			<p>
-				<span  class="pull-left">
-					<!-- <span class="author">{$info.uid|get_nickname}</span>
-					<a class="activity-meta" id="post-user" href="javascript:viewProfile();">
-                   	<span class="text-ellipsis">{:C('WECHAT_NICKNAME')}</span><i class="icon_link_arrow"></i>
-                	</a> -->
-					<span> 发表于 {$info.create_time|timeTip}前</span>
-				</span>
-				<span class="pull-right">
-					<article:prev name="prev" info="info">
-                        <a href="{:U('?id='.$prev['id'])}">上一篇</a>
-                    </article:prev>
-                    <article:next name="next" info="info">
-                        <a href="{:U('?id='.$next['id'])}">下一篇</a>
-                    </article:next>
-				</span>
-			</p>
-		</div>
-	</header>
-</block>
 <block name="body">
     <div class="main-content">
+	    <header id="overview">
+			<div class="container">
+				<h2>{$info.title}</h2>
+				<p>
+					<span  class="pull-left">
+						<!-- <span class="author">{$info.uid|get_nickname}</span>
+						<a class="activity-meta" id="post-user" href="javascript:viewProfile();">
+	                   	<span class="text-ellipsis">{:C('WECHAT_NICKNAME')}</span><i class="icon_link_arrow"></i>
+	                	</a> -->
+						<span> 发表于 {$info.create_time|timeTip}前</span>
+					</span>
+					<span class="pull-right">
+						<article:prev name="prev" info="info">
+	                        <a href="{:U('?id='.$prev['id'])}">上一篇</a>
+	                    </article:prev>
+	                    <article:next name="next" info="info">
+	                        <a href="{:U('?id='.$next['id'])}">下一篇</a>
+	                    </article:next>
+					</span>
+				</p>
+			</div>
+		</header>
         <hr/>
         <!-- Contents
         ================================================== -->

@@ -1,8 +1,6 @@
 <extend name="Base/common"/>
 
-<block name="header">
-
-</block>
+<block name="header"></block>
 
 <block name="body">
 
@@ -52,15 +50,15 @@
 </ul>
 <hr />
 <volist name="category" id="vo" >
-	<if condition="($vo['id'] eq 1) OR ($vo['id'] eq 40)" >
+	<if condition="($vo['name'] eq 'contact') OR ($vo['name'] eq 'about')" >
 	
 	<else />
 	
 	<dl class="link_list">
 	    <dt><img src="{:get_cover($vo['icon'],'path')}" alt=""></dt>
 	    <dd>
-	        <a href="{:U('Home/Article/index?category='.$vo['name'])}"><h3>{$vo.title}</h3>
-	        <p>{$vo.description}</p></a>
+	        <a href="{:U('Home/Article/index?category='.$vo['name'])}"><h3>{$vo.title}</h3></a>
+	        <p>{$vo.description}</p>
 	    </dd>
 	</dl>
 	
