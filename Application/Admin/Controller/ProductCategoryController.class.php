@@ -20,7 +20,7 @@ class ProductCategoryController extends CategoryController {
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function index(){
-        $tree = D('Category')->getTree('product','id,name,title,sort,pid,allow_publish,status');
+        $tree = D('Category')->getTree(80,'id,name,title,sort,pid,allow_publish,status');
 		if(isset($tree['_'])){//原语句指定分类编号获取目录树会出问题，因此添加了此IF判断代码筛选出指定目录的子目录树
 			$tree = $tree['_'];
 		}else{

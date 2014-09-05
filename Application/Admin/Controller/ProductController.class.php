@@ -647,9 +647,9 @@ class ProductController extends AdminController {
         if ( isset($_GET['time-end']) ) {
             $map['update_time'][] = array('elt',24*60*60 + strtotime(I('time-end')));
         }
-        //只查询pid为0的文章
+        //只查询pid为0,model_id为53（即产品模型）的文章
         $map['pid'] = 0;
-		$map['model'] = 53;
+		$map['model_id'] = 53;
         $list = $this->lists($Document,$map,'update_time desc');
         int_to_string($list);
         // 记录当前列表页的cookie

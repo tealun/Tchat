@@ -1,5 +1,6 @@
 -- -----------------------------
 -- 说明：本SQL中的新建表均会增加Tchat前缀，表名中不包含Tchat的即为系统自带表
+-- 除非是文档模型扩展
 -- 本SQL命令文件只负责向表中添加必要数据，不更改其表结构
 -- -----------------------------
 
@@ -96,15 +97,21 @@ INSERT INTO `onethink_attribute` VALUES ('214', 'action_type', '触发类型', '
 INSERT INTO `onethink_attribute` VALUES ('215', 'action_code', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个）”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('216', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('217', 'pid', '上级菜单', 'int(10) unsigned NOT NULL ', 'string', '0', '请选择上级菜单', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('218', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('218', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '2', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('219', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('220', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('221', 'url', '跳转链接', 'varchar(250) NOT NULL ', 'string', '0', '请填写点击后跳转到的网址，注意一定要带上"htt://"或者"https://"', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 
 -- Attribute of product model
-INSERT INTO `onethink_attribute` VALUES ('252', 'content', '产品详情', 'text NOT NULL', 'editor', '', '产品详情介绍','1', '', '53','1','1','1408933941','1408933941', '','3', '', 'regex', '','3', 'function');
-INSERT INTO `onethink_attribute` VALUES ('253', 'special_price', '特价', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0.00', '商品特价','1', '', '53','0','1','1408934868','1408934580', '','3', '', 'regex', '','3', 'function');
-INSERT INTO `onethink_attribute` VALUES ('254', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '商品价格','1', '', '53','0','1','1408934711','1408934711', '','3', '', 'regex', '','3', 'function');
+INSERT INTO `onethink_attribute` VALUES ('252', 'content', '产品详情', 'text NOT NULL', 'editor', '', '产品详情介绍','1', '', '53','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('253', 'special_price', '特价', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0.00', '商品特价','1', '', '53','0','1','1408934868','1408934580', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('254', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '商品价格','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('255', 'pics', '产品图片', 'VARCHAR(100) NOT NULL', 'string', '0', '产品的展示图片，可多图','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('256', 'style', '产品类型', 'VARCHAR(100) NOT NULL', 'string', '0', '指定产品的类型，如型号、批次、类别、归属等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('257', 'spec', '产品规格', 'VARCHAR(100) NOT NULL', 'string', '0', '产品的规格，如：尺寸、面积、质量、体积等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('258', 'features', '产品特征', 'VARCHAR(100) NOT NULL', 'string', '0', '用于标记产品的特征，如，颜色、形状、材质、朝向等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('259', 'amount', '产品总量', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品供应的总量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('260', 'stock', '产品库存', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品目前的库存量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 
 -- -----------------------------
 -- Records of  `onethink_model`
@@ -119,9 +126,27 @@ INSERT INTO `onethink_model`  VALUES ('8', 'ticket', '优惠券', '6', '', '1', 
 
 INSERT INTO `onethink_model`  VALUES ('41','tchat_qrcode','场景二维码','0', '', '1', '{\"1\":[\"191\",\"193\"]}', '1:永久二维码', '', '', '', '', 'action_name:二维码类型\r\nticket:获取二维码Ticket\r\nscene:场景\r\nscene_id:场景值ID', '10', '', '', '1394597229', '1394597323', '1', 'MyISAM');
 INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1', '{\"1\":[\"201\",\"202\",\"203\",\"204\"]}', '1:基础', '', '', '', '', 'name:相册标识\r\ntitle:相册标题\r\nact_type:所属分类ID\r\nvote:投票设置', '10', '', '', '1396970451', '1396970451', '1', 'MyISAM');
-INSERT INTO `onethink_model`  VALUES ('52', 'tchat_menu', '自定义菜单', '0', '', '1', '{"1":["217","212","211","210","213","214","215","216"]}', '1:基础', '', '', '', '', 'id:编号\r\nsort:排序\r\nname:显示名称\r\nkey:系统识别码\r\ntype:菜单类型\r\nurl:跳转链接\r\naction_type:触发类型\r\naction:动作指令\r\nstatus:状态\r\nuid:用户\r\n', '10', '', '', '1407334493', '1407334851', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('52', 'tchat_menu', '自定义菜单', '0', '', '1', '{\"1\":[\"217\",\"212\",\"211\",\"210\",\"213\",\"214\",\"215\",\"216\"]}', '1:基础', '', '', '', '', 'id:编号\r\nsort:排序\r\nname:显示名称\r\nkey:系统识别码\r\ntype:菜单类型\r\nurl:跳转链接\r\naction_type:触发类型\r\naction:动作指令\r\nstatus:状态\r\nuid:用户\r\n', '10', '', '', '1407334493', '1407334851', '1', 'MyISAM');
 
-INSERT INTO `onethink_model`  VALUES ('53', 'product', '产品', '1', '', '1', '{"1":["2","3","254","253","252","5","12","19"],"2":["10","11","9","13","14","16","17","20"]}', '1:基础,2:高级', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+INSERT INTO `onethink_model`  VALUES ('53', 'product', '产品', '1', '', '1', '{\"1\":[\"2\",\"3\",\"252\",\"5\",\"12\",\"19\"],\"2\":[\"10\",\"11\",\"9\",\"13\",\"14\",\"16\",\"17\",\"20\"],\"3\":[\"254\",\"253\",\"255\",\"256\",\"257\",\"258\",\"259\",\"260\"]}', '1:基础,2:高级,3:属性设置', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+
+-- -----------------------------
+-- 新建产品文档模型扩展表 `onethink_document_product`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_document_product`;
+CREATE TABLE `onethink_document_product` (
+	`id` int(5) unsigned NOT NULL COMMENT '产品ID',
+	`content` text NOT NULL DEFAULT '' COMMENT '产品详情',
+    `special_price` FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '产品特价',
+    `price` FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '产品价格',
+    `pics` varchar(100) NOT NULL DEFAULT '' COMMENT '产品图册图片的ID集合',
+    `style` varchar(100) NOT NULL DEFAULT '' COMMENT '产品的类型',
+    `spec` varchar(100) NOT NULL DEFAULT '' COMMENT '产品的规格',
+    `features` varchar(100) NOT NULL DEFAULT '' COMMENT '产品特征',
+    `amount` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '产品总量',
+    `stock` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '产品库存',
+	PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '产品文档表';
 
 -- -----------------------------
 -- Records of  `onethink_auth_extend`
