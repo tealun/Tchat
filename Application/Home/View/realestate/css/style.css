@@ -94,6 +94,27 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
 .lead{font-size: 14px;font-weight: 100;text-indent:2em;margin-bottom:0;}
 .listMeta{}
 
+.pagination{
+    width:100%;
+}
+
+.first,.prev,.next,.num,.end,.current {
+	background-color:#CECECE;
+	width:auto;
+}
+
+.prev{
+	margin-right:2px;
+	border-radius: 6px 0 0 6px;
+}
+.next{
+	margin-left:2px;
+	border-radius: 0 6px 6px 0;
+}
+
+.num{width:inherit}
+
+.current{background-color:#FF6600;color:#FFFFFF;}
 
 /*内页*/
 .content { width:95%; overflow:hidden; margin:10px auto; min-height:400px;}
