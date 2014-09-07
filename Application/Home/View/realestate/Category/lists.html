@@ -1,15 +1,12 @@
 <volist name="category" id="cate">
 	<eq name="current" value="$cate['id']">
-		<li class="active">
-			<a href="{:U('Article/lists?category='.$cate['name'])}">
-				<i class="icon-chevron-right"></i>{$cate.title}
-			</a>
-		</li>
+		<div class="btn-group btn-group-sm">
+		    <a  class="btn btn-success" href="{:U('Article/lists?category='.$cate['name'])}">{$cate.title}</a>
+		</div>
+
 	<else/>
-		<li>
-			<a href="{:U('Article/lists?category='.$cate['name'])}">
-				<i class="icon-chevron-right"></i>{$cate.title}
-			</a>
-		</li>
+		<div class="btn-group btn-group-sm">
+		    <a  class="btn btn-default" href="{:U('Article/lists?category='.$cate['name'])}">{$cate.title}</a>
+		</div>
 	</eq>
 </volist>
