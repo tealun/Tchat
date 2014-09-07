@@ -107,9 +107,9 @@ INSERT INTO `onethink_attribute` VALUES ('252', 'content', '产品详情', 'text
 INSERT INTO `onethink_attribute` VALUES ('253', 'special_price', '特价', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0.00', '商品特价','1', '', '53','0','1','1408934868','1408934580', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('254', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '商品价格','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('255', 'pics', '产品图片', 'VARCHAR(100) NOT NULL', 'string', '0', '产品的展示图片，可多图','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('256', 'style', '产品类型', 'VARCHAR(100) NOT NULL', 'string', '0', '指定产品的类型，如型号、批次、类别、归属等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('257', 'spec', '产品规格', 'VARCHAR(100) NOT NULL', 'string', '0', '产品的规格，如：尺寸、面积、质量、体积等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('258', 'features', '产品特征', 'VARCHAR(100) NOT NULL', 'string', '0', '用于标记产品的特征，如，颜色、形状、材质、朝向等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('256', 'style', '产品类型', 'VARCHAR(100) NOT NULL', 'string', '', '指定产品的类型，如型号、批次、类别、归属等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('257', 'spec', '产品规格', 'VARCHAR(100) NOT NULL', 'string', '', '产品的规格，如：尺寸、面积、质量、体积等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('258', 'features', '产品特征', 'VARCHAR(100) NOT NULL', 'string', '', '用于标记产品的特征，如，颜色、形状、材质、朝向等','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('259', 'amount', '产品总量', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品供应的总量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('260', 'stock', '产品库存', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品目前的库存量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 
@@ -139,7 +139,7 @@ CREATE TABLE `onethink_document_product` (
 	`content` text NOT NULL DEFAULT '' COMMENT '产品详情',
     `special_price` FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '产品特价',
     `price` FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '产品价格',
-    `pics` varchar(100) NOT NULL DEFAULT '' COMMENT '产品图册图片的ID集合',
+    `pics` varchar(100) NOT NULL DEFAULT '0' COMMENT '产品图册图片的ID集合',
     `style` varchar(100) NOT NULL DEFAULT '' COMMENT '产品的类型',
     `spec` varchar(100) NOT NULL DEFAULT '' COMMENT '产品的规格',
     `features` varchar(100) NOT NULL DEFAULT '' COMMENT '产品特征',
