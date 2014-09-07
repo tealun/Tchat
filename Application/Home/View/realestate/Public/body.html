@@ -5,12 +5,11 @@
         <block name="side">
         <!-- 左侧 nav
         ================================================== -->
-            <div class="btn-toolbar">
-                <block name="publish"></block>
-                <ul class="btn-group">
-                    {:W('Category/lists', array($category['id'], ACTION_NAME == 'index'))}
-                </ul>
-            </div>
+        <block name="publish"></block>
+        <div class="btn-group btn-group-justified">
+		 	 {:W('Category/lists', array($category['id'], ACTION_NAME == 'index'))}
+		</div>
+
         </block>
         <block name="body"></block>
 
