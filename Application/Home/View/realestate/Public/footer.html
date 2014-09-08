@@ -5,9 +5,32 @@
 		<div class="siteMeta">
 			<p class="pull-right">本站由<a href="http://www.onethink.cn" target="_blank">OneThink</a>强力驱动</p>
 		</div>
-		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-		<!-- Navbar content -->
-		</nav>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+  <div class="btn-group btn-group-justified" >
+	<volist name="channel" id="chan">
+	
+		<div class="btn-group dropup">
+        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+       	<span>{$chan.title}</span>
+        </button>
+        <ul role="menu" class="dropdown-menu">
+          <li><a href="#">Action</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Another action</a></li>
+           <li class="divider"></li>
+          <li><a href="#">Something</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+          <li class="divider"></li>
+        </ul>
+      </div>	
+		
+	</volist>
+
+
+  </div>
+</nav>
+
     </footer>
 
 <include file="Public/var"/>

@@ -20,6 +20,25 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
     padding-left: 10px;
 }
 
+.btn-group-justified button {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #D5D5D5;
+}
+.btn-group-justified button {
+    background-color: #E5E5E5;
+    background-repeat: repeat-x;
+    border-bottom: 1px solid #D5D5D5;
+    color: #777777;
+    font-weight: bold;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+/*hide the last <li> in dropup class , witch should be divider class*/
+.dropup ul li:last-child {
+	display:none;
+}
+
 .sub_nav {
     background: none repeat scroll 0 0 #003366;
     box-shadow: 0 3px 3px #999999;
@@ -72,7 +91,7 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
 .link_list dd  h3{ font-size:larger;}
 
 .footer { width:95%; overflow:hidden; margin:15px auto 0 auto; border-top:1px solid #666666;}
-.footer ul li { float:left; width:33%; overflow:hidden; text-align:center;}
+.footer ul li {text-align:center;}
 .footer ul img { width:100%;}
 
 /*------img_ad-------*/
@@ -94,26 +113,16 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
 .lead{font-size: 14px;font-weight: 100;text-indent:2em;margin-bottom:0;}
 .listMeta{}
 
-.pagination{
-    width:100%;
-}
+.btn-toolbar{margin: 0 1%;width:98% }
+.btn-toolbar ul {display: inline;line-height:1.5;text-align: center;color: #FFFFFF}
+.btn-toolbar ul li {background-color:#88BFE8; }
+.btn-toolbar ul li .active{background-color:#0081C2 ; }
 
-.first,.prev,.next,.num,.end,.current {
-	background-color:#CECECE;
-	width:auto;
-}
-
-.prev{
-	margin-right:2px;
-	border-radius: 6px 0 0 6px;
-}
-.next{
-	margin-left:2px;
-	border-radius: 0 6px 6px 0;
-}
-
+.pagination{width:100%;}
+.first,.prev,.next,.num,.end,.current {	background-color:#CECECE;	width:auto;}
+.prev{	margin-right:2px;	border-radius: 6px 0 0 6px;}
+.next{	margin-left:2px;	border-radius: 0 6px 6px 0;}
 .num{width:inherit}
-
 .current{background-color:#FF6600;color:#FFFFFF;}
 
 /*内页*/
@@ -127,6 +136,89 @@ input,select,button{font:12px Verdana,Arial,Tahoma; vertical-align:middle; paddi
 .text p { width:100%; margin:10px auto; line-height:2.0; }
 .text p img { width:100%; display:block; height:auto;}
 .dtl {width:100%;  line-height:2.0; font-size:12px; text-align:center; border-bottom:1px solid #d6d6d6;}
+
+table {
+    *border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 0;
+    width: 100%;    
+   margin: 15px 0;
+}
+
+.bordered {
+    border: solid #ccc 1px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 1px 1px #ccc; 
+    -moz-box-shadow: 0 1px 1px #ccc; 
+    box-shadow: 0 1px 1px #ccc;         
+}
+
+.bordered tr:hover {
+    background: #fbf8e9;
+    -o-transition: all 0.1s ease-in-out;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;     
+}    
+    
+.bordered td, .bordered th {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;    
+}
+
+.bordered th {
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+}
+
+.bordered td:first-child, .bordered th:first-child {
+    border-left: none;
+}
+
+.bordered th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+
+.bordered th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+
+.bordered th:only-child{
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.bordered tr:last-child td:first-child {
+    -moz-border-radius: 0 0 0 6px;
+    -webkit-border-radius: 0 0 0 6px;
+    border-radius: 0 0 0 6px;
+}
+
+.bordered tr:last-child td:last-child {
+    -moz-border-radius: 0 0 6px 0;
+    -webkit-border-radius: 0 0 6px 0;
+    border-radius: 0 0 6px 0;
+}
+
 
 /*优惠活动*/
 .list { width:100%;}
