@@ -331,6 +331,10 @@ INSERT INTO `onethink_category` VALUES ('32', 'share_know', '行业知识', '31'
 INSERT INTO `onethink_category` VALUES ('33', 'share_story', '行业故事', '31', '2', '10', '', '', '', '', '', '', '', '2', '2,1,3', '0', '1', '1', '0', '1', '1', '', '1379475028', '1386839751', '1', '31');
 
 -- -----------------------------
+-- Add COLUMN `group` TO `onethink_channel`
+-- -----------------------------
+ALTER TABLE `onethink_channel` ADD `group` varchar(100) NOT NULL DEFAULT '' COMMENT '所属分组';
+-- -----------------------------
 -- Records of `onethink_channel`
 -- -----------------------------
 DELETE FROM `onethink_channel` WHERE `id` = '2' limit 1;
@@ -650,7 +654,6 @@ CREATE TABLE `onethink_tchat_album_category` (
 	PRIMARY KEY (`id`),
 	UNIQUE KEY `uk_name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT '相册分类表';
-
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_client`
