@@ -6,10 +6,11 @@
         <!-- 左侧 nav
         ================================================== -->
         <block name="publish"></block>
+        <if condition="$category['pid'] gt 0">
         <div class="btn-group btn-group-justified">
 		 	 {:W('Category/lists', array($category['id'], ACTION_NAME == 'index'))}
-		</div>
-
+		</div>        	
+        </if>
         </block>
         <block name="body"></block>
 

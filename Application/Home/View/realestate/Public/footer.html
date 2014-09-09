@@ -11,10 +11,10 @@
 			<volist name="channel" id="chan">
 				<if condition="$chan['group'] eq '底部导航'" >
 					<div class="btn-group dropup">
+					<notempty name="chan['_']">
 						<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
 							<span>{$chan.title}</span>
 						</button>
-						<notempty name="chan['_']">
 							<ul role="menu" class="dropdown-menu">
 								<volist name="chan['_']" id="subChan">
 									<li>
@@ -22,8 +22,11 @@
 									</li>
 									<li class="divider"></li>
 								</volist>
-
 							</ul>
+							<else />
+							<a href="{$chan.url}" class="btn btn-default" >
+							<span>{$chan.title}</span>
+							</a>
 						</notempty>
 						
 					</div>
@@ -37,8 +40,6 @@
 
 <include file="Public/var"/>
 <block name="script">
-	<script src="{$Think.THEME_PATH}/js/jquery-1.js"></script>
-
 	<script src="__STATIC__/flatui/js/jquery-ui-1.10.3.custom.min.js"></script>
 	<script src="__STATIC__/flatui/js/jquery.ui.touch-punch.min.js"></script>
 	<script src="__STATIC__/flatui/js/bootstrap.min.js"></script>
