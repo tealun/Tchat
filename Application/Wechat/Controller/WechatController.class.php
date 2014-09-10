@@ -192,24 +192,33 @@ public function test(){
         if($i >= 8) {
         	$count = count($news);
         	$articles[$i]['Title']='后面还有'.$count.'条没有展示，请回复"mm"获取查看，5分钟内有效';
-			/* 
-			      //缓存过滤掉已回复后的数组内容
-                  S($openId,array(
-                      'action'=>array(
-                        'c'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
-                        'a'=>'startPreg', //需要后续处理的公共方法
-                        ),
-                      'p'=>array( //需要传递到上述公共方法的变量及赋值
-                         'openId'=>$openId, 
-	                     'keyword'=>'mm'
-                        ),
-                      'news'=>$news //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
+			
+			      //缓存过滤掉已回复后的数组内容,缓存标识为客户openId
+			      $openid = $this->data['ToUserName'];
+				  var_dump($openid);
+			      var_dump($news);
+
+                  S($openid,array(
+	                      'action'=>array(
+		                        'controller'=>"Cache,Logic", //需要后续处理的控制器及命名空间
+		                        'methed'=>'newsCache', //需要后续处理的公共方法
+		                        ),
+	                      'needs'=>array(
+		                      	'keyword'=>array('mm','MM','Mm','mM'),
+		                      	'params' =>array($news)//需要传递到上述公共方法的变量及赋值
+							  )
                       ),
-                      300);
-			*/
-			break; } //最多只允许10条新闻
+				  
+                      20); 
+			$i++;//标识要比条数多加1
+				  
+			break;	 //最多只允许10条新闻，此处保险起见，打8条，9条明杠了，用来做提示
+			 } else{
+        	S($openid,NULL);
         }
-    $this->data['ArticleCount'] = $i+1;
+
+        }
+    $this->data['ArticleCount'] = $i;
     $this->data['Articles'] = $articles;
 	unset($i);
   }

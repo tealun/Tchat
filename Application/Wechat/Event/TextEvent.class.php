@@ -31,12 +31,16 @@ class TextEvent{
       exit;
       //查看是否有客户缓存
       }elseif(S($openId)){
-        return $reply = A('Cache','Logic')->cacheReply($openId,$keyword);
+		if($reply = A('Cache','Logic')->cacheReply($openId,$keyword)){
+			return $reply;
+		};
       //对发送的关键字进行缓存查询
-      }elseif ($id=S($keyword)){
-        $rs = M('Tchat_keyword_group')->where('id="'.$id.'"')->find();
-        return $reply = A('Reply','Event')->wechatReply($rs);
-      }else{
+      }
+      //elseif ($id=S($keyword)){
+       // $rs = M('Tchat_keyword_group')->where('id="'.$id.'"')->find();
+        //return $reply = A('Reply','Event')->wechatReply($rs);
+     // }
+      else{
         if(!$New = M('Tchat_keyword')){
           //当M实例化模型出错时
           $content = get_wchat_error(U('textHadle','',''),$openId,$keyword);;
@@ -98,7 +102,7 @@ class TextEvent{
    * 客户可通过该缓存回复相应数字回复不同的关键词组对应内容
    * @param array $findGroup
    */
-  private function findGroup($findGroup){
+  private function findGroup($findGroup,$openId){
         
         foreach ($findGroup as $key=>$var){
           $ids[$key] = $var['group_id'];
@@ -114,7 +118,7 @@ class TextEvent{
           $i=1;
           foreach ($name as $k => $v){
           $contentlist .= $i.").".$v."\n";
-          S($i,$k,60);//缓存group_id字段值，对应列表序号
+		  $textCache[$i]=$k;
           $i++;
           }
           $i--;
@@ -122,12 +126,25 @@ class TextEvent{
             $map['id'] = $k;
             $rs = M('Tchat_keyword_group')->where($map)->find();
             return $reply = A('Reply','Event')->wechatReply($rs);
-            S($i,NULL);//清除缓存
+            unset($textCache);//清除缓存变量
           }else{ //找到多个符合的记录是，提供选择并缓存
           $content = "[愉快]为您找到".$i."个结果：\n"
               .$contentlist.
               "您可以回复以上序号查看相关信息。\n (一分钟内有效)\r(づ￣ ³￣)づ";
           unset($i);
+		  
+		   S($openId,
+				array(
+					      'action'=>array(
+		                        'controller'=>"Text,Event", //需要后续处理的控制器及命名空间
+		                        'methed'=>'textCache', //需要后续处理的公共方法
+		                        ),
+	                      'needs'=>array(
+		                      	'keyword'=>array_keys($textCache), //取缓存数组的键名作为关键字数组
+		                      	'params' =>array($textCache)//需要传递到上述公共方法的变量及赋值
+							  )
+				),
+				60);//缓存group_id字段值，对应列表序号
           return get_text_arr($content);
           }
         }else {

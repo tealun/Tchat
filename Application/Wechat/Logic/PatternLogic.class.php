@@ -172,12 +172,15 @@ class PatternLogic{
                   //缓存需要检测项目
                   S($openId,array(
                       'action'=>array(
-                        'c'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
-                        'a'=>'startPreg', //需要后续处理的公共方法
+                        'controller'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
+                        'methed'=>'startPreg', //需要后续处理的公共方法
                         ),
-                      'p'=>array( //需要传递到上述公共方法的变量及赋值
-                         'openId'=>$openId, 
-	                     'pattern'=>$pattern
+                      'needs'=>array(
+                      	'keyword' =>array(),	 //需要传递到上述公共方法的变量及赋值
+						'params' =>array(
+							 'openId'=>$openId, 
+	                    	 'pattern'=>$pattern
+							)
                         ),
                       'matches'=>$matches //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
                       ),
