@@ -175,7 +175,7 @@ public function test(){
    */
   private function news($news){
     $i=0;
-    foreach ($news as $var) {
+    foreach ($news as $key => $var) {
         $articles[$i]['Title'] = $var['title'];
         $articles[$i]['Description']= $var['description'];
           if($i==0){
@@ -188,10 +188,30 @@ public function test(){
           }
         $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Home/Article/detail/id/'.$var['id'].'.html';
         $i++;
-        if($i >= 9) { break; } //最多只允许10条新闻
+		unset($news[$key]);
+        if($i >= 8) {
+        	$count = count($news);
+        	$articles[$i]['Title']='后面还有'.$count.'条没有展示，请回复"mm"获取查看，5分钟内有效';
+			/* 
+			      //缓存过滤掉已回复后的数组内容
+                  S($openId,array(
+                      'action'=>array(
+                        'c'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
+                        'a'=>'startPreg', //需要后续处理的公共方法
+                        ),
+                      'p'=>array( //需要传递到上述公共方法的变量及赋值
+                         'openId'=>$openId, 
+	                     'keyword'=>'mm'
+                        ),
+                      'news'=>$news //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
+                      ),
+                      300);
+			*/
+			break; } //最多只允许10条新闻
         }
-    $this->data['ArticleCount'] = $i;
+    $this->data['ArticleCount'] = $i+1;
     $this->data['Articles'] = $articles;
+	unset($i);
   }
 
 

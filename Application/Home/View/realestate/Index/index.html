@@ -57,7 +57,12 @@
 	<dl class="link_list">
 	    <dt><img src="{:get_cover($vo['icon'],'path')}" alt=""></dt>
 	    <dd>
-	        <a href="{:U('Home/Article/index?category='.$vo['name'])}"><h3>{$vo.title}</h3></a>
+	    	<if condition="$vo['allow_publish'] eq 0">
+	    		<a href="{:U('Home/Article/index?category='.$vo['name'])}"><h3>{$vo.title}</h3></a>
+	    	<else />
+	    		<a href="{:U('Home/Article/lists?category='.$vo['name'])}"><h3>{$vo.title}</h3></a>
+	    	</if>
+
 	        <p>{$vo.description}</p>
 	    </dd>
 	</dl>

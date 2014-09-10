@@ -63,7 +63,7 @@ input, select, button {
 	padding-left: 10px;
 }
 
-.btn-group-justified button , .btn-group-justified div > a {
+.btn-group-justified button , .footer .btn-group-justified div > a {
 	border-left: 1px solid #FFFFFF;
 	border-right: 1px solid #D5D5D5;
 	background-color: #E5E5E5;
@@ -326,12 +326,17 @@ input, select, button {
 }
 
 /*内页*/
-.content {
+#contents {
 	width: 95%;
 	overflow: hidden;
 	margin: 10px auto;
 	min-height: 400px;
 }
+
+#contents p{
+	margin:10px 0;
+}
+
 .top_link {
 	width: 100%;
 	background: #e1e1e1;

@@ -42,13 +42,15 @@ class ReplyEvent {
       //TODO 对分类进行多层子分类查询，并对含多个子目录的分类从子分类中平均提取新闻条目
       case 'news' :
         $catIdarr = M('Category')->where(array('id'=>$rs['reply_id'],'pid'=>$rs['reply_id'],'_logic'=>'OR'))->getField('id',true);
-        $news = M($segment)->where(
-				        											array(
-				        											'category_id'=>array('in',$catIdarr), //在指定目录及其子目录下的文档
-				        											'status'=>array('eq',1), //状态为启用的
-				        											'deadline'=>array(	'NOT BETWEEN ',array(1,time())) //截止日期为0或大于现在时间的
-																	)
-																)->order('create_time desc')->getField('id,title,description,cover_id,link_id',8);
+		$map =array(
+				'category_id'=>array('in',$catIdarr), //在指定目录及其子目录下的文档
+				'status'=>array('eq',1), //状态为启用的
+				'deadline'=>array(	'NOT BETWEEN ',array(1,time())) //截止日期为0或大于现在时间的
+				);
+		$order =array('level'=>'desc','create_time'=>'desc');
+		
+		$SegModel = M($segment);
+        $news = $SegModel->where($map)->order($order)->getField('id,title,description,cover_id,link_id,level');
         $reply = !empty($news)?get_news_arr($news):get_text_arr("哎呀，仓库里空空如也，啥也没找到！>_<|||\n你有哆啦A梦的口袋么？");
         unset($catIdarr,$news);
         break;

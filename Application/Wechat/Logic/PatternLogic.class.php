@@ -175,7 +175,7 @@ class PatternLogic{
                         'c'=>"Pattern,Logic", //需要后续处理的控制器及命名空间
                         'a'=>'startPreg', //需要后续处理的公共方法
                         ),
-                      'p'=>array( //需要传递到上述公共发放的变量及赋值
+                      'p'=>array( //需要传递到上述公共方法的变量及赋值
                          'openId'=>$openId, 
 	                     'pattern'=>$pattern
                         ),

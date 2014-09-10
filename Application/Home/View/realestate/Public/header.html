@@ -4,13 +4,16 @@
 <div id="top" class="sub_nav">
 	<div class="sub_nav_l">
 		<a href="{:U('Home/Index/index')}">首页</a>
-		<if condition="$category['pid'] eq 0">
-			&gt;<a href="{:U('Home/Article/index?category='.$category['name'])}" alt="">{$category['title']}</a>
-		<elseif condition="$category['pid'] gt 0" />
+		<if condition="($category['pid'] eq 0) and ($category['allow_publish'] gt 0)">
+			{/*如果当前目录层的上级分类ID为0，且可以发布内容时，使用下面这行代码，链接用LISTS模板*/}
+			&gt;<a href="{:U('Home/Article/lists?category='.$category['name'])}" alt="">{$category['title']}</a>
+		<elseif condition="($category['pid'] gt 0) and ($category['allow_publish'] gt 0)" />
+		    {/*如果当前目录层的上级分类ID大于0，且可以发布内容时，使用下面这行代码，上级链接用index索引模板*/}
 			&gt;<a href="{:U('Home/Article/index?category='.get_category_name($category['pid']))}" alt="">{:get_category_title($category['pid'])}</a>	
-			&gt;<a href="{:U('Home/Article/lists?category='.$category['name'])}" alt="">{$category['title']}</a>	
+			&gt;<a href="{:U('Home/Article/lists?category='.$category['name'])}" alt="">{$category['title']}</a>
 		<else />
-
+			{/*否则，使用下面这行代码，链接用索引index模板*/}
+			&gt;<a href="{:U('Home/Article/index?category='.$category['name'])}" alt="">{$category['title']}</a>
 		</if>
 	</div>    
 	  <div class="sub_nav_r">{:C('WEB_SITE_TITLE')}</div>

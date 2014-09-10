@@ -187,8 +187,8 @@ INSERT INTO `onethink_auth_extend` VALUES ('5','23','1');
 -- -----------------------------
 -- Records of `onethink_auth_group`
 -- -----------------------------
-UPDATE `onethink_auth_group` SET `title`='管理组',`description` = '用于公司管理人员的帐号组',`rules` = '1,2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,26,36,37,38,39,40,41,65,67,68,69,70,71,72,73,74,79,88,89,90,91,92,93,107,108,109,110,211,214,215,216,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351' WHERE `id` ='2' limit '1';
-INSERT INTO `onethink_auth_group` VALUES ('3', 'admin', '1', '领导组', '用于领导人员的帐号组', '1', '1,2,17,316,318,322,323,335,337,349,350,351,352,353,354,355,356,357,358,362,364,370');
+UPDATE `onethink_auth_group` SET `title`='管理组',`description` = '用于网络管理人员的帐号组',`rules` = '1,2,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,39,40,46,47,48,49,50,51,52,53,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,81,82,83,84,86,87,88,89,90,91,92,93,100,102,103,107,108,109,110,195,207,211,213,214,300,301,302,303,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,329,330,331,332,333,400,401,402,403,404,405,406,407,408,409,410,411,412,413,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,550,551,552,553,554,' WHERE `id` ='2' limit 1;
+INSERT INTO `onethink_auth_group` VALUES ('3', 'admin', '1', '领导组', '用于领导人员的帐号组', '1', '1,2,3,15,16,17,18,23,24,26,27,88,107,108,109,110,301,306,307,308,309,310,311,312,313,314,315,316,317,318,322,407,408,409,410,411,412,413,451,453,456,459,461,464,466,550,551,554');
 INSERT INTO `onethink_auth_group` VALUES ('4', 'admin', '1', '行政组', '用于行政人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,334,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,364,365,366,367,368,369,370,371,372,373,374,375');
 INSERT INTO `onethink_auth_group` VALUES ('5', 'admin', '1', '活动组', '用于活动管理人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,335,336,337,343,349,350,351,352,353,354,355,356,357,358,359,361,362,364,365,366,367,368,370,371,372,373,374');
 INSERT INTO `onethink_auth_group` VALUES ('6', 'admin', '1', '终端组', '用于面向客户的工作人员的帐号组', '1', '1,316,318,323,337,343,349,350,351,352,353,354,355,356,357,359,361,362,364,370');
@@ -227,87 +227,92 @@ INSERT INTO `onethink_auth_rule` VALUES ('311', 'admin', '1', 'Admin/WechatKeywo
 
 INSERT INTO `onethink_auth_rule` VALUES ('312', 'admin', '1', 'Admin/WechatClient/index','客户列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('313', 'admin', '1', 'Admin/WechatClient/group','客户分组', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('314', 'admin', '1', 'Admin/WechatClient/detail', '详情','1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('314', 'admin', '1', 'Admin/WechatMessage/index','消息列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('315', 'admin', '1', 'Admin/WechatMessage/setStar','星标消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('316', 'admin', '1', 'Admin/WechatMessage/archive','存档消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('315', 'admin', '1', 'Admin/WechatMessage/index','消息列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('316', 'admin', '1', 'Admin/WechatMessage/setStar','星标消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('317', 'admin', '1', 'Admin/WechatMessage/archive','存档消息', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('317', 'admin', '1', 'Admin/WechatMessage/analytical','消息分析', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('318', 'admin', '1', 'Admin/WechatMessage/analytical','消息分析', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('318', 'admin', '1', 'Admin/WechatMessage/handle','处理消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('319', 'admin', '1', 'Admin/WechatMessage/delete','删除消息', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatMessage/reply','回复消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('319', 'admin', '1', 'Admin/WechatMessage/handle','处理消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('320', 'admin', '1', 'Admin/WechatMessage/delete','删除消息', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatMessage/reply','回复消息', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('321', 'admin', '1', 'Admin/WechatMenu/viewMenu','查看菜单', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatMenu/add','新增菜单', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatMenu/edit','编辑菜单', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatMenu/setStatus','改变状态', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('325', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatMenu/viewMenu','查看菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatMenu/add','新增菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatMenu/edit','编辑菜单', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('325', 'admin', '1', 'Admin/WechatMenu/setStatus','改变状态', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
+-- INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
 
 
-INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatQrcode/index','二维码列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatQrcode/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('330', 'admin', '1', 'Admin/WechatQrcode/getTicket','获得Ticket', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('331', 'admin', '1', 'Admin/WechatQrcode/showQrcode','查看二维码', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatQrcode/index','二维码列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('330', 'admin', '1', 'Admin/WechatQrcode/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('331', 'admin', '1', 'Admin/WechatQrcode/setStatus','改变状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('332', 'admin', '1', 'Admin/WechatQrcode/getTicket','获得Ticket', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('333', 'admin', '1', 'Admin/WechatQrcode/showQrcode','查看二维码', '1', '');
 
 -- 活动板块权限设置
 
-INSERT INTO `onethink_auth_rule` VALUES ('332', 'admin', '2', 'Admin/Activity/index','活动', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('400', 'admin', '2', 'Admin/Activity/index','活动', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('333', 'admin', '1', 'Admin/Activity/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('334', 'admin', '1', 'Admin/Activity/edit','编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('335', 'admin', '1', 'Admin/Activity/setStatus','改变状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('336', 'admin', '1', 'Admin/Activity/update','保存', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('337', 'admin', '1', 'Admin/Activity/autoSave','保存草稿', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('338', 'admin', '1', 'Admin/Activity/batchOperate','导入', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('401', 'admin', '1', 'Admin/Activity/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('402', 'admin', '1', 'Admin/Activity/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('403', 'admin', '1', 'Admin/Activity/setStatus','改变状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('404', 'admin', '1', 'Admin/Activity/update','保存', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('405', 'admin', '1', 'Admin/Activity/autoSave','保存草稿', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('406', 'admin', '1', 'Admin/Activity/batchOperate','导入', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('339', 'admin', '1', 'Admin/Activity/analytical','活动分析', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('407', 'admin', '1', 'Admin/Activity/analytical','活动分析', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('340', 'admin', '1', 'Admin/Activity/disabled','禁用箱', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('341', 'admin', '1', 'Admin/Activity/draftBox','活动草稿箱', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('342', 'admin', '1', 'Admin/Activity/recycle','活动回收站', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('343', 'admin', '1', 'Admin/Activity/restore','还原', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('344', 'admin', '1', 'Admin/Activity/clear','彻底删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('408', 'admin', '1', 'Admin/Activity/disabled','禁用箱', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('409', 'admin', '1', 'Admin/Activity/draftBox','活动草稿箱', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('410', 'admin', '1', 'Admin/Activity/recycle','活动回收站', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('411', 'admin', '1', 'Admin/Activity/restore','还原', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('412', 'admin', '1', 'Admin/Activity/clear','彻底删除', '1', '');
+
+INSERT INTO `onethink_auth_rule` VALUES ('413', 'admin', '1', 'Admin/Activity/index','活动列表', '1', '');
 
 -- 产品板块权限设置
 
-INSERT INTO `onethink_auth_rule` VALUES ('345', 'admin', '2', 'Admin/Product/index', '产品', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('450', 'admin', '2', 'Admin/Product/myProduct', '产品', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('346', 'admin', '1', 'Admin/Product/myProduct', '产品列表', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('347', 'admin', '1', 'Admin/Product/edit', '编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('348', 'admin', '1', 'Admin/Product/setStatus', '更改状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('349', 'admin', '1', 'Admin/Product/remove', '删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('451', 'admin', '1', 'Admin/Product/index?cate_id=80', '产品列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('452', 'admin', '1', 'Admin/Product/edit', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('453', 'admin', '1', 'Admin/Product/setStatus', '更改状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('454', 'admin', '1', 'Admin/Product/remove', '删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('350', 'admin', '1', 'Admin/Product/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('455', 'admin', '1', 'Admin/Product/add', '新增', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('351', 'admin', '1', 'Admin/Product/productCategory', '产品分类', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('456', 'admin', '1', 'Admin/Product/plan', '套餐', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('457', 'admin', '1', 'Admin/Product/addPlan', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('458', 'admin', '1', 'Admin/Product/editPlan', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('459', 'admin', '1', 'Admin/Product/setPlanStatus', '更改状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('460', 'admin', '1', 'Admin/Product/removePlan', '删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('352', 'admin', '1', 'Admin/Product/plan', '套餐', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('353', 'admin', '1', 'Admin/Product/addPlan', '新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('354', 'admin', '1', 'Admin/Product/editPlan', '编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('355', 'admin', '1', 'Admin/Product/setPlanStatus', '更改状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('356', 'admin', '1', 'Admin/Product/removePlan', '删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('461', 'admin', '1', 'Admin/Product/topic', '专题', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('462', 'admin', '1', 'Admin/Product/addTopic', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('463', 'admin', '1', 'Admin/Product/editTopic', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('464', 'admin', '1', 'Admin/Product/setTopicStatus', '更改状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('465', 'admin', '1', 'Admin/Product/removeTopic', '删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('357', 'admin', '1', 'Admin/Product/topic', '专题', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('358', 'admin', '1', 'Admin/Product/addTopic', '新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('359', 'admin', '1', 'Admin/Product/editTopic', '编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('360', 'admin', '1', 'Admin/Product/setTopicStatus', '更改状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('361', 'admin', '1', 'Admin/Product/removeTopic', '删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('466', 'admin', '1', 'Admin/ProductCategory/index', '分类管理', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('467', 'admin', '1', 'Admin/ProductCategory/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('468', 'admin', '1', 'Admin/ProductCategory/edit', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('469', 'admin', '1', 'Admin/ProductCategory/operate', '操作', '1', '');
 
 -- 相册板块权限设置
 
-INSERT INTO `onethink_auth_rule` VALUES ('362', 'admin', '2', 'Admin/Album/index','相册', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('550', 'admin', '2', 'Admin/Album/index','相册', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('363', 'admin', '1', 'Admin/Album/create','新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('364', 'admin', '1', 'Admin/Album/edit','编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('365', 'admin', '1', 'Admin/Album/setStatus','改变状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('366', 'admin', '1', 'Admin/Album/delete','删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('551', 'admin', '1', 'Admin/Album/index','相册列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('552', 'admin', '1', 'Admin/Album/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('553', 'admin', '1', 'Admin/Album/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('554', 'admin', '1', 'Admin/Album/setStatus','改变状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('555', 'admin', '1', 'Admin/Album/delete','删除', '1', '');
 
--- 这里是补充一些板块的权限设置
-
-INSERT INTO `onethink_auth_rule` VALUES ('801', 'admin', '1', 'Admin/WechatClient/detail', '详情','1', '');
 -- -----------------------------
 -- Records of `onethink_category`
 -- -----------------------------
@@ -481,7 +486,7 @@ INSERT INTO `onethink_menu` VALUES ('520', '新增产品', '500', '0', 'Admin/Pr
 INSERT INTO `onethink_menu` VALUES ('521', '查看分类', '500', '0', 'Admin/ProductCategory/index', '0', '查看当前的产品分类', '分类管理', '0');
 INSERT INTO `onethink_menu` VALUES ('522', '新增', '521', '0', 'Admin/ProductCategory/add', '0', '新增一个产品分类', '', '0');
 INSERT INTO `onethink_menu` VALUES ('523', '编辑', '521', '0', 'Admin/ProductCategory/edit', '0', '编辑一个产品分类', '', '0');
-INSERT INTO `onethink_menu` VALUES ('524', '编辑', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
+INSERT INTO `onethink_menu` VALUES ('524', '操作', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('540', '套餐列表', '500', '1', 'Admin/Product/plan', '0', '多种产品构成的组合套餐', '套餐管理', '0');
 INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/Product/addPlan', '0', '新增一款套餐', '套餐管理', '0');
