@@ -168,10 +168,16 @@ class PatternLogic {
 			$pattern['rule'] = "/^" . $preg['rule'] . "/";
 			$content = "请回复您的" . $tips . ",取消请回复'qx'\n（2分钟内有效）";
 			//缓存需要检测项目
-			S($openId, array('action' => array('controller' => "Pattern,Logic", //需要后续处理的控制器及命名空间
-			'methed' => 'startPreg', //需要后续处理的公共方法
-			), 'needs' => array('keyword' => array(), //需要传递到上述公共方法的变量及赋值
-			'params' => array('pattern' => $pattern)), 'matches' => $matches //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
+			S($openId, array(
+					'action' => array('
+							controller' => "Pattern,Logic", //需要后续处理的控制器及命名空间
+							'methed' => 'startPreg', //需要后续处理的公共方法
+						), 
+					'needs' => array(
+							'keyword' => '', //需要传递到上述公共方法的变量及赋值
+							'params' => '',
+							),
+			 'matches' => $matches //缓存现有匹配到的数据,在上述公共方法中会读取该缓存数组
 			), 120);
 			$reply = get_text_arr($content);
 		} else {
