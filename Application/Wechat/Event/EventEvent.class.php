@@ -1,6 +1,16 @@
 <?php
+// +----------------------------------------------------------------------
+// | Tchat
+// +----------------------------------------------------------------------
+// | Copyright (c) 2014 http://www.tealun.com
+// +----------------------------------------------------------------------
+// | Author: Tealun Du <tealun@tealun.com> <http://www.tealun.com>
+// +----------------------------------------------------------------------
 namespace Wechat\Event;
 
+/**
+ * 客户事件类型消息处理类
+ */
 class EventEvent {
 
 	/**
@@ -13,8 +23,9 @@ class EventEvent {
 	 */
 	public function eventHandle($openId, $event, $eventKey = '', $ticket = '') {
 		switch ($event) {
-			//如果是关注事件，拉取客户资料进行存储
 			//TODO 无法获取系统配置，采用自定义配置文件方式配置认证状态 再寻问题及解决方法
+			
+			/* 关注事件 */
 			case 'subscribe' :
 
 				//实例化客户模型
@@ -44,7 +55,8 @@ class EventEvent {
 
 				$Client -> update($data);
 				break;
-			//取消关注事件
+				
+			/* 取消关注事件 */
 			case 'unsubscribe' :
 				$Client = M('Tchat_client');
 				$Client -> getByOpenid($openId);
@@ -52,15 +64,19 @@ class EventEvent {
 				//更改关注状态
 				$Client -> save($data);
 				break;
+			
+			/* 扫描事件 */
 			case 'SCAN' :
 				$this -> qrcodePlusOne($ticket);
 				break;
+			
+			/* 自定义菜单点击事件 */
 			case 'CLICK' :
 				
 				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
-
+				//对点击事件的动作执行类型进行过滤
 				switch ($rs['action_type']) {
-					case 'keyword' :
+					case 'keyword' : //执行某关键词回复
 						$TextRe = A('Text', 'Event');
 						$keyword = $rs['action_code'];
 						return $reply = $TextRe -> textHandle($openId, $keyword);
@@ -68,14 +84,14 @@ class EventEvent {
 						break;
 
 					//当自定义菜单点击的回复类型为分类时
-					case 'category' :
+					case 'category' : //执行某分类文章回复
 						$re = array('reply_type' => 'news', 'reply_id' => $rs['action_code'], );
 
 						//直接回复图文列表
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
                    //当自定义菜单点击的回复类型为文档列表时
-					case 'document' :
+					case 'document' : //执行文章合集回复
 						$re = array('reply_type' => 'document', 'reply_id' => $rs['action_code'], );
 
 						//直接回复图文列表
@@ -93,7 +109,7 @@ class EventEvent {
  	}
  
 	/**
-	 * 扫描带参数的二维码事件
+	 * 二维码扫描数+1
 	 * @param $ticket 二维码TICKET
 	 */
 	protected function qrcodePlusOne($ticket) {

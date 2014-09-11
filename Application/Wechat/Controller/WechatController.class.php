@@ -10,13 +10,16 @@
 namespace Wechat\Controller;
 use Think\Controller;
 
+/**
+ * 微信接口处理类
+ */
 class WechatController extends Controller {
   /*
    * 定义所需变量 
    * $token 公众帐号接口TOKEN设置
    * $data 与微信后台进行交换数据的数组
    */
-  public $token = 'Tchat';
+  private $token = '';
   private $data = array();
 
   /*
@@ -24,23 +27,15 @@ class WechatController extends Controller {
    */
   //微信后台RUL设置CONTROLLER方法，检测是否是验证，非验证则进行消息回应
   public function index(){
-    if(IS_GET){
-     //TODO 如果是接入认证的话，就读取系统配置的TOKEN，然后转入认证流程
 
-      $this->valid();
+    if(IS_GET){//接入验证
+      $this -> token = get_ot_config('WECHAT_TOKEN');
+      $this->valid(); 
     }else {
-      //如果不是接入验证，则进入正常的客户消息响应流程
+      //如果不是接入验证，则进入客户消息响应流程
       $this->responseMsg();
     }
   }
-
-/**
- * 本方法用于测试本版块内的功能所用
- */
-public function test(){
-
-	
-}
 
   /**
    * 响应用户消息
@@ -50,10 +45,10 @@ public function test(){
     /*获取微信消息资源*/
     $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
     if (!empty($postStr)){
-
+	  /* 整理客户消息数据 */
       $data = $this->request($postStr);
       
-      /* 获取回复信息 */
+      /* 获取回复给客户的信息 */
       // 用list方法将reply方法返回的数组变量(内容,回复类型,星标)进行赋值
       list($content, $type, $flag) = $this->reply($data);
       /* 响应当前客户消息 */
@@ -68,43 +63,48 @@ public function test(){
 
   /**
    * 获取微信推送的数据
+   * @param object 微信推送过来的对象
    * @return array 转换为数组后的数据
-   * 
    */
   private function request($postStr){
       $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-      /* 获取客户消息 */
+      /* 将客户消息转换为数据数组 */
       foreach ($postObj as $key => $value) {
             $this->data[$key] = strval($value);
       }
            return $this->data;
     }
-  
+
   /**
+   * 判断客户消息类型方法
    * 根据用户发送内容生成的数组判断其消息类型并分别获取不同回复数据
-   * 
    * @param array $data 经解析后的用户数据
    * @return array 最终生成的回复内容数组
    */
   private function reply($data){
     $openId= $data['FromUserName'];
-    if('text' == $data['MsgType']){ //客户文本消息类型回复
+	
+    if('text' == $data['MsgType']){ //客户文本消息类型的处理流程
       $TextRe = A('Text','Event');
       $keyword = $data['Content'];
       $reply = $TextRe->textHandle($openId,$keyword);
-    } elseif('event' == $data['MsgType']){ //客户事件消息类型回复
+	  
+    } elseif('event' == $data['MsgType']){ //客户事件消息类型处理流程
       $EventRe = A('Event','Event');
       $event = $data['Event'];
       $eventKey = $data['EventKey'];
       $ticket = $data['Ticket'];
       $reply = $EventRe -> eventHandle($openId,$event,$eventKey,$ticket);
-    } elseif('image' == $data['MsgType']){ //客户图片消息类型回复
+	  
+    } elseif('image' == $data['MsgType']){ //客户图片消息类型处理流程
       $ImageRe = A('Image','Event');
       $mediaId = $data['MediaId'];
       $reply = $ImageRe->imageHandle($openId,$mediaId);
+	  
     }else {
-      exit;
+      $reply = get_text_arr('您的消息已成功发送过来，我们暂时还未能识别您的消息类型，我们后期会对此进行处理，感谢您的支持。');
     }
+	
     return $reply;
   }
 
@@ -128,18 +128,17 @@ public function test(){
       'MsgType'      => $type
     );
     
-    /* 添加类型数据 */
+    /* 根据回复信息类型添加相应数据到回复数据中 */
     $this->$type($content);
       
-    /* 添加状态 */
+    /* 添加星标状态 */
     $this->data['FuncFlag'] = $flag;
 
-    /*添加回复类型模板 */
+    /*设置回复信息类型的模板 */
     $tpl= get_wechat_tpl($type);
     $data=$this->data;
     //转换数据为XML 
     $this->data2xml($type,$tpl, $data);
-    exit();
   }
 
   
@@ -170,52 +169,50 @@ public function test(){
 
   /**
    * 回复的图文信息写入变量data
+   * 对于多于10条记录的，进行缓存分页，并设定查看下一页的回复关键字
    * @param  string $news 要回复的图文内容
-   * TODO 对于多于10条记录的，进行缓存分页，并设定查看下一页的回复关键字，可参考青龙老贼的教程
    */
   private function news($news){
+  	$openid = $this->data['ToUserName'];
+  	S($openid,NULL);
     $i=0;
     foreach ($news as $key => $var) {
         $articles[$i]['Title'] = $var['title'];
-        $articles[$i]['Description']= $var['description'];
-          if($i==0){
+          if($i==0){//如果是第一条，在没有指定封面的情况下使用默认图片，并加上描述
+          	$articles[$i]['Description']= $var['description'];//描述会在单图文时显示，多条时不会显示所以只在第一条中设置。
             $defaultPicUrl = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Public/Home/images/intro/'.rand(1,9).'.jpg';
             $articles[$i]['PicUrl'] = $var['cover_id'] == 0?$defaultPicUrl
             :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
-          }else{
+          }else{//其他条目如果没有指定封面，则设置为空
             $articles[$i]['PicUrl'] = $var['cover_id'] == 0?''
             :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
           }
         $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Home/Article/detail/id/'.$var['id'].'.html';
         $i++;
 		unset($news[$key]);
-        if($i >= 8) {
+		
+        if($i >= 8) { //最多只允许10条新闻，此处保险起见，打8条，9条明杠了，用来做提示
         	$count = count($news);
-        	$articles[$i]['Title']='后面还有'.$count.'条没有展示，请回复"mm"获取查看，5分钟内有效';
-			
-			      //缓存过滤掉已回复后的数组内容,缓存标识为客户openId
-			      $openid = $this->data['ToUserName'];
-				  var_dump($openid);
-			      var_dump($news);
+        	$articles[$i]['Title']='还有'.$count.'条没有展示，请回复"mm"获取查看，5分钟内有效';
 
+			      //缓存过滤掉已回复后的数组内容,缓存标识为客户openId
                   S($openid,array(
-	                      'action'=>array(
-		                        'controller'=>"Cache,Logic", //需要后续处理的控制器及命名空间
-		                        'methed'=>'newsCache', //需要后续处理的公共方法
-		                        ),
-	                      'needs'=>array(
-		                      	'keyword'=>array('mm','MM','Mm','mM'),
-		                      	'params' =>array($news)//需要传递到上述公共方法的变量及赋值
-							  )
-                      ),
-				  
-                      20); 
+                      'action'=>array(
+	                        'controller'=>"Cache,Logic", //需要后续处理的控制器及命名空间
+	                        'methed'=>'newsCache', //需要后续处理的公共方法
+	                        ),
+                      'needs'=>array(
+	                      	'keyword'=>'mm,mM,MM,Mm',
+	                      	'params' =>''//需要传递到上述公共方法的变量及赋值
+						  ),
+					  'news'=>$news
+                  ),
+                  300); 
 			$i++;//标识要比条数多加1
-				  
-			break;	 //最多只允许10条新闻，此处保险起见，打8条，9条明杠了，用来做提示
-			 } else{
+			break;
+		 } else{
         	S($openid,NULL);
-        }
+         }
 
         }
     $this->data['ArticleCount'] = $i;
@@ -252,7 +249,7 @@ public function test(){
         break;
     
     }
-    echo $resultStr;
+    return $resultStr;
   }
 
 
