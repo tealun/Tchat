@@ -50,7 +50,8 @@ class ReplyEvent {
 		$order =array('level'=>'desc','create_time'=>'desc');
 		
 		$SegModel = M($segment);
-        $news = $SegModel->where($map)->order($order)->getField('id,title,description,cover_id,link_id,level');
+		/*根据条件取出相应记录，限制80条，即10页内容*/
+        $news = $SegModel->where($map)->order($order)->getField('id,title,description,cover_id,link_id,level',80);
         $reply = !empty($news)?get_news_arr($news):get_text_arr("哎呀，仓库里空空如也，啥也没找到！>_<|||\n你有哆啦A梦的口袋么？");
         unset($catIdarr,$news);
         break;
