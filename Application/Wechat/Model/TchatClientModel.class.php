@@ -50,19 +50,24 @@ class TchatClientModel extends Model{
      * 如果不存在，则根据openId新建客户资料
      * 如果公众帐号通过了微信认证则提取客户在微信服务器上的资料存储到本地
      * 没有认证的帐号则忽略提取，直接存储openId
-     * 因此开发时如果涉及到存储客户信息或者查看客户信息，最好是先通过openId查找对应的客户ID，然后再进行查看或存储
+     * 因此开发时如果涉及到存储客户信息或者查看客户信息，最好是先通过openId调用本方法查找对应的客户ID，然后再进行查看或存储
      * 这样会自动从微信服务器上下载更新客户资料并返回ID值
      * @param string $openId
      */
     public function getClientId($openId){
+      /* 查看客户是否已存在 */
       $id = $this->where(array('openid'=>$openId))->getField('id');
-      if(!$id){
+	  
+	  /* 客户不存在时 */
+      if(!$id){ //未认证情况下，仅存储客户openid
       	$data = array(
           'openid'=>$openId,
-        );
-        if(check_wechat_rz()) $data = get_client_info($openId);
-        $this->create($data);
-        $id = $this->add();
+        ); 
+		
+		/* 查看认证情况 */
+        if(check_wechat_rz()) $data = get_client_info($openId);//已认证则从服务器获取该客户资料
+        $this->create($data);//创建客户数据
+        $id = $this->add();//新增数据
       }
       return $id;
     }
