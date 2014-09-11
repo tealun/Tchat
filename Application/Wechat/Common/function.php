@@ -92,21 +92,21 @@ function get_url_arr($content){
 /**
  * 客户发送消息后由于系统问题无法正常查询数据库等情况下回复客户出错
  * 一般情况下，如果出现此错误，并非Wechat模块问题，可参考是否正确连接数据库，配置文件是否正确，实例化对象是否正常
- * @param string $action  出现故障的操作方法
+ * @param string $action  出现故障的检测点操作方法
  * @param string $openId Content 客户发送的内容
- * @param string $mailMessge 发送给客服的信息内容，后期再写一个客服邮件发送函数
+ * @param string $mailMessge 发送给客服的信息内容，TODO: 后期再写一个客服邮件发送函数
  * @return array $Arr ['client']用于回复客户，['SUPPORT']用于报告客服
  */
 function get_wchat_error($action,$openId,$clientContent) {
   $time = Date('Y-m-d H:i:s',TIME());
   $client = get_client_info($openId);
-  $messge = "亲爱的\"".$client['nickname']."\":\n非常抱歉，貌似系统感冒了…\n此次故障我们已经记录，我们期待您通过网站或致电的方式将问题详情反馈给我们，以便我们尽快处理！\n网址：www.tealun.com \n电话：010-00000000";
+  $messge = "亲爱的\"".$client['nickname']?$client['nickname']:'朋友：'."\":\n非常抱歉，貌似系统感冒了…\n此次故障我们已经记录，我们会尽快处理，感谢您的支持。\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击进入官网</a>";
   $mailMessge= $time.$client['province'].$client['city']." 客户“".$client['nickname']."”在发送消息“".$clientContent."”时发生故障，事件环节为“".$action."”请尽快处理，如果您无法处理该问题，请致电开发人员解决。";
   
-  //将系统错误信息发送给客户，前提是Wechat模块运行正常
+  //返回错误信息，前提是Wechat模块运行正常
   return $Arr = array(
-    'client'=>$messge,
-    'SUPPORT' =>$mailMessge,
+    'client'=>$messge, //发送给客户的
+    'SUPPORT' =>$mailMessge, //发送给客服的
   );
 }
 
@@ -200,6 +200,6 @@ function check_wechat_type(){
  * @param $string $name 配置的name标识
  */ 
 function get_ot_config($name){
-  $res = M('Config')->where(array('name'=>$name))->getField('value');
-  return $res;
+  $val = M('Config')->where(array('name'=>$name))->getField('value');
+  return $val;
 }
