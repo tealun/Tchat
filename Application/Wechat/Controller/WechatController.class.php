@@ -249,7 +249,7 @@ class WechatController extends Controller {
         break;
     
     }
-    return $resultStr;
+    echo $resultStr; //最终的回复结果不能用return，只能用echo ，否则没响应。
   }
 
 
