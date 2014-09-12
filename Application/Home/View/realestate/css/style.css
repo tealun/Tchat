@@ -4,18 +4,18 @@
 	margin: 0 auto;
 }
 body {
-	font-size: 14px;
+	font-size: 16px;
 	font-family: "微软雅黑", Arial Narrow, arial, serif;
 }
 ul, li, dl, dt, dd, p, h4 {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	font-size: 14px;
+	font-size: 16px;
 }
 h1, h2, h3 {
-	font-size: 16px;
-	margin-top: 15px;!important
+	font-size: 18px;
+	margin-left:0;
 }
 img {
 	border: 0;
@@ -39,7 +39,7 @@ hr {
 	display: none;
 }
 input, select, button {
-	font: 12px Verdana, Arial, Tahoma;
+	font: 16px Verdana, Arial, Tahoma;
 	vertical-align: middle;
 	padding: 0;
 	margin: 0;
@@ -56,13 +56,17 @@ input, select, button {
 	overflow: hidden;
 }
 .container {
-	padding: 0 1%;
+	padding: 0 2%;
 }
 .container > h1, h2, h3 {
 	border-left: 4px solid #003366;
 	padding-left: 10px;
 }
 
+span .text{
+	font-size:12px;
+	color:#777777;
+} 
 .btn-group-justified button , .footer .btn-group-justified div > a {
 	border-left: 1px solid #FFFFFF;
 	border-right: 1px solid #D5D5D5;
@@ -99,13 +103,13 @@ input, select, button {
 }
 .sub_nav_l {
 	float: left;
-	font-size: 14px;
+	font-size: 16px;
 	padding-left: 10px;
 }
 
 .sub_nav_r {
 	float: right;
-	font-size: 14px;
+	font-size: 16px;
 	padding-right: 10px;
 }
 /*首页*/
@@ -274,7 +278,7 @@ input, select, button {
 	margin-bottom: 10px;
 }
 .lead {
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 100;
 	text-indent: 2em;
 	margin-bottom: 0;
@@ -326,6 +330,10 @@ input, select, button {
 }
 
 /*内页*/
+.content_title{
+	padding:0;
+}
+
 #contents {
 	width: 95%;
 	overflow: hidden;
@@ -489,7 +497,7 @@ table {
 	background: #ffa61b;
 	text-align: center;
 	color: #FFFFFF;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 2.0;
 }
 .list dl dd {
@@ -577,7 +585,7 @@ table {
 	width: 100%;
 }
 .table_1 table tr td {
-	font-size: 14px;
+	font-size: 16px;
 	color: #000000;
 	line-height: 3.0;
 	padding-right: 3%;
@@ -604,7 +612,7 @@ table {
 	width: 40%;
 	text-align: center;
 	margin: 10px auto;
-	font-size: 14px;
+	font-size: 16px;
 	color: #FFFFFF;
 	font-weight: bold;
 	line-height: 2.0;
