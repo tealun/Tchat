@@ -1,0 +1,70 @@
+<extend name="Base/common"/>
+
+<block name="body">
+    <article class="main-content">
+	    <header id="overview">
+			<div class="container">
+				<h2>{$info.title}</h2>
+				<p>
+					<span  class="pull-left">
+						<!-- <span class="author">{$info.uid|get_nickname}</span>
+						<a class="activity-meta" id="post-user" href="javascript:viewProfile();">
+	                   	<span class="text-ellipsis">{:C('WECHAT_NICKNAME')}</span><i class="icon_link_arrow"></i>
+	                	</a> -->
+						<span> 发表于 {$info.create_time|timeTip}前</span>
+					</span>
+					<span class="pull-right">
+						<article:prev name="prev" info="info">
+	                        <a href="{:U('?id='.$prev['id'])}">上一篇</a>
+	                    </article:prev>
+	                    <article:next name="next" info="info">
+	                        <a href="{:U('?id='.$next['id'])}">下一篇</a>
+	                    </article:next>
+					</span>
+				</p>
+			</div>
+		</header>
+		<hr/>
+		<div class="productInfo">
+			<table class="bordered">
+				<tr>
+					<th></th>
+					<th></th>
+				</tr>
+				<if condition="($info['style'] neq 0) OR ($info['style'] neq '')">
+					<tr>
+						<td >类型：</td><td >{$info.style}</td>					
+					</tr>
+				</if>
+				<if condition="($info['spec'] neq 0) OR ($info['spec'] neq '')">
+					<tr>
+						<td >规格：</td><td >{$info.spec}</td>					
+					</tr>
+				</if>
+				<if condition="($info['features'] neq 0) OR ($info['features'] neq '')">
+					<tr>
+						<td >特性：</td><td >{$info.features}</td>					
+					</tr>
+				</if>
+				<if condition="$info['amount'] neq 0">
+					<tr>
+						<td >总量：</td><td >{$info.amount}</td>					
+					</tr>
+				</if>
+				<if condition="$info['stock'] neq 0">
+					<tr>
+						<td >库存：</td><td >{$info.stock}</td>					
+					</tr>
+				</if>
+			</table>
+
+		</div>
+        
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">{$info.content}</section>
+        <hr/>
+       
+    </article>
+     {:hook('documentDetailAfter',$info)}
+</block>
