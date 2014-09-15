@@ -113,6 +113,33 @@ INSERT INTO `onethink_attribute` VALUES ('258', 'features', '产品特征', 'VAR
 INSERT INTO `onethink_attribute` VALUES ('259', 'amount', '产品总量', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品供应的总量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('260', 'stock', '产品库存', 'int(10) UNSIGNED NOT NULL', 'num', '0', '产品目前的库存量','1', '', '53','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
 
+-- Attribute of product Plan model
+INSERT INTO `onethink_attribute` VALUES ('279', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('280', 'name', '套餐标识','VARCHAR(100) NOT NULL', 'string', '', '设置套餐标识，请使用英文字母或拼音','1', '', '54','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('281', 'title', '套餐名称','VARCHAR(100) NOT NULL', 'string', '', '填写套餐名称','1', '', '54','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('282', 'description', '描述', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '54', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('283', 'products', '产品', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '54', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('284', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '套餐价格','1', '', '54','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('285', 'cover_id', '封面', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，需要函数处理', '1', '', '54', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('286', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '2', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('287', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('288', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('289', 'deadline', '截止时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '0-永久有效', '1', '', '54', '0', '1', '1387163248', '1383891233', '', '0', '', 'regex', '', '0', 'function');
+
+-- Attribute of product Topic model
+INSERT INTO `onethink_attribute` VALUES ('290', 'name', '专题标识','VARCHAR(100) NOT NULL', 'string', '', '设置专题标识，请使用英文字母或拼音','1', '', '55','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('291', 'title', '专题名称','VARCHAR(100) NOT NULL', 'string', '', '填写专题名称','1', '', '55','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
+INSERT INTO `onethink_attribute` VALUES ('292', 'description', '描述', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('293', 'products', '产品', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('294', 'plans', '套餐', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('295', 'cover_id', '封面', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，需要函数处理', '1', '', '55', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('296', 'tags', '标签', 'VARCHAR(100) NOT NULL ', 'string', '0', '请为该专题设置标签，将用此标签调取新闻资讯', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('297', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '2', '', '0', '', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('298', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('299', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('300', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('301', 'deadline', '截止时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '0-永久有效', '1', '', '55', '0', '1', '1387163248', '1383891233', '', '0', '', 'regex', '', '0', 'function');
+
 -- -----------------------------
 -- Records of  `onethink_model`
 -- -----------------------------
@@ -129,6 +156,11 @@ INSERT INTO `onethink_model`  VALUES ('51', 'tchat_album', '相册', '0', '', '1
 INSERT INTO `onethink_model`  VALUES ('52', 'tchat_menu', '自定义菜单', '0', '', '1', '{\"1\":[\"217\",\"212\",\"211\",\"210\",\"213\",\"214\",\"215\",\"216\"]}', '1:基础', '', '', '', '', 'id:编号\r\nsort:排序\r\nname:显示名称\r\nkey:系统识别码\r\ntype:菜单类型\r\nurl:跳转链接\r\naction_type:触发类型\r\naction:动作指令\r\nstatus:状态\r\nuid:用户\r\n', '10', '', '', '1407334493', '1407334851', '1', 'MyISAM');
 
 INSERT INTO `onethink_model`  VALUES ('53', 'product', '产品', '1', '', '1', '{\"1\":[\"2\",\"3\",\"252\",\"5\",\"12\",\"19\"],\"2\":[\"10\",\"11\",\"9\",\"13\",\"14\",\"16\",\"17\",\"20\"],\"3\":[\"254\",\"253\",\"255\",\"256\",\"257\",\"258\",\"259\",\"260\"]}', '1:基础,2:高级,3:属性设置', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+
+INSERT INTO `onethink_model`  VALUES ('54', 'tchat_plan', '产品套餐', '1', '', '1', '{\"1\":[\"280\",\"281\",\"284\",\"282\",\"283\",\"285\"]}', '1:基础', '', '', '', '', 'id:编号\r\nname:产品\r\nprice:价格\r\nspecial_price:特价', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+
+INSERT INTO `onethink_model`  VALUES ('55', 'tchat_topic', '产品专题', '1', '', '1', '{\"1\":[\"290\",\"291\",\"292\",\"293\",\"294\",\"295\",\"296\"]}', '1:基础', '', '', '', '', 'id:编号\r\ntitle:名称', '10', '', '', '1408519938', '1408519938', '1', 'MyISAM');
+
 
 -- -----------------------------
 -- 新建产品文档模型扩展表 `onethink_document_product`
@@ -286,17 +318,17 @@ INSERT INTO `onethink_auth_rule` VALUES ('454', 'admin', '1', 'Admin/Product/rem
 
 INSERT INTO `onethink_auth_rule` VALUES ('455', 'admin', '1', 'Admin/Product/add', '新增', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('456', 'admin', '1', 'Admin/Product/plan', '套餐', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('457', 'admin', '1', 'Admin/Product/addPlan', '新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('458', 'admin', '1', 'Admin/Product/editPlan', '编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('459', 'admin', '1', 'Admin/Product/setPlanStatus', '更改状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('460', 'admin', '1', 'Admin/Product/removePlan', '删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('456', 'admin', '1', 'Admin/ProductPlan/index', '产品套餐', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('457', 'admin', '1', 'Admin/ProductPlan/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('458', 'admin', '1', 'Admin/ProductPlan/edit', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('459', 'admin', '1', 'Admin/ProductPlan/setStatus', '更改状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('460', 'admin', '1', 'Admin/ProductPlan/remove', '删除', '1', '');
 
-INSERT INTO `onethink_auth_rule` VALUES ('461', 'admin', '1', 'Admin/Product/topic', '专题', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('462', 'admin', '1', 'Admin/Product/addTopic', '新增', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('463', 'admin', '1', 'Admin/Product/editTopic', '编辑', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('464', 'admin', '1', 'Admin/Product/setTopicStatus', '更改状态', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('465', 'admin', '1', 'Admin/Product/removeTopic', '删除', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('461', 'admin', '1', 'Admin/ProductTopic/index', '产品专题', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('462', 'admin', '1', 'Admin/ProductTopic/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('463', 'admin', '1', 'Admin/ProductTopic/edit', '编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('464', 'admin', '1', 'Admin/ProductTopic/setStatus', '更改状态', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('465', 'admin', '1', 'Admin/ProductTopic/remove', '删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('466', 'admin', '1', 'Admin/ProductCategory/index', '分类管理', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('467', 'admin', '1', 'Admin/ProductCategory/add', '新增', '1', '');
@@ -473,8 +505,9 @@ INSERT INTO `onethink_menu` VALUES ('353', '活动回收站', '340', '5', 'Admin
 INSERT INTO `onethink_menu` VALUES ('354', '还原', '353', '0', 'Admin/Activity/restore', '0', '还原已经删除的一项活动', '', '0');
 INSERT INTO `onethink_menu` VALUES ('355', '彻底删除', '353', '0', 'Admin/Activity/clear', '0', '彻底删除一项活动', '', '0');
 
+-- ----------------------
 -- 新增产品板块管理目录
-
+-- ----------------------
 INSERT INTO `onethink_menu` VALUES ('500', '产品', '0', '4', 'Admin/Product/myProduct', '0', '产品后台模块管理目录', '', '0');
 INSERT INTO `onethink_menu` VALUES ('501', '产品列表', '500', '0', 'Admin/Product/index?cate_id=80', '0', '列出我的产品', '产品管理', '0');
 INSERT INTO `onethink_menu` VALUES ('502', '编辑', '501', '1', 'Admin/Product/edit', '0', '编辑一种产品的详细信息', '', '0');
@@ -488,21 +521,22 @@ INSERT INTO `onethink_menu` VALUES ('522', '新增', '521', '0', 'Admin/ProductC
 INSERT INTO `onethink_menu` VALUES ('523', '编辑', '521', '0', 'Admin/ProductCategory/edit', '0', '编辑一个产品分类', '', '0');
 INSERT INTO `onethink_menu` VALUES ('524', '操作', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('540', '套餐列表', '500', '1', 'Admin/Product/plan', '0', '多种产品构成的组合套餐', '套餐管理', '0');
-INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/Product/addPlan', '0', '新增一款套餐', '套餐管理', '0');
-INSERT INTO `onethink_menu` VALUES ('542', '编辑', '540', '0', 'Admin/Product/editPlan', '0', '编辑一款套餐的内容', '', '0');
-INSERT INTO `onethink_menu` VALUES ('543', '更改状态', '540', '0', 'Admin/Product/setPlanStatus', '0', '更改一种套餐的启用状态', '', '0');
-INSERT INTO `onethink_menu` VALUES ('544', '删除', '540', '0', 'Admin/Product/removePlan', '0', '删除一种套餐', '', '0');
+INSERT INTO `onethink_menu` VALUES ('540', '套餐列表', '500', '1', 'Admin/ProductPlan/index', '0', '多种产品构成的组合套餐', '套餐管理', '0');
+INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/ProductPlan/add', '0', '新增一款套餐', '套餐管理', '0');
+INSERT INTO `onethink_menu` VALUES ('542', '编辑', '540', '0', 'Admin/ProductPlan/edit', '0', '编辑一款套餐的内容', '', '0');
+INSERT INTO `onethink_menu` VALUES ('543', '更改状态', '540', '0', 'Admin/ProductPlan/setStatus', '0', '更改一种套餐的启用状态', '', '0');
+INSERT INTO `onethink_menu` VALUES ('544', '删除', '540', '0', 'Admin/ProductPlan/remove', '0', '删除一种套餐', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('550', '专题列表', '500', '2', 'Admin/Product/topic', '0', '针对某场专题活动而进行的产品或套餐的组合', '专题管理', '0');
-INSERT INTO `onethink_menu` VALUES ('551', '编辑', '550', '0', 'Admin/Product/editTopic', '0', '编辑一项专题的内容', '', '0');
-INSERT INTO `onethink_menu` VALUES ('552', '更改状态', '550', '0', 'Admin/Product/setTopicStatus', '0', '更改专题的启用状态', '', '0');
-INSERT INTO `onethink_menu` VALUES ('553', '删除', '550', '0', 'Admin/Product/removeTopic', '0', '删除一项专题', '', '0');
+INSERT INTO `onethink_menu` VALUES ('550', '专题列表', '500', '2', 'Admin/ProductTopic/index', '0', '针对某场专题活动而进行的产品或套餐的组合', '专题管理', '0');
+INSERT INTO `onethink_menu` VALUES ('551', '编辑', '550', '0', 'Admin/ProductTopic/edit', '0', '编辑一项专题的内容', '', '0');
+INSERT INTO `onethink_menu` VALUES ('552', '更改状态', '550', '0', 'Admin/ProductTopic/setStatus', '0', '更改专题的启用状态', '', '0');
+INSERT INTO `onethink_menu` VALUES ('553', '删除', '550', '0', 'Admin/ProductTopic/remove', '0', '删除一项专题', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('554', '新增专题', '500', '0', 'Admin/Product/addTopic', '0', '新增一项专题', '专题管理', '0');
+INSERT INTO `onethink_menu` VALUES ('554', '新增专题', '500', '0', 'Admin/ProductTopic/add', '0', '新增一项专题', '专题管理', '0');
 
-
+-- --------------------
 -- 新增相册板块管理目录
+-- --------------------
 
 INSERT INTO `onethink_menu` VALUES ('600', '相册', '0', '5', 'Admin/Album/index', '0', '相册模块管理目录', '', '0');
 
@@ -515,9 +549,9 @@ INSERT INTO `onethink_menu` VALUES ('605', '新增相册', '600', '0', 'Admin/Al
 
 -- 若有其他板块的目录，可在此添加或在功能板块安装程序中向onethink_menu中添加目录数据，比如针对房地产行业的【地产】板块
 
--- -----------------------------
+-- ---------------------------------------------
 -- Table structure for `onethink_tchat_activity`
--- -----------------------------
+-- ---------------------------------------------
 DROP TABLE IF EXISTS `onethink_tchat_activity`;
 CREATE TABLE `onethink_tchat_activity` (
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -877,7 +911,7 @@ CREATE TABLE `onethink_tchat_menu` (
 -- -----------------------------
 DROP TABLE IF EXISTS `onethink_tchat_music`;
 CREATE TABLE `onethink_tchat_music` (
-	`id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '音乐型回复内容ID',
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '音乐型回复内容ID',
 	`music_url`	varchar(200) NOT NULL UNIQUE COMMENT '音乐链接地址',
 	`music_content` varchar(250) NOT NULL COMMENT '音乐描述',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
@@ -885,6 +919,47 @@ CREATE TABLE `onethink_tchat_music` (
 	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '音乐类型回复内容表';
+
+-- -----------------------------
+-- Table structure for `onethink_tchat_plan`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_tchat_plan`;
+CREATE TABLE `onethink_tchat_plan` (
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '套餐ID',
+	`name`	varchar(100) NOT NULL DEFAULT '' COMMENT '套餐标识',
+	`title`	varchar(100) NOT NULL DEFAULT '' UNIQUE COMMENT '套餐名称',
+	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '描述',
+	`products`	varchar(100) NOT NULL DEFAULT '0' COMMENT '产品',
+	`price`	FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '套餐价格',
+	`cover_id`	int(10) NOT NULL DEFAULT '0' COMMENT '封面',
+	`status` tinyint(2) NOT NULL default '1' COMMENT '状态',
+	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '失效时间',
+	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+	PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '产品套餐内容表';
+
+-- -----------------------------
+-- Table structure for `onethink_tchat_topic`
+-- -----------------------------
+DROP TABLE IF EXISTS `onethink_tchat_topic`;
+CREATE TABLE `onethink_tchat_topic` (
+	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '专题ID',
+	`name`	varchar(100) NOT NULL DEFAULT '' COMMENT '专题标识',
+	`title`	varchar(100) NOT NULL DEFAULT '' UNIQUE COMMENT '专题名称',
+	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '描述',
+	`products`	varchar(100) NOT NULL DEFAULT '0' COMMENT '产品',
+	`plans`	varchar(100) NOT NULL DEFAULT '0' COMMENT '套餐',
+	`cover_id`	int(10) NOT NULL DEFAULT '0' COMMENT '封面',
+	`tags`	varchar(100) NOT NULL DEFAULT '' COMMENT '标签',
+	`status` tinyint(2) NOT NULL default '1' COMMENT '状态',
+	`deadline` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '失效时间',
+	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
+	PRIMARY KEY(`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '产品专题内容表';
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_segment`
