@@ -6,6 +6,7 @@
 body {
 	font-size: 16px;
 	font-family: "微软雅黑", Arial Narrow, arial, serif;
+	background-color: #FDF6E3;
 }
 ul, li, dl, dt, dd, p, h4 {
 	margin: 0;
@@ -55,11 +56,13 @@ input, select, button {
 	height: 10px;
 	overflow: hidden;
 }
-.container-fluid {
-	padding: 0 2%;
+
+.container-fluid{
+	padding:0 1%;
 }
+
 .container-fluid > h1, h2, h3 {
-	border-left: 4px solid #003366;
+	border-left: 4px solid #FFFF99;
 	padding-left: 10px;
 }
 
@@ -117,7 +120,7 @@ span .text {
 	width: 100%;
 	line-height: 2.5;
 	font-size: 22px;
-	background: #003366;
+	background-color:#F8E8AA;
 	overflow: hidden;
 }
 .header p {
@@ -159,19 +162,41 @@ span .text {
 	width: 100%;
 }
 
-.logo h1 {
-	text-indent: -9999px;
+.newest {
+	background-color: #F08047;
 }
-
+.featrues{
+	background-color: #34B4E0;
+}
+.adviced{
+	background-color: #E15F63;
+}
 .newest h2, .featrues h2, .adviced h2 {
+	font-size:2em;
 	margin:auto;
+	padding-top:10px;
 	color:#DDDDDD;
 }
 
 .newest p, .featrues p, .adviced p {
-	margin-top: -1em;
+	line-height:1.7em;
+	text-align:center;
+	color:#FFFFFF;
+	background-color: rgba(25,25,25,.7);
 }
 
+.wave-icon {
+	width: 50%;
+}
+
+.logo {
+	background-color: #F8E8AA;
+	padding:10px 0;
+	margin-bottom:10px;
+	-webkit-box-shadow: 0 1px 1px #ccc;
+	-moz-box-shadow: 0 1px 1px #ccc;
+	box-shadow: 0 1px 1px #ccc;
+}
 
 .footer {
 	width: 95%;

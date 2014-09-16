@@ -1,24 +1,31 @@
 <extend name="Base/common"/>
 
-<block name="header"></block>
+<block name="header">
+	<div class="logo">
+			<div class="row">
+				<div class="col-xs-12">
+					<img src="{$Think.THEME_PATH}images/logo_03.png" alt="" />
+					<h1 class="hidden">兄弟海鲜大排档</h1>
+				</div>
+		    </div>	
+	</div>
+</block>
 
 <block name="body">
 
 	<section class="container-fluid"> <!-- Start Container Fluid -->
-		<div class="row">
-			<div class="col-xs-12 logo">
-				<img src="{$Think.THEME_PATH}images/logo.png" alt="" />
-				<h1>兄弟海鲜大排档</h1>
-			</div>
-		</div>
+
 		<div class="row newest"><!-- Start Row -->
 			<div class="col-xs-4">
 				<h2>新菜上市</h2>
+				<span class="wave-icon pull-right">
+					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+				</span>
 			</div>
 			<div class="col-xs-8">
-					<img src="" alt="" />
+					<img src="{$Think.THEME_PATH}images/cai-01.png" alt="" />
 					<p>
-						这里是新菜品的说明文字
+						这里是新菜品菜名
 					</p>
 			</div>
 		</div><!-- End Row -->
@@ -29,13 +36,16 @@
 		</div>
 		<div class="row  featrues"><!-- Start Row -->
 			<div class="col-xs-8">
-					<img src="" alt="" />
+					<img src="{$Think.THEME_PATH}images/cai-02.png" alt="" />
 					<p>
-						这里是厨师精选菜品的说明文字
+						这里是厨师精选菜名
 					</p>
 			</div>
 			<div class="col-xs-4">
 				<h2>厨师精选</h2>
+				<span class="wave-icon pull-left">
+					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+				</span>
 			</div>
 		</div> <!-- End Row -->
 		<div class="row">
@@ -43,15 +53,17 @@
 			<div class="col-xs-4">菜单2</div>
 			<div class="col-xs-4">菜单3</div>
 		</div>
-		<hr />
 		<div class="row adviced">
 		<div class="col-xs-4">
 			<h2>今日推荐</h2>
+			<span class="wave-icon pull-right">
+					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+				</span>
 		</div>
 		<div class="col-xs-8">
-					<img src="" alt="" />
+					<img src="{$Think.THEME_PATH}images/cai-04.png" alt="" />
 					<p>
-						这里是今日推荐菜品的说明文字
+						这里是今日推荐菜名
 					</p>
 		</div>
 		
