@@ -16,10 +16,24 @@
 		</volist>
 		<present name="article">：<a href="{:U('Product/index','cate_id='.$cate_id.'&pid='.$article['id'])}">{$article.title}</a></present>
 		]
-		<eq name="allow" value="0">（该分类不允许发布内容）</eq>
+		<eq name="allow" value="0">
+		（该分类不允许发布内容）
 		</h2>
 	</div>
-
+	<div class="tab-wrap">
+		<section class="gallery">
+	        <ul>
+	        	<volist name="cates" id="cate">
+	            <li>
+	            <span class="button-wrap"><a class="button button-circle button-primary" href="{:U('add',array('cate_id'=>$cate['id'],'pid'=>0,'model_id'=>53))}">{$cate['title']}</a></span>
+	            </li>
+				</volist>
+	       </ul>
+	     </section>
+	</div>
+	<else />
+		</h2>
+	</div>
 	<!-- 按钮工具栏 -->
 	<div class="cf">
 		<div class="fl">

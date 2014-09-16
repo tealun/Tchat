@@ -50,6 +50,36 @@ class ProductTopicController extends AdminController {
 		$this->display();
 	}
 	
+		/**
+	 * 新增或更新数据
+	 */
+	public function update() {
+			$TchatTopic = M('Tchat_topic');
+			if (IS_POST) {
+				$data=$_POST;
+				$TchatTopic -> create($data);//创建数据
+				
+				/* 新增数据 */
+				if (empty($id)) {
+					$status = $TchatTopic -> add();
+					if (FALSE == $status) {
+						$this -> error(empty($error) ? '未知错误！' : $error);
+					} else {
+						$this -> success('新增成功！', U('index'));
+					}
+					
+				/* 更新数据 */
+				} else {
+					$status = $TchatTopic -> save();
+					if (FALSE == $status) {
+						$this -> error(empty($error) ? '未知错误！' : $error);
+					} else {
+						$this -> success('更新成功！', U('index'));
+					}
+				}
+			}
+	}
+	
 	/**
 	 * 设置产品专题状态
 	 */

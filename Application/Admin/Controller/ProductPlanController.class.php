@@ -27,9 +27,9 @@ class ProductPlanController extends AdminController {
 		);
 
 	    $this->getLists($map);
-	    $this->meta_title = '活动列表';
+	    $this->meta_title = '产品套餐列表';
 	    $this->display(); // 输出模板
-        $this->display();
+
     }
 	
 	    /**
@@ -37,16 +37,20 @@ class ProductPlanController extends AdminController {
      * @author huajie <banhuajie@163.com>
      */
     public function add(){
-		
-		//获取表单字段排序
-        $fields = get_model_attribute($model['id']);
-        $this->assign('info',       $info);
-        $this->assign('fields',     $fields);
-        $this->assign('type_list',  get_type_bycate($cate_id));
-        $this->assign('model',      $model);
-		$this->meta_title = '新增'.$model['title'];
+		$info['model_id'] = '54';
 
-        $this->display();
+		/* 新增产品套餐变量赋值 */
+		//获取菜单模型
+		$model = M('Model') -> where(array('id' => $info['model_id'])) -> find();
+
+		//获取套餐表单字段排序
+		$fields = get_model_attribute($model['id']);
+		$this -> assign('info', $info);
+		$this -> assign('fields', $fields);
+		$this -> assign('model', $model);
+		/* 获取套餐信息 */
+		$this -> meta_title = '新增产品套餐';
+		$this -> display();
     }
 	
 	/**
@@ -55,6 +59,36 @@ class ProductPlanController extends AdminController {
 	public function edit(){
 		
 		$this->display();
+	}
+	
+	/**
+	 * 新增或更新数据
+	 */
+	public function update() {
+			$TchatPlan = M('Tchat_plan');
+			if (IS_POST) {
+				$data=$_POST;
+				$TchatPlan -> create($data);//创建数据
+				
+				/* 新增数据 */
+				if (empty($id)) {
+					$status = $TchatPlan -> add();
+					if (FALSE == $status) {
+						$this -> error(empty($error) ? '未知错误！' : $error);
+					} else {
+						$this -> success('新增成功！', U('index'));
+					}
+					
+				/* 更新数据 */
+				} else {
+					$status = $TchatPlan -> save();
+					if (FALSE == $status) {
+						$this -> error(empty($error) ? '未知错误！' : $error);
+					} else {
+						$this -> success('更新成功！', U('index'));
+					}
+				}
+			}
 	}
 	
 	/**
