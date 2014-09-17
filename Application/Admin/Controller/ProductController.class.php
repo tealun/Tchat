@@ -99,7 +99,7 @@ class ProductController extends ArticleController {
     }
 
     /**
-     * 文档新增页面初始化
+     * 产品新增页面初始化
      * @author huajie <banhuajie@163.com>
      */
     public function add(){
