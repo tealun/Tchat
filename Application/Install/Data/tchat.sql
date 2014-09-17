@@ -319,13 +319,13 @@ INSERT INTO `onethink_auth_rule` VALUES ('454', 'admin', '1', 'Admin/Product/rem
 INSERT INTO `onethink_auth_rule` VALUES ('455', 'admin', '1', 'Admin/Product/add', '新增', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('456', 'admin', '1', 'Admin/ProductPlan/index', '产品套餐', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('457', 'admin', '1', 'Admin/ProductPlan/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('457', 'admin', '1', 'Admin/ProductPlan/create', '新增', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('458', 'admin', '1', 'Admin/ProductPlan/edit', '编辑', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('459', 'admin', '1', 'Admin/ProductPlan/setStatus', '更改状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('460', 'admin', '1', 'Admin/ProductPlan/remove', '删除', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('461', 'admin', '1', 'Admin/ProductTopic/index', '产品专题', '1', '');
-INSERT INTO `onethink_auth_rule` VALUES ('462', 'admin', '1', 'Admin/ProductTopic/add', '新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('462', 'admin', '1', 'Admin/ProductTopic/create', '新增', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('463', 'admin', '1', 'Admin/ProductTopic/edit', '编辑', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('464', 'admin', '1', 'Admin/ProductTopic/setStatus', '更改状态', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('465', 'admin', '1', 'Admin/ProductTopic/remove', '删除', '1', '');
@@ -522,7 +522,7 @@ INSERT INTO `onethink_menu` VALUES ('523', '编辑', '521', '0', 'Admin/ProductC
 INSERT INTO `onethink_menu` VALUES ('524', '操作', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
 
 INSERT INTO `onethink_menu` VALUES ('540', '套餐列表', '500', '1', 'Admin/ProductPlan/index', '0', '多种产品构成的组合套餐', '套餐管理', '0');
-INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/ProductPlan/add', '0', '新增一款套餐', '套餐管理', '0');
+INSERT INTO `onethink_menu` VALUES ('541', '新增套餐', '500', '0', 'Admin/ProductPlan/create', '0', '新增一款套餐', '套餐管理', '0');
 INSERT INTO `onethink_menu` VALUES ('542', '编辑', '540', '0', 'Admin/ProductPlan/edit', '0', '编辑一款套餐的内容', '', '0');
 INSERT INTO `onethink_menu` VALUES ('543', '更改状态', '540', '0', 'Admin/ProductPlan/setStatus', '0', '更改一种套餐的启用状态', '', '0');
 INSERT INTO `onethink_menu` VALUES ('544', '删除', '540', '0', 'Admin/ProductPlan/remove', '0', '删除一种套餐', '', '0');
@@ -532,7 +532,7 @@ INSERT INTO `onethink_menu` VALUES ('551', '编辑', '550', '0', 'Admin/ProductT
 INSERT INTO `onethink_menu` VALUES ('552', '更改状态', '550', '0', 'Admin/ProductTopic/setStatus', '0', '更改专题的启用状态', '', '0');
 INSERT INTO `onethink_menu` VALUES ('553', '删除', '550', '0', 'Admin/ProductTopic/remove', '0', '删除一项专题', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('554', '新增专题', '500', '0', 'Admin/ProductTopic/add', '0', '新增一项专题', '专题管理', '0');
+INSERT INTO `onethink_menu` VALUES ('554', '新增专题', '500', '0', 'Admin/ProductTopic/create', '0', '新增一项专题', '专题管理', '0');
 
 -- --------------------
 -- 新增相册板块管理目录

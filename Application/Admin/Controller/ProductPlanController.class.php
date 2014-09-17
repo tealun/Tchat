@@ -21,10 +21,16 @@ class ProductPlanController extends AdminController {
      * @author huajie <banhuajie@163.com>
      */
     public function index($status = null, $title = null){
-		$map=array(
-			'status'=> '',
-			'deadline' => array('not between',array(1,time()))
-		);
+    	
+		if(!is_null($status)){
+			$map['status'] = $status; 
+		}
+		
+		if(!is_null($title)){
+			$map['title'] = $title;
+		}
+		
+		$map['deadline']=array('not between',array(1000000000,time()));
 
 	    $this->getLists($map);
 	    $this->meta_title = '产品套餐列表';
@@ -36,7 +42,7 @@ class ProductPlanController extends AdminController {
      * 新增产品套餐
      * @author huajie <banhuajie@163.com>
      */
-    public function add(){
+    public function create(){
 		$info['model_id'] = '54';
 
 		/* 新增产品套餐变量赋值 */
@@ -58,52 +64,102 @@ class ProductPlanController extends AdminController {
 	 */
 	public function edit(){
 		
-		$this->display();
+		if (IS_GET) {
+			$id = I('get.id', '');
+			if (empty($id)) {
+				$this -> error('参数不能为空！');
+			}
+
+			$info['model_id'] = '54';
+			$info['id'] = $id;
+
+			/*获取一条记录的详细数据*/
+			$TchatPlan = D('Tchat_plan');
+			$map = array(
+				'id' => $id
+			);
+			$data = $TchatPlan -> where($map)->find();
+			if (!$data) {
+				$this -> error($TchatPlan -> getError());
+			}
+			//赋值data变量，将作为字段的已有数据值对应设置为字段值
+			$this -> assign('data', $data);
+
+			//获取菜单模型
+			$model = M('Model') -> where(array('id' => $info['model_id'])) -> find();
+
+			//获取表单字段排序
+			$fields = get_model_attribute($model['id']);
+			
+			$this -> assign('info', $info);
+			$this -> assign('fields', $fields);
+			$this -> assign('model', $model);
+
+		}
+		$this -> meta_title = '编辑套餐';
+		$this -> display();
 	}
 	
 	/**
 	 * 新增或更新数据
 	 */
 	public function update() {
-			$TchatPlan = M('Tchat_plan');
+			$TchatPlan = D('Tchat_plan');
 			if (IS_POST) {
-				$data=$_POST;
-				$TchatPlan -> create($data);//创建数据
-				
-				/* 新增数据 */
-				if (empty($id)) {
-					$status = $TchatPlan -> add();
-					if (FALSE == $status) {
-						$this -> error(empty($error) ? '未知错误！' : $error);
+				$id = I('post.id');
+				if (false !== $TchatPlan -> update()) {
+					if (!empty($id)) {
+						$this -> success('更新成功！', U('index'));
 					} else {
 						$this -> success('新增成功！', U('index'));
 					}
-					
-				/* 更新数据 */
+	
 				} else {
-					$status = $TchatPlan -> save();
-					if (FALSE == $status) {
-						$this -> error(empty($error) ? '未知错误！' : $error);
-					} else {
-						$this -> success('更新成功！', U('index'));
-					}
+					$error = $TchatPlan -> getError();
+					$this -> error(empty($error) ? '未知错误！' : $error);
 				}
 			}
 	}
 	
-	/**
-	 * 设置产品套餐状态
-	 */
-	public function setStatus(){
-		
-	}
-	
-	/**
-	 * 删除产品套餐
-	 */
-	public function remove(){
+    /**
+     * 设置一条或者多条数据的状态
+     * @author huajie <banhuajie@163.com>
+     */
+    public function setStatus($model='Tchat_plan'){
+        return parent::setStatus('Tchat_plan');
+    }
 
-	}
+	//TODO 增加回收站功能
+
+	/**
+     * TODO 彻底删除一条或多条数据
+     * @author huajie <banhuajie@163.com>
+     */
+    public function delete($ids=''){
+    	if(!empty($ids)){
+    		$res = D('Tchat_plan')->remove($ids);
+	        if($res !== false){
+	            $this->success('彻底删除成功！');
+	        }else{
+	            $this->error('彻底删除失败！');
+	        }
+    	}else{
+    		$this->error('请选择要删除的数据。');
+    	}
+    }
+	
+    /**
+     * 清空回收站
+     * @author huajie <banhuajie@163.com>
+     */
+    public function clear(){
+        $res = D('Tchat_plan')->remove();
+        if($res !== false){
+            $this->success('清空回收站成功！');
+        }else{
+            $this->error('清空回收站失败！');
+        }
+    }
 	
 	 /**
 	 * 获取数据列表
