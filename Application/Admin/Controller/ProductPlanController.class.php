@@ -30,7 +30,7 @@ class ProductPlanController extends AdminController {
 			$map['title'] = $title;
 		}
 		
-		$map['deadline']=array('not between',array(1000000000,time()));
+		$map['deadline']=array('not between',array(1,time()));
 
 	    $this->getLists($map);
 	    $this->meta_title = '产品套餐列表';

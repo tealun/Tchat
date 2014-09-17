@@ -11,7 +11,7 @@ namespace Admin\Model;
 use Think\Model;
 
 /**
- * 带参数二维码模型
+ * 产品套餐模型
  */
 class TchatPlanModel extends Model {
 
@@ -32,15 +32,15 @@ class TchatPlanModel extends Model {
     );
 
     /**
-     * 获取菜单详细信息
+     * 获取套餐详细信息
 	 * 源自分类模型
-     * @param  milit   $id 菜单ID或标识
+     * @param  milit   $id 套餐ID或标识
      * @param  boolean $field 查询字段
-     * @return array     菜单信息
+     * @return array     套餐信息
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function info($id, $field = true){
-        /* 获取菜单信息 */
+        /* 获取套餐信息 */
         $map = array();
         if(is_numeric($id)){ //通过ID查询
             $map['id'] = $id;
@@ -51,7 +51,7 @@ class TchatPlanModel extends Model {
     }
 
     /**
-     * 更新菜单信息
+     * 更新套餐信息
      * @return boolean 更新状态
      * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
@@ -68,11 +68,8 @@ class TchatPlanModel extends Model {
             $res = $this->save();
         }
 
-        //更新菜单缓存
-        S('tchat_menu_list', null);
-
         //记录行为
-       // action_log('update_tchat_menu', 'tchat_menu', $data['id'] ? $data['id'] : $res, UID);
+       // action_log('update_tchat_plan', 'tchat_plan', $data['id'] ? $data['id'] : $res, UID);
 
         return $res;
     }
