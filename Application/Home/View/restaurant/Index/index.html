@@ -34,28 +34,37 @@
 			<div class="col-xs-4">系列2</div>
 			<div class="col-xs-4">系列3</div>
 		</div>
-		<div class="row  featrues"><!-- Start Row -->
-			<div class="col-xs-8">
-					<img src="{$Think.THEME_PATH}images/cai-02.png" alt="" />
-					<p>
-						这里是厨师精选菜名
-					</p>
-			</div>
-			<div class="col-xs-4">
-				<h2>厨师精选</h2>
-				<span class="wave-icon pull-left">
-					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
-				</span>
-			</div>
-		</div> <!-- End Row -->
-		<div class="row">
-			<div class="col-xs-4">菜单1</div>
-			<div class="col-xs-4">菜单2</div>
-			<div class="col-xs-4">菜单3</div>
-		</div>
+	<if condition="isset($productPos)" >
+		
+		<for start="0" end="4">
+			<assign name="pro" value="$productPos[$i]" /> {/* 将循环数组赋值给一个变量 */}
+			<if condition ="$i eq 0" >
+				<div class="row  featrues"><!-- Start Row -->
+					<div class="col-xs-8">
+							<img src="{:get_cover($pro['cover_id'],'path')}" alt="" />
+							<p>
+								{$pro.title}
+							</p>
+					</div>
+					<div class="col-xs-4">
+						<h2>厨师精选</h2>
+						<span class="wave-icon pull-left">
+							<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+						</span>
+					</div>
+				</div> <!-- End Row -->
+			<div class="row"> {/*第一条循环完成后新增ROW */ }
+			<else />
+					<div class="col-xs-4">{$pro.title}</div>
+			</if>
+		</for>
+	</div> {/*剩余条数循环完成后结束ROW */ }
+	
+	</if>
+
 		<div class="row adviced">
 		<div class="col-xs-4">
-			<h2>今日推荐</h2>
+			<h2>本周推荐</h2>
 			<span class="wave-icon pull-right">
 					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
 				</span>
@@ -63,7 +72,7 @@
 		<div class="col-xs-8">
 					<img src="{$Think.THEME_PATH}images/cai-04.png" alt="" />
 					<p>
-						这里是今日推荐菜名
+						这里是本周推荐菜名
 					</p>
 		</div>
 		
