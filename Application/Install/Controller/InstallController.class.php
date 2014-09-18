@@ -50,6 +50,7 @@ class InstallController extends Controller{
 	//安装第二步，创建数据库
 	public function step2($db = null, $admin = null){
 		if(IS_POST){
+
 			//检测管理员信息
 			if(!is_array($admin) || empty($admin[0]) || empty($admin[1]) || empty($admin[3])){
 				$this->error('请填写完整管理员信息');
@@ -69,7 +70,8 @@ class InstallController extends Controller{
 			} else {
 				$DB = array();
 				list($DB['DB_TYPE'], $DB['DB_HOST'], $DB['DB_NAME'], $DB['DB_USER'], $DB['DB_PWD'],
-					 $DB['DB_PORT'], $DB['DB_PREFIX']) = $db;
+					 $DB['DB_PORT'], $DB['DB_PREFIX'],$DB['TEST_DATA']) = $db;
+
 				//缓存数据库配置
 				session('db_config', $DB);
 
@@ -102,7 +104,6 @@ class InstallController extends Controller{
 		if(session('step') != 2){
 			$this->redirect('step2');
 		}
-
 		$this->display();
 
 		//连接数据库
@@ -128,13 +129,5 @@ class InstallController extends Controller{
 		}
 	}
 
-	//TODO Tchat 提供是否安装测试数据以及选择安装模块选项（用以配置不同行业功能模块）
-/*	public function step4(){
-		if(session('step') = 3){
-			$this->display();
-		}else{
-		show_msg();
-		}
-	}*/
 }
 

@@ -50,6 +50,10 @@
                 <input type="text" name="db[]" value="onethink_">
                 <span>数据表前缀，同一个数据库运行多个系统时请修改为不同的前缀</span>
             </div>
+			<div class="switch" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label="<i class='icon-remove'></i>">
+			    <input type="checkbox" id="test-data" name="db[]" />
+                <span>是否安装测试数据，默认不安装</span>
+			</div>
         </div>
 
         <div class="create-database">
@@ -77,4 +81,12 @@
 <block name="footer">
     <a class="btn btn-success btn-large" href="{:U('Install/step1')}">上一步</a>
     <button id="submit" type="button" class="btn btn-primary btn-large" onclick="$('form').submit();return false;">下一步</button>
+
+ <script type="text/javascript">
+ $(function(){
+ 	$("#test-data").bootstrapSwitch();
+ });
+ 
+ </script>
+
 </block>
