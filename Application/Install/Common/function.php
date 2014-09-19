@@ -180,7 +180,8 @@ function create_tables($db, $prefix = ''){
 	$sql = file_get_contents(MODULE_PATH . 'Data/install.sql');
 	//Tchat 载入Wechat数据
 	$sql .= file_get_contents(MODULE_PATH . 'Data/tchat.sql');
-	if(!empty($db['TEST_DATA'])) {
+	
+	if(session('test_data')) {
 	$sql .= file_get_contents(MODULE_PATH . 'Data/testdata.sql');
 	}
 	$sql = str_replace("\r", "\n", $sql);

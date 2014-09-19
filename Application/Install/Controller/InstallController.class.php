@@ -74,7 +74,10 @@ class InstallController extends Controller{
 
 				//缓存数据库配置
 				session('db_config', $DB);
-
+				
+				//根据选择是否安装测试数据，设置session
+				$DB['TEST_DATA'] ? session('test_data', TRUE) : session('test_data', FALSE)  ;
+				
 				//创建数据库
 				$dbname = $DB['DB_NAME'];
 				unset($DB['DB_NAME']);
