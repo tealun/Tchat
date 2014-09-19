@@ -216,6 +216,9 @@ class WechatKeywordController extends WechatController {
         return parent::setStatus('Tchat_keyword_group');
     }
     
+	/**
+	 * 获取数据列表
+	 */
     private function getLists($map){
       $list   = $this->lists('Tchat_keyword_group',$map);
       col_to_string($list);

@@ -19,7 +19,6 @@ class WechatMenuController extends WechatController {
 	/**
 	 * 获取微信账号的验证状态
 	 * 在微信后台配置中设置WECHAT_ACCOUNT_RZ配置项
-	 * Enter description here ...
 	 */
 	protected function getRZ() {
 		//如果账号没有认证过，且账号为订阅号时返回FALSE,否则返回TRUE
