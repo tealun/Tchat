@@ -288,6 +288,11 @@ INSERT INTO `onethink_auth_rule` VALUES ('331', 'admin', '1', 'Admin/WechatQrcod
 INSERT INTO `onethink_auth_rule` VALUES ('332', 'admin', '1', 'Admin/WechatQrcode/getTicket','获得Ticket', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('333', 'admin', '1', 'Admin/WechatQrcode/showQrcode','查看二维码', '1', '');
 
+INSERT INTO `onethink_auth_rule` VALUES ('334', 'admin', '1', 'Admin/WechatText/index','文本列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('335', 'admin', '1', 'Admin/WechatText/create','新增', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('336', 'admin', '1', 'Admin/WechatText/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('337', 'admin', '1', 'Admin/WechatText/remove','删除', '1', '');
+
 -- 活动板块权限设置
 
 INSERT INTO `onethink_auth_rule` VALUES ('400', 'admin', '2', 'Admin/Activity/index','活动', '1', '');
@@ -457,6 +462,11 @@ INSERT INTO `onethink_menu` VALUES ('394', '新增菜单', '300', '0', 'Admin/We
 -- INSERT INTO `onethink_menu` VALUES ('395', '菜单回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
 -- INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
 -- INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('410','文本列表','300','0','Admin/WechatText/index','0','查看文本数据列表','文本素材','0');
+INSERT INTO `onethink_menu` VALUES ('411','编辑','410','0','Admin/WechatText/edit','0','编辑文本内容','','0');
+INSERT INTO `onethink_menu` VALUES ('412','删除','410','0','Admin/WechatText/remove','0','删除文本内容','','0');
+INSERT INTO `onethink_menu` VALUES ('413','新增文本','300','0','Admin/WechatText/create','0','新建文本内容','文本素材','0');
 
 INSERT INTO `onethink_menu` VALUES ('421', '二维码列表', '300', '0', 'Admin/WechatQrcode/index', '0', '所有场景值二维码的列表', '二维码管理', '0');
 INSERT INTO `onethink_menu` VALUES ('422', '新增二维码', '300', '0', 'Admin/WechatQrcode/create', '0', '新增一个场景值二维码', '二维码管理', '0');
@@ -958,3 +968,7 @@ CREATE TABLE `onethink_tchat_vote_list` (
 	`sort` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '投票细项列表';
+
+-- ---------------------------
+-- End of install tchat tables
+-- ---------------------------
