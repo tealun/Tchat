@@ -49,6 +49,15 @@ function get_wechat_tpl($type){
                <FuncFlag>![CDATA[%s]]</FuncFlag>
                </xml>";
       break;
+	  
+	  case 'service':
+      $tpl = "<xml>
+        <ToUserName><![CDATA[%s]]></ToUserName>
+        <FromUserName><![CDATA[%s]]></FromUserName>
+        <CreateTime>%s</CreateTime>
+        <MsgType><![CDATA[%s]]></MsgType>
+        </xml>";
+      break;
   }
   return $tpl;
 }
@@ -89,6 +98,11 @@ function get_url_arr($content){
   return $arr;
 }
 
+function get_service_arr(){
+  $arr = array($content,'transfer_customer_service',0);
+  return $arr;
+}
+
 /**
  * 客户发送消息后由于系统问题无法正常查询数据库等情况下回复客户出错
  * 一般情况下，如果出现此错误，并非Wechat模块问题，可参考是否正确连接数据库，配置文件是否正确，实例化对象是否正常
@@ -97,7 +111,7 @@ function get_url_arr($content){
  * @param string $mailMessge 发送给客服的信息内容，TODO: 后期再写一个客服邮件发送函数
  * @return array $Arr ['client']用于回复客户，['SUPPORT']用于报告客服
  */
-function get_wchat_error($action,$openId,$clientContent) {
+function get_wechat_error($action,$openId,$clientContent) {
   $time = Date('Y-m-d H:i:s',TIME());
   $client = get_client_info($openId);
   $messge = "亲爱的\"".$client['nickname']?$client['nickname']:'朋友：'."\":\n非常抱歉，貌似系统感冒了…\n此次故障我们已经记录，我们会尽快处理，感谢您的支持。\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击进入官网</a>";

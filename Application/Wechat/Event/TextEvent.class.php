@@ -37,25 +37,27 @@ class TextEvent {
 		
 		/* 开始通过自定义关键字查询回复 */
 		if (!$New = M('Tchat_keyword')) {//当M实例化关键字模型出错时
-			$content = get_wchat_error(U('textHadle', '', ''), $openId, $keyword); ;
+			$content = get_wechat_error(U('textHadle', '', ''), $openId, $keyword); ;
 			$reply = array($content['client'], 'text', 0);
 			return $reply;
 		} else {
 			/* 对关键字进行匹配查询,找到所有对应的关键词组ID */
 			$findGroup = $New -> where(array('keyword' => $keyword)) -> distinct(true) -> field('group_id')-> select();
-			if ($findGroup) {
-				if ($reply = $this -> keywordMatch($findGroup)) {
+			$reply = $this -> keywordMatch($findGroup);
+			if ($reply){
 					return $reply;
-				} else {
+				}else{ //没有全匹配结果时，进行一次模糊匹配查询
 					$reply = $this -> keywordLike($keyword);
-					return $reply ? $reply : get_text_arr("/::< 抱歉，没有为您找到想要的结果。");
+					if($reply){
+						return $reply;
+					}else{//模糊查询也没有结果时，回复信息
+						$content = "/::< 抱歉，没有为您找到想要的结果。";
+						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
+						  $content .= "\n您可以回复“KF”或“客服”咨询我们的在线客服";
+					}
+					return $reply = get_text_arr($content);
 				}
-			} elseif (is_null($findGroup)) {
-				//没有全匹配查询结果，返回数据为空时进行一次模糊查询
-				$reply = $this -> keywordLike($keyword);
-				return $reply ? $reply : get_text_arr("/::< 抱歉，没有为您找到想要的结果。");
 			}
-		}
 
 	}
 
@@ -72,7 +74,9 @@ class TextEvent {
 				return false;
 			} else {
 				//判断是否过期，0为长期有效，过期则回复过期回复文字，有效则进入相应模型查找回应内容。
-				return $reply = 0 < $rs['deadline'] && $rs['deadline'] < time() ? get_text_arr( M('Tchat_text') -> where('`id`="' . $rs['dead_text'] . '"') -> getField('content')) : A('Reply', 'Event') -> wechatReply($rs);
+				return $reply = 0 < $rs['deadline'] && $rs['deadline'] < time() ? 
+								get_text_arr( M('Tchat_text') -> where('`id`="' . $rs['dead_text'] . '"') -> getField('content'))
+							: A('Reply', 'Event') -> wechatReply($rs);
 			}
 		}
 	}

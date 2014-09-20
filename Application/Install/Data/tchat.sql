@@ -406,8 +406,9 @@ INSERT INTO `onethink_config` VALUES ('42', 'WECHAT_NICKNAME', '1', '微信昵�
 INSERT INTO `onethink_config` VALUES ('43', 'WECHAT_TOKEN', '1', '微信TOKEN', '5', '', '公众帐号的接入本地验证码,可自行设定，请确保微信后台开发者模式TOKEN填写与此保持一致', '1378898976', '1379235841', '1', 'Tchat', '5');
 INSERT INTO `onethink_config` VALUES ('44', 'WECHAT_APP_ID', '1', 'APPID', '5', '', '公众帐号的APPID', '1378898976', '1379235841', '1', '', '6');
 INSERT INTO `onethink_config` VALUES ('45', 'WECHAT_APP_SECRET', '1', 'APP_SECRET', '5', '', '公众帐号的APPSECRET', '1378898976', '1379235841', '1', '', '7');
-INSERT INTO `onethink_config` VALUES ('46', 'WECHAT_ACCOUNT_TYPE', '4', '账号类型', '5', '0:订阅号\r\n1:服务号', '公众帐号类型', '1378898976', '1379235841', '1', '0', '7');
-INSERT INTO `onethink_config` VALUES ('47', 'WECHAT_ACCOUNT_RZ', '4', '认证状态', '5', '0:未认证\r\n1:已认证\r\n2:微博认证', '公众账号的认证状态', '1378898976', '1379235841', '1', '0', '7');
+INSERT INTO `onethink_config` VALUES ('46', 'WECHAT_ACCOUNT_TYPE', '4', '账号类型', '5', '0:订阅号\r\n1:服务号', '公众帐号类型', '1378898976', '1379235841', '1', '0', '8');
+INSERT INTO `onethink_config` VALUES ('47', 'WECHAT_ACCOUNT_RZ', '4', '认证状态', '5', '0:未认证\r\n1:已认证\r\n2:微博认证', '公众账号的认证状态', '1378898976', '1379235841', '1', '0', '9');
+INSERT INTO `onethink_config` VALUES ('48', 'WECHAT_CUSTOM_SERVICE', '4', '多客服服务', '5', '0:未开通\r\n1:已开通', '公众帐号后台控制，只有已认证的服务号才可开通', '1378898976', '1379235841', '1', '0', '10');
 
 -- -----------------------------
 -- Records of `onethink_menu`
