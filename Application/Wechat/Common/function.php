@@ -98,8 +98,12 @@ function get_url_arr($content){
   return $arr;
 }
 
+/**
+ * 转接客服消息类型整合返回数组
+ * 不需要实际内容
+ */
 function get_service_arr(){
-  $arr = array($content,'transfer_customer_service',0);
+  $arr = array('','service',0); //这里使用service类型标识,返回后续流程中注意要将<MegType>设置为"transfer_customer_service"
   return $arr;
 }
 

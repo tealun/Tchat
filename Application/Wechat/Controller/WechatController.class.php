@@ -48,10 +48,10 @@ class WechatController extends Controller {
 	  /* 整理客户消息数据 */
       $data = $this->request($postStr);
       
-      /* 获取回复给客户的信息 */
+      /* 获取回复给客户的格式化信息 */
       // 用list方法将reply方法返回的数组变量(内容,回复类型,星标)进行赋值
       list($content, $type, $flag) = $this->reply($data);
-      /* 响应当前客户消息 */
+      /* 响应给当前客户 */
       $this->response($content, $type, $flag);
 
     }else {
@@ -220,6 +220,9 @@ class WechatController extends Controller {
 	unset($i);
   }
 
+private function service(){
+	$this->data['MsgType'] = "transfer_customer_service";
+}
 
   /**
      * 数据XML编码
@@ -244,8 +247,13 @@ class WechatController extends Controller {
         }
         $resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType'],$data['ArticleCount'],$articlesStr,$data['FuncFlag']);
         break;
+		
       case 'music':
         $resultStr = sprintf();
+        break;
+		
+	case 'service':
+        $resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType']);
         break;
     
     }

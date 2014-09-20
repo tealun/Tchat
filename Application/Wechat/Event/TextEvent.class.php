@@ -23,18 +23,18 @@ class TextEvent {
 	public function textHandle($openId, $keyword) {
 		$this -> openId = $openId;
 
-		/* 对是否需要验证客户信息的项目进行关键字匹配 */
-		if ($reply = A('Pattern', 'Logic') -> findPreg($openId, $keyword)) {
-			return $reply;
-		}
-
 		/* 查看是否有客户缓存 */
 		if (S($openId)) {
 			if ($reply = A('Cache', 'Logic') -> cacheReply($openId, $keyword)) {
 				return $reply;
 			};
 		}
-		
+
+		/* 对是否需要验证客户信息的项目进行关键字匹配 */
+		if ($reply = A('Pattern', 'Logic') -> findPreg($openId, $keyword)) {
+			return $reply;
+		}
+
 		/* 开始通过自定义关键字查询回复 */
 		if (!$New = M('Tchat_keyword')) {//当M实例化关键字模型出错时
 			$content = get_wechat_error(U('textHadle', '', ''), $openId, $keyword); ;
@@ -48,19 +48,36 @@ class TextEvent {
 					return $reply;
 				}else{ //没有全匹配结果时，进行一次模糊匹配查询
 					$reply = $this -> keywordLike($keyword);
-					if($reply){
-						return $reply;
+					if($reply ){
+						return $reply ;
 					}else{//模糊查询也没有结果时，回复信息
 						$content = "/::< 抱歉，没有为您找到想要的结果。";
 						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
-						  $content .= "\n您可以回复“KF”或“客服”咨询我们的在线客服";
+						  $content .= "\n\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
+								
+								/*转接客服缓存*/
+								S($openId, array(
+								'action' => array(
+									'controller' => "Cache,Logic", //需要后续处理的控制器及命名空间
+									'methed' => 'serviceCache', //需要后续处理的公共方法
+									), 
+								'needs' => array(
+									'keyword' => "1,是", //取缓存数组的键名作为关键字数组
+									'params' => '' //传入到上述方法的公共参数
+									)
+								), 60);
+						
+						return $reply = get_text_arr($content);
 					}
-					return $reply = get_text_arr($content);
+					
 				}
 			}
 
 	}
 
+	/**
+	 * 关键词完全匹配查询
+	 * */
 	private function keywordMatch($findGroup) {
 		//有多个匹配结果
 		if (!empty($findGroup[1])) {
@@ -70,7 +87,7 @@ class TextEvent {
 			$map['id'] = $findGroup[0]['group_id'];
 			$rs = M('Tchat_keyword_group') -> where($map) -> find();
 
-			if ($rs['status'] == '0' || $rs['status'] == '-1') {
+			if ($rs['status'] <= '0') {
 				return false;
 			} else {
 				//判断是否过期，0为长期有效，过期则回复过期回复文字，有效则进入相应模型查找回应内容。
@@ -86,10 +103,15 @@ class TextEvent {
 	 * @param string $keyword 关键词
 	 */
 	private function keywordLike($keyword) {
+		
 		$New = M('Tchat_keyword');
-		$map['keyword'] = array('like', '%' . $keyword . '%');
+		$map['keyword'] = array('like', '%'.$keyword.'%' );
 		$findGroup = $New -> where($map) -> distinct(true) -> field('group_id') -> limit(10) -> select();
-		return $reply = $this -> findGroup($findGroup);
+		if (is_null($findGroup)) {
+			return FALSE;
+		} else {
+			return $reply = $this -> findGroup($findGroup);
+		}
 
 	}
 

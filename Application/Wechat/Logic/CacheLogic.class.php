@@ -55,7 +55,7 @@ class CacheLogic{
 			 //如果在缓存中指定了传入变量，则通过指定控制器方法传入指定变量获取回复
 		     $reply = call_user_func_array(array($action,$methed), array($openId,$keyword,$data['needs']['params']));
 	    }else{
-	    	//如果缓存中没有指定传入变量，则将客户发送的关键字传入到指定控制器的方法
+	    	//如果缓存中没有指定传入变量，则将默认客户发送的关键字传入到指定控制器的方法
 		    $reply = A($action[0],$action[1])->$methed($openId,$keyword);
 		    }
 		
@@ -90,6 +90,15 @@ class CacheLogic{
 	$cache = S($openId);
 	$news = $cache['news'];
   	return $reply = get_news_arr($news);
+  }
+  
+  /**
+   * 转接客服
+   * 客户确认后转接到客服
+   */
+  public function serviceCache($openId,$keyword=''){
+  		S($openId,NULL);
+  		return $reply = get_service_arr($news);
   }
   
 }
