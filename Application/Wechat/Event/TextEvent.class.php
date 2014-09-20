@@ -53,7 +53,7 @@ class TextEvent {
 					}else{//模糊查询也没有结果时，回复信息
 						$content = "/::< 抱歉，没有为您找到想要的结果。";
 						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
-						  $content .= "\n\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
+						  $content .= "\n--------------------\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
 								
 								/*转接客服缓存*/
 								S($openId, array(
@@ -148,7 +148,7 @@ class TextEvent {
 				unset($listCache);
 				//清除缓存变量
 			} else {//找到多个符合的记录是，提供选择并缓存
-				$content = "[愉快]为您找到" . $i . "个结果：\n" . $contentlist . "您可以回复以上序号查看相关信息。\n (一分钟内有效)\r(づ￣ ³￣)づ";
+				$content = "[愉快]为您找到" . $i . "个结果：\n--------------------\n" . $contentlist . "\n--------------------\n您可以回复以上序号查看相关信息。\n (一分钟内有效)\r(づ￣ ³￣)づ";
 				unset($i);
 
 				$openId = $this -> openId;
