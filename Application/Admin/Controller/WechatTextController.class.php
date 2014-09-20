@@ -69,14 +69,21 @@ class WechatTextController extends WechatController {
 			$id = $data['id'];
 			$Text = M('Tchat_text');
 			$Text-> create($data);
-			if(!$id){
+			if(empty($id)){
 				$status = $Text -> add();
-				$re = $status?'新增文本成功':'新增文本失败';
+				if($status == FALSE){
+					$this -> error('新增失败',U('index'));
+				}else{
+					$this -> success('新增成功',U('index'));
+				}
 			}else{
 				$status = $Text -> save();
-			    $re = $status?'更新文本成功':'更新文本失败';
+			    if($status == FALSE){
+					$this -> error('更新失败',U('index'));
+				}else{
+					$this -> success('更新成功',U('index'));
+				}
 			}
-		$this-> ajaxReturn($re);
 		}
 
 		/* 获取菜单信息 */
@@ -89,6 +96,7 @@ class WechatTextController extends WechatController {
 	 * 
 	 */
 	public function remove() {
+		
 		$ids = I('ids');
 		if (empty($ids)) {
 			$this -> error('参数错误!');
@@ -100,9 +108,12 @@ class WechatTextController extends WechatController {
 		$res = M('Tchat_text') -> delete($ids);
 		
 		}else{
-			$ids = str2arr($ids);
 			foreach ($ids as $id) {
 				$res = M('Tchat_text') -> delete($id);
+				if($res == FALSE) {
+					$this -> error('删除编号'.$id.'文本信息失败！');
+					break;
+				}
 			}
 		}
 
