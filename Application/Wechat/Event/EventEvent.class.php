@@ -75,26 +75,28 @@ class EventEvent {
 				
 				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
 				//对点击事件的动作执行类型进行过滤
+				//TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型 
 				switch ($rs['action_type']) {
 					case 'keyword' : //执行某关键词回复
 						$TextRe = A('Text', 'Event');
 						$keyword = $rs['action_code'];
 						return $reply = $TextRe -> textHandle($openId, $keyword);
-
 						break;
 
-					//当自定义菜单点击的回复类型为分类时
-					case 'category' : //执行某分类文章回复
-						$re = array('reply_type' => 'news', 'reply_id' => $rs['action_code'], );
-
-						//直接回复图文列表
-						return $reply = A('Reply', 'Event') -> wechatReply($re);
+					 //当自定义菜单点击的回复类型为功能时
+					case 'segment' : //执行文章合集回复
+						//如果是客服模块直接转到客服
+						if($rs['action_code'] == 'service'){
+							return  get_service_arr();
+						}else{//TODO 其他模块待加入
+							return get_text_arr('功能尚在完善，敬请关注');
+						}
 						break;
-                   //当自定义菜单点击的回复类型为文档列表时
-					case 'document' : //执行文章合集回复
-						$re = array('reply_type' => 'document', 'reply_id' => $rs['action_code'], );
 
-						//直接回复图文列表
+					//其他默认情况下的回复
+					default: 
+						$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code'], );
+						//直接回复对应的内容
 						return $reply = A('Reply', 'Event') -> wechatReply($re);
 						break;
 

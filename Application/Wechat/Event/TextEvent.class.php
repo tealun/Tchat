@@ -60,7 +60,7 @@ class TextEvent {
 	}
 
 	/**
-	 * 关键词完全匹配查询
+	 * 关键词匹配查询
 	 * */
 	private function keywordMatch($keyword) {
 		$New = M('Tchat_keyword');
