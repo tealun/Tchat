@@ -19,7 +19,7 @@ class CacheLogic{
 
 	/**
    * 检查openId的缓存，并根据缓存中指定的模块控制器及方法传入缓存中存储的参数
-	 * 存储所需的数据格式：
+	 * 存储所需的数据格式实例：
 	 * array(
 	*		'action' => array(
 	 * 			'controller' => "Cache,Logic", //需要后续处理的控制器及命名空间
@@ -28,7 +28,7 @@ class CacheLogic{
 	 * 	'needs' => array(
 	 * 			'keyword' => array(
 	 * 										'keyword' => array_keys($listCache), //判断客户发送的文本是否为继续处理本缓存的指令 string or array
-	 * 																										//array有两种方式，一种为array()函数数组，或以“,”分割关键字的字符串
+	 * 																										//有两种方式，一种为array()函数数组，或以“,”分割关键字的字符串
 	*  			'params' => '' //需要传递到上述公共方法的变量及赋值 string or array 依上述处理方法所需为准
 	*			),
 	* 		 'listCache' => $listCache，//缓存现有匹配到的数据,键名和键值自己定，可以在上述公共方法中读取该键名内的数据
@@ -68,13 +68,13 @@ class CacheLogic{
   /**
    * 回复缓存的关键词组列表
    * @param string $openId 客户openId
-   * @param int $id 客户发送的关键词组ID 
+   * @param int $id 客户发送的序号 
    */
   public function listCache($openId,$keyword){
   	$data = S($openId);//获取客户缓存
 	/* 查询对应的回复信息 */
-    $map['id']  = $data['listCache'][$keyword];
-	$rs = M('Tchat_keyword_group')->where($map)->find();
+    $map['id']  = $data['listCache'][$keyword]; //获取缓存中对应客户发送序号的关键词组ID
+	$rs = M('Tchat_keyword_group')->where($map)->find(); // 查找对应的关键词组内容
 	/* 回复内容 */
     $reply = A('Reply','Event')->wechatReply($rs);
 
@@ -84,21 +84,25 @@ class CacheLogic{
   
   /**
    * 回复缓存的图文数据
-   * @param array $news 缓存的图文信息数据
+   * @param string $openId 客户openid
+   * @param string $keyword 客户发送的关键词
+   * 本方法需要缓存的图文信息数据，数据存储在缓存数组的['news']键名中
    */
-  public function newsCache($openId,$keyword=''){
+  public function newsCache($openId){
 	$cache = S($openId);
-	$news = $cache['news'];
-  	return $reply = get_news_arr($news);
+	$news = $cache['news']; //读取缓存的图文数据
+  	return $reply = get_news_arr($news); //将缓存图文回复给客户
   }
   
   /**
    * 转接客服
    * 客户确认后转接到客服
+   * @param string $openId 客户openid
+   * 本方法直接调用get_service_arr()函数将消息转发到多客服
    */
-  public function serviceCache($openId,$keyword=''){
-  		S($openId,NULL);
-  		return $reply = get_service_arr($news);
+  public function serviceCache($openId){
+  		S($openId,NULL); //清除客户缓存
+  		return $reply = get_service_arr(); //消息流转发到多客服
   }
   
 }
