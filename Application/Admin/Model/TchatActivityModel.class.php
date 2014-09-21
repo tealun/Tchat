@@ -12,15 +12,14 @@ use Think\Model;
 use Admin\Model\AuthGroupModel;
 
 /**
- * 关键词分组模型
+ * 活动模型
  */
 class TchatActivityModel extends Model{
 
     /* 自动验证规则 */
     protected $_validate = array(
-        array('name', 'checkName', '关键词组名称已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
-        array('name', 'require', '关键词组名称不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-        array('name', '1,12', '关键词组名长度不能超过12个字符', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
+        array('name', 'require', '活动名称不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
+        array('name', '1,12', '活动名长度不能超过12个字符', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
         array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
    );
 
