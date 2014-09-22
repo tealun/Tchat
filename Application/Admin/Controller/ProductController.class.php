@@ -98,6 +98,14 @@ class ProductController extends ArticleController {
         $this->assign('show_draftbox', C('OPEN_DRAFTBOX'));
     }
 
+    public function index($cate_id = 80){
+
+		$cates       =   M('Category')->where(array('status'=>1,'pid'=>$cate_id,'model'=>53))->field('id,title,pid,allow_publish')->order('pid,sort')->select();
+		$this-> assign('meta_title','产品列表');
+		$this-> assign('cates',$cates);
+		 parent::index($cate_id);
+    }
+
     /**
      * 产品新增页面初始化
      * @author huajie <banhuajie@163.com>

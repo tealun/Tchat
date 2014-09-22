@@ -6,6 +6,19 @@
 </block>
 
 <block name="body">
+	<if condition="isset($cates)">
+	  <link rel="stylesheet" type="text/css" href="__STATIC__/button.css">
+  <style>
+	.gallery ul li{
+		padding:20px;
+	    display: inline-block;
+	    margin: 5px;
+	}
+	.gallery a:hover{
+		color:rgb(255,255,255) !important;
+	}
+  </style>
+ </if>
 	<!-- 标题 -->
 	<div class="main-title">
 		<h2>
@@ -17,20 +30,20 @@
 		<present name="article">：<a href="{:U('Product/index','cate_id='.$cate_id.'&pid='.$article['id'])}">{$article.title}</a></present>
 		]
 		<eq name="allow" value="0">
-		（该分类不允许发布内容）
+		（请选择分类进入查看）
 		</h2>
 	</div>
-	<div class="tab-wrap">
-		<section class="gallery">
-	        <ul>
-	        	<volist name="cates" id="cate">
-	            <li>
-	            <span class="button-wrap"><a class="button button-circle button-primary" href="{:U('add',array('cate_id'=>$cate['id'],'pid'=>0,'model_id'=>53))}">{$cate['title']}</a></span>
-	            </li>
-				</volist>
-	       </ul>
-	     </section>
-	</div>
+<div class="tab-wrap">
+	<section class="gallery">
+        <ul>
+        	<volist name="cates" id="cate">
+            <li>
+            <span class="button-wrap"><a class="button button-circle button-highlight" href="{:U('index',array('cate_id'=>$cate['id']))}">{$cate['title']}</a></span>
+            </li>
+			</volist>
+       </ul>
+     </section>
+</div>
 	<else />
 		</h2>
 	</div>
@@ -133,6 +146,7 @@
         {$_page}
     </div>
 </div>
+</eq>
 
 </block>
 <block name="script">
