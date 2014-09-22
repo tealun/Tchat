@@ -32,7 +32,7 @@ class ImageEvent{
       $this->saveWeixinFile($filePath,$fileName, $fileInfo["body"]);
       
       /* 将图片存储到数据库中，并与微信客户表中的客户ID关联*/
-      $clientId = get_client_detail($openId, array('id'));
+      $clientId = D('Tchat_client')->getClientId($openId);
       $data = array(
         'client_id' =>$clientId,
         'photo' => $filePath.$fileName,

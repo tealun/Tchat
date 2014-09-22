@@ -7,7 +7,7 @@
 // | Author: Tealun Du <tealun@tealun.com> <http://www.tealun.com>
 // +----------------------------------------------------------------------
 
-namespace Wechat\Model;
+namespace Admin\Model;
 use Think\Model;
 
 /**

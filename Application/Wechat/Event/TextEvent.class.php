@@ -140,8 +140,6 @@ class TextEvent {
 		} else {
 			return false;
 		}
-
-		exit ;
 	}
 
 }

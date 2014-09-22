@@ -70,21 +70,6 @@ function get_client_info($openId){
 }
 
 /**
- * 查询本地数据库中客户详情
- * TODO 与Tchat_client模型做比较，看是否整合到该模型类中
- * @param string $openId 客户openId
- * @param array $field  想要查询的字段数组
- */
-function get_client_detail($openId,$field=array()){
-  if(!empty($field)){
-    $rs = M('Tchat_client')->where(array('openid'=>$openId))->field($field)->find();
-  }else{
-    $rs = M('Tchat_client')->where(array('openid'=>$openId))->find();
-  }
-  return $rs;
-}
-
-/**
  * 获取公众账号的accessToken
  * 
  */
@@ -110,10 +95,14 @@ function save_access_token(){
 
   $str = file_get_contents($url);
   $arr = json_decode($str, true);
-  S('accessToken',$arr['access_token'],120);
+  /* 存储获取到的access_token，有限期为获取到的有限期，正常情况下为 7200 */
+  S('accessToken',$arr['access_token'],$arr['expires_in']);
   return $accessToken = S('accessToken');
 }
 
+/**
+ * 查看是否获得认证
+ */
 function check_wechat_rz(){
   $value = C('WECHAT_ACCOUNT_RZ');
 	  if($value === '2'){
@@ -123,9 +112,22 @@ function check_wechat_rz(){
   }
 }
 
+/**
+ * 查看账户类型
+ */
 function check_wechat_type(){
   $value = C('WECHAT_ACCOUNT_TYPE');
-  return $value === '1'?TRUE:FALSE;
+  switch ($value) {
+      case '1':
+          $type = "服务号";
+          break;
+	  case '2':
+		  $type = "企业号";
+      default:
+          $type = "订阅号";
+          break;
+  }
+  return $type;
 }
 	
 	/**
