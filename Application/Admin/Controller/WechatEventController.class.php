@@ -22,11 +22,9 @@ class WechatEventController extends WechatController {
 	 * 查看事件的设置情况
 	 */
 	public function index() {
-
-		$status = M('Tchat_events')->getField('event_type,status');
-		if ($status !== FALSE) {
-			$this->assign('status',$status);
-		}
+		$map['status'] = array('gt',-1);
+		$this -> getLists($map);
+		
 		$this->assign('meta_title','事件设置');
 		$this->display();
 	}
@@ -37,7 +35,7 @@ class WechatEventController extends WechatController {
 	 * @param int $id 事件ID
 	 */
 	public function edit($id){
-		$data = M('Tchat_events')->find($id);
+		$data = D('Tchat_events')->info($id);
 		if(is_null($data)) $this->error('非法操作',U('index'));
 	
 		$this->assign('data',$data);
@@ -51,16 +49,20 @@ class WechatEventController extends WechatController {
 	 */
 	public function update(){
         if(IS_POST || IS_AJAX){
-			$data = I('param');
-			$id = $data['id'];
-			$Event = M('Tchat_events');
-			if(empty($id)){
-				$this-> ajaxReturn('非法操作，您的参数有误。','json');
-			}else{
-				$status = $Event -> data($data)->create()->save();
-				$status?$this-> ajaxReturn('更新成功','json'):$this-> ajaxReturn('更新失败','json');
+			$data = I('param.');
+			$Event = D('Tchat_events');
+			if(!empty($data['id'])){
+					/* 判断是更新还是新增 */
+					if (false !== $Event -> update()) {
+						$this -> success('更新成功！', U('index'));
+					} else {
+						$this -> error('更新失败！', U('index'));
+					}
+			}else{//没有指定ID的情况下
+				$this -> error('参数设置错误！', U('index'));
 			}
-		}else{
+
+		}else{//非POST或AJAX方式的访问情况下
 			$this->error('非法操作，您无权进行此操作',U('index'));
 		}
 		$this->display();
@@ -69,5 +71,14 @@ class WechatEventController extends WechatController {
 	public function setStatus(){
 		
 	}
+	
+		/**
+	 * 获取数据列表
+	 */
+    private function getLists($map){
+      $list   = $this->lists('Tchat_events',$map,'id');
+      col_to_string($list);
+    $this->assign('_list', $list);
+    }
 
 }

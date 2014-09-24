@@ -6,54 +6,41 @@
 
 	<div class="row-fluid">
 		<ul class="thumbnails">
-		  <li class="span4">
-		    <div class="thumbnail">
-		      <img alt="300x200" data-src="holder.js/300x200" style="width: 300px; height: 200px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAYAAABS39xVAAADZ0lEQVR4nO3YMXLCMBRAwdz/KByOKyRtZmLAwjb2U7bYCmE+hd5Y+rrf798ABV9nDwCwlmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYE3idrv9sdf60We/O+9eMxwxL9cgWBNY2pTPNurI+tFnvzvvXjMcMS/XIVgTEKxj5+U6BGsCWzf0o89Go7dl3tH/8cl5uQ7BmtC7G/fsAAgWrwjWRNZcNB8VgKXfHrn4vvIbIdchWJM6IwBb7o8EizUEa2JnHLGW3rDemfNT89IiWBM7605o7THw1XM+NS8dgjWBkePUlYK1dY1g/T+CNYHR+5+RkG2J3h53YEfPS4tgTWDrm9Sz9UesvVJgaRGsSfw+ho0ctdasX7N26fNH31l63qs59p6XJsECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyfgCjVkWTkzIm1AAAAABJRU5ErkJggg==">
-		      <div class="caption">
-		        <h3>关注事件</h3>
-		        <p>当客户新关注公众帐号时的回复内容设置</p>
-		        <p>
-		        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>'1'))}">
-		        	<eq name="status['subscribe']" value="1">
-		        	编辑</a>
-			        <a href="{:U('setStatus?id=1&status='.abs(1-$status['subscribe']))}" class="btn btn-large ajax-get">{$status.subscribe|show_status_op}</a>
-					<else />
-					设置</a>
-					</eq>
-				</p>
-		      </div>
-		    </div>
-		  </li>
-		  <li class="span4">
-		    <div class="thumbnail">
-		      <img alt="300x200" data-src="holder.js/300x200" style="width: 300px; height: 200px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAYAAABS39xVAAADZ0lEQVR4nO3YMXLCMBRAwdz/KByOKyRtZmLAwjb2U7bYCmE+hd5Y+rrf798ABV9nDwCwlmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYE3idrv9sdf60We/O+9eMxwxL9cgWBNY2pTPNurI+tFnvzvvXjMcMS/XIVgTEKxj5+U6BGsCWzf0o89Go7dl3tH/8cl5uQ7BmtC7G/fsAAgWrwjWRNZcNB8VgKXfHrn4vvIbIdchWJM6IwBb7o8EizUEa2JnHLGW3rDemfNT89IiWBM7605o7THw1XM+NS8dgjWBkePUlYK1dY1g/T+CNYHR+5+RkG2J3h53YEfPS4tgTWDrm9Sz9UesvVJgaRGsSfw+ho0ctdasX7N26fNH31l63qs59p6XJsECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyfgCjVkWTkzIm1AAAAABJRU5ErkJggg==">
-		      <div class="caption">
-		        <h3>扫描二维码事件</h3>
-		        <p>当客户扫描带二维码事件时的回复内容。<br /><strong>注意：</strong>如果客户是通过扫描二维码关注帐号时，回复内容为“关注事件”中设置的内容，如果是已经关注的客户扫描，则回复本设置中的内容。</p>
-		        <p>
-		        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>'2'))}">
-		        	<eq name="status['SCAN']" value="1">
-		        	编辑</a>
-			        <a href="{:U('setStatus?id=3&status='.abs(1-$status['SCAN']))}" class="btn btn-large ajax-get">{$status.SCAN|show_status_op}</a>
-					<else />
-					设置</a>
-					</eq>
-				</p>
-		      </div>
-		    </div>
-		  </li>
-		  <li class="span4">
-		    <div class="thumbnail">
-		      <img alt="300x200" data-src="holder.js/300x200" style="width: 300px; height: 200px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAADICAYAAABS39xVAAADZ0lEQVR4nO3YMXLCMBRAwdz/KByOKyRtZmLAwjb2U7bYCmE+hd5Y+rrf798ABV9nDwCwlmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYAEZggVkCBaQIVhAhmABGYIFZAgWkCFYQIZgARmCBWQIFpAhWECGYE3idrv9sdf60We/O+9eMxwxL9cgWBNY2pTPNurI+tFnvzvvXjMcMS/XIVgTEKxj5+U6BGsCWzf0o89Go7dl3tH/8cl5uQ7BmtC7G/fsAAgWrwjWRNZcNB8VgKXfHrn4vvIbIdchWJM6IwBb7o8EizUEa2JnHLGW3rDemfNT89IiWBM7605o7THw1XM+NS8dgjWBkePUlYK1dY1g/T+CNYHR+5+RkG2J3h53YEfPS4tgTWDrm9Sz9UesvVJgaRGsSfw+ho0ctdasX7N26fNH31l63qs59p6XJsECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyBAvIECwgQ7CADMECMgQLyBAsIEOwgAzBAjIEC8gQLCBDsIAMwQIyfgCjVkWTkzIm1AAAAABJRU5ErkJggg==">
-		      <div class="caption">
-		        <h3>上报地理位置事件</h3>
-		        <p>客户上报地理位置事件的回复内容。</p>
-		        <p>
-					<button type="button" class="btn btn-large" disabled>暂未完成</button>
-				</p>
-		      </div>
-		    </div>
-		  </li>
+			<volist name="_list" id="vo">
+			  <li class="span4">
+			    <div class="thumbnail">
+			      <img alt="{$vo.event_name}" style="width: 100%; " src="__PUBLIC__/Admin/images/default/{$vo.event_type}_banner.jpg" />
+			      <div class="caption">
+			        <h3>{$vo.event_name}</h3>
+			        <p>{$vo.comment}</p>
+			        <hr />
+
+			        <table class="table">
+			        	<tbody>
+			        	 <tr class="info">
+			        	 <td style="width: 40%; text-align: center">回复类别：</td>
+					      <td style="width: 60%; text-align: left">{$vo.reply_type_text}</td>
+						</tr>
+						<tr class="success">
+							<td style="width: 40%; text-align: center">回复内容：</td>
+							<if condition="$vo['reply_type'] eq 'news' " >
+						      	      <td style="width: 60%; text-align: left">[<strong> {$vo.reply_id|get_category_title} </strong>]分类</td>
+						    <elseif  condition="$vo['reply_type'] eq 'text'" />
+						      	      <td style="width: 60%; text-align: left"> {$vo.reply_id|get_tchat_text}</td>
+						     <else />
+						     		 <td style="width: 60%; text-align: left">{$vo.reply_id}</td>
+						      </if>
+						</tr>
+						</tbody>
+			        </table>
+			        <p>
+			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>'1'))}">编辑</a>
+				        <a href="{:U('setStatus?id='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="btn btn-large ajax-get">{$vo.status|show_status_op}</a>
+					</p>
+			      </div>
+			    </div>
+			  </li>		
+			</volist>
 		</ul>
 	</div>
 

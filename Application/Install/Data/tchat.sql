@@ -760,15 +760,17 @@ CREATE TABLE `onethink_tchat_events` (
 	`event_type` varchar(50) NOT NULL COMMENT '对应微信事件类型',
 	`reply_type` varchar(20) NOT NULL DEFAULT'text' COMMENT '回应类型',
 	`reply_id` varchar(250) NOT NULL DEFAULT '2' COMMENT '回复类型的自定义文章ID，文本及新闻分类只需要一个值',
-	`status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态',
+	`status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '数据状态 -1：暂未开启 0：已经禁用 1：已经启用',
+    `comment` varchar(250) NOT NULL DEFAULT '' COMMENT '事件说明',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '事件判断回复表';
 
 -- -----------------------------
 -- Records of `onethink_tchat_events`
 -- -----------------------------
-INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2');
-INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21');
+INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2','1','当客户新关注公众帐号时的回复内容设置');
+INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21','1','当客户扫描带二维码事件时的回复内容。<br /><strong>注意：</strong>如果客户是通过扫描二维码关注帐号时，回复内容为“关注事件”中设置的内容，如果是已经关注的客户扫描，则回复本设置中的内容。');
+INSERT INTO `onethink_tchat_events` VALUES ('3','上报地理位置','LOCATION','','','-1','客户上报地理位置事件的回复内容。');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_keyword`
