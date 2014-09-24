@@ -287,10 +287,11 @@ INSERT INTO `onethink_auth_rule` VALUES ('322', 'admin', '1', 'Admin/WechatMenu/
 INSERT INTO `onethink_auth_rule` VALUES ('323', 'admin', '1', 'Admin/WechatMenu/add','新增菜单', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('324', 'admin', '1', 'Admin/WechatMenu/edit','编辑菜单', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('325', 'admin', '1', 'Admin/WechatMenu/setStatus','改变状态', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatMenu/recycle','回收站', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatMenu/restore','还原', '1', '');
--- INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatMenu/clear','彻底删除', '1', '');
 
+INSERT INTO `onethink_auth_rule` VALUES ('326', 'admin', '1', 'Admin/WechatEvent/index','事件列表', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('327', 'admin', '1', 'Admin/WechatEvent/edit','编辑', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('328', 'admin', '1', 'Admin/WechatEvent/update','更新', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('338', 'admin', '1', 'Admin/WechatEvent/setStatus','改变状态', '1', '');
 
 INSERT INTO `onethink_auth_rule` VALUES ('329', 'admin', '1', 'Admin/WechatQrcode/index','二维码列表', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('330', 'admin', '1', 'Admin/WechatQrcode/create','新增', '1', '');
@@ -302,6 +303,7 @@ INSERT INTO `onethink_auth_rule` VALUES ('334', 'admin', '1', 'Admin/WechatText/
 INSERT INTO `onethink_auth_rule` VALUES ('335', 'admin', '1', 'Admin/WechatText/create','新增', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('336', 'admin', '1', 'Admin/WechatText/edit','编辑', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('337', 'admin', '1', 'Admin/WechatText/remove','删除', '1', '');
+-- 338编号已经用作事件更改状态
 
 -- 活动板块权限设置
 
@@ -472,10 +474,6 @@ INSERT INTO `onethink_menu` VALUES ('393', '改变状态', '391', '0', 'Admin/We
 
 INSERT INTO `onethink_menu` VALUES ('394', '新增菜单', '300', '0', 'Admin/WechatMenu/add', '0', '新增一项菜单项', '自定义菜单', '0');
 
--- INSERT INTO `onethink_menu` VALUES ('395', '菜单回收站', '300', '0', 'Admin/WechatMenu/recycle', '0', '', '自定义菜单', '0');
--- INSERT INTO `onethink_menu` VALUES ('396', '还原', '395', '0', 'Admin/WechatMenu/restore', '0', '', '', '0');
--- INSERT INTO `onethink_menu` VALUES ('397', '彻底删除', '395', '0', 'Admin/WechatMenu/clear', '0', '', '', '0');
-
 INSERT INTO `onethink_menu` VALUES ('410','文本列表','300','0','Admin/WechatText/index','0','查看文本数据列表','文本素材','0');
 INSERT INTO `onethink_menu` VALUES ('411','编辑','410','0','Admin/WechatText/edit','0','编辑文本内容','','0');
 INSERT INTO `onethink_menu` VALUES ('412','删除','410','0','Admin/WechatText/remove','0','删除文本内容','','0');
@@ -486,6 +484,11 @@ INSERT INTO `onethink_menu` VALUES ('422', '新增二维码', '300', '0', 'Admin
 INSERT INTO `onethink_menu` VALUES ('423', '获取TICKET', '422', '0', 'Admin/WechatQrcode/getTicket', '0', '获取公众账号二维码的TICKET', '', '0');
 INSERT INTO `onethink_menu` VALUES ('424', '查看二维码', '421', '0', 'Admin/WechatQrcode/showQrcode', '0', '查看二维码详情', '', '0');
 INSERT INTO `onethink_menu` VALUES ('425', '改变状态', '421', '0', 'Admin/WechatQrcode/setStatus', '0', '更改二维码的启用状态', '', '0');
+
+INSERT INTO `onethink_menu` VALUES ('430','事件列表','300','0','Admin/WechatEvent/index','0','查看事件回复设置状态','事件设置','0');
+INSERT INTO `onethink_menu` VALUES ('431','编辑','430','0','Admin/WechatEvent/edit','0','设置某一事件回复内容','','0');
+INSERT INTO `onethink_menu` VALUES ('432','更新','430','0','Admin/WechatEvent/update','0','更新事件设置内容','','0');
+INSERT INTO `onethink_menu` VALUES ('433','更改状态','430','0','Admin/WechatEvent/setStatus','0','更改事件状态','','0');
 
 -- 新增活动板块管理目录
 
@@ -765,7 +768,7 @@ CREATE TABLE `onethink_tchat_events` (
 -- Records of `onethink_tchat_events`
 -- -----------------------------
 INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2');
-INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','text','2');
+INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_keyword`
