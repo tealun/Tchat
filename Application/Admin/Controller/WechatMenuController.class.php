@@ -59,6 +59,8 @@ class WechatMenuController extends WechatController {
 
 	/**
 	 * 编辑自定义菜单
+	 * @param int $id     菜单条目的ID
+	 * @param int $pid  菜单条目的上级菜单ID 
 	 */
 	public function edit($id = null, $pid = 0) {
 
@@ -111,36 +113,41 @@ class WechatMenuController extends WechatController {
 
 	/**
 	 * 新增自定义菜单
+	 * @param  int  $pid  新增菜单的上级菜单ID
 	 */
 	public function add($pid = 0) {
-		$TchatMenu = D('Tchat_menu');
-		$info['model_id'] = '52';
-		if ($pid) {
-			/* 获取上级菜单信息 */
-			$pidInfo = $TchatMenu -> info($pid, 'id,name,status');
-			if (!($pidInfo && 1 == $pidInfo['status'])) {
-				$this -> error('指定的上级菜单不存在或被禁用！');
-			} else {
-				//获取到的上级菜单信息，用于添加二级菜单时的数据
-				$pidInfo = json_encode($pidInfo);
-				$pidInfo = decodeUnicode($pidInfo);
-				$this -> assign('pidInfo', $pidInfo);
+		if ($this -> getRZ() == FALSE) {
+			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
+		}else{
+			$TchatMenu = D('Tchat_menu');
+			$info['model_id'] = '52';
+			if ($pid) {
+				/* 获取上级菜单信息 */
+				$pidInfo = $TchatMenu -> info($pid, 'id,name,status');
+				if (!($pidInfo && 1 == $pidInfo['status'])) {
+					$this -> error('指定的上级菜单不存在或被禁用！');
+				} else {
+					//获取到的上级菜单信息，用于添加二级菜单时的数据
+					$pidInfo = json_encode($pidInfo);
+					$pidInfo = decodeUnicode($pidInfo);
+					$this -> assign('pidInfo', $pidInfo);
+				}
 			}
+			
+			/* 新增菜单页面的变量赋值 */
+	
+			//获取菜单模型
+			$model = M('Model') -> where(array('id' => $info['model_id'])) -> find();
+	
+			//获取表单字段排序
+			$fields = get_model_attribute($model['id']);
+			$this -> assign('info', $info);
+			$this -> assign('fields', $fields);
+			$this -> assign('model', $model);
+			/* 获取菜单信息 */
+			$this -> meta_title = '新增菜单';
+			$this -> display();
 		}
-		/* 新增菜单页面的变量赋值 */
-
-		//获取菜单模型
-		$model = M('Model') -> where(array('id' => $info['model_id'])) -> find();
-
-		//获取表单字段排序
-		$fields = get_model_attribute($model['id']);
-		$this -> assign('info', $info);
-		$this -> assign('fields', $fields);
-		$this -> assign('model', $model);
-		/* 获取菜单信息 */
-		$this -> meta_title = '新增菜单';
-		$this -> display();
-
 	}
 
 	/**
@@ -213,7 +220,7 @@ class WechatMenuController extends WechatController {
 	 * @return string  返回的结果；
 	 */
 	public function setMenu() {
-		//if (IS_POST) {
+		if (IS_POST) {
 		$tree = D('Tchat_menu') -> getTree(0, 'id,pid,menu_type,name,event_key,url');
 		
 		//清理掉$tree中用于排序和分级而获取到的字段，这些字段不需要发送到服务器		
@@ -234,11 +241,16 @@ class WechatMenuController extends WechatController {
 		} else {
 			$this -> error('更新失败！');
 		}
+		
+		}else{
+			$this -> error('非法操作！');
+		}
 
 	}
 
 	/**
 	 * 查询微信服务器菜单
+	 * TODO 后期在菜单管理中加入从服务器导入功能
 	 * @return string  返回的结果；
 	 */
 	private function getMenu() {
