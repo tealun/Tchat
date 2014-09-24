@@ -180,6 +180,13 @@ function get_keyword($groupId){
 }
 
 /**
+ * 获取指定ID的文本内容
+ */
+function get_tchat_text($id){
+		$text = M('Tchat_text')->where(array('id'=>$id))->getField('content');
+		return $text;
+}
+/**
  * 获取二维码扫描关注人数
  */
 function get_scan_sub_count($id){
