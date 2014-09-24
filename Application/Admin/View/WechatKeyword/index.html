@@ -46,7 +46,7 @@
       <td><a href="{:U('edit?id='.$vo['id'].'&name='.$vo['name'])}"><span>{$vo.name}</span></a></td>
       <td><a href="{:U('index?segment='.$vo['segment'])}"><span>{$vo.segment_text}</span></a></td>
       <td><span>{$vo.reply_type_text}</span></td>
-      <if condition="$vo['reply_type_text'] eq '分类' ">
+      <if condition="$vo['reply_type'] eq 'news' ">
       	      <td><span>{$vo.reply_id|get_category_title}</span></td>
      <else />
      		 <td><span>{$vo.reply_id}</span></td>
