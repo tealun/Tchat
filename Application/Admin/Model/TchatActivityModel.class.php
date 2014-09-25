@@ -14,7 +14,7 @@ use Admin\Model\AuthGroupModel;
 /**
  * 文档基础模型
  */
-class DocumentModel extends Model{
+class TchatActivityModel extends Model{
 
     /* 自动验证规则 */
     protected $_validate = array(
@@ -65,19 +65,22 @@ class DocumentModel extends Model{
      * @return array              文档列表
      * @author huajie <banhuajie@163.com>
      */
-    public function lists($model, $order = '`id` DESC', $status = 1, $field = true, $limit = '10', $map = array()){
-        $map = array_merge($this->listMap($model, $status), $map);
+    public function lists($model="", $order = '`id` DESC', $status = 1, $field = true, $limit = '10', $map = array()){
+        if(empty($model) || $model == 6){
+        	$model = M('Model')->where(array('pid'=>6))->getFeild('id');
+        }
+		$map = array_merge($this->listMap($model, $status), $map);
         return $this->field($field)->where($map)->order($order)->limit($limit)->select();
     }
 
     /**
      * 计算列表总数
-     * @param  number  $category 分类ID
+     * @param  number  $model    模型ID
      * @param  integer $status   状态
      * @return integer           总数
      */
-    public function listCount($category, $status = 1, $map = array()){
-        $map = array_merge($this->listMap($category, $status), $map);
+    public function listCount($model, $status = 1, $map = array()){
+        $map = array_merge($this->listMap($model, $status), $map);
         return $this->where($map)->count('id');
     }
 
@@ -90,7 +93,7 @@ class DocumentModel extends Model{
         /* 获取基础数据 */
         $info = $this->field(true)->find($id);
         if(!(is_array($info) || 1 !== $info['status'])){
-            $this->error = '文档被禁用或已删除！';
+            $this->error = '活动被禁用或已删除！';
             return false;
         }
 
@@ -107,14 +110,13 @@ class DocumentModel extends Model{
     }
 
     /**
-     * 返回前一篇文档信息
+     * 返回前一活动信息
      * @param  array $info 当前文档信息
      * @return array
      */
     public function prev($info){
         $map = array(
             'id'          => array('lt', $info['id']),
-            'category_id' => $info['category_id'],
             'status'      => 1,
         );
 
@@ -123,14 +125,13 @@ class DocumentModel extends Model{
     }
 
     /**
-     * 获取下一篇文档基本信息
+     * 获取下一活动基本信息
      * @param  array    $info 当前文档信息
      * @return array
      */
     public function next($info){
         $map = array(
             'id'          => array('gt', $info['id']),
-            'category_id' => $info['category_id'],
             'status'      => 1,
         );
 
@@ -139,7 +140,7 @@ class DocumentModel extends Model{
     }
 
     /**
-     * 新增或更新一个文档
+     * 新增或更新一个活动
      * @param array  $data 手动传入的数据
      * @return boolean fasle 失败 ， int  成功 返回完整的数据
      * @author huajie <banhuajie@163.com>
@@ -173,15 +174,18 @@ class DocumentModel extends Model{
             }
         }
 
-        /* 添加或新增扩展内容 */
-        $logic = $this->logic($data['model_id']);
-        if(!$logic->update($id)){
-            if(isset($id)){ //新增失败，删除基础数据
-                $this->delete($id);
-            }
-            $this->error = $logic->getError();
-            return false;
-        }
+		if($data['model_id'] !== 6){
+	        /* 添加或新增扩展内容 */
+	        $logic = $this->logic($data['model_id']);
+	        if(!$logic->update($id)){
+	            if(isset($id)){ //新增失败，删除基础数据
+	                $this->delete($id);
+	            }
+	            $this->error = $logic->getError();
+	            return false;
+	        }			
+		}
+
 
         hook('documentSaveComplete', array('model_id'=>$data['model_id']));
 
@@ -330,7 +334,8 @@ class DocumentModel extends Model{
      * @return object         模型对象
      */
     private function logic($model){
-        return D(get_document_model($model, 'name'), 'Logic');
+    	$modelName = M('Model')->getFieldById($model,'name');
+        return D($modelName, 'Logic');
     }
 
     /**
@@ -340,16 +345,16 @@ class DocumentModel extends Model{
      * @param  integer $status   状态
      * @return array             查询条件
      */
-    private function listMap($category, $status = 1, $pos = null){
+    private function listMap($model, $status = 1, $pos = null){
         /* 设置状态 */
         $map = array('status' => $status);
 
         /* 设置分类 */
-        if(!is_null($category)){
-            if(is_numeric($category)){
-                $map['category_id'] = $category;
+        if(!is_null($model)){
+            if(is_numeric($model)){
+                $map['model_id'] = $model;
             } else {
-                $map['category_id'] = array('in', str2arr($category));
+                $map['model_id'] = array('in', str2arr($model_id));
             }
         }
 

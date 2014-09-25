@@ -45,7 +45,7 @@ INSERT INTO `onethink_attribute` VALUES ('252', 'model_id', '对应活动类型'
 INSERT INTO `onethink_attribute` VALUES ('253','check_info','参与活动是否需审核客户信息', 'smallint(5) unsigned NOT NULL ', 'checkbox', '0', '请选择需要客户发送的个人信息项', '1', '1:姓名\r\n2:电话\r\n4:QQ\r\n8:Email', '6', '0', '1', '1383895640', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('254', 'ex_keyword', '前置关键词', 'varchar(10) NOT NULL ', 'string', '', '触发参与报名或获取资格告知的关键词，比如\"我要优惠券\"', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('255', 'cheked_reply', '验证后回复内容', 'varchar(100) NOT NULL', 'string', '', '获取客户资料后的回复内容', '1', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('256', 'category_id', '所属分类', 'int(10) unsigned NOT NULL ', 'string', '', '', '0', '', '6', '0', '1', '1384508336', '1383891233', '', '0', '', '', '', '0', '');
+-- 删除了编号为256的categry_id所属分类字段属性
 INSERT INTO `onethink_attribute` VALUES ('257', 'description', '描述', 'char(140) NOT NULL ', 'textarea', '', '', '1', '', '6', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('258', 'root', '根节点', 'int(10) unsigned NOT NULL ', 'num', '0', '该文档的顶级文档编号', '0', '', '6', '0', '1', '1384508323', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('259', 'pid', '所属ID', 'int(10) unsigned NOT NULL ', 'num', '0', '父文档编号', '0', '', '6', '0', '1', '1384508543', '1383891233', '', '0', '', '', '', '0', '');
@@ -584,7 +584,6 @@ CREATE TABLE `onethink_tchat_activity` (
 	`check_info` int(5) NOT NULL DEFAULT '0' COMMENT '参与活动是否需审核客户信息',
 	`ex_keyword` varchar(10) NOT NULL DEFAULT '' COMMENT '客户个人信息时的前置关键词',
 	`checked_reply` varchar(100) NOT NULL DEFAULT '' COMMENT '获取客户资料后的回复内容',
-	`category_id` int(10) unsigned NOT NULL COMMENT '所属分类',
 	`description` char(140) NOT NULL DEFAULT '' COMMENT '描述',
 	`root` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '根节点',
 	`pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属ID',
