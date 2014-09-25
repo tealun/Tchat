@@ -102,6 +102,7 @@ function save_access_token(){
 
 /**
  * 查看是否获得认证
+ * 
  */
 function check_wechat_rz(){
   $value = C('WECHAT_ACCOUNT_RZ');
@@ -114,6 +115,7 @@ function check_wechat_rz(){
 
 /**
  * 查看账户类型
+ * 
  */
 function check_wechat_type(){
   $value = C('WECHAT_ACCOUNT_TYPE');
@@ -130,11 +132,12 @@ function check_wechat_type(){
   return $type;
 }
 	
-	/**
+/**
  * 获取关键字模型信息
  * @param  integer $id    模型ID
  * @param  string  $field 模型字段
  * @return array
+ * 
  */
 function get_keyword_model($id = null, $field = null){
     static $list;
@@ -204,6 +207,7 @@ charset=UTF-8"
 /**
  * 模拟登录获取Cookie函数
  * TODO 有关Cookie的部分需要重新写
+ * 
  */
 function vlogin($url, $data) { 
     $curl = curl_init (); // 启动一个CURL会话
