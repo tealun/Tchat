@@ -179,14 +179,18 @@ class WechatController extends Controller {
     foreach ($news as $key => $var) {
         $articles[$i]['Title'] = $var['title'];
           if($i==0){//如果是第一条，在没有指定封面的情况下使用默认图片，并加上描述
+          
           	$articles[$i]['Description']= $var['description'];//描述会在单图文时显示，多条时不会显示所以只在第一条中设置。
+          	
             $defaultPicUrl = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Public/Home/images/intro/'.rand(1,9).'.jpg';
             $articles[$i]['PicUrl'] = $var['cover_id'] == 0?$defaultPicUrl
             :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
-          }else{//其他条目如果没有指定封面，则设置为空
-            $articles[$i]['PicUrl'] = $var['cover_id'] == 0?''
-            :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['cover_id']))->getField('path');
+          
+		  }else{//其他条目如果没有指定封面，则设置为空
+            $articles[$i]['PicUrl'] = $var['index_pic'] == 0?''
+            :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['index_pic']))->getField('path');
           }
+		  
         $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Home/Article/detail/id/'.$var['id'].'.html';
         $i++;
 		unset($news[$key]);
