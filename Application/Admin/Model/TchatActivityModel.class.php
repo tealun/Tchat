@@ -26,12 +26,12 @@ class TchatActivityModel extends Model{
         //TODO: 外链编辑验证
         //array('link_id', 'url', '外链格式不正确', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
         array('description', '1,140', '简介长度不能超过140个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
-        array('category_id', 'require', '分类不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_INSERT),
-        array('category_id', 'require', '分类不能为空', self::EXISTS_VALIDATE , 'regex', self::MODEL_UPDATE),
-        array('category_id', 'checkCategory', '该分类不允许发布内容', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
-        array('model_id,category_id', 'checkModel', '该分类没有绑定当前模型', self::MUST_VALIDATE , 'callback', self::MODEL_INSERT),
+        array('model_id', 'require', '模型不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_INSERT),
+        array('model_id', 'require', '模型不能为空', self::EXISTS_VALIDATE , 'regex', self::MODEL_UPDATE),
+        array('model_id', 'checkModel', '该模型不存在', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
         array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
         array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
+		array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
     );
 
     /* 自动完成规则 */
@@ -97,7 +97,7 @@ class TchatActivityModel extends Model{
             return false;
         }
 
-        /* 获取模型数据 */
+        /* 获取扩展模型数据 */
         $logic  = $this->logic($info['model_id']);
         $detail = $logic->detail($id); //获取指定ID的数据
         if(!$detail){
@@ -250,13 +250,13 @@ class TchatActivityModel extends Model{
     /**
      * 获取推荐位数据列表
      * @param  number  $pos      推荐位 1-列表推荐，2-频道页推荐，4-首页推荐
-     * @param  number  $category 分类ID
+     * @param  number  $model    模型ID
      * @param  number  $limit    列表行数
      * @param  boolean $filed    查询字段
      * @return array             数据列表
      */
-    public function position($pos, $category = null, $limit = null, $field = true){
-        $map = $this->listMap($category, 1, $pos);
+    public function position($pos, $model = null, $limit = null, $field = true){
+        $map = $this->listMap($model, 1, $pos);
 
         /* 设置列表数量 */
         is_numeric($limit) && $this->limit($limit);
@@ -271,7 +271,7 @@ class TchatActivityModel extends Model{
      */
     protected function getStatus(){
     	$id = I('post.id');
-        $cate = I('post.category_id');
+        $model = I('post.model_id');
         if(empty($id)){	//新增
         	$status = 1;
         }else{				//更新
@@ -309,23 +309,13 @@ class TchatActivityModel extends Model{
     }
 
     /**
-     * 验证分类是否允许发布内容
-     * @param  integer $id 分类ID
-     * @return boolean     true-允许发布内容，false-不允许发布内容
+     * 验证模型是否存在
+     * @param  integer $id 模型ID
+     * @return boolean     true-存在，false-不存在
      */
-    public function checkCategory($id){
-        $publish = get_category($id, 'allow_publish');
-        return $publish ? true : false;
-    }
-
-    /**
-     * 检测分类是否绑定了指定模型
-     * @param  array $info 模型ID和分类ID数组
-     * @return boolean     true-绑定了模型，false-未绑定模型
-     */
-    protected function checkModel($info){
-        $model = get_category($info['category_id'], 'model');
-        return in_array($info['model_id'], $model);
+    public function checkModel($id){
+        $status = M("model")->where(array('id'=>$id))->getField('id');
+        return $status ? true : false;
     }
 
     /**
@@ -335,12 +325,12 @@ class TchatActivityModel extends Model{
      */
     private function logic($model){
     	$modelName = M('Model')->getFieldById($model,'name');
-        return D($modelName, 'Logic');
+        return D($modelName, 'Activity');
     }
 
     /**
      * 设置where查询条件
-     * @param  number  $category 分类ID
+     * @param  number  $model    模型ID
      * @param  number  $pos      推荐位
      * @param  integer $status   状态
      * @return array             查询条件
@@ -441,12 +431,9 @@ class TchatActivityModel extends Model{
      */
     public function remove(){
         //查询假删除的基础数据
-        if ( is_administrator() ) {
-            $map = array('status'=>-1);
-        }else{
-            $cate_ids = AuthGroupModel::getAuthCategories(UID);
-            $map = array('status'=>-1,'category_id'=>array( 'IN',trim(implode(',',$cate_ids),',') ));
-        }
+
+        $map = array('status'=>-1);
+
         $base_list = $this->where($map)->field('id,model_id')->select();
         //删除扩展模型数据
         $base_ids = array_column($base_list,'id');
@@ -519,11 +506,11 @@ class TchatActivityModel extends Model{
             array('name', '', '标识已经存在', self::VALUE_VALIDATE, 'unique', self::MODEL_BOTH),
             array('title', '1,80', '标题长度不能超过80个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
             array('description', '1,140', '简介长度不能超过140个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
-            array('category_id', 'require', '分类不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
-            array('category_id', 'checkCategory', '该分类不允许发布内容', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
-            array('model_id,category_id', 'checkModel', '该分类没有绑定当前模型', self::MUST_VALIDATE , 'callback', self::MODEL_INSERT),
+            array('model_id', 'require', '模型不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+            array('model_id', 'checkModel', '该模型不存在', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
             array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
             array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
+			array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
         );
         $this->_auto[] = array('status', '3', self::MODEL_BOTH);
 
@@ -563,6 +550,7 @@ class TchatActivityModel extends Model{
 
     /**
      * 获取目录列表
+	 * TODO 检测是否缓存会造成不同根节点缓存的混乱
      * @param intger $pid 目录的根节点
      * @return boolean
      * @author huajie <banhuajie@163.com>
@@ -580,9 +568,9 @@ class TchatActivityModel extends Model{
     }
 
     /**
-     * 递归查询子文档
+     * 递归查询子活动文档
      * @param intger $pid
-     * @return array: 子文档数组
+     * @return array: 子活动文档数组
      * @author huajie <banhuajie@163.com>
      */
     private function getChild($pid){
@@ -593,15 +581,37 @@ class TchatActivityModel extends Model{
     	}else{
     		$map['pid'] = $pid;
     	}
+		/* 查找出所有指定PID的数据列表 */
     	$child = $this->where($map)->field('id,name,title,pid')->order('level DESC,id DESC')->select();
     	if(!empty($child)){
     		foreach ($child as $key=>$value){
-    			$pids[] = $value['id'];
+    			$pids[] = $value['id']; //遍历出所有数据ID值
     		}
+			/*再递归查找出所有PID为数据列表中的ID的深层数据*/
     		$tree = array_merge($child, $this->getChild($pids));
     	}
     	return $tree;
     }
+
+	/**
+	 * 获取活动的详细内容
+	 * @return boolean
+	 * @author huajie <banhuajie@163.com>
+	 */
+	protected function getContent(){
+		$type = I('post.type');
+		$content = I('post.content');
+		if($type > 1){	//主题和段落必须有内容
+			if(empty($content)){
+				return false;
+			}
+		}else{			//目录没内容则生成空字符串
+			if(empty($content)){
+				$_POST['content'] = ' ';
+			}
+		}
+		return true;
+	}
 
     /**
      * 检查指定文档下面子文档的类型

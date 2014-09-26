@@ -76,9 +76,9 @@ INSERT INTO `onethink_attribute` VALUES ('282','index_pic','索引图片', 'int(
 -- Attribute of activity discount model
 INSERT INTO `onethink_attribute` VALUES ('290', 'discount', '折扣率', 'float(3,2) NOT NULL ', 'string', '0.80', '', '1', '', '7', '0', '1', '1396968844', '1396968844', '', '0', '', '', '', '0', '');
 
--- Attribute of activity discount model
-INSERT INTO `onethink_attribute` VALUES ('300', 'ticket_prefix', '优惠券前缀', 'char(4) NOT NULL ', 'string', '', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('301', 'max', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+-- Attribute of activity ticket model
+INSERT INTO `onethink_attribute` VALUES ('300', 'ticket_prefix', '优惠券前缀', 'char(4) NOT NULL ', 'string', '', '请使用2-4位大写英文字母', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('301', 'max_num', '发行总数量', 'int(5) unsigned NOT NULL ', 'string', '300', '请设置在100000以内', '1', '', '8', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
 
 -- Attribute of tchat_qrcode
 INSERT INTO `onethink_attribute` VALUES ('400','ticket','Ticket编码','varchar(250) NOT NULL','string','','获取到的Ticket值','1','','41', '0', '1', '1396968858', '1396968858', '', '0', '', '', '', '0', '');
@@ -609,7 +609,7 @@ CREATE TABLE `onethink_tchat_activity` (
 	`bookmark` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '收藏数',
 	`index_pic` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '索引图片',
 	PRIMARY KEY (`id`),
-	KEY `idx_category_status` (`category_id`,`status`),
+	KEY `idx_model_status` (`model_id`,`status`),
 	KEY `idx_status_type_pid` (`status`,`uid`,`pid`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='活动模型基础表';
 
@@ -630,7 +630,7 @@ DROP TABLE IF EXISTS `onethink_tchat_activity_ticket`;
 CREATE TABLE `onethink_tchat_activity_ticket` (
 	`id` int(5) unsigned NOT NULL COMMENT '活动ID',
 	`ticket_prefix` char(4) NOT NULL COMMENT '优惠券前缀',
-	`max` int(5) unsigned NOT NULL DEFAULT '300' COMMENT '发行总数量',
+	`max_num` int(5) unsigned NOT NULL DEFAULT '300' COMMENT '发行总数量',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '优惠券控制表';
 
