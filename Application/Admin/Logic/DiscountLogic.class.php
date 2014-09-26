@@ -7,12 +7,12 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Admin\Activity;
+namespace Admin\Logic;
 
 /**
  * 活动模型子模型 - 折扣模型
  */
-class DiscountActivity extends BaseActivity{
+class DiscountLogic extends ActivityLogic{
 	/* 自动验证规则 */
 	protected $_validate = array();
 

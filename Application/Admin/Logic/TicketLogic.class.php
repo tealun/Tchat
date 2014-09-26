@@ -7,12 +7,13 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Admin\Activity;
+namespace Admin\Logic;
 
 /**
  * 活动模型子模型 - 优惠券模型
  */
-class TickeActivity extends BaseActivity{
+class TicketLogic extends ActivityLogic {
+	public $test = "this is a test param of TicketLogic Class";
 	/* 自动验证规则 */
 	protected $_validate = array(
 		array('ticket_prefix', '/^[A-Z]\w{1,3}$/', '请使用2-4位大写英文字母', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),

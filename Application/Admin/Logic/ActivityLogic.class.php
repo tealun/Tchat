@@ -7,14 +7,14 @@
 // | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
 
-namespace Admin\Activity;
+namespace Admin\Logic;
 use Think\Model;
 
 /**
  * 活动模型逻辑层公共模型
  * 所有活动逻辑层模型都需要继承此模型
  */
-abstract class BaseActivity extends Model{
+abstract class ActivityLogic extends Model{
 
 	/**
 	 * 构造函数，用于设置Logic层的表前缀

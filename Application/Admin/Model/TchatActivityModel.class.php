@@ -27,7 +27,6 @@ class TchatActivityModel extends Model{
         //array('link_id', 'url', '外链格式不正确', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
         array('description', '1,140', '简介长度不能超过140个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
         array('model_id', 'require', '模型不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_INSERT),
-        array('model_id', 'require', '模型不能为空', self::EXISTS_VALIDATE , 'regex', self::MODEL_UPDATE),
         array('model_id', 'checkModel', '该模型不存在', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
         array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
         array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
@@ -50,6 +49,7 @@ class TchatActivityModel extends Model{
         array('update_time', NOW_TIME, self::MODEL_BOTH),
         array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
         array('position', 'getPosition', self::MODEL_BOTH, 'callback'),
+        array('check_info', 'getCheckInfo', self::MODEL_BOTH, 'callback'),
         array('deadline', 'strtotime', self::MODEL_BOTH, 'function'),
     );
 
@@ -324,8 +324,7 @@ class TchatActivityModel extends Model{
      * @return object         模型对象
      */
     private function logic($model){
-    	$modelName = M('Model')->getFieldById($model,'name');
-        return D($modelName, 'Activity');
+        return D(get_activity_model($model, 'name'), 'Logic');
     }
 
     /**
@@ -423,6 +422,23 @@ class TchatActivityModel extends Model{
         }
     }
 
+    /**
+     * 生成验证信息的值
+     * @return number 验证信息
+     * @author huajie <banhuajie@163.com>
+     */
+    protected function getCheckInfo(){
+        $checkInfo = I('post.check_info');
+        if(!is_array($checkInfo)){
+            return 0;
+        }else{
+            $check = 0;
+            foreach ($checkInfo as $key=>$value){
+                $check += $value;		//将各个推荐位的值相加
+            }
+            return $check;
+        }
+    }
 
     /**
      * 删除状态为-1的数据（包含扩展模型）
