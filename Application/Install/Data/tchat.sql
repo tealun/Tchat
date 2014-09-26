@@ -44,7 +44,7 @@ INSERT INTO `onethink_attribute` VALUES ('251', 'title', '标题', 'varchar(50) 
 INSERT INTO `onethink_attribute` VALUES ('252', 'model_id', '对应活动类型', 'int(5) unsigned NOT NULL ', 'select', '6', '选择活动的类型', '1', '6:常规\r\n7:折扣\r\n8:优惠券\r\n9:刮刮卡\r\n10:大转盘\r\n11:幸运机\r\n12:抢红包\r\n13:抽奖\r\n14:邀请\r\n15:竞拍\r\n16:秒杀\r\n17:抢楼', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('253','check_info','参与活动是否需审核客户信息', 'smallint(5) unsigned NOT NULL ', 'checkbox', '0', '请选择需要客户发送的个人信息项', '1', '1:姓名\r\n2:电话\r\n4:QQ\r\n8:Email', '6', '0', '1', '1383895640', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('254', 'ex_keyword', '前置关键词', 'varchar(10) NOT NULL ', 'string', '', '触发参与报名或获取资格告知的关键词，比如\"我要优惠券\"', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('255', 'cheked_reply', '验证后回复内容', 'varchar(100) NOT NULL', 'string', '', '获取客户资料后的回复内容', '1', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('255', 'checked_reply', '验证后回复内容', 'varchar(100) NOT NULL', 'string', '', '获取客户资料后的回复内容', '1', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
 -- 删除了编号为256的categry_id所属分类字段属性
 INSERT INTO `onethink_attribute` VALUES ('257', 'description', '描述', 'char(140) NOT NULL ', 'textarea', '', '', '1', '', '6', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('258', 'root', '根节点', 'int(10) unsigned NOT NULL ', 'num', '0', '该文档的顶级文档编号', '0', '', '6', '0', '1', '1384508323', '1383891233', '', '0', '', '', '', '0', '');
