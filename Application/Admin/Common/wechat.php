@@ -133,33 +133,33 @@ function check_wechat_type(){
 }
 	
 /**
- * 获取关键字模型信息
+ * 获取活动模型信息
  * @param  integer $id    模型ID
  * @param  string  $field 模型字段
  * @return array
  * 
  */
-function get_keyword_model($id = null, $field = null){
+function get_activity_model($id = null, $field = null){
     static $list;
 
-    /* 非法分类ID */
+    /* 非法模型ID */
     if(!(is_numeric($id) || is_null($id))){
         return '';
     }
 
     /* 读取缓存数据 */
     if(empty($list)){
-        $list = S('KEYWORD_MODEL_LIST');
+        $list = S('ACTIVITY_MODEL_LIST');
     }
 
     /* 获取模型名称 */
     if(empty($list)){
-        $map   = array('status' => 1, 'extend' => 4);
-        $model = M('Tchat_keyword_group')->where($map)->field(true)->select();
+        $map   = array('status' => 1, 'extend' => 6);
+        $model = M('Model')->where($map)->field(true)->select();
         foreach ($model as $value) {
             $list[$value['id']] = $value;
         }
-        S('KEYWORD_MODEL_LIST', $list); //更新缓存
+        S('ACTIVITY_MODEL_LIST', $list); //更新缓存
     }
 
     /* 根据条件返回数据 */
