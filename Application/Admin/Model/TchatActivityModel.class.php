@@ -22,7 +22,7 @@ class TchatActivityModel extends Model{
         array('name', 'checkName', '标识已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
         array('title', 'require', '标题不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
         array('title', '1,80', '标题长度不能超过80个字符', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
-    	array('level', '/^[\d]+$/', '优先级只能填正整数', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
+      array('level', '/^[\d]+$/', '优先级只能填正整数', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
         //TODO: 外链编辑验证
         //array('link_id', 'url', '外链格式不正确', self::VALUE_VALIDATE, 'regex', self::MODEL_BOTH),
         array('description', '1,140', '简介长度不能超过140个字符', self::VALUE_VALIDATE, 'length', self::MODEL_BOTH),
@@ -30,7 +30,7 @@ class TchatActivityModel extends Model{
         array('model_id', 'checkModel', '该模型不存在', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
         array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
         array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
-		array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
+    array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
     );
 
     /* 自动完成规则 */
@@ -38,14 +38,14 @@ class TchatActivityModel extends Model{
         array('uid', 'is_login', self::MODEL_INSERT, 'function'),
         array('title', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
         array('description', 'htmlspecialchars', self::MODEL_BOTH, 'function'),
-    	array('root', 'getRoot', self::MODEL_BOTH, 'callback'),
+      array('root', 'getRoot', self::MODEL_BOTH, 'callback'),
         array('link_id', 'getLink', self::MODEL_BOTH, 'callback'),
         array('attach', 0, self::MODEL_INSERT),
         array('view', 0, self::MODEL_INSERT),
         array('comment', 0, self::MODEL_INSERT),
         array('extend', 0, self::MODEL_INSERT),
         array('create_time', 'getCreateTime', self::MODEL_BOTH,'callback'),
-		array('reply_time', 'getCreateTime', self::MODEL_INSERT,'callback'),
+    array('reply_time', 'getCreateTime', self::MODEL_INSERT,'callback'),
         array('update_time', NOW_TIME, self::MODEL_BOTH),
         array('status', 'getStatus', self::MODEL_BOTH, 'callback'),
         array('position', 'getPosition', self::MODEL_BOTH, 'callback'),
@@ -67,9 +67,9 @@ class TchatActivityModel extends Model{
      */
     public function lists($model="", $order = '`id` DESC', $status = 1, $field = true, $limit = '10', $map = array()){
         if(empty($model) || $model == 6){
-        	$model = M('Model')->where(array('pid'=>6))->getFeild('id');
+          $model = M('Model')->where(array('pid'=>6))->getFeild('id');
         }
-		$map = array_merge($this->listMap($model, $status), $map);
+    $map = array_merge($this->listMap($model, $status), $map);
         return $this->field($field)->where($map)->order($order)->limit($limit)->select();
     }
 
@@ -104,9 +104,7 @@ class TchatActivityModel extends Model{
             $this->error = $logic->getError();
             return false;
         }
-        $info = array_merge($info, $detail);
-
-        return $info;
+        return array_merge($info, $detail);
     }
 
     /**
@@ -146,12 +144,12 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     public function update($data = null){
-    	/* 检查文档类型是否符合要求 */
-    	$res = $this->checkDocumentType( I('type'), I('pid') );
-    	if(!$res['status']){
-    		$this->error = $res['info'];
-    		return false;
-    	}
+      /* 检查文档类型是否符合要求 */
+      $res = $this->checkDocumentType( I('type'), I('pid') );
+      if(!$res['status']){
+        $this->error = $res['info'];
+        return false;
+      }
 
         /* 获取数据对象 */
         $data = $this->create($data);
@@ -168,30 +166,30 @@ class TchatActivityModel extends Model{
             }
         } else { //更新数据
             $status = $this->save(); //更新基础内容
-            if(false === $status){
+            if(!$status){
                 $this->error = '更新基础内容出错！';
                 return false;
             }
         }
 
-		if($data['model_id'] !== 6){
-	        /* 添加或新增扩展内容 */
-	        $logic = $this->logic($data['model_id']);
-	        if(!$logic->update($id)){
-	            if(isset($id)){ //新增失败，删除基础数据
-	                $this->delete($id);
-	            }
-	            $this->error = $logic->getError();
-	            return false;
-	        }			
-		}
+    if($data['model_id'] !== 6){
+          /* 添加或新增扩展内容 */
+          $logic = $this->logic($data['model_id']);
+          if(!$logic->update($id)){
+              if(isset($id)){ //新增失败，删除基础数据
+                  $this->delete($id);
+              }
+              $this->error = $logic->getError();
+              return false;
+          }      
+    }
 
 
         hook('documentSaveComplete', array('model_id'=>$data['model_id']));
 
         //行为记录
         if($id){
-        	action_log('add_document', 'document', $id, UID);
+          action_log('add_document', 'document', $id, UID);
         }
 
         //内容添加或更新完成
@@ -270,16 +268,15 @@ class TchatActivityModel extends Model{
      * @return integer 数据状态
      */
     protected function getStatus(){
-    	$id = I('post.id');
-        $model = I('post.model_id');
-        if(empty($id)){	//新增
-        	$status = 1;
-        }else{				//更新
-			$status = $this->getFieldById($id, 'status');
-			//编辑草稿改变状态
-			if($status == 3){
-				$status = 1;
-			}
+      $id = I('post.id');
+        if(empty($id)){  //新增
+          $status = 1;
+        }else{        //更新
+      $status = $this->getFieldById($id, 'status');
+      //编辑草稿改变状态
+      if($status == 3){
+        $status = 1;
+      }
         }
         return $status;
     }
@@ -290,12 +287,12 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     protected function getRoot(){
-    	$pid = I('post.pid');
-    	if($pid == 0){
-    		return 0;
-    	}
-    	$p_root = $this->getFieldById($pid, 'root');
-    	return $p_root == 0 ? $pid : $p_root;
+      $pid = I('post.pid');
+      if($pid == 0){
+        return 0;
+      }
+      $pRoot = $this->getFieldById($pid, 'root');
+      return $pRoot == 0 ? $pid : $Root;
     }
 
     /**
@@ -304,8 +301,8 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     protected function getCreateTime(){
-        $create_time    =   I('post.create_time');
-        return $create_time?strtotime($create_time):NOW_TIME;
+        $createTime    =   I('post.create_time');
+        return $createTime?strtotime($createTime):NOW_TIME;
     }
 
     /**
@@ -343,7 +340,7 @@ class TchatActivityModel extends Model{
             if(is_numeric($model)){
                 $map['model_id'] = $model;
             } else {
-                $map['model_id'] = array('in', str2arr($model_id));
+                $map['model_id'] = array('in', str2arr($model));
             }
         }
 
@@ -368,16 +365,16 @@ class TchatActivityModel extends Model{
 
         //获取根节点
         if($pid == 0){
-        	$root = 0;
+          $root = 0;
         }else{
-        	$root = $this->getFieldById($pid, 'root');
-        	$root = $root == 0 ? $pid : $root;
+          $root = $this->getFieldById($pid, 'root');
+          $root = $root == 0 ? $pid : $root;
         }
 
         $map = array('root'=>$root, 'name'=>$name, 'id'=>array('neq',$id));
         $res = $this->where($map)->getField('id');
         if($res){
-        	return false;
+          return false;
         }
         return true;
     }
@@ -387,13 +384,13 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     private function generateName(){
-        $str = 'abcdefghijklmnopqrstuvwxyz0123456789';	//源字符串
+        $str = 'abcdefghijklmnopqrstuvwxyz0123456789';  //源字符串
         $min = 10;
         $max = 39;
         $name = false;
         while (true){
-            $length = rand($min, $max);	//生成的标识长度
-            $name = substr(str_shuffle(substr($str,0,26)), 0, 1);	//第一个字母
+            $length = rand($min, $max);  //生成的标识长度
+            $name = substr(str_shuffle(substr($str,0,26)), 0, 1);  //第一个字母
             $name .= substr(str_shuffle($str), 0, $length);
             //检查是否已存在
             $res = $this->getFieldByName($name, 'id');
@@ -416,7 +413,7 @@ class TchatActivityModel extends Model{
         }else{
             $pos = 0;
             foreach ($position as $key=>$value){
-                $pos += $value;		//将各个推荐位的值相加
+                $pos += $value;    //将各个推荐位的值相加
             }
             return $pos;
         }
@@ -434,7 +431,7 @@ class TchatActivityModel extends Model{
         }else{
             $check = 0;
             foreach ($checkInfo as $key=>$value){
-                $check += $value;		//将各个推荐位的值相加
+                $check += $value;    //将各个推荐位的值相加
             }
             return $check;
         }
@@ -450,22 +447,22 @@ class TchatActivityModel extends Model{
 
         $map = array('status'=>-1);
 
-        $base_list = $this->where($map)->field('id,model_id')->select();
+        $baseList = $this->where($map)->field('id,model_id')->select();
         //删除扩展模型数据
-        $base_ids = array_column($base_list,'id');
+        $baseIds = array_column($baseList,'id');
         //孤儿数据
-        $orphan   = get_stemma( $base_ids,$this, 'id,model_id');
+        $orphan   = get_stemma( $baseIds,$this, 'id,model_id');
 
-        $all_list  = array_merge( $base_list,$orphan );
-        foreach ($all_list as $key=>$value){
+        $allList  = array_merge( $baseList,$orphan );
+        foreach ($allList as $key=>$value){
             $logic = $this->logic($value['model_id']);
             $logic->delete($value['id']);
         }
 
         //删除基础数据
-        $ids = array_merge( $base_ids, (array)array_column($orphan,'id') );
+        $ids = array_merge( $baseIds, (array)array_column($orphan,'id') );
         if(!empty($ids)){
-        	$res = $this->where( array( 'id'=>array( 'IN',trim(implode(',',$ids),',') ) ) )->delete();
+          $res = $this->where( array( 'id'=>array( 'IN',trim(implode(',',$ids),',') ) ) )->delete();
         }
 
         return $res;
@@ -482,9 +479,11 @@ class TchatActivityModel extends Model{
             return 0;
         } else if(is_numeric($link)){
             return $link;
+        }else{
+          $res = D('Url')->update(array('url'=>$link));
+          return $res['id'];
         }
-        $res = D('Url')->update(array('url'=>$link));
-        return $res['id'];
+
     }
 
     /**
@@ -498,20 +497,20 @@ class TchatActivityModel extends Model{
         /* 检查文档类型是否符合要求 */
         $res = $this->checkDocumentType( I('type'), I('pid') );
         if(!$res['status']){
-        	$this->error = $res['info'];
-        	return false;
+          $this->error = $res['info'];
+          return false;
         }
 
         //触发自动保存的字段
-        $save_list = array('name','title','description','position','link_id','cover_id','deadline','create_time','content');
-        foreach ($save_list as $value){
+        $saveList = array('name','title','description','position','link_id','cover_id','deadline','create_time','content');
+        foreach ($saveList as $value){
             if(!empty($post[$value])){
-                $if_save = true;
+                $ifSave = true;
                 break;
             }
         }
 
-        if(!$if_save){
+        if(!$ifSave){
             $this->error = '您未填写任何内容';
             return false;
         }
@@ -526,7 +525,7 @@ class TchatActivityModel extends Model{
             array('model_id', 'checkModel', '该模型不存在', self::EXISTS_VALIDATE , 'callback', self::MODEL_UPDATE),
             array('deadline', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
             array('create_time', '/^\d{4,4}-\d{1,2}-\d{1,2}(\s\d{1,2}:\d{1,2}(:\d{1,2})?)?$/', '日期格式不合法,请使用"年-月-日 时:分"格式,全部为数字', self::VALUE_VALIDATE  , 'regex', self::MODEL_BOTH),
-			array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
+      array('content', 'getContent', '内容不能为空！', self::MUST_VALIDATE , 'callback', self::MODEL_BOTH),
         );
         $this->_auto[] = array('status', '3', self::MODEL_BOTH);
 
@@ -538,14 +537,14 @@ class TchatActivityModel extends Model{
         if(empty($data['id'])){ //新增数据
             $id = $this->add(); //添加基础内容
             if(!$id){
-    			$this->error = '新增基础内容出错！';
+          $this->error = '新增基础内容出错！';
                 return false;
             }
             $data['id'] = $id;
         } else { //更新数据
             $status = $this->save(); //更新基础内容
-            if(false === $status){
-    			$this->error = '更新基础内容出错！';
+            if(!$status){
+          $this->error = '更新基础内容出错！';
                 return false;
             }
         }
@@ -566,21 +565,21 @@ class TchatActivityModel extends Model{
 
     /**
      * 获取目录列表
-	 * TODO 检测是否缓存会造成不同根节点缓存的混乱
+   * TODO 检测是否缓存会造成不同根节点缓存的混乱
      * @param intger $pid 目录的根节点
      * @return boolean
      * @author huajie <banhuajie@163.com>
      */
     public function getDirectoryList($pid = null){
-    	if(empty($pid)){
-    		return false;
-    	}
-    	$tree = S('sys_directory_tree');
-		if(empty($tree)){
-			$res = $this->getChild($pid);
-			S('sys_directory_tree', $tree);
-		}
-		return $res;
+      if(empty($pid)){
+        return false;
+      }
+      $tree = S('sys_directory_tree');
+    if(empty($tree)){
+      $res = $this->getChild($pid);
+      S('sys_directory_tree', $tree);
+    }
+    return $res;
     }
 
     /**
@@ -590,44 +589,44 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     private function getChild($pid){
-    	$tree = array();
-    	$map = array('status'=>1,'type'=>1);
-    	if(is_array($pid)){
-    		$map['pid'] = array('in', implode(',', $pid));
-    	}else{
-    		$map['pid'] = $pid;
-    	}
-		/* 查找出所有指定PID的数据列表 */
-    	$child = $this->where($map)->field('id,name,title,pid')->order('level DESC,id DESC')->select();
-    	if(!empty($child)){
-    		foreach ($child as $key=>$value){
-    			$pids[] = $value['id']; //遍历出所有数据ID值
-    		}
-			/*再递归查找出所有PID为数据列表中的ID的深层数据*/
-    		$tree = array_merge($child, $this->getChild($pids));
-    	}
-    	return $tree;
+      $tree = array();
+      $map = array('status'=>1,'type'=>1);
+      if(is_array($pid)){
+        $map['pid'] = array('in', implode(',', $pid));
+      }else{
+        $map['pid'] = $pid;
+      }
+    /* 查找出所有指定PID的数据列表 */
+      $child = $this->where($map)->field('id,name,title,pid')->order('level DESC,id DESC')->select();
+      if(!empty($child)){
+        foreach ($child as $key=>$value){
+          $pids[] = $value['id']; //遍历出所有数据ID值
+        }
+      /*再递归查找出所有PID为数据列表中的ID的深层数据*/
+        $tree = array_merge($child, $this->getChild($pids));
+      }
+      return $tree;
     }
 
-	/**
-	 * 获取活动的详细内容
-	 * @return boolean
-	 * @author huajie <banhuajie@163.com>
-	 */
-	protected function getContent(){
-		$type = I('post.type');
-		$content = I('post.content');
-		if($type > 1){	//主题和段落必须有内容
-			if(empty($content)){
-				return false;
-			}
-		}else{			//目录没内容则生成空字符串
-			if(empty($content)){
-				$_POST['content'] = ' ';
-			}
-		}
-		return true;
-	}
+  /**
+   * 获取活动的详细内容
+   * @return boolean
+   * @author huajie <banhuajie@163.com>
+   */
+  protected function getContent(){
+    $type = I('post.type');
+    $content = I('post.content');
+    if($type > 1){  //主题和段落必须有内容
+      if(empty($content)){
+        return false;
+      }
+    }else{      //目录没内容则生成空字符串
+      if(empty($content)){
+        $_POST['content'] = ' ';
+      }
+    }
+    return true;
+  }
 
     /**
      * 检查指定文档下面子文档的类型
@@ -637,36 +636,36 @@ class TchatActivityModel extends Model{
      * @author huajie <banhuajie@163.com>
      */
     public function checkDocumentType($type = null, $pid = null){
-    	$res = array('status'=>1, 'info'=>'');
-		if(empty($type)){
-			return array('status'=>0, 'info'=>'文档类型不能为空');
-		}
-		if(empty($pid)){
-			return $res;
-		}
-		//查询父文档的类型
-		if(is_numeric($pid)){
-			$ptype = $this->getFieldById($pid, 'type');
-		}else{
-			$ptype = $this->getFieldByName($pid, 'type');
-		}
-		//父文档为目录时
-		if($ptype == 1){
-			return $res;
-		}
-		//父文档为主题时
-		if($ptype == 2){
-			if($type != 3){
-				return array('status'=>0, 'info'=>'主题下面只允许添加段落');
-			}else{
-				return $res;
-			}
-		}
-		//父文档为段落时
-		if($ptype == 3){
-			return array('status'=>0, 'info'=>'段落下面不允许再添加子内容');
-		}
-		return array('status'=>0, 'info'=>'父文档类型不正确');
+      $res = array('status'=>1, 'info'=>'');
+    if(empty($type)){
+      return array('status'=>0, 'info'=>'文档类型不能为空');
+    }
+    if(empty($pid)){
+      return $res;
+    }
+    //查询父文档的类型
+    if(is_numeric($pid)){
+      $ptype = $this->getFieldById($pid, 'type');
+    }else{
+      $ptype = $this->getFieldByName($pid, 'type');
+    }
+    //父文档为目录时
+    if($ptype == 1){
+      return $res;
+    }
+    //父文档为主题时
+    if($ptype == 2){
+      if($type != 3){
+        return array('status'=>0, 'info'=>'主题下面只允许添加段落');
+      }else{
+        return $res;
+      }
+    }
+    //父文档为段落时
+    if($ptype == 3){
+      return array('status'=>0, 'info'=>'段落下面不允许再添加子内容');
+    }
+    return array('status'=>0, 'info'=>'父文档类型不正确');
     }
 
 }

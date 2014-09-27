@@ -27,33 +27,7 @@ class EventEvent {
 			
 			/* 关注事件 */
 			case 'subscribe' :
-
-				//实例化客户模型
-				$Client = D('Tchat_client');
-				if (check_wechat_rz() === TRUE) {
-					//如果是认证服务号，更新一次客户的详细信息
-					$data = get_client_info($openId);
-
-					$clientId = $Client -> where('`openid` = "' . $openId . '"') -> getField('id');
-					if ($clientId) {//如果有存储，则设置ID值
-						$data['id'] = $clientId;
-					}
-
-					if (!empty($ticket)) {//检测tiket是否为空
-						$this -> qrcodePlusOne($ticket);
-					}
-
-					//获取客户信息
-					$data['event_key'] = $eventKey;
-
-				} else {//公众号未认证且未存储过客户信息的情况下只存储openid
-					$data['openid'] = $openId;
-				}
-
-				$data['subscribe'] = '1';
-				$data['subscribe_time'] = time();
-
-				$Client -> update($data);
+				$this -> updateClientInfo($openId,$eventKey,$ticket);
 				break;
 				
 			/* 取消关注事件 */
@@ -72,43 +46,51 @@ class EventEvent {
 			
 			/* 自定义菜单点击事件 */
 			case 'CLICK' :
-				
 				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
-				//对点击事件的动作执行类型进行过滤
-				//TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型 
-				switch ($rs['action_type']) {
-					case 'keyword' : //执行某关键词回复
-						$TextRe = A('Text', 'Event');
-						$keyword = $rs['action_code'];
-						return $reply = $TextRe -> textHandle($openId, $keyword);
-						break;
-
-					 //当自定义菜单点击的回复类型为功能时
-					case 'segment' : //执行文章合集回复
-						//如果是客服模块直接转到客服
-						if($rs['action_code'] == 'service'){
-							return  get_service_arr();
-						}else{//TODO 其他模块待加入
-							return get_text_arr('功能尚在完善，敬请关注');
-						}
-						break;
-
-					//其他默认情况下的回复
-					default: 
-						$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code'], );
-						//直接回复对应的内容
-						return $reply = A('Reply', 'Event') -> wechatReply($re);
-						break;
-
-				}
+				$this -> replyClickEvent($rs);
+			break;
+			
+			default:
+					return $reply = get_text_arr("系统正在开发本接口，敬请关注。");
 			break;
 		}
-
-		//根据EVENT值找到EVENT表中相应的回复类型
-		$re = M('Tchat_events') -> where(array('event_type'=>$event)) ->find();
-		return $reply = A('Reply', 'Event') -> wechatReply($re);
-
+			    //根据EVENT值找到EVENT表中相应的回复类型
+			$re = M('Tchat_events') -> where(array('event_type'=>$event)) ->find();
+			return $reply = A('Reply', 'Event') -> wechatReply($re);
  	}
+   
+   /**
+    * 更新客户信息
+    * 
+    */
+   protected function updateClientInfo($openId,$eventKey="",$ticket=""){
+			//实例化客户模型
+			$Client = D('Tchat_client');
+			if (check_wechat_rz() === TRUE) {
+				//如果是认证服务号，更新一次客户的详细信息
+				$data = get_client_info($openId);
+
+				$clientId = $Client -> where('`openid` = "' . $openId . '"') -> getField('id');
+				if ($clientId) {//如果有存储，则设置ID值
+					$data['id'] = $clientId;
+				}
+
+				if (!empty($ticket)) {//检测tiket是否为空
+					$this -> qrcodePlusOne($ticket);
+				}
+
+				//获取客户信息
+				$data['event_key'] = $eventKey;
+
+			} else {//公众号未认证且未存储过客户信息的情况下只存储openid
+				$data['openid'] = $openId;
+			}
+
+			$data['subscribe'] = '1';
+			$data['subscribe_time'] = time();
+
+			$Client -> update($data);
+   }
  
 	/**
 	 * 二维码扫描数+1
@@ -120,6 +102,38 @@ class EventEvent {
 		$QRcode -> getByTicket($ticket);
 		$QRcode -> scan_num++;
 		$QRcode -> save();
+	}
+	
+	/**
+	 *点击自定义菜单事件回应
+	 * 对点击事件的动作执行类型进行过滤 
+	 */
+	protected function replyClickEvent($rs){
+		// TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型 
+		switch ($rs['action_type']) {
+			case 'keyword' : //执行某关键词回复
+				$TextRe = A('Text', 'Event');
+				$keyword = $rs['action_code'];
+				return $reply = $TextRe -> textHandle($openId, $keyword);
+				break;
+
+			 //当自定义菜单点击的回复类型为功能时
+			case 'segment' : //执行文章合集回复
+				//如果是客服模块直接转到客服
+				if($rs['action_code'] == 'service'){
+					return  get_service_arr();
+				}else{//TODO 其他模块待加入
+					return get_text_arr('功能尚在完善，敬请关注');
+				}
+				break;
+
+			//其他默认情况下的回复
+			default: 
+				$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code'], );
+				//直接回复对应的内容
+				return $reply = A('Reply', 'Event') -> wechatReply($re);
+				break;
+		}
 	}
 
 }
