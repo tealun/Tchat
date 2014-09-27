@@ -14,15 +14,44 @@ namespace Admin\Controller;
  * 
  */
 class AlbumController extends AdminController {
-
+	
+	/**
+	 * 相册列表
+	 */
 	public function index(){
 		
-		$hostname = $_SERVER["HTTP_HOST"].C('WECHAT_APP_ID');
-		$this->assign('hostname',$hostname);
 		$this->display();
 	}
 
+	/**
+	 * 相册详情
+	 */
+	public function detail(){
+		
+		$this->display();
+	}
 
+	/**
+	 * 创建相册
+	 */
+	public function create(){
+		
+		$this->display();
+	}
+	
+	/**
+	 * 编辑相册
+	 */
+	public function edit(){
+		
+		$this->display();
+	}
 
+	/**
+	 * 更新相册
+	 */
+	public function update(){
+
+	}
 
 }

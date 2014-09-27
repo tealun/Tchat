@@ -1,12 +1,15 @@
 <?php
 // +----------------------------------------------------------------------
-// | Tchat 
+// | OneThink [ WE CAN DO IT JUST THINK IT ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2014 http://www.tealun.com
+// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: Tealun Du <tealun@tealun.com> <http://www.tealun.com>
+// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
 // +----------------------------------------------------------------------
-
+// | 说明: 本类中的很多方法均源自oneThink源码，由于是需要从文档中分离出来，但
+// |       其结构、逻辑与文档类似，为不去改动文档的控制器和模型逻辑，此处将其
+// |       代码拿来并根据活动板块的特殊性做了一些改动。
+// +----------------------------------------------------------------------
 namespace Admin\Controller;
 
 /**
@@ -17,7 +20,7 @@ class ActivityController extends AdminController {
 
 	/**
 	 * 活动列表
-	 * 
+	 * 活动的总列表
 	 */
 	public function index(){
     $map=$this->indexOfMap();
@@ -27,7 +30,7 @@ class ActivityController extends AdminController {
     $this->display(); // 输出模板
 	}
 
-      /**
+    /**
      * 查询条件初始化
      *
      */
@@ -83,7 +86,7 @@ class ActivityController extends AdminController {
   }
   
     /**
-     * update one record
+     * 更新活动
      * @author huajie <banhuajie@163.com>
      */
     public function update(){
