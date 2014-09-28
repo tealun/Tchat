@@ -24,10 +24,17 @@ class IndexController extends HomeController {
 		
 		/* 首页推荐产品数据 */
 		$productCate = D('Category')->getChildrenId(80);
+		
+		$productNews = D('Document')->lists(arr2str($productCate),'`id` DESC',1,'id,cover_id,title');
 		$productPos =  D('Document')->position(4,$productCate,5,'id,cover_id,title');//获取产品目录首页推荐产品，限制5条
-				if(!empty($productPos)){
-				$this->assign('productPos',$productPos);//首页推荐产品
+
+		if(!empty($productNews)){
+			$this->assign('productNews',$productNews);//首页最新产品
 		}
+		if(!empty($productPos)){
+			$this->assign('productPos',$productPos);//首页推荐产品
+		}
+		
 		
         $this->assign('category',$category);//栏目
         $this->assign('lists',$lists);//列表

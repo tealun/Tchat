@@ -1,14 +1,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{:C('WEB_SITE_TITLE')}</title>
+<title><if condition="isset($meta_title)">{$meta_title}|</if>{:C('WEB_SITE_TITLE')}</title>
 <!-- Loading Bootstrap -->
 <link href="__STATIC__/bootstrap3.2.0/css/bootstrap.css" rel="stylesheet">
 <!-- Loading Flat UI CSS-->
 <link href="__STATIC__/flatui/css/flat-ui.css" rel="stylesheet">
 
 <link href="./Application/Home/View/restaurant/css/style.css" rel="stylesheet" type="text/css">
-
-<title>{$title}</title>
 <meta http-equiv="Content-Language" content="UTF-8">
 <meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}">
 <meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}">
