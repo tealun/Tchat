@@ -6,6 +6,5 @@ define('TCHAT_PHOTO','./Uploads/Wechat/Tchat/Picture/');
 define('TCHAT_VOICE','./Uploads/Wechat/Tchat/Voice/');
 define('TCHAT_VIDEO','./Uploads/Wechat/Tchat/Video/');
 return array(
-	'SUGGESTE_EXP_TEXT'=>array('建议','提建议','我建议','我想建议')
 
 );

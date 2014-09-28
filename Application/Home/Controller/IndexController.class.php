@@ -24,8 +24,8 @@ class IndexController extends HomeController {
 		
 		/* 首页推荐产品数据 */
 		$productCate = D('Category')->getChildrenId(80);
-		
-		$productNews = D('Document')->lists(arr2str($productCate),'`id` DESC',1,'id,cover_id,title');
+
+		$productNews = D('Document')->lists($productCate,'`id` DESC',1,'id,cover_id,title');
 		$productPos =  D('Document')->position(4,$productCate,5,'id,cover_id,title');//获取产品目录首页推荐产品，限制5条
 
 		if(!empty($productNews)){

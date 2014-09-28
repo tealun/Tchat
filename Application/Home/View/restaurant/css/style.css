@@ -178,6 +178,12 @@ span .text {
 	color:#DDDDDD;
 }
 
+.newest a, .featrues a, .adviced a {
+	line-height:1.7em;
+	text-align:center;
+	color:#FFFFFF;
+}
+
 .newest p, .featrues p, .adviced p {
 	line-height:1.7em;
 	text-align:center;
