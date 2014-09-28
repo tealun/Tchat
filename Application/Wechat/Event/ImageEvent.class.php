@@ -24,7 +24,7 @@ class ImageEvent{
     if(check_wechat_rz()===TRUE){
       //下载图片
       $accessToken = get_access_token();
-      $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$accessToken&media_id=$mediaId";
+      $url = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=".$accessToken."&media_id=".$mediaId;
       $fileInfo = $this->downloadWeixinFile($url);
       
       $filePath = CLIENT_PHOTO.date('Ym',time())."/";
@@ -45,7 +45,7 @@ class ImageEvent{
   
       $content .= "\n<a href='http://".$_SERVER["HTTP_HOST"].$filePath.$fileName."' >点击查看</a>";  
     }
-    return $reply = get_text_arr($content);
+    return get_text_arr($content);
   }
   
 /**
@@ -64,8 +64,7 @@ private function downloadWeixinFile($url)
     $package = curl_exec($ch);
     $httpinfo = curl_getinfo($ch);
     curl_close($ch);
-    $imageAll = array_merge(array('header' => $httpinfo), array('body' => $package)); 
-    return $imageAll;
+    return array_merge(array('header' => $httpinfo), array('body' => $package)); 
 }
 
 /**

@@ -16,10 +16,11 @@ class EventEvent {
 	/**
 	 * 客户发送事件消息处理
 	 *
-	 * @param $openId
-	 * @param $event
-	 * @param $eventKey
-	 * @param $ticket
+	 * @param  $openId    客户唯一openid
+	 * @param  $event     事件类型
+	 * @param  $eventKey  事件KEY值
+	 * @param  $ticket    二维码的ticket，可用来换取二维码图片
+	 * @author Tealun Du
 	 */
 	public function eventHandle($openId, $event, $eventKey = '', $ticket = '') {
 		switch ($event) {
@@ -51,17 +52,20 @@ class EventEvent {
 			break;
 			
 			default:
-					return $reply = get_text_arr("系统正在开发本接口，敬请关注。");
+					return get_text_arr("系统正在开发本接口，敬请关注。");
 			break;
 		}
 			    //根据EVENT值找到EVENT表中相应的回复类型
 			$re = M('Tchat_events') -> where(array('event_type'=>$event)) ->find();
-			return $reply = A('Reply', 'Event') -> wechatReply($re);
+			return A('Reply', 'Event') -> wechatReply($re);
  	}
    
    /**
     * 更新客户信息
-    * 
+    * @param string $openId   客户唯一openid
+    * @param string $eventKey 事件KEY值
+    * @param string $ticket   二维码的ticket，可用来换取二维码图片
+    * @author Tealun Du 
     */
    protected function updateClientInfo($openId,$eventKey="",$ticket=""){
 			//实例化客户模型
@@ -106,22 +110,25 @@ class EventEvent {
 	
 	/**
 	 *点击自定义菜单事件回应
-	 * 对点击事件的动作执行类型进行过滤 
+	 * 对点击事件的动作执行类型进行过滤
+	 * @param array $rs 点击事件的配置数据资源
 	 */
 	protected function replyClickEvent($rs){
-		// TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型 
+		
+		/* TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型  */
 		switch ($rs['action_type']) {
-			case 'keyword' : //执行某关键词回复
+			
+			//执行某关键词回复
+			case 'keyword' : 
 				$TextRe = A('Text', 'Event');
 				$keyword = $rs['action_code'];
-				return $reply = $TextRe -> textHandle($openId, $keyword);
+				return $TextRe -> textHandle($openId, $keyword);
 				break;
 
 			 //当自定义菜单点击的回复类型为功能时
-			case 'segment' : //执行文章合集回复
-				//如果是客服模块直接转到客服
-				if($rs['action_code'] == 'service'){
-					return  get_service_arr();
+			case 'segment' : 
+				if($rs['action_code'] == 'service'){//如果是客服模块直接转到客服
+					return get_service_arr();
 				}else{//TODO 其他模块待加入
 					return get_text_arr('功能尚在完善，敬请关注');
 				}
@@ -131,7 +138,7 @@ class EventEvent {
 			default: 
 				$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code'], );
 				//直接回复对应的内容
-				return $reply = A('Reply', 'Event') -> wechatReply($re);
+				return A('Reply', 'Event') -> wechatReply($re);
 				break;
 		}
 	}
