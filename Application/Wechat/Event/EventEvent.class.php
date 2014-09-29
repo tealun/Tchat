@@ -47,13 +47,20 @@ class EventEvent {
 			
 			/* 自定义菜单点击事件 */
 			case 'CLICK' :
+				
+				// 获取对应资源 
 				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
-				$this -> replyClickEvent($rs);
-			break;
+				
+				if(!$rs){
+					return get_text_arr("菜单配置错误，请联系管理员。");
+				}else{
+					return $this -> replyClickEvent($rs);//回应菜单指令
+				}
+				break;
 			
 			default:
-					return get_text_arr("系统正在开发本接口，敬请关注。");
-			break;
+				return get_text_arr("系统正在开发本接口，敬请关注。");
+				break;
 		}
 			    //根据EVENT值找到EVENT表中相应的回复类型
 			$re = M('Tchat_events') -> where(array('event_type'=>$event)) ->find();
@@ -114,7 +121,6 @@ class EventEvent {
 	 * @param array $rs 点击事件的配置数据资源
 	 */
 	protected function replyClickEvent($rs){
-		
 		/* TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型  */
 		switch ($rs['action_type']) {
 			
@@ -136,7 +142,7 @@ class EventEvent {
 
 			//其他默认情况下的回复
 			default: 
-				$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code'], );
+				$re = array('reply_type' => $rs['action_type'], 'reply_id' => $rs['action_code']);
 				//直接回复对应的内容
 				return A('Reply', 'Event') -> wechatReply($re);
 				break;
