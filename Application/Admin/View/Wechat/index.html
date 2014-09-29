@@ -1,9 +1,172 @@
 <extend name="Public/base"/>
 
 <block name="body">
- <div>
-  <p>
-    This is test agin !
-  </p>
- </div>
+<div class="container-fluid">
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="thumbnails">
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="微信配置" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_setup_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-wrench"></i> 微信配置
+							</h3>
+							<p>
+								配置微信公众帐号的相关信息，使用本系统对接微信公众帐号必须正确配置相关信息
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">配置</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="事件管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_event_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-magnet"></i> 事件管理
+							</h3>
+							<p>
+								微信公众帐号的事件管理，包括关注公众帐号时的回复信息，客户扫描二维码时的回复信息等。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="自定义菜单管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_event_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-list"></i> 自定义菜单管理
+							</h3>
+							<p>
+								自定义菜单是微信公众帐号消息页面底部的菜单，服务号默认会有，订阅号需认证后才会有，您可以在此配置自定义菜单的信息交互方式，更多请点击帮助了解
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="thumbnails">
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="微信配置" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_keyword_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-screenshot"></i> 自定义关键词
+							</h3>
+							<p>
+								您可以通过自定义关键词来指定客户发送某个词汇时，系统回复指定的内容。关键词默认在找不到全匹配结果时返回模糊匹配结果，可以回复文本、图文、图片、音乐等格式的消息，了解更多请点击帮助。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="文本素材管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_text_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-list-alt"></i> 文本素材管理
+							</h3>
+							<p>
+								您可以在这里管理您自定义的文本素材内容，当关键词或事件设置中指定回复文本时，会通过设置文本编号在本素材库中查找文本，然后回复给客户。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="自定义二维码管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_qrcode_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-qrcode"></i> 自定义二维码
+							</h3>
+							<p>
+								请注意，自定义二维码功能只有已经认证的【服务号】才可以使用，如果您的帐号是订阅号，或未认证的服务号，请忽略这里。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<ul class="thumbnails">
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="客户管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_custom_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-user"></i> 客户管理
+							</h3>
+							<p>
+								您可以在这里管理已经关注您公众帐号的客户，如果您的帐号是已认证的【服务号】，本系统会自动获取客户的详细信息。了解更多请点击帮助。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="客户图片管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_image_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-picture"></i> 客户图片管理
+							</h3>
+							<p>
+								如果你的帐号是已经认证的【服务号】，客户发送到微信公众帐号的图片会自动保存在本系统中，您可以在此进行管理。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+				<li class="span4">
+					<div class="thumbnail">
+			      <img alt="客户消息管理" style="width: 100%; " src="__PUBLIC__/Admin/images/default/wechat_message_banner.jpg" />
+						<div class="caption">
+							<h3>
+								<i class="icon-medkit"></i>客户消息管理
+							</h3>
+							<p>
+								您可以在这里管理客户消息。
+							</p>
+							<p>
+								<a class="btn btn-primary" href="#">进入管理</a> <a class="btn" href="#">帮助</a>
+							</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+		
+</div>
 </block>
