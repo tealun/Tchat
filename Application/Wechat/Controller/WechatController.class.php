@@ -191,7 +191,7 @@ class WechatController extends Controller {
             :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['index_pic']))->getField('path');
           }
 		  
-        $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/Home/Article/detail/id/'.$var['id'].'.html';
+        $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/index.php?s=/Home/Article/detail/id/'.$var['id'].'.html';
         $i++;
 		unset($news[$key]);
 		
