@@ -52,7 +52,10 @@ class EventEvent {
 				$rs = M('Tchat_menu') -> where('`event_key` = "'.$eventKey.'"') -> find();
 				
 				if(!$rs){
-					return get_text_arr("菜单配置错误，请联系管理员。");
+						$content = "菜单配置错误，请稍后重试。";
+						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
+					   $content .= "\n--------------------\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
+					return get_text_arr($content);
 				}else{
 					return $this -> replyClickEvent($rs);//回应菜单指令
 				}
@@ -135,6 +138,7 @@ class EventEvent {
 			case 'segment' : 
 				if($rs['action_code'] == 'service'){//如果是客服模块直接转到客服
 					return get_service_arr();
+
 				}else{//TODO 其他模块待加入
 					return get_text_arr('功能尚在完善，敬请关注');
 				}

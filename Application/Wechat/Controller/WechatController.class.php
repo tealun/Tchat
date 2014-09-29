@@ -50,7 +50,15 @@ class WechatController extends Controller {
       
       /* 获取回复给客户的格式化信息 */
       // 用list方法将reply方法返回的数组变量(内容,回复类型,星标)进行赋值
-      list($content, $type, $flag) = $this->reply($data);
+      list($content, $type, $flag) = $this->getReply($data);
+	  
+	  	 if($type == 'service'){
+	 	$url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=".get_access_token();
+		$message = "{\"touser\":\"".$data['ToUserName']."\",\"msgtype\":\"text\",\"text\":{\"content\":\"正在为您转接客服呢\"}}";
+        vpost($url,$message);
+
+	 }
+	  
       /* 响应给当前客户 */
       $this->response($content, $type, $flag);
 
@@ -81,7 +89,7 @@ class WechatController extends Controller {
    * @param array $data 经解析后的用户数据
    * @return array 最终生成的回复内容数组
    */
-  private function reply($data){
+  private function getReply($data){
     $openId= $data['FromUserName'];
 	
     if('text' == $data['MsgType']){ //客户文本消息类型的处理流程
@@ -257,9 +265,8 @@ private function service(){
         break;
 		
 	case 'service':
-        $resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType']);
+		$resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType']);
         break;
-    
     }
     echo $resultStr; //最终的回复结果不能用return，只能用echo ，否则没响应。
   }

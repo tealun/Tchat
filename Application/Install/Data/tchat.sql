@@ -99,7 +99,7 @@ INSERT INTO `onethink_attribute` VALUES ('450', 'sort', '排序', 'tinyint(2) NO
 INSERT INTO `onethink_attribute` VALUES ('451', 'menu_type', '菜单类型', 'varchar(20) NOT NULL ', 'select', 'click', '设置本菜单的类型，是作为一级菜单还是获取回复信息又或者是跳转到网页', '1', 'click:获取回复\r\nbutton:一级菜单\r\nview:转到网址', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('452', 'name', '显示名称', 'varchar(50) NOT NULL ', 'string', '', '菜单上显示的名称', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('453', 'event_key', '系统识别码', 'varchar(50) NOT NULL ', 'string', '', '用于识别菜单的指令代码，可以自己随便写,注意不要用中文', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('454', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组名、功能、分类编号、文章编号、文本编号', '1', 'keyword:触发关键词\r\nsegement:触发功能\r\nnews:选择分类\r\ndocument:选择文类\r\ntext:选择文本', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('454', 'action_type', '触发类型', 'varchar(20) NOT NULL ', 'select', '', '关键词组名、功能、分类编号、文章编号、文本编号', '1', 'keyword:触发关键词\r\ntext:选择文本\r\nnews:选择分类\r\ndocument:选择文章\r\nsegment:触发功能', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('455', 'action_code', '动作指令', 'varchar(100) NOT NULL ', 'string', '', '关键词请填写已有的关键词组名，功能请选择功能，分类及文章请填写分类号和文章号（文章可多个）”', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('456', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('457', 'pid', '上级菜单', 'int(10) unsigned NOT NULL ', 'string', '0', '请选择上级菜单', '1', '', '52', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
@@ -231,7 +231,9 @@ INSERT INTO `onethink_auth_extend` VALUES ('5','23','1');
 -- -----------------------------
 -- Records of `onethink_auth_group`
 -- -----------------------------
-UPDATE `onethink_auth_group` SET `title`='管理组',`description` = '用于网络管理人员的帐号组',`rules` = '1,2,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,39,40,46,47,48,49,50,51,52,53,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,81,82,83,84,86,87,88,89,90,91,92,93,100,102,103,107,108,109,110,195,207,211,213,214,300,301,302,303,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,329,330,331,332,333,400,401,402,403,404,405,406,407,408,409,410,411,412,413,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,550,551,552,553,554,' WHERE `id` ='2' limit 1;
+ALTER TABLE `onethink_auth_group` CHANGE `rules` `rules` VARCHAR(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开';
+
+UPDATE `onethink_auth_group` SET `title`='管理员组',`description` = '用于网络管理人员的帐号组',`rules` = '1,2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,34,36,37,38,39,40,41,46,47,48,49,50,51,52,53,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,81,82,83,84,86,87,88,89,90,91,92,93,100,102,103,107,108,109,110,195,207,211,213,214,215,216,300,301,302,303,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,400,401,402,403,404,405,406,407,408,409,410,411,412,413,450,451,452,453,454,455,456,457,458,459,460,461,464,465,466,467,468,469,470,471,472,473,474,475,550,551,552,553,554,555' WHERE `id` ='2' limit 1;
 INSERT INTO `onethink_auth_group` VALUES ('3', 'admin', '1', '领导组', '用于领导人员的帐号组', '1', '1,2,3,15,16,17,18,23,24,26,27,88,107,108,109,110,301,306,307,308,309,310,311,312,313,314,315,316,317,318,322,407,408,409,410,411,412,413,451,453,456,459,461,464,466,550,551,554');
 INSERT INTO `onethink_auth_group` VALUES ('4', 'admin', '1', '行政组', '用于行政人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,334,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,364,365,366,367,368,369,370,371,372,373,374,375');
 INSERT INTO `onethink_auth_group` VALUES ('5', 'admin', '1', '活动组', '用于活动管理人员的帐号组', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,79,211,316,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,335,336,337,343,349,350,351,352,353,354,355,356,357,358,359,361,362,364,365,366,367,368,370,371,372,373,374');
@@ -305,6 +307,9 @@ INSERT INTO `onethink_auth_rule` VALUES ('336', 'admin', '1', 'Admin/WechatText/
 INSERT INTO `onethink_auth_rule` VALUES ('337', 'admin', '1', 'Admin/WechatText/remove','删除', '1', '');
 -- 338编号已经用作事件更改状态
 
+INSERT INTO `onethink_auth_rule` VALUES ('339', 'admin', '1', 'Admin/WechatMenu/update','更新', '1', '');
+INSERT INTO `onethink_auth_rule` VALUES ('340', 'admin', '1', 'Admin/WechatMenu/setMenu','生成', '1', '');
+
 -- 活动板块权限设置
 
 INSERT INTO `onethink_auth_rule` VALUES ('400', 'admin', '2', 'Admin/Activity/index','活动', '1', '');
@@ -354,7 +359,6 @@ INSERT INTO `onethink_auth_rule` VALUES ('468', 'admin', '1', 'Admin/ProductTopi
 INSERT INTO `onethink_auth_rule` VALUES ('469', 'admin', '1', 'Admin/ProductTopic/recycle', '已删除', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('470', 'admin', '1', 'Admin/ProductTopic/clear', '清空', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('471', 'admin', '1', 'Admin/ProductTopic/delete', '彻底删除', '1', '');
-
 
 INSERT INTO `onethink_auth_rule` VALUES ('472', 'admin', '1', 'Admin/ProductCategory/index', '分类管理', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('473', 'admin', '1', 'Admin/ProductCategory/add', '新增', '1', '');
@@ -473,8 +477,10 @@ INSERT INTO `onethink_menu` VALUES ('377', '回复消息', '375', '0', 'Admin/We
 INSERT INTO `onethink_menu` VALUES ('391', '查看菜单', '300', '0', 'Admin/WechatMenu/viewMenu', '0', '查看当前菜单', '自定义菜单', '0');
 INSERT INTO `onethink_menu` VALUES ('392', '编辑菜单', '391', '0', 'Admin/WechatMenu/edit', '0', '编辑一条菜单项', '', '0');
 INSERT INTO `onethink_menu` VALUES ('393', '改变状态', '391', '0', 'Admin/WechatMenu/setStatus', '0', '改变一条菜单的启用状态', '', '0');
+INSERT INTO `onethink_menu` VALUES ('394', '更新', '391', '0', 'Admin/WechatMenu/update', '0', '更新一条菜单的设置', '', '0');
+INSERT INTO `onethink_menu` VALUES ('395', '生成', '391', '0', 'Admin/WechatMenu/setMenu', '0', '将本地菜单设置生成到微信公众平台', '', '0');
 
-INSERT INTO `onethink_menu` VALUES ('394', '新增菜单', '300', '0', 'Admin/WechatMenu/add', '0', '新增一项菜单项', '自定义菜单', '0');
+INSERT INTO `onethink_menu` VALUES ('396', '新增菜单', '300', '0', 'Admin/WechatMenu/add', '0', '新增一项菜单项', '自定义菜单', '0');
 
 INSERT INTO `onethink_menu` VALUES ('410','文本列表','300','0','Admin/WechatText/index','0','查看文本数据列表','文本素材','0');
 INSERT INTO `onethink_menu` VALUES ('411','编辑','410','0','Admin/WechatText/edit','0','编辑文本内容','','0');
@@ -1001,3 +1007,4 @@ CREATE TABLE `onethink_tchat_vote_list` (
 -- ---------------------------
 -- End of install tchat tables
 -- ---------------------------
+
