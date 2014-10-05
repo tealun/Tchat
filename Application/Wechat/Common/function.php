@@ -58,6 +58,18 @@ function get_wechat_tpl($type){
         <MsgType><![CDATA[%s]]></MsgType>
         </xml>";
       break;
+      
+case'setService':
+	$tpl="<xml>
+    <ToUserName><![CDATA[%s]]></ToUserName>
+    <FromUserName><![CDATA[%s]]></FromUserName>
+    <CreateTime>%s</CreateTime>
+    <MsgType><![CDATA[%s]]></MsgType>
+    <TransInfo>
+        <KfAccount>%s</KfAccount>
+    </TransInfo>
+</xml>";
+	break;
   }
   return $tpl;
 }

@@ -52,13 +52,6 @@ class WechatController extends Controller {
       // 用list方法将reply方法返回的数组变量(内容,回复类型,星标)进行赋值
       list($content, $type, $flag) = $this->getReply($data);
 	  
-	  	 if($type == 'service'){
-	 	$url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=".get_access_token();
-		$message = "{\"touser\":\"".$data['ToUserName']."\",\"msgtype\":\"text\",\"text\":{\"content\":\"正在为您转接客服呢\"}}";
-        vpost($url,$message);
-
-	 }
-	  
       /* 响应给当前客户 */
       $this->response($content, $type, $flag);
 
@@ -265,7 +258,16 @@ private function service(){
         break;
 		
 	case 'service':
-		$resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType']);
+		/* 查看是否为指定客服 */
+		if($name = S($data['ToUserName'].'service')){
+			$tpl = get_wechat_tpl('setService'); //获取带指定客服账号的模板
+			$servicer=$name.'@'.get_ot_config('WECHAT_NAME'); //赋值客户账号
+			S($data['ToUserName'].'service',NULL); //清除客户联系客服时的缓存
+			$resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType'],$servicer);
+		}else{ // 没有指定客服的情况下自动转接到有空的客服
+			$resultStr = sprintf($tpl, $data['ToUserName'], $data['FromUserName'], $data['CreateTime'], $data['MsgType']);
+		}
+
         break;
     }
     echo $resultStr; //最终的回复结果不能用return，只能用echo ，否则没响应。

@@ -53,11 +53,24 @@ class EventEvent {
 				
 				if(!$rs){
 						$content = "菜单配置错误，请稍后重试。";
-						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
-					   $content .= "\n--------------------\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
+						if(get_ot_config('WECHAT_CUSTOM_SERVICE')) {//检测是否开启多客服，开启则提示可联系客服
+						   $content .= "\n--------------------\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
+	
+								/*转接客服缓存*/
+								S($openId, array(
+								'action' => array(
+									'controller' => "Cache,Logic", //需要后续处理的控制器及命名空间
+									'methed' => 'serviceCache', //需要后续处理的公共方法
+									), 
+								'needs' => array(
+									'keyword' => "1,是", //取缓存数组的键名作为关键字数组
+									'params' => '' //传入到上述方法的公共参数
+									)
+								), 60);
+						}
 					return get_text_arr($content);
 				}else{
-					return $this -> replyClickEvent($rs);//回应菜单指令
+					return $this -> replyClickEvent($openId,$rs);//回应菜单指令
 				}
 				break;
 			
@@ -123,7 +136,7 @@ class EventEvent {
 	 * 对点击事件的动作执行类型进行过滤
 	 * @param array $rs 点击事件的配置数据资源
 	 */
-	protected function replyClickEvent($rs){
+	protected function replyClickEvent($openId,$rs){
 		/* TODO 点击自定义菜单中增加回复类型为图片、音乐、URL等类型  */
 		switch ($rs['action_type']) {
 			
@@ -135,10 +148,16 @@ class EventEvent {
 				break;
 
 			 //当自定义菜单点击的回复类型为功能时
-			case 'segment' : 
-				if($rs['action_code'] == 'service'){//如果是客服模块直接转到客服
-					return get_service_arr();
-
+			case 'segment' :
+				/* 匹配是否客服板块 */
+				if(preg_match('/^service[:：, _](.+)/',$rs['action_code'],$match)){
+					
+					if(!empty($match[1])){//看是否有匹配到客服账号，有则缓存账号
+						S($openId.'service',$match[1],10);
+					}
+					
+					return get_service_arr(); //直接转接到客服
+					
 				}else{//TODO 其他模块待加入
 					return get_text_arr('功能尚在完善，敬请关注');
 				}

@@ -4,7 +4,7 @@
 	<div class="logo">
 			<div class="row">
 				<div class="col-xs-12">
-					<img src="{$Think.THEME_PATH}images/logo_03.png" alt="" />
+					{:hook('homeLogo')}
 					<h1 class="hidden">兄弟海鲜大排档</h1>
 				</div>
 		    </div>	
@@ -12,7 +12,7 @@
 </block>
 
 <block name="body">
-
+	{:hook('homeSlide')}
 	<section class="container-fluid"> <!-- Start Container Fluid -->
 
 	<if condition="isset($productNews)" >{/* 开始最新菜品 */ }
