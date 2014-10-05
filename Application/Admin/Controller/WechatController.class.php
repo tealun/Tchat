@@ -16,9 +16,7 @@ namespace Admin\Controller;
 class WechatController extends AdminController {
 
 	public function index(){
-		
-		$hostname = $_SERVER["HTTP_HOST"].C('WECHAT_APP_ID');
-		$this->assign('hostname',$hostname);
+		$this ->assign('meta_title','微信管理');
 		$this->display();
 	}
 
