@@ -90,7 +90,6 @@
 								</for>
 							</notempty>
 							
-							
 						</ul>
 						
 						<span class="btn btn-primary" id="addItem"><i class="icon-plus"></i> 新增一条</span>
@@ -105,41 +104,68 @@
 </block>
 
 <block name="script">
-								<script type="text/javascript">
-										var count = 0;
-										var slideLi = '<li><div  class="rows"><div class="span4"><div class="control-group">';
-														slideLi += '<label class="control-label" for="segment'+count+'" >类别：</label>';
-														slideLi +='<select name="slide'+count+'[\'segment\']" id="segment'+count+'" >';
-														slideLi +='<option value="custom">自定义</option>';
-														slideLi +='<option value="news">新闻</option>';
-														slideLi +='<option value="activity">活动</option>';
-														slideLi +='<option value="product">产品</option>';
-														slideLi +='<option value="plan">套餐</option>';
-														slideLi +='<option value="topic">专题</option>';
-														slideLi +='</select>';
-														slideLi +='</div>';
-													
-														slideLi +='<div class="control-group">';
-														slideLi +='<label for="item'+count+'" class="control-label">条目：</label>';
-														slideLi += '<input type="text" name="slide'+count+'[\'item\']" value="{$slide.item}" id="item'+count+'"/>';
-														slideLi +='</div>';
-													
-														slideLi +='<div class="control-group">';
-														slideLi +='<label for="caption'+count+'" class="control-label">说明：</label>';
-														slideLi +='<input type="text" name="slide'+count+'[\'caption\']" value="{$slide.caption}" id="caption'+count+'"/>';
-														slideLi +='</div>';
-													
-														slideLi +='</div>';
-														slideLi +='<div class="span8" id="preview'+count+'">';
-														slideLi +='<img src="{$slide.image|get_cover=\'path\'}" alt="{$slide.item}">';
-												 		slideLi +='<div class="carousel-caption">';
-														slideLi += '{$slide.caption}</div></div></div></li>';
-														
-											$('#addItem').click(function(){
-												$('#slides').append(slideLi);
-												count = count + 1;
-											});
-									</script>
+<if condition="isset($count)">
+	<script type="text/javascript">
+	var count = parseInt({$count});
+	</script>
+<else /> 
+	<script type="text/javascript">
+	var count = parseInt(0); 
+	</script>
+</if>
+	<script type="text/javascript">
+
+		$('#addItem').click(function(){
+			var i = count+1;
+				if(i > 6){
+					alert('为保证幻加载速度及播放顺畅，幻灯片控制在6张，您可以替换掉原有条目中的内容以展示新幻灯片内容。');
+				}else{
+
+					var slideLi = '<li class="slide'+i+'"><div  class="row"><div class="span4"><div class="control-group">';
+							slideLi += '<h4 style="margin-bottom:15px;">新增第'+i+'条</h4>';
+							slideLi += '<label for="segment'+count+'" >类别：</label>';
+							slideLi +='<select name="slide'+count+'[\'segment\']" id="segment'+count+'" >';
+							slideLi +='<option value="custom">自定义</option>';
+							slideLi +='<option value="news">新闻</option>';
+							slideLi +='<option value="activity">活动</option>';
+							slideLi +='<option value="product">产品</option>';
+							slideLi +='<option value="plan">套餐</option>';
+							slideLi +='<option value="topic">专题</option>';
+							slideLi +='</select>';
+							slideLi +='</div>';
+						
+							slideLi +='<div class="control-group">';
+							slideLi +='<label for="item'+count+'">条目：</label>';
+							slideLi += '<input type="text" name="slide'+count+'[\'item\']" value="{$slide.item}" id="item'+count+'"/>';
+							slideLi +='</div>';
+						
+							slideLi +='<div class="control-group">';
+							slideLi +='<label for="caption'+count+'">说明：</label>';
+							slideLi +='<input type="text" name="slide'+count+'[\'caption\']" value="{$slide.caption}" id="caption'+count+'"/>';
+							slideLi +='</div>';
+						
+							slideLi +='</div>';
+							slideLi +='<div class="span8" id="preview'+count+'">';
+							slideLi +='<h4 style="margin-bottom:15px;">图片预览：</h4>';
+							slideLi +='<div style="height:100px;width:100%;background-color:red;"></div>';
+							slideLi +='<img src="{$slide.image|get_cover=\'path\'}" alt="{$slide.item}">';
+
+							slideLi += '</div></div>';
+							slideLi +='<span class="button-caution close slide"><i class="icon-remove"></i> 删除</span><hr /></li>';
+							slideLi +='<script type="text/javascript">';
+							slideLi +='$(".button-caution.close.slide").click(function(){';
+							slideLi +='$(this).parent("li").detach();count = count-1';
+							slideLi +='});'+'</'+'script>';
+							
+			$('#slides').append(slideLi);
+			count = count+1;
+				if(count > 5){
+				$(this).attr('disabled','');	
+				}											
+			}
+		});
+
+	</script>
 
 									<script type="text/javascript">
 								//上传图片
