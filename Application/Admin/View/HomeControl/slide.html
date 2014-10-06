@@ -92,7 +92,7 @@
 							
 						</ul>
 						
-						<span class="btn btn-primary" id="addItem"><i class="icon-plus"></i> 新增一条</span>
+						<span class="btn btn-primary" id="addItem"><i class="icon-plus" ></i> 新增一条</span>
 
 
 			</fieldset>
@@ -120,13 +120,12 @@
 				if(i > 6){
 					alert('为保证幻加载速度及播放顺畅，幻灯片控制在6张，您可以替换掉原有条目中的内容以展示新幻灯片内容。');
 				}else{
-
-					var slideLi = '<li class="slide'+i+'"><div  class="row"><div class="span4"><div class="control-group">';
+					var imgTpl = '\'<img src=\"'+count+'\" alt=\"data.title\" />\';';
+					var slideLi = '<li class="slide'+i+'"><span class="button button-rounded button-flat-caution slide pull-right"><i class="icon-remove"></i> 删除</span><div  class="row"><div class="span4"><div class="control-group">';
 							slideLi += '<h4 style="margin-bottom:15px;">新增第'+i+'条</h4>';
 							slideLi += '<label for="segment'+count+'" >类别：</label>';
 							slideLi +='<select name="slide'+count+'[\'segment\']" id="segment'+count+'" >';
-							slideLi +='<option value="custom">自定义</option>';
-							slideLi +='<option value="news">新闻</option>';
+							slideLi +='<option value="article">文章</option>';
 							slideLi +='<option value="activity">活动</option>';
 							slideLi +='<option value="product">产品</option>';
 							slideLi +='<option value="plan">套餐</option>';
@@ -135,7 +134,7 @@
 							slideLi +='</div>';
 						
 							slideLi +='<div class="control-group">';
-							slideLi +='<label for="item'+count+'">条目：</label>';
+							slideLi +='<label for="item'+count+'">条目编号：</label>';
 							slideLi += '<input type="text" name="slide'+count+'[\'item\']" value="{$slide.item}" id="item'+count+'"/>';
 							slideLi +='</div>';
 						
@@ -147,15 +146,17 @@
 							slideLi +='</div>';
 							slideLi +='<div class="span8" id="preview'+count+'">';
 							slideLi +='<h4 style="margin-bottom:15px;">图片预览：</h4>';
-							slideLi +='<div style="height:100px;width:100%;background-color:red;"></div>';
-							slideLi +='<img src="{$slide.image|get_cover=\'path\'}" alt="{$slide.item}">';
-
+							slideLi +='<div id="item'+count+'preview" style="height:300px;width:100%;background-color: #A0A0A0;font-size:60px;text-align:center;line-height:300px;"><i class="icon-large icon-refresh"></i> 点此刷新预览图</div>';
 							slideLi += '</div></div>';
-							slideLi +='<span class="button-caution close slide"><i class="icon-remove"></i> 删除</span><hr /></li>';
+							slideLi +='<hr /></li>';
 							slideLi +='<script type="text/javascript">';
-							slideLi +='$(".button-caution.close.slide").click(function(){';
-							slideLi +='$(this).parent("li").detach();count = count-1';
-							slideLi +='});'+'</'+'script>';
+							slideLi +='$(".button-flat-caution.slide").click(function(){';
+							slideLi +='$(this).parent("li").detach();});';
+							slideLi +='$("input#item'+count+'").change(function(){';
+							slideLi +='var img'+count+'='+imgTpl;
+							slideLi +='	$("#item'+count+'preview").append(img'+count+');';
+							slideLi +='});';
+							slideLi +='</'+'script>';
 							
 			$('#slides').append(slideLi);
 			count = count+1;
@@ -164,43 +165,7 @@
 				}											
 			}
 		});
-
+		
 	</script>
-
-									<script type="text/javascript">
-								//上传图片
-							    /* 初始化上传插件 */
-								$("#upload_picture_{$field.name}").uploadify({
-							        "height"          : 30,
-							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
-							        "fileObjName"     : "download",
-							        "buttonText"      : "上传图片",
-							        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
-							        "width"           : 120,
-							        'removeTimeout'	  : 1,
-							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-							        "onUploadSuccess" : uploadPicture{$field.name},
-							        'onFallback' : function() {
-							            alert('未检测到兼容版本的Flash.');
-							        }
-							    });
-								function uploadPicture{$field.name}(file, data){
-							    	var data = $.parseJSON(data);
-							    	var src = '';
-							        if(data.status){
-							        	$("#cover_id_{$field.name}").val(data.id);
-							        	src = data.url || '__ROOT__' + data.path
-							        	$("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
-							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
-							        	);
-							        } else {
-							        	updateAlert(data.info);
-							        	setTimeout(function(){
-							                $('#top-alert').find('button').click();
-							                $(that).removeClass('disabled').prop('disabled',false);
-							            },1500);
-							        }
-							    }
-								</script>	
 			
 </block>
