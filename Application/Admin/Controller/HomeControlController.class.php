@@ -65,4 +65,34 @@ class HomeControlController extends AdminController {
 		$this->display();
 	}
 	
+	public function slideInfo($segment,$id){
+			switch ($segment) {
+				case 'article':
+					
+					$info = D('Document')->detail($id);
+					$info['url'] = "/Home/article/detail?id=".$id;
+					break;
+					
+				case 'activity':
+					
+					break;
+					
+				case 'product':
+					
+					break;
+										
+				case 'plan':
+					
+					break;
+										
+				case 'topic':
+					
+					break;
+					
+				default:
+					
+					break;
+			}
+	}
+	
 }
