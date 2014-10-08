@@ -60,6 +60,8 @@ class HomeControlController extends AdminController {
 		$list = F('homeSlide'); //获取幻灯片设置的内容
 		$count = count($list); //读取幻灯片的数量
 		
+		var_dump($list);
+		$this -> assign('count',$count);
 		$this -> assign('list',$list);		
 		$this->meta_title = '幻灯片配置';
 		$this->display();
@@ -93,6 +95,68 @@ class HomeControlController extends AdminController {
 					
 					break;
 			}
+
+				return $info;
+
+
+	}
+	
+	public function saveSlide(){
+		if(IS_POST||IS_AJAX){
+			
+			$newSlides=I('post.');
+				/*
+				foreach ($newSlides as $key => $value) {
+					$info=$this->slideInfo($value['segment'], $value['id']);
+					$newSlides[$key] = array_merge($value,$info);
+				}
+				*/
+				$slides = F('homeSlide')?array_merge(F('homeSlide'),$newSlides):$newSlides;
+
+				F('homeSlide',$slides);
+				
+				$status = array(
+						'info'=>'幻灯片更新成功',
+						'status'=>1
+					);
+		}
+		$this->ajaxReturn($status,'json');
+	}
+	
+	/**
+	 * 清除某项设置
+	 * @param string $part 要清除数据的模块标识
+	 * 注意首字母大写
+	 */
+	public function clear($part){
+		if(IS_POST || IS_AJAX){
+
+			switch ($part) {
+				case 'Logo':
+					$partname = 'LOGO';
+					break;
+				case 'Slide':
+					$partname = '幻灯片';
+					break;
+				default:
+					$status = array(
+						'info'=>'没有该指令，请确认您的指令正确',
+						'status'=>'0'
+					);
+					$this->ajaxReturn($status,'json');
+					exit();
+					break;
+			}
+			
+			/* 清除数据缓存 */
+			F('home'.$part,null);
+			
+			$status = array(
+					'info'=>$partname.'清除成功',
+					'status'=>'1'
+				);
+			$this->ajaxReturn($status,'json');
+		}
 	}
 	
 }

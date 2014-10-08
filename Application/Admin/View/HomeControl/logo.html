@@ -30,6 +30,9 @@
 			</fieldset>
 			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden"><i class="icon-ok"></i>  确 定</button>
     		 <a class="btn btn-return" href=""><i  class="icon-chevron-left"></i>  返 回</a>
+    		 <notempty name="logo">
+    		 <a href="{:U('clear?part=Logo')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i>  清除</a>
+			</notempty>
 		</form>
 	</div>
 
