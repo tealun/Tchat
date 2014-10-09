@@ -42,7 +42,7 @@ class HomeControlController extends AdminController {
 				);
 			}else{
 				$status = array(
-					'info'=>'LOGO没有更新，请上传新LOGO。',
+					'info'=>'啊哦，请上传新LOGO。',
 					'status'=>'0'
 				);
 			}
@@ -58,36 +58,83 @@ class HomeControlController extends AdminController {
 	 */
 	public function slide(){
 		$list = F('homeSlide'); //获取幻灯片设置的内容
-		$count = count($list); //读取幻灯片的数量
-		
-		var_dump($list);
+			if(!$list){
+				$count = 0;
+			}else{
+				$count = count($list); //读取幻灯片的数量
+			}
+
 		$this -> assign('count',$count);
 		$this -> assign('list',$list);		
 		$this->meta_title = '幻灯片配置';
 		$this->display();
 	}
 	
+	/**
+	 * 存储幻灯片设置
+	 */
+	public function saveSlide(){
+		if(IS_POST||IS_AJAX){
+			
+			$postSlides=I('post.');//获取提交数据
+				
+				/* 获取每条幻灯片的详细信息 */
+				foreach ($postSlides as $value) {
+					$slides[] = $this->slideInfo($value['segment'], $value['id']);
+				}
+				
+				F('homeSlide',NULL);//删除旧的幻灯片数据
+				
+				F('homeSlide',$slides);//更新新的幻灯片数据
+				
+				$status = array(
+						'info'=>'幻灯片更新成功',
+						'status'=>1
+					);
+		}
+		$this->ajaxReturn($status,'json');
+	}
+	
+	/**
+	 * 获取一条幻灯片的详细信息
+	 * 根据不同类型的幻灯内容设置，获取对应ID的数据
+	 * @param string   $segment     幻灯片所属的内容类型
+	 * @param int         $id                幻灯片所属内容的ID
+	 * TODO 稍后完善不同内容类型的赋值
+	 */ 
 	public function slideInfo($segment,$id){
 			switch ($segment) {
-				case 'article':
+				case 'category': //内容分类类型
 					
-					$info = D('Document')->detail($id);
+					break;
+					
+				case 'article'://文章类型
+					
+					$article = D('Document')->detail($id); //获取条目内容详情
+					
+					$info['segment'] = $segment;
+					$info['id']=$id;
 					$info['url'] = "/Home/article/detail?id=".$id;
+					$info['image'] = get_cover($article['cover_id'],'path');
+					$info['alt']=$article['title'];
+					$info['caption']=$article['title'];
+					
+					unset($article); //删除article的变量
 					break;
 					
-				case 'activity':
+				case 'activity'://活动类型
 					
 					break;
 					
-				case 'product':
+				case 'product'://产品类型
 					
 					break;
 										
-				case 'plan':
+				case 'plan'://套餐类型
 					
 					break;
 										
-				case 'topic':
+				case 'topic'://专题类型
 					
 					break;
 					
@@ -96,31 +143,9 @@ class HomeControlController extends AdminController {
 					break;
 			}
 
-				return $info;
+				return $info;//返回整合后的幻灯片数据内容
 
 
-	}
-	
-	public function saveSlide(){
-		if(IS_POST||IS_AJAX){
-			
-			$newSlides=I('post.');
-				/*
-				foreach ($newSlides as $key => $value) {
-					$info=$this->slideInfo($value['segment'], $value['id']);
-					$newSlides[$key] = array_merge($value,$info);
-				}
-				*/
-				$slides = F('homeSlide')?array_merge(F('homeSlide'),$newSlides):$newSlides;
-
-				F('homeSlide',$slides);
-				
-				$status = array(
-						'info'=>'幻灯片更新成功',
-						'status'=>1
-					);
-		}
-		$this->ajaxReturn($status,'json');
 	}
 	
 	/**
@@ -149,7 +174,7 @@ class HomeControlController extends AdminController {
 			}
 			
 			/* 清除数据缓存 */
-			F('home'.$part,null);
+			F('home'.$part,NULL);
 			
 			$status = array(
 					'info'=>$partname.'清除成功',

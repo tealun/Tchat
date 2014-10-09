@@ -9,12 +9,11 @@
 				</div>
 		    </div>	
 	</div>
+		{:hook('homeSlide')}
 </block>
 
 <block name="body">
-	{:hook('homeSlide')}
 	<section class="container-fluid"> <!-- Start Container Fluid -->
-
 	<if condition="isset($productNews)" >{/* 开始最新菜品 */ }
 		
 		<for start="0" end="4">{/* 开始循环最新菜品 */ }
@@ -22,7 +21,7 @@
 			<if condition ="$i eq 0" >
 				<div class="row newest"><!-- Start Row -->
 					<div class="col-xs-4">
-						<h2>新菜上市</h2>
+						<h2>精品海鲜</h2>
 						<span class="wave-icon pull-right">
 							<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
 						</span>

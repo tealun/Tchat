@@ -13,9 +13,9 @@ use Common\Controller\Addon;
         public $info = array(
             'name'=>'HomeControl',
             'title'=>'前台首页展示控制插件',
-            'description'=>'基于bootstrap 3.2.0实现的前台首页内容控制插件',
+            'description'=>'基于bootstrap 3.2.0实现的前台首页内容控制插件 \r需要Admin板块控制器和视图配合，及创建菜单和权限',
             'status'=>1,
-            'author'=>'Tealun',
+            'author'=>'Tealun Du',
             'version'=>'0.1'
         );
 
@@ -27,12 +27,7 @@ use Common\Controller\Addon;
             return true;
         }
 
-        //实现的homeControlConfig钩子方法
-        public function homeControlConfig(){
-		
-		$this->display('config');
-        }
-		
+	
 		//实现的homeLogo钩子方法
 		public function homeLogo(){
 			$defaultLogo = 'Public/Home/images/logo.png';

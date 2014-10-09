@@ -16,6 +16,9 @@ UPDATE `onethink_addons` SET `status` = '0' WHERE `onethink_addons`.`id` IN ('3'
 -- Records of  `onethink_hooks`
 -- -----------------------------
 INSERT INTO `onethink_hooks`  VALUES ('30', 'wechatIndex', '微信控制栏目首页钩子', '1', '1397114797', 'TchatIndex');
+INSERT INTO `onethink_hooks`  VALUES ('31', 'homeSlide', '首页幻灯片位置', '1', '1397114797', 'HomeControl');
+INSERT INTO `onethink_hooks`  VALUES ('32', 'homeLogo', '站点LOGO图片展示', '1', '1397114797', 'HomeControl');
+
 -- -----------------------------
 -- Records of  `onethink_attribute`
 -- -----------------------------
