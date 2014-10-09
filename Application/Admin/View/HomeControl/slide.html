@@ -52,41 +52,38 @@
 							<notempty name="list">
 								 <for start="0" end="$count">
 								 	<assign name="slide" value="$list[$i]" /> {/* 将循环数组赋值给一个变量 */}
-										<li>
-											<div  class="rows">
-												<div class="span4">
-													
-													 <div class="control-group">
-														<label class="control-label" for="segment{$i}" >类别：</label>
-														<select name="slide{$i}['segment']" id="segment{$i}" >
-															<option value="custom">自定义</option>
-															<option value="news">新闻</option>
-															<option value="activity">活动</option>
-															<option value="product">产品</option>
-															<option value="plan">套餐</option>
-															<option value="topic">专题</option>
-														</select>
-													</div>
-													
-													<div class="control-group">
-														<label for="item{$i}" class="control-label">条目：</label>
-													    <input type="text" name="slide{$i}['item']" value="{$slide.item}" id="item{$i}"/>
-													</div>
-													
-													<div class="control-group">
-														<label for="caption{$i}" class="control-label">说明：</label>
-													    <input type="text" name="slide{$i}['caption']" value="{$slide.caption}" id="caption{$i}"/>
-													</div>
-													
-												</div>
-												<div class="span8" id="preview{$i}">
-												      <img src="{$slide.image|get_cover='path'}" alt="{$slide.item}">
-												      <div class="carousel-caption">
-												        {$slide.caption}
-												      </div>
-												</div>
+								 								
+							<li class="slide{$i+1}">
+								<span class="button button-rounded button-flat-caution slide pull-right">
+									<i class="icon-remove"></i> 删除</span>
+									<div class="row">
+										<div class="span4">
+											<div class="control-group">
+												<h4 style="margin-bottom:15px;">第{$i+1}条</h4>
+												<label for="segment{$i}">类别：</label>
+												<select id="segment{$i}" name="slide{$i}['segment']">
+													<option value="article" <eq name="slide['segment']" value="article">selected="true"</eq>>文章</option>
+													<option value="activity" <eq name="slide['segment']" value="activity">selected="true"</eq>>活动</option>
+													<option value="product" <eq name="slide['segment']" value="product">selected="true"</eq>>产品</option>
+													<option value="plan" <eq name="slide['segment']" value="plan">selected="true"</eq>>套餐</option>
+													<option value="topic" <eq name="slide['segment']" value="topic">selected="true"</eq>>专题</option>
+												</select>
 											</div>
-										</li>
+											
+											<div class="control-group">
+												<label for="item{$i}">条目编号：</label>
+												<input type="text" id="item{$i}" value="{$slide['id']}" name="slide{$i}['id']">
+											</div>
+										</div>
+										
+										<div id="preview{$i}" class="span8">
+											<h4 style="margin-bottom:15px;">图片预览：</h4>
+											<div style="height:300px;width:100%;background-color: #A0A0A0;font-size:60px;text-align:center;line-height:300px;" id="item{$i}preview">
+												<i class="icon-large icon-refresh"></i> 点此刷新预览图</div>
+										</div>
+									</div>
+									<hr />
+									</li>
 								</for>
 							</notempty>
 							
