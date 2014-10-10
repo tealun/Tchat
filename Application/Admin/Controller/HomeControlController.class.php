@@ -102,7 +102,19 @@ class HomeControlController extends AdminController {
 	 * @param int         $id                幻灯片所属内容的ID
 	 * TODO 稍后完善不同内容类型的赋值
 	 */ 
-	public function slideInfo($segment,$id){
+	public function slideInfo($segment='',$id=''){
+		
+			if(IS_POST || IS_AJAX){
+				$data = I('post.');
+				if(is_numeric($data[0])){
+					$segment = $data[1];
+					$id = $data[0];
+				}else{
+					$segment = $data[0];
+					$id = $data[1];
+				}
+			}
+			
 			switch ($segment) {
 				case 'category': //内容分类类型
 					
@@ -143,8 +155,11 @@ class HomeControlController extends AdminController {
 					break;
 			}
 
-				return $info;//返回整合后的幻灯片数据内容
-
+				if(IS_POST || IS_AJAX){
+					$this->ajaxReturn($info,'json');
+				}else{
+					return $info;//返回整合后的幻灯片数据内容
+				}
 
 	}
 	

@@ -71,7 +71,12 @@
 														
 														<div class="control-group">
 															<label for="item{$i}">条目编号：</label>
-															<input type="text" id="item{$i}" value="{$slide['id']}" name="slide{$i}[id]">
+															<input type="text" id="item{$i}" value="{$slide.id}" name="slide{$i}[id]">
+														</div>
+														
+														<div class="control-group">
+															<label for="item{$i}">条目标题：</label>
+															<p>{$slide.caption}</p>
 														</div>
 													</div>
 													
@@ -141,16 +146,30 @@
 							slideLi +='</div>';
 							slideLi +='<div class="span8" id="preview'+count+'">';
 							slideLi +='<h4 style="margin-bottom:15px;">图片预览：</h4>';
-							slideLi +='<div id="item'+count+'preview" style="height:300px;width:100%;background-color: #A0A0A0;font-size:60px;text-align:center;line-height:300px;"><p id="clickPreview'+count+'" ><i class="icon-large icon-refresh"></i> 点此刷新预览图</p></div>';
-							slideLi += '</div></div>';
+							slideLi +='<div id="item'+count+'preview" style="height:280px;width:504px;background-color: #A0A0A0;font-size:40px;text-align:center;line-height:200px;"><p id="clickPreview'+count+'" ><i class="icon-large icon-refresh"></i> 请输入条目编号</p>';
+							slideLi +='<img class="hidden" style="width:100%;" src="" alt="" >';
+							slideLi += '</div></div></div>';
 							slideLi +='<hr /></li>';
 							slideLi +='<script type="text/javascript">';
 							slideLi +='$(".button-flat-caution.slide").click(function(){';
 							slideLi +='$(this).parent("li").detach();});';
-							slideLi +='$("p#clickPreview'+count+'").click(function(){';
-							slideLi +='$(this).detach();';
-							slideLi +='	$("item'+count+'preview").append(function(){';
-							slideLi +='  });';
+							slideLi +='$("#item'+count+'").change(function(){';
+							slideLi +='$("p#clickPreview'+count+'").detach();';
+							slideLi += 'var slideObj = {};';
+							slideLi +=' slideObj[0] = $("#segment'+count+'").val();';
+							slideLi +=' slideObj[1] = $(this).val();';
+							slideLi +='	if(slideObj[1] == ""){';
+							slideLi +='	alert("条目编号必须填写");';
+							slideLi +='};';
+							slideLi +='$.post(';
+							slideLi +=' "/Admin/HomeControl/slideInfo",';
+							slideLi +='slideObj,';
+							slideLi +=' function(data){';
+							slideLi +='$("#item'+count+'preview").find("img").removeClass("hidden").attr({"src":data.image,"alt":data.alt})';
+							slideLi +='	},';
+							slideLi +='	"json"';
+							slideLi +=');';
+
 							slideLi +='});';
 							slideLi +='</'+'script>';
 							
