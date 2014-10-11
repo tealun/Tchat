@@ -16,7 +16,7 @@
 	<section class="container-fluid"> <!-- Start Container Fluid -->
 	<if condition="isset($productNews)" >{/* 开始最新菜品 */ }
 		
-		<for start="0" end="4">{/* 开始循环最新菜品 */ }
+		<for start="0" end="4">{/* 开始循环精品海鲜 */ }
 			<assign name="productNew" value="$productNews[$i]" /> {/* 将循环数组赋值给一个变量 */}
 			<if condition ="$i eq 0" >
 				<div class="row newest"><!-- Start Row -->
@@ -35,13 +35,13 @@
 				</div><!-- End Row -->
 				<div class="row"> {/*第一条循环完成后新增ROW */ }
 			<else />
-					<div class="col-xs-4" style="text-align:center; background-color:#ecf0f1; margin: 2px; padding:5px 10px; ">
+					<div class="col-xs-4" style="text-align:center; background-color:#ecf0f1; padding:5px 10px; ">
 						<a  href="{:U('Article/detail?id='.$productNew['id'])}">{$productNew.title}</a>
 					</div>
 			</if>
-		</for>{/* 结束循环最新菜品 */ }
+		</for>{/* 结束循环精品海鲜 */ }
 				</div> {/* 剩余条数循环完成后结束ROW */ }
-	</if>{/* 结束最新菜品 */ }
+	</if>{/* 结束精品海鲜 */ }
 	
 	<if condition="isset($productPos)" >
 		

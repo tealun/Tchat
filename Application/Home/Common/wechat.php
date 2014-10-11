@@ -21,4 +21,14 @@ function timeTip($time){
   return $re;
 }
 
+function get_model_column_name($model_id,$column){
+	    /* 非法ID */
+    if(empty($model_id) || !is_numeric($model_id)){
+        return '';
+    }
+	
+	   $map = array('model_id'=>$model_id);
+       return M('attribute')->where($map)->getFieldByName($column,'title');
+}
+
 ?>

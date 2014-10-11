@@ -28,32 +28,32 @@
 		<div class="productInfo">
 			<table class="bordered">
 				<tr>
-					<th></th>
-					<th></th>
+					<th style="width: 30%"></th>
+					<th style="width: 70%"></th>
 				</tr>
 				<if condition="($info['style'] neq 0) OR ($info['style'] neq '')">
 					<tr>
-						<td >类型：</td><td >{$info.style}</td>					
+						<td style="width: 30%"><strong>{:get_model_column_name($info['model_id'],'style')}:</strong></td><td style="width: 70%">{$info.style}</td>					
 					</tr>
 				</if>
 				<if condition="($info['spec'] neq 0) OR ($info['spec'] neq '')">
 					<tr>
-						<td >规格：</td><td >{$info.spec}</td>					
+						<td style="width: 30%">,<strong>:get_model_column_name(1info['model_id'],'spec')</strong></td><td style="width: 70%">{$info.spec}</td>					
 					</tr>
 				</if>
 				<if condition="($info['features'] neq 0) OR ($info['features'] neq '')">
 					<tr>
-						<td >特性：</td><td >{$info.features}</td>					
+						<td style="width: 30%"><strong>{:get_model_column_name($info['model_id'],'features')}:</strong></td><td style="width: 70%">{$info.features}</td>					
 					</tr>
 				</if>
 				<if condition="$info['amount'] neq 0">
 					<tr>
-						<td >总量：</td><td >{$info.amount}</td>					
+						<td style="width: 30%"><strong>{:get_model_column_name($info['model_id'],'amount')}:</strong></td><td style="width: 70%">{$info.amount}</td>					
 					</tr>
 				</if>
 				<if condition="$info['stock'] neq 0">
 					<tr>
-						<td >库存：</td><td >{$info.stock}</td>					
+						<td style="width: 30%"><strong>{:get_model_column_name($info['model_id'],'stock')}:</strong></td><td style="width: 70%">{$info.stock}</td>					
 					</tr>
 				</if>
 			</table>
