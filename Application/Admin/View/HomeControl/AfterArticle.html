@@ -1,0 +1,90 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="data-table">
+		<form action="{:U('saveArticle')}" class="form-horizontal config-form">
+			<fieldset>
+				<div class="controls">
+					<div class="upload-img-box">
+						<notempty name="AfterArticle">
+							<div class="alert alert-info alert-block">
+								<button type="button" class="close" data-dismiss="alert">
+									&times;
+								</button>
+								<h4>恭喜，您已经设置了文尾展示</h4>
+								您的站点文尾展示为如下，如果您希望更换，请选择需要更换的样式并点击【确定】即可。如果您希望清除设置，请点击清除按钮。
+							</div>
+							<div class="upload-pre-item" style="width: 50%;margin: 15px 0;">
+								{:hook('documentDetailBefore')}
+							</div>
+							<else />
+							<div class="alert alert-block">
+								<button type="button" class="close" data-dismiss="alert">
+									&times;
+								</button>
+								<h4>注意！您还没有设置文尾展示</h4>
+								您的站点还没有设置文尾展示，如果您希望使用此功能，您可以在下方选择展示样式，并点击确定即可。
+							</div>
+						</notempty>
+					</div>
+
+					<legend>
+						选择样式：
+					</legend>
+
+					<div class="row-fluid">
+					            <ul class="thumbnails">
+					              <li class="span4">
+					                <div class="thumbnail">
+									  <img src="__PUBLIC__/Home/images/intro/1.jpg" alt="" >
+					                  <div class="caption">
+					                    <h3>Thumbnail label</h3>
+					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+					                  </div>
+					                </div>
+					              </li>
+					              <li class="span4">
+					                <div class="thumbnail">
+					                  <img src="__PUBLIC__/Home/images/intro/2.jpg" alt="" >
+					                  <div class="caption">
+					                    <h3>Thumbnail label</h3>
+					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+					                  </div>
+					                </div>
+					              </li>
+					              <li class="span4">
+					                <div class="thumbnail">
+					                  <img src="__PUBLIC__/Home/images/intro/3.jpg" alt="" >
+					                  <div class="caption">
+					                    <h3>Thumbnail label</h3>
+					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+					                  </div>
+					                </div>
+					              </li>
+					            </ul>
+					          </div>
+					<input type="hidden" name="part" value="AfterArticle"/>
+					<input type="hidden" name="AfterArticle" value="{$AfterArticle|default=''}"/>
+				</div>
+			</fieldset>
+			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden">
+				<i class="icon-ok"></i> 确 定
+			</button>
+			<a class="btn btn-return" href=""><i  class="icon-chevron-left"></i> 返 回</a>
+			<notempty name="logo">
+				<a href="{:U('clear?part=Logo')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i> 清除</a>
+			</notempty>
+		</form>
+	</div>
+
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+
+	</script>
+
+</block>

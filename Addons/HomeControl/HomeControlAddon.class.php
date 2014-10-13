@@ -45,5 +45,15 @@ use Common\Controller\Addon;
 			$this->assign('count',$count);
 			$this->display('slide');				
         }
+		
+		//实现的documentDetailAfter钩子方法
+		public function documentDetailBefore(){
+			$this->display('beforeArticle');	
+		}
+		
+		//实现的documentDetailAfter钩子方法
+		public function documentDetailAfter(){
+			$this->display('afterArticle');	
+		}
 
     }

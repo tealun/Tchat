@@ -1,0 +1,116 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="data-table">
+		<form action="{:U('saveArticle')}" class="form-horizontal config-form">
+			<fieldset>
+				<div class="controls">
+					<div class="upload-img-box">
+						<notempty name="BeforeArticle">
+							<div class="alert alert-info alert-block">
+								<button type="button" class="close" data-dismiss="alert">
+									&times;
+								</button>
+								<h4>恭喜，您已经设置了文前展示</h4>
+								您的站点文前展示为如下，如果您希望更换，请选择需要更换的样式并点击【确定】即可。如果您希望清除设置，请点击清除按钮。
+							</div>
+							<div class="upload-pre-item" style="width: 50%;margin: 15px 0;">
+								{:hook('documentDetailBefore')}
+							</div>
+							<else />
+							<div class="alert alert-block">
+								<button type="button" class="close" data-dismiss="alert">
+									&times;
+								</button>
+								<h4>注意！您还没有设置文前展示</h4>
+								您的站点还没有设置文前展示，如果您希望使用此功能，您可以在下方选择展示样式，并点击确定即可。
+							</div>
+						</notempty>
+					</div>
+
+					<legend>
+						选择样式：
+					</legend>
+					<div class = "row">
+						<div class = "span6">
+							<img src="__PUBLIC__/Home/images/intro/1.jpg" alt="" >
+							<label class="radio">
+							<input type="radio" name="BeforeArticle" id="optionsRadios1" value="1" <eq name="BeforeArticle" value="1">checked</eq>>
+							Option one </label>
+						</div>
+						<div class="span6">
+							<img src="__PUBLIC__/Home/images/intro/2.jpg" alt="" >
+							<label class="radio">
+							<input type="radio" name="BeforeArticle" id="optionsRadios2" value="2" <eq name="BeforeArticle" value="2">checked</eq>>
+							Option two </label>
+						</div>
+					</div>
+					<div class = "row">
+						<div class = "span6">
+							<img src="__PUBLIC__/Home/images/intro/3.jpg" alt="" >
+							<label class="radio">
+							<input type="radio" name="BeforeArticle" id="optionsRadios3" value="3" <eq name="BeforeArticle" value="3">checked</eq>>
+							Option one </label>
+						</div>
+						<div class="span6">
+							<img src="__PUBLIC__/Home/images/intro/4.jpg" alt="" >
+							<label class="radio">
+							<input type="radio" name="BeforeArticle" id="optionsRadios4" value="4" <eq name="BeforeArticle" value="4">checked</eq>>
+							Option two </label>
+						</div>
+					</div>
+
+					<input type="hidden" name="part" value="BeforeArticle"/>
+				</div>
+			</fieldset>
+			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden">
+				<i class="icon-ok"></i> 确 定
+			</button>
+			<a class="btn btn-return" href=""><i  class="icon-chevron-left"></i> 返 回</a>
+			<notempty name="logo">
+				<a href="{:U('clear?part=Logo')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i> 清除</a>
+			</notempty>
+		</form>
+	</div>
+
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		//上传图片
+		/* 初始化上传插件 */
+		$("#upload_picture_logo").uploadify({
+			"height" : 30,
+			"swf" : "__STATIC__/uploadify/uploadify.swf",
+			"fileObjName" : "download",
+			"buttonText" : "<notempty name='logo'><i class='icon-refresh'></i> 更新图片<else /><i class='icon-plus'></i> 上传图片</notempty>",
+			"uploader" : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+			"width" : 120,
+			'removeTimeout' : 1,
+			'fileTypeExts' : '*.jpg; *.png; *.gif;',
+			"onUploadSuccess" : uploadPicturelogo,
+			'onFallback' : function() {
+				alert('未检测到兼容版本的Flash.');
+			}
+		});
+		function uploadPicturelogo(file, data) {
+			var data = $.parseJSON(data);
+			var src = '';
+			if (data.status) {
+				$("#logo_id").val(data.id);
+				src = data.url || '__ROOT__' + data.path
+				$("#logo_id").parent().find('.upload-img-box').html('<p>您的新LOGO图片为：</p><div class="upload-pre-item"><img src="' + src + '"/></div>');
+			} else {
+				updateAlert(data.info);
+				setTimeout(function() {
+					$('#top-alert').find('button').click();
+					$(that).removeClass('disabled').prop('disabled', false);
+				}, 1500);
+			}
+		}
+	</script>
+
+</block>

@@ -10,7 +10,7 @@
 namespace Admin\Controller;
 
 /**
- * 微信后台管理控制器
+ * 前台管理控制器
  * 
  */
 class HomeControlController extends AdminController {
@@ -162,6 +162,44 @@ class HomeControlController extends AdminController {
 				}
 
 	}
+
+	/**
+	 * 文章页面配置
+	 * @param string $part 需要配置的选项
+	 */
+	public function article($part){
+		$value = F('home'.$part);
+		if($value){
+			$this -> assign($part,$value);
+		}
+		switch ($part) {
+			case 'BeforeArticle':
+				$partName = "文前";
+				break;
+			case 'AfterArticle':
+				$partName = "文尾";
+				break;
+			default:
+				
+				break;
+		}
+		
+		$this->meta_title = $partName.'配置';
+		$this->display($part);
+	}
+	
+	/**
+	 * 存储文章相关设置内容
+	 * @param string $part 存储的位置 befor和after
+	 */
+	public function saveArticle(){
+		if(IS_POST || IS_AJAX){
+			$part = I('post.part');
+			$value = I('post.'.$part);
+			F('home'.$part,NULL);
+			F('home'.$part,$value);
+		}
+	}
 	
 	/**
 	 * 清除某项设置
@@ -177,6 +215,12 @@ class HomeControlController extends AdminController {
 					break;
 				case 'Slide':
 					$partname = '幻灯片';
+					break;
+				case 'BeforeArticle':
+					$partname = '文前引用';
+					break;
+				case 'AfterArticle':
+					$partname = "文尾引用";
 					break;
 				default:
 					$status = array(
