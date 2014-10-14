@@ -12,11 +12,11 @@ use Common\Controller\Addon;
 
         public $info = array(
             'name'=>'HomeControl',
-            'title'=>'前台首页展示控制插件',
-            'description'=>'基于bootstrap 3.2.0实现的前台首页内容控制插件 \r需要Admin板块控制器和视图配合，及创建菜单和权限',
+            'title'=>'前台内容控制插件',
+            'description'=>'基于bootstrap 3.2.0实现的前台首页内容控制插件，需要Admin板块控制器和视图配合，及创建菜单和权限',
             'status'=>1,
             'author'=>'Tealun Du',
-            'version'=>'0.1'
+            'version'=>'0.2'
         );
 
         public function install(){
@@ -38,21 +38,25 @@ use Common\Controller\Addon;
 		
 		 //实现的homeSlideShow钩子方法
 		public function homeSlide(){
-			$list = F('homeSlide'); //获取幻灯片设置的内容
-			$count = count($list); //读取幻灯片的数量
+			$slideList = F('homeSlide'); //获取幻灯片设置的内容
+			$slideCount = count($slideList); //读取幻灯片的数量
 			
-			$this->assign('list',$list);
-			$this->assign('count',$count);
-			$this->display('slide');				
+			$this->assign('addons_slideList',$slideList);
+			$this->assign('addons_slideCount',$slideCount);
+			$this->display('slide');
         }
 		
 		//实现的documentDetailAfter钩子方法
 		public function documentDetailBefore(){
+			$beforeArticle = F('homeBeforeArticle');
+			$this->assign('addons_beforeArticle',$beforeArticle);
 			$this->display('beforeArticle');	
 		}
 		
 		//实现的documentDetailAfter钩子方法
 		public function documentDetailAfter(){
+			$afterArticle = F('homeAfterArticle');
+			$this->assign('addons_afterArticle',$afterArticle);
 			$this->display('afterArticle');	
 		}
 

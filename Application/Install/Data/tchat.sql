@@ -11,10 +11,13 @@
 -- Records of  `onethink_addons`
 -- -----------------------------
 UPDATE `onethink_addons` SET `status` = '0' WHERE `onethink_addons`.`id` IN ('3','4');
+INSERT INTO `onethink_addons` VALUES ('21', 'HomeControl', '前台内容控制插件', '基于bootstrap 3.2.0实现的前台首页内容控制插件，需要Admin板块控制器和视图配合，及创建菜单和权限', '1', '', 'Tealun Du', '0.2', '1380273962', '0');
 
 -- -----------------------------
 -- Records of  `onethink_hooks`
 -- -----------------------------
+UPDATE `onethink_hooks` SET `addons` = 'Attachment,HomeControl,SocialComment' WHERE `id` = '4' LIMIT 1;
+UPDATE `onethink_hooks` SET `addons` = 'HomeControl' WHERE `id` = '5' LIMIT 1;
 INSERT INTO `onethink_hooks`  VALUES ('30', 'wechatIndex', '微信控制栏目首页钩子', '1', '1397114797', 'TchatIndex');
 INSERT INTO `onethink_hooks`  VALUES ('31', 'homeSlide', '首页幻灯片位置', '1', '1397114797', 'HomeControl');
 INSERT INTO `onethink_hooks`  VALUES ('32', 'homeLogo', '站点LOGO图片展示', '1', '1397114797', 'HomeControl');

@@ -1,5 +1,17 @@
-<switch name="AfterArticle" >
-    <case value="1" >输出内容1</case>
+<switch name="addons_afterArticle" >
+    <case value="1" >
+	<section class="after_article1">
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				  <p style="background-color: #A6E1EC;padding: 10px;font-weight: bold;">::: 关于我们 :::</p>
+				  <p>【{:C('WEB_SITE_TITLE')}】</p>
+				  <p>{:C('WEB_SITE_DESCRIPTION')}</p>
+				  <p>联系电话：<a href="tel:{:C('COMPANY_TELEPHONE')}" >{:C('COMPANY_TELEPHONE')}</a></p>
+				  <p>地址：<a href='http://api.map.baidu.com/geocoder?address={:C('COMPANY_ADDRESS')}&output=html' target='_blank'>{:C('COMPANY_ADDRESS')}</a></p>
+			</div>
+		</div>
+	</section>
+	</case>
     <case value="2">输出内容2</case>
     <default />默认情况
 </switch>
