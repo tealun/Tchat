@@ -198,6 +198,8 @@ class HomeControlController extends AdminController {
 			$value = I('post.'.$part);
 			F('home'.$part,NULL);
 			F('home'.$part,$value);
+			$status = array('info' => '更新成功','status'=>1 );
+		    $this -> ajaxReturn($status,'json');
 		}
 	}
 	

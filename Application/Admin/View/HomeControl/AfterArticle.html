@@ -18,7 +18,7 @@
 								您的站点文尾展示为如下，如果您希望更换，请选择需要更换的样式并点击【确定】即可。如果您希望清除设置，请点击清除按钮。
 							</div>
 							<div class="upload-pre-item" style="width: 50%;margin: 15px 0;">
-								{:hook('documentDetailBefore')}
+								{:hook('documentDetailAfter')}
 							</div>
 							<else />
 							<div class="alert alert-block">
@@ -44,15 +44,32 @@
 					                    <h3>Thumbnail label</h3>
 					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 					                  </div>
+					                  	<eq name="AfterArticle" value="1">
+					                  		<a class="button button-pill button-caution" href="javascript:" data="1">
+					                  		<i class="icon-ok-sign icon-white"></i> 已选
+					                  	<else />
+					                  	<a class="button button-pill" href="javascript:" data="1">
+					                  	<i class="icon-ok-circle"></i> 选择
+					                  	</eq>
+					                  	</a>
 					                </div>
 					              </li>
 					              <li class="span4">
 					                <div class="thumbnail">
 					                  <img src="__PUBLIC__/Home/images/intro/2.jpg" alt="" >
+					                  
 					                  <div class="caption">
 					                    <h3>Thumbnail label</h3>
 					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 					                  </div>
+					                  	<eq name="AfterArticle" value="2">
+					                  		<a class="button button-pill button-caution" href="javascript:" data="2">
+					                  		<i class="icon-ok-sign icon-white"></i> 已选
+					                  	<else />
+					                  	<a class="button button-pill" href="javascript:" data="2">
+					                  	<i class="icon-ok-circle"></i> 选择
+					                  	</eq>
+					                  	</a>
 					                </div>
 					              </li>
 					              <li class="span4">
@@ -62,6 +79,14 @@
 					                    <h3>Thumbnail label</h3>
 					                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 					                  </div>
+					                  <eq name="AfterArticle" value="3">
+					                  		<a class="button button-pill button-caution" href="javascript:" data="3">
+					                  		<i class="icon-ok-sign icon-white"></i> 已选
+					                  	<else />
+					                  		<a class="button button-pill" href="javascript:" data="3">
+					                  		<i class="icon-ok-circle"></i> 选择
+					                  	</eq>
+									  </a>
 					                </div>
 					              </li>
 					            </ul>
@@ -74,8 +99,8 @@
 				<i class="icon-ok"></i> 确 定
 			</button>
 			<a class="btn btn-return" href=""><i  class="icon-chevron-left"></i> 返 回</a>
-			<notempty name="logo">
-				<a href="{:U('clear?part=Logo')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i> 清除</a>
+			<notempty name="AfterArticle">
+				<a href="{:U('clear?part=AfterArticle')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i> 清除</a>
 			</notempty>
 		</form>
 	</div>
@@ -84,7 +109,16 @@
 
 <block name="script">
 	<script type="text/javascript">
-
+		$(".button.button-pill").hover(function(){
+			$(this).toggleClass("button-action");
+		});
+		
+		$(".button.button-pill").click(function(){
+			$(".button.button-pill.button-caution").removeClass("button-caution").html('<i class="icon-ok-circle"></i> 选择');
+			$(this).addClass("button-caution").html('<i class="icon-ok-sign icon-white"></i> 已选');
+			var id = $(this).attr("data");
+			$("input[name='AfterArticle']").val(id);
+		});
 	</script>
 
 </block>
