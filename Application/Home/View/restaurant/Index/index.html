@@ -27,7 +27,7 @@
 						</span>
 					</div>
 					<div class="col-xs-8" style="padding-right: 0px;">
-							<img src="{:get_cover($productNew['cover_id'],'path')}" alt="" />
+							<a  href="{:U('Article/detail?id='.$productNew['id'])}"><img src="{:get_cover($productNew['cover_id'],'path')}" alt="" /></a>
 							<p>
 								<a  href="{:U('Article/detail?id='.$productNew['id'])}">{$productNew.title}</a>
 							</p>
@@ -50,9 +50,9 @@
 			<if condition ="$i eq 0" >
 				<div class="row  featrues"><!-- Start Row -->
 					<div class="col-xs-8" style="padding-left: 0px;">
-							<img src="{:get_cover($pro['cover_id'],'path')}" alt="" />
+							<a  href="{:U('Article/detail?id='.$pro['id'])}"><img src="{:get_cover($pro['cover_id'],'path')}" alt="" /></a>
 							<p>
-								{$pro.title}
+								<a  href="{:U('Article/detail?id='.$pro['id'])}">{$pro.title}</a>
 							</p>
 					</div>
 					<div class="col-xs-4">
@@ -64,7 +64,9 @@
 				</div> <!-- End Row -->
 			<div class="row"> {/*第一条循环完成后新增ROW */ }
 			<else />
-					<div class="col-xs-4">{$pro.title}</div>
+					<div class="col-xs-4" style="text-align:center; background-color:#ecf0f1; padding:5px 10px; ">
+						<a  href="{:U('Article/detail?id='.$pro['id'])}">{$pro.title}</a>
+					</div>
 			</if>
 		</for>
 	</div> {/*剩余条数循环完成后结束ROW */ }

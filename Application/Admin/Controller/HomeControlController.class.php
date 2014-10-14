@@ -82,7 +82,7 @@ class HomeControlController extends AdminController {
 				foreach ($postSlides as $value) {
 					$slides[] = $this->slideInfo($value['segment'], $value['id']);
 				}
-				
+
 				F('homeSlide',NULL);//删除旧的幻灯片数据
 				
 				F('homeSlide',$slides);//更新新的幻灯片数据
@@ -91,20 +91,16 @@ class HomeControlController extends AdminController {
 						'info'=>'幻灯片更新成功',
 						'status'=>1
 					);
+				
 		}
-		$this->ajaxReturn($status,'json');
+				$this->ajaxReturn($status,'json');
 	}
 	
 	/**
-	 * 获取一条幻灯片的详细信息
-	 * 根据不同类型的幻灯内容设置，获取对应ID的数据
-	 * @param string   $segment     幻灯片所属的内容类型
-	 * @param int         $id                幻灯片所属内容的ID
-	 * TODO 稍后完善不同内容类型的赋值
-	 */ 
-	public function slideInfo($segment='',$id=''){
-		
-			if(IS_POST || IS_AJAX){
+	 * AJAX获取幻灯片信息
+	 */
+	public function slideAjax(){
+		if(IS_POST){
 				$data = I('post.');
 				if(is_numeric($data[0])){
 					$segment = $data[1];
@@ -114,8 +110,20 @@ class HomeControlController extends AdminController {
 					$id = $data[1];
 				}
 			}
-			
-			switch ($segment) {
+			$info = $this->slideInfo($segment,$id);
+			$this->ajaxReturn($info,'json');
+	}
+	
+	/**
+	 * 获取一条幻灯片的详细信息
+	 * 根据不同类型的幻灯内容设置，获取对应ID的数据
+	 * @param string   $segment     幻灯片所属的内容类型
+	 * @param int         $id                幻灯片所属内容的ID
+	 * TODO 稍后完善不同内容类型的赋值
+	 */ 
+	public function slideInfo($segment=' ',$id=' '){
+		
+		switch ($segment) {
 				case 'category': //内容分类类型
 					
 					break;
@@ -155,11 +163,8 @@ class HomeControlController extends AdminController {
 					break;
 			}
 
-				if(IS_POST || IS_AJAX){
-					$this->ajaxReturn($info,'json');
-				}else{
+
 					return $info;//返回整合后的幻灯片数据内容
-				}
 
 	}
 

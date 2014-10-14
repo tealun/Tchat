@@ -13,9 +13,9 @@
 		 <for start="0" end="$addons_slideCount">
 		 	<assign name="slide" value="$addons_slideList[$i]" /> {/* 将循环数组赋值给一个变量 */}
 		  	<div <if condition= "$i eq 0"  >class="item active"<else /> class="item"  </if> >
-			      <img src="{$slide.image}" alt="{$slide.alt}">
+			      <a href="{$slide.url}" > <img src="{$slide.image}" alt="{$slide.alt}"></a>
 			      <div class="carousel-caption">
-			        {$slide.caption}
+			         {$slide.caption}
 			      </div>
 		    </div>	
 		 </for>
