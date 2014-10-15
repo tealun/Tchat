@@ -24,7 +24,7 @@ class WechatTextController extends WechatController {
 	public function index() {
 
 		$this->getLists();
-	
+		$this->meta_title = '文本素材列表';
 		$this->display();
 		
 	}

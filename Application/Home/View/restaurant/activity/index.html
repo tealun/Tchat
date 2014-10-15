@@ -6,15 +6,15 @@
         <section id="contents">
             <article:list name="list" category="$category['id']" child="true">
                 <div class="listTitle">
-                    <h3><a href="{:U('Article/detail?id='.$list['id'])}">{$list.title}</a></h3>
+                    <h3><a href="{:U('Activity/detail?id='.$list['id'])}">{$list.title}</a></h3>
                 </div>
                 <div class="listContent">
 					<!-- 文章图文简介  -->
 					<if condition="$list['cover_id'] gt 0">
 						<empty name="list['description']">
-							<a href="{:U('Article/detail?id='.$list['id'])}"><img src="{:get_cover($list['cover_id'],'path')}" alt="" /></a>
+							<a href="{:U('Activity/detail?id='.$data['id'])}"><img src="{:get_cover($list['cover_id'],'path')}" alt="" /></a>
 						<else />
-							<p><a href="{:U('Article/detail?id='.$list['id'])}"><img src="{:get_cover($list['cover_id'],'path')}" alt="" /></a></p>
+							<p><a href="{:U('Activity/detail?id='.$data['id'])}"><img src="{:get_cover($list['cover_id'],'path')}" alt="" /></a></p>
 							<p class="lead">{$list.description}</p>
 						</empty>
 
@@ -23,7 +23,7 @@
 					</if>
                 </div>
                 <div class="listMeta">
-                    <span><a href="{:U('Article/detail?id='.$list['id'])}">查看全文</a></span>
+                    <span><a href="{:U('Activity/detail?id='.$list['id'])}">查看全文</a></span>
                     <span class="pull-right">
 
                         <span>{$list.create_time|timeTip}前发表在 <span>

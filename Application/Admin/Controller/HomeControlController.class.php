@@ -100,8 +100,9 @@ class HomeControlController extends AdminController {
 	 * AJAX获取幻灯片信息
 	 */
 	public function slideAjax(){
-		if(IS_POST){
+		if(IS_POST||IS_AJAX){
 				$data = I('post.');
+				/* 对POST过来的数据进行过滤分配变量*/
 				if(is_numeric($data[0])){
 					$segment = $data[1];
 					$id = $data[0];
@@ -109,9 +110,11 @@ class HomeControlController extends AdminController {
 					$segment = $data[0];
 					$id = $data[1];
 				}
-			}
 			$info = $this->slideInfo($segment,$id);
 			$this->ajaxReturn($info,'json');
+			}else{
+				$this->error('非法操作！');
+			}
 	}
 	
 	/**
@@ -128,7 +131,7 @@ class HomeControlController extends AdminController {
 					
 					break;
 					
-				case 'article'://文章类型
+				case 'article'||'product'://文章及产品类型
 					
 					$article = D('Document')->detail($id); //获取条目内容详情
 					
@@ -143,19 +146,42 @@ class HomeControlController extends AdminController {
 					break;
 					
 				case 'activity'://活动类型
+					$activity = D('Tchat_activity')->detail($id); //获取条目内容详情
 					
+					$info['segment'] = $segment;
+					$info['id']=$id;
+					$info['url'] = "/Home/activity/detail?id=".$id;
+					$info['image'] = get_cover($activity['cover_id'],'path');
+					$info['alt']=$activity['title'];
+					$info['caption']=$activity['title'];
+					
+					unset($activity); //删除article的变量
 					break;
 					
-				case 'product'://产品类型
+ 				case 'plan'://套餐类型
+					$plan = D('Tchat_plan')->info($id); //获取条目内容详情
 					
-					break;
-										
-				case 'plan'://套餐类型
+					$info['segment'] = $segment;
+					$info['id']=$id;
+					$info['url'] = "/Home/activity/detail?id=".$id;
+					$info['image'] = get_cover($plan['cover_id'],'path');
+					$info['alt']=$plan['title'];
+					$info['caption']=$plan['title'];
 					
+					unset($plan);
 					break;
 										
 				case 'topic'://专题类型
+					$topic = D('Tchat_topic')->info($id); //获取条目内容详情
 					
+					$info['segment'] = $segment;
+					$info['id']=$id;
+					$info['url'] = "/Home/topic/detail?id=".$id;
+					$info['image'] = get_cover($topic['cover_id'],'path');
+					$info['alt']=$topic['title'];
+					$info['caption']=$topic['title'];
+					
+					unset($topic);
 					break;
 					
 				default:
