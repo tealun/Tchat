@@ -52,9 +52,12 @@ class ReplyEvent {
         break;
       //document类型回复其实也是图文类型的方式，它是一篇或多篇图文的集合，reply_id的值可以多个,以英文半角逗号分隔。
       case 'document' :
-        $news= M($segmentModel)->where(array('status'=>array('eq',1)))->field('id,title,description,cover_id,link_id')->order('id desc')->select($rs['reply_id']);
+		$map = array('status'=>array('eq',1));
+		$field = 'id,title,description,cover_id,index_pic,link_id,level,model_id';
+		$order = array('level'=>'desc','id'=>'desc');
+        $news= M($segmentModel)->where($map)->field($field)->order($order)->select($rs['reply_id']);
         $reply = get_news_arr($news);
-        unset($news);
+        unset($map,$field,$order,$news);
         break;
       //TODO 其他类型暂时统一回复一份文本，后期加上image、voice、video、music类型，这四种类型需先上传文件到服务器获得media_id
       default:
@@ -69,9 +72,9 @@ class ReplyEvent {
 	 * 获取指定图文类型回复文章
 	 */
 	private	function getNews($segmentModel){
-		if($segmentModel == "Tchat_activity"){
+		if($segmentModel == "Tchat_activity"){//活动板块根据所属模型不同查找
 			$map['model_id']= $this->rs['reply_id'];
-		}else{
+		}else{  //其他板块则根据分类不同查找
 			$catIdarr = M('Category')->where(array('id'=>$this->rs['reply_id'],'pid'=>$this->rs['reply_id'],'_logic'=>'OR'))->getField('id',true);
 			$map['category_id'] = array('in',$catIdarr);//在指定目录及其子目录下的文档
 		}
@@ -81,6 +84,6 @@ class ReplyEvent {
 		$order =array('level'=>'desc','create_time'=>'desc');
 		
 		/*根据条件取出相应记录，限制80条，即10页内容*/
-	    return M($segmentModel)->where($map)->order($order)->getField('id,title,description,cover_id,index_pic,link_id,level',80);
+	    return M($segmentModel)->where($map)->order($order)->getField('id,title,description,cover_id,index_pic,link_id,level,model_id',80);
 	}
 }

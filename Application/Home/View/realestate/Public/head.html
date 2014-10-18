@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>{:C('WEB_SITE_TITLE')}</title>
+<title><if condition="isset($info)">{$info.title}|<elseif condition="$meta_title">{$meta_title}|</elseif></if>{:C('WEB_SITE_TITLE')}</title>
 <!-- Loading Bootstrap -->
 <link href="__STATIC__/bootstrap3.2.0/css/bootstrap.css" rel="stylesheet">
 <!-- Loading Flat UI CSS-->

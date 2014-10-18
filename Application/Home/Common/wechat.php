@@ -21,6 +21,9 @@ function timeTip($time){
   return $re;
 }
 
+/**
+ * 查找模型字段名
+ */
 function get_model_column_name($model_id,$column){
 	    /* 非法ID */
     if(empty($model_id) || !is_numeric($model_id)){

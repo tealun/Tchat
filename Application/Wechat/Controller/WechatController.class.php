@@ -176,6 +176,8 @@ class WechatController extends Controller {
   private function news($news){
   	$openid = $this->data['ToUserName'];
   	S($openid,NULL);
+	/* 定义不同模型模块 */
+	$activityModelArr = array(6,7,8);
     $i=0;
     foreach ($news as $key => $var) {
         $articles[$i]['Title'] = $var['title'];
@@ -191,8 +193,17 @@ class WechatController extends Controller {
             $articles[$i]['PicUrl'] = $var['index_pic'] == 0?''
             :'http://'.$_SERVER['HTTP_HOST'].__ROOT__.M('Picture')->where(array('id'=>$var['index_pic']))->getField('path');
           }
-		  
-        $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/index.php?s=/Home/Article/detail/id/'.$var['id'].'.html';
+		
+		/* 根据文档所属模型ID不同生成不同的链接路径所用模块 */
+		if(in_array($var['model_id'], $activityModelArr)){
+			$modelName = 'Activity';
+		}elseif($var['model_id'] == 51){
+			$modelName = 'Album';
+		}else{
+			$modelName = 'Article';
+		}
+		
+        $articles[$i]['Url'] = 'http://'.$_SERVER['HTTP_HOST'].__ROOT__.'/index.php?s=/Home/'.$modelName.'/detail/id/'.$var['id'].'.html';
         $i++;
 		unset($news[$key]);
 		
