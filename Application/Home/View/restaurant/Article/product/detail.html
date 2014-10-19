@@ -41,7 +41,7 @@
 				</if>
 				<if condition="($info['spec'] neq 0) OR ($info['spec'] neq '')">
 					<tr>
-						<td style="width: 30%">,<strong>:get_model_column_name(1info['model_id'],'spec')</strong></td><td style="width: 70%">{$info.spec}</td>					
+						<td style="width: 30%">,<strong>{:get_model_column_name(1info['model_id'],'spec')}</strong></td><td style="width: 70%">{$info.spec}</td>					
 					</tr>
 				</if>
 				<if condition="($info['features'] neq 0) OR ($info['features'] neq '')">

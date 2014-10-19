@@ -216,11 +216,16 @@ span .text {
 
 /*列表页*/
 .listTitle {
+	margin:0;
+	border:none;
+	padding-left:0;
 }
 .listContent {
 	margin-bottom: 10px;
 }
 .listContent img {
+	overflow:hidden;
+	max-height:200px;
 	margin-bottom: 10px;
 }
 .lead {

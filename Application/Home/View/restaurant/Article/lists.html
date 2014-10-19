@@ -1,43 +1,54 @@
 <extend name="Base/common"/>
 
 <block name="body">
-      <div class="span9">
         <!-- Contents
         ================================================== -->
         <section id="contents">
 			<!-- 图文列表 -->
-			<volist name="list" id="data">
-				<div class="listTitle">
-					<h3 class="ellipsis"><a href="{:U('Article/detail?id='.$data['id'])}">{$data.title}</a></h3>
+			<div class="container-fluid">
+				<volist name="list" id="data">
+				<if condition="$i%2 neq 0" >
+						<div class="row">
+				</if>
+				<div class="col-xs-6 listContent">
+							<div class="thumbnail">
+								<if condition="$data['index_pic'] gt 0">
+								<a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['index_pic'],'path')}" alt="" /></a>
+	 							<else />
+	 							
+	 				    		</if>
+								<hr />
+								 <div class="caption">
+									<h3 class="listTitle">{$data.title}
+										<if condition="($data['features'] neq 0) OR ($data['features'] neq '')">
+											 | {$data.features}
+										</if>
+									</h3>
+									<empty name="data['special_price']">
+										<p>售价:{$data.price}</p>
+									<else />
+										<p>原价:<del>{$data.price}</del></p>
+										<p>特价:<del>{$data.special_price}</del></p>
+									</empty>
+								</div>
+							</div>
 				</div>
-				<div class="listContent">
-					<!-- 文章图文简介  -->
-					<if condition="$data['cover_id'] gt 0">
-						<empty name="data['description']">
-							<a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a>
-						<else />
-							<p><a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a></p>
-							<p class="lead">{$data.description}</p>
-						</empty>
+				
+				<if condition="$i%2 eq 0" >
+				</div> {/*当前条目为偶数位时结束row*/}
+				</if>
 
-					<else />
-						<p class="lead">{$data.description}</p>
-					</if>
-
-				</div>
-				<div class="listMeta">
-					<span><a href="{:U('Article/detail?id='.$data['id'])}">查看全文</a></span>
-					<span class="pull-right">
-						<span>{$data.create_time|timeTip}前</span>
-						<span>阅读({$data.view})</span>&nbsp;&nbsp;
-				</div>
-				<hr/>
 	        </volist>
 
+			<if condition="$i%2 neq 0" >
+			</div> {/*最后一条条目为奇数位时结束row*/}
+			</if>
+			
+	</div>
+			
             <div class="pagination">
                 <article:page cate="$category['id']" listrow="$category['list_row']" />
             </div>
         </section>
       </div>
-    </div>
 </block>

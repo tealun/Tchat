@@ -1,0 +1,44 @@
+<extend name="Base/common"/>
+
+<block name="body">
+      <div class="span9">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+			<!-- 图文列表 -->
+
+			<volist name="list" id="data">
+				<div class="listTitle">
+					<h3 class="ellipsis"><a href="{:U('Article/detail?id='.$data['id'])}">{$data.title}</a></h3>
+				</div>
+				<div class="listContent">
+					<!-- 文章图文简介  -->
+					<if condition="$data['cover_id'] gt 0">
+						<empty name="data['description']">
+							<a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a>
+						<else />
+							<p><a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a></p>
+							<p class="lead">{$data.description}</p>
+						</empty>
+					<else />
+						<p class="lead">{$data.description}</p>
+					</if>
+				</div>
+				<div class="listMeta">
+					<?php if ($i%2==0): ?>
+						qing
+					<?php endif ?>
+					<span><a href="{:U('Article/detail?id='.$data['id'])}">查看全文</a></span>
+					<span class="pull-right">
+						<span>{$data.create_time|timeTip}前</span>
+						<span>阅读({$data.view})</span>&nbsp;&nbsp;
+				</div>
+				<hr/>
+	        </volist>
+            <div class="pagination">
+                <article:page cate="$category['id']" listrow="$category['list_row']" />
+            </div>
+        </section>
+      </div>
+    </div>
+</block>
