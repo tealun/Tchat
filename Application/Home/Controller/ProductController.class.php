@@ -14,5 +14,22 @@ namespace Home\Controller;
  * 继承自文章文档模型
  */
 class productController extends ArticleController {
+	
+	/* 产品模型列表页 */
+	public function lists($p = 1){
+		/* 分类信息 */
+		$category = $this->category();
 
+		/* 获取当前分类列表 */
+		$Product = D('Document_product');
+		$list = $Product->page($p, $category['list_row'])->lists($category['id']);
+		if(false === $list){
+			$this->error('获取列表数据失败！');
+		}
+
+		/* 模板赋值并渲染模板 */
+		$this->assign('category', $category);
+		$this->assign('list', $list);
+		$this->display($category['template_lists']);
+	}
 }
