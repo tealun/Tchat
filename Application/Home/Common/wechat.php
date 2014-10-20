@@ -34,4 +34,17 @@ function get_model_column_name($model_id,$column){
        return M('attribute')->where($map)->getFieldByName($column,'title');
 }
 
+
+function get_product_column($id,$column){
+
+	if(is_numeric($id)){
+		$map['id']=$id;
+	}else{
+		$map['name']=$id;
+	}
+
+	$Product = M('Document_product');
+	return $Product ->where($map)->getField($column);
+}
+
 ?>

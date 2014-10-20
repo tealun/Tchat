@@ -6,6 +6,7 @@
         <section id="contents">
 			<!-- 图文列表 -->
 			<div class="container-fluid">
+			<eq name="category['pid']" value="80" >
 				<volist name="list" id="data">
 				<if condition="$i%2 neq 0" >
 						<div class="row">
@@ -24,12 +25,16 @@
 											 | {$data.features}
 										</if>
 									</h3>
-									<empty name="data['special_price']">
-										<p>售价:{$data.price}</p>
-									<else />
-										<p>原价:<del>{$data.price}</del></p>
-										<p>特价:<del>{$data.special_price}</del></p>
-									</empty>
+										<if condition="get_product_column($data['id'],'special_price') eq 0">
+											<if condition="get_product_column($data['id'],'price') gt 0" >
+												<p>售价:{:get_product_column($data['id'],'price')} 元</p>
+												<else />
+												<p>{$data.description}</p>
+											</if>
+										<else />
+											<p>原价:<del>{:get_product_column($data['id'],'price')} 元</del></p>
+											<p>特价:{:get_product_column($data['id'],'special_price')} 元</p>
+										</if>
 								</div>
 							</div>
 				</div>
@@ -44,6 +49,37 @@
 			</div> {/*最后一条条目为奇数位时结束row*/}
 			</if>
 			
+			<else />
+			
+			  <volist name="list" id="data">
+				<div class="listTitle">
+					<h3 class="ellipsis"><a href="{:U('Article/detail?id='.$data['id'])}">{$data.title}</a></h3>
+				</div>
+				<div class="listContent">
+					<!-- 文章图文简介  -->
+					<if condition="$data['cover_id'] gt 0">
+						<empty name="data['description']">
+							<a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a>
+						<else />
+							<p><a href="{:U('Article/detail?id='.$data['id'])}"><img src="{:get_cover($data['cover_id'],'path')}" alt="" /></a></p>
+							<p class="lead">{$data.description}</p>
+						</empty>
+					<else />
+						<p class="lead">{$data.description}</p>
+					</if>
+				</div>
+				<div class="listMeta">
+					<?php if ($i%2==0): ?>
+						qing
+					<?php endif ?>
+					<span><a href="{:U('Article/detail?id='.$data['id'])}">查看全文</a></span>
+					<span class="pull-right">
+						<span>{$data.create_time|timeTip}前</span>
+						<span>阅读({$data.view})</span>&nbsp;&nbsp;
+				</div>
+				<hr/>
+	        </volist>
+	       </eq>
 	</div>
 			
             <div class="pagination">

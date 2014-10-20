@@ -222,6 +222,7 @@ span .text {
 }
 .listContent {
 	margin-bottom: 10px;
+	padding: 0 10px;
 }
 .listContent img {
 	overflow:hidden;
