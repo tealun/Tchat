@@ -52,13 +52,13 @@ INSERT INTO `onethink_attribute` VALUES ('253','check_info','参与活动是否�
 INSERT INTO `onethink_attribute` VALUES ('254', 'ex_keyword', '前置关键词', 'varchar(10) NOT NULL ', 'string', '', '触发参与报名或获取资格告知的关键词，比如\"我要优惠券\"', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('255', 'checked_reply', '验证后回复内容', 'varchar(100) NOT NULL', 'string', '', '获取客户资料后的回复内容', '1', '', '6', '0', '1', '1384508362', '1383891233', '', '0', '', '', '', '0', '');
 -- 删除了编号为256的categry_id所属分类字段属性
-INSERT INTO `onethink_attribute` VALUES ('257', 'description', '描述', 'char(140) NOT NULL ', 'textarea', '', '', '1', '', '6', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('257', 'description', '简介', 'char(140) NOT NULL ', 'textarea', '', '', '1', '', '6', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('258', 'root', '根节点', 'int(10) unsigned NOT NULL ', 'num', '0', '该文档的顶级文档编号', '0', '', '6', '0', '1', '1384508323', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('259', 'pid', '所属ID', 'int(10) unsigned NOT NULL ', 'num', '0', '父文档编号', '0', '', '6', '0', '1', '1384508543', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('260', 'type', '内容类型', 'tinyint(3) unsigned NOT NULL ', 'select', '2', '', '1', '1:目录\r\n2:主题\r\n3:段落', '6', '0', '1', '1384511157', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('261', 'position', '推荐位', 'smallint(5) unsigned NOT NULL ', 'checkbox', '0', '多个推荐则将其推荐值相加', '1', '1:列表推荐\r\n2:频道页推荐\r\n4:首页推荐', '6', '0', '1', '1383895640', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('262', 'link_id', '外链', 'int(10) unsigned NOT NULL ', 'num', '0', '0-非外链，大于0-外链ID,需要函数进行链接与编号的转换', '1', '', '6', '0', '1', '1383895757', '1383891233', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('263', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸360*200像素', '1', '', '6', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('263', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸900*500像素或700*420像素', '1', '', '6', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('264', 'act_add', '活动地点', 'varchar(100) NOT NULL ', 'string', 'Local', '', '1', '', '6', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('265', 'display', '可见性', 'tinyint(3) unsigned NOT NULL ', 'radio', '1', '', '1', '0:不可见\r\n1:所有人可见', '6', '0', '1', '1386662271', '1383891233', '', '0', '', 'regex', '', '0', 'function');
 INSERT INTO `onethink_attribute` VALUES ('266', 'startup', '启动时间', 'int(10) unsigned NOT NULL ', 'datetime', '0', '设置活动的<strong>启动时间</strong>', '1', '', '6', '0', '1', '1396965384', '1396965384', '', '0', '', '', '', '0', '');
@@ -129,10 +129,10 @@ INSERT INTO `onethink_attribute` VALUES ('488', 'stock', '产品库存', 'int(10
 INSERT INTO `onethink_attribute` VALUES ('500', 'status', '状态', 'tinyint(2) NOT NULL ', 'bool', '1', '是否现在就启用', '1', '1:启用\r\n0:禁用', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('501', 'name', '套餐标识','VARCHAR(100) NOT NULL', 'string', '', '设置套餐标识，请使用英文字母或拼音','1', '', '54','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('502', 'title', '套餐名称','VARCHAR(100) NOT NULL', 'string', '', '填写套餐名称','1', '', '54','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('503', 'description', '描述', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '54', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('503', 'description', '简介', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '54', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('504', 'products', '产品', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '54', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('505', 'price', '价格', 'FLOAT(10,2) UNSIGNED NOT NULL', 'num', '0', '套餐价格','1', '', '54','0','1','1408934711','1408934711', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('506', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸360*200像素', '1', '', '54', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('506', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸900*500像素或700*420像素', '1', '', '54', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('507', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '2', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('508', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('509', 'update_time', '更新时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '54', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
@@ -142,10 +142,10 @@ INSERT INTO `onethink_attribute` VALUES ('511','index_pic','索引图片', 'int(
 -- Attribute of product Topic model
 INSERT INTO `onethink_attribute` VALUES ('530', 'name', '专题标识','VARCHAR(100) NOT NULL', 'string', '', '设置专题标识，请使用英文字母或拼音','1', '', '55','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
 INSERT INTO `onethink_attribute` VALUES ('531', 'title', '专题名称','VARCHAR(100) NOT NULL', 'string', '', '填写专题名称','1', '', '55','1','1','1408933941','1408933941', '','0', '', '', '','0', '');
-INSERT INTO `onethink_attribute` VALUES ('532', 'description', '描述', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('532', 'description', '简介', 'VARCHAR(250) NOT NULL ', 'textarea', '', '', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('533', 'products', '产品', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('534', 'plans', '套餐', 'VARCHAR(100) NOT NULL ', 'string', '0', '请选择要加入套餐的产品', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
-INSERT INTO `onethink_attribute` VALUES ('535', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸360*200像素', '1', '', '55', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
+INSERT INTO `onethink_attribute` VALUES ('535', 'cover_id', '封面图片', 'int(10) unsigned NOT NULL ', 'picture', '0', '0-无封面，大于0-封面图片ID，建议尺寸900*500像素或700*420像素', '1', '', '55', '0', '1', '1384147827', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('536', 'tags', '标签', 'VARCHAR(100) NOT NULL ', 'string', '0', '请为该专题设置标签，将用此标签调取新闻资讯', '1', '', '55', '0', '1', '1383894927', '1383891233', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('537', 'uid', '用户', 'int(10) unsigned NOT NULL ', 'string', '2', '', '0', '', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
 INSERT INTO `onethink_attribute` VALUES ('538', 'create_time', '创建时间', 'int(10) unsigned NOT NULL ', 'string', '0', '', '0', '', '55', '0', '1', '1407334493', '1407334493', '', '0', '', '', '', '0', '');
@@ -577,6 +577,8 @@ INSERT INTO `onethink_menu` VALUES ('604', '删除', '601', '0', 'Admin/Album/de
 
 INSERT INTO `onethink_menu` VALUES ('605', '新增相册', '600', '0', 'Admin/Album/create', '0', '新增一个相册', '相册管理', '0');
 
+
+
 -- 若有其他板块的目录，可在此添加或在功能板块安装程序中向onethink_menu中添加目录数据，比如针对房地产行业的【地产】板块
 
 -- -----------------------------
@@ -598,7 +600,7 @@ CREATE TABLE `onethink_tchat_activity` (
 	`check_info` int(5) NOT NULL DEFAULT '0' COMMENT '参与活动是否需审核客户信息',
 	`ex_keyword` varchar(10) NOT NULL DEFAULT '' COMMENT '客户个人信息时的前置关键词',
 	`checked_reply` varchar(100) NOT NULL DEFAULT '' COMMENT '获取客户资料后的回复内容',
-	`description` char(140) NOT NULL DEFAULT '' COMMENT '描述',
+	`description` char(140) NOT NULL DEFAULT '' COMMENT '简介',
 	`root` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '根节点',
 	`pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属ID',
 	`type` tinyint(3) unsigned NOT NULL DEFAULT '2' COMMENT '内容类型',
@@ -690,7 +692,7 @@ CREATE TABLE `onethink_tchat_album_category` (
 	`list_row` tinyint(3) unsigned NOT NULL DEFAULT '10' COMMENT '列表每页行数',
 	`meta_title` varchar(50) NOT NULL DEFAULT '' COMMENT 'SEO的网页标题',
 	`keywords` varchar(255) NOT NULL DEFAULT '' COMMENT '关键字',
-	`description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+	`description` varchar(255) NOT NULL DEFAULT '' COMMENT '简介',
 	`template_index` varchar(100) NOT NULL COMMENT '频道页模板',
 	`template_lists` varchar(100) NOT NULL COMMENT '列表页模板',
 	`template_detail` varchar(100) NOT NULL COMMENT '详情页模板',
@@ -861,7 +863,7 @@ DROP TABLE IF EXISTS `onethink_tchat_music`;
 CREATE TABLE `onethink_tchat_music` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '音乐型回复内容ID',
 	`music_url`	varchar(200) NOT NULL UNIQUE COMMENT '音乐链接地址',
-	`music_content` varchar(250) NOT NULL COMMENT '音乐描述',
+	`music_content` varchar(250) NOT NULL COMMENT '音乐简介',
 	`uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
 	`create_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
 	`update_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -876,7 +878,7 @@ CREATE TABLE `onethink_tchat_plan` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '套餐ID',
 	`name`	varchar(100) NOT NULL DEFAULT '' COMMENT '套餐标识',
 	`title`	varchar(100) NOT NULL DEFAULT '' UNIQUE COMMENT '套餐名称',
-	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '描述',
+	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '简介',
 	`products`	varchar(100) NOT NULL DEFAULT '0' COMMENT '产品',
 	`price`	FLOAT(10,2) UNSIGNED NOT NULL DEFAULT '0.00' COMMENT '套餐价格',
 	`cover_id`	int(10) NOT NULL DEFAULT '0' COMMENT '封面图片',
@@ -897,7 +899,7 @@ CREATE TABLE `onethink_tchat_topic` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '专题ID',
 	`name`	varchar(100) NOT NULL DEFAULT '' COMMENT '专题标识',
 	`title`	varchar(100) NOT NULL DEFAULT '' UNIQUE COMMENT '专题名称',
-	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '描述',
+	`description`	varchar(250) NOT NULL DEFAULT '' UNIQUE COMMENT '简介',
 	`products`	varchar(100) NOT NULL DEFAULT '0' COMMENT '产品',
 	`plans`	varchar(100) NOT NULL DEFAULT '0' COMMENT '套餐',
 	`cover_id`	int(10) NOT NULL DEFAULT '0' COMMENT '封面图片',
@@ -919,7 +921,7 @@ CREATE TABLE `onethink_tchat_segment` (
 	`id` int(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '板块ID',
 	`name` varchar(30) NOT NULL COMMENT '标识',
 	`title` varchar(50) NOT NULL COMMENT '板块标题',
-    `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述',
+    `description` varchar(255) NOT NULL DEFAULT '' COMMENT '简介',
     `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '板块安装状态 0 未安装 1 已安装',
 	PRIMARY KEY(`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT '音乐类型回复内容表';
