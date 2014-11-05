@@ -1,6 +1,6 @@
 <switch name="addons_afterArticle" >
     <case value="1" >
-	<section class="after_article1">
+	<section class="after_article">
 		<div class="row">
 			<div class="col-xs-12 col-md-12">
 				  <p style="background-color: #A6E1EC;padding: 10px;font-weight: bold;">::: 关于我们 :::</p>
@@ -12,6 +12,18 @@
 		</div>
 	</section>
 	</case>
-    <case value="2">输出内容2</case>
+    <case value="2">
+	<section class="after_article">
+		<fieldset style="margin: 0px; padding: 5px; border: 1px solid rgb(251, 88, 8); border-image-source: none; max-width: 100% !important; word-wrap: break-word !important; box-sizing: border-box !important;">
+			<legend style="padding: 0px; max-width: 100% !important; word-wrap: break-word !important; box-sizing: border-box !important; margin: 0px 10px;">
+				<span style="max-width: 100% !important; word-wrap: break-word !important; box-sizing: border-box !important; padding: 5px 10px; color: rgb(255, 255, 255); font-size: 14px; font-weight: bold; background-color: rgb(251, 88, 8);">
+					戳阅读原文查看
+					</span>
+					</legend>
+					<p style="margin-top: 0px; margin-bottom: 0px; min-height: 1em; white-space: pre-wrap; max-width: 100% !important; word-wrap: break-word !important; box-sizing: border-box !important;"><br></p>
+					{:C('WEB_SITE_DESCRIPTION')}<br>
+		</fieldset>
+	</section>
+	</case>
     <default />默认情况
 </switch>

@@ -1,0 +1,97 @@
+<extend name="Base/common"/>
+
+<block name="header">
+	<div class="logo">
+			<div class="row">
+				<div class="col-xs-12">
+					{:hook('homeLogo')}
+					<h1 class="hidden">兄弟海鲜大排档</h1>
+				</div>
+		    </div>	
+	</div>
+		{:hook('homeSlide')}
+</block>
+
+<block name="body">
+	<section class="container-fluid"> <!-- Start Container Fluid -->
+	<if condition="isset($productNews)" >{/* 开始最新菜品 */ }
+		
+		<for start="0" end="4">{/* 开始循环精品海鲜 */ }
+			<assign name="productNew" value="$productNews[$i]" /> {/* 将循环数组赋值给一个变量 */}
+			<if condition ="$i eq 0" >
+				<div class="row newest"><!-- Start Row -->
+					<div class="col-xs-4">
+						<h2>精品海鲜</h2>
+						<span class="wave-icon pull-right">
+							<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+						</span>
+					</div>
+					<div class="col-xs-8" style="padding-right: 0px;">
+							<a  href="{:U('Article/detail?id='.$productNew['id'])}"><img src="{:get_cover($productNew['cover_id'],'path')}" alt="" /></a>
+							<p>
+								<a  href="{:U('Article/detail?id='.$productNew['id'])}">{$productNew.title}</a>
+							</p>
+					</div>
+				</div><!-- End Row -->
+				<div class="row"> {/*第一条循环完成后新增ROW */ }
+			<else />
+					<div class="col-xs-4" style="text-align:center; background-color:#ecf0f1; padding:5px 10px; ">
+						<a  href="{:U('Article/detail?id='.$productNew['id'])}">{$productNew.title}</a>
+					</div>
+			</if>
+		</for>{/* 结束循环精品海鲜 */ }
+				</div> {/* 剩余条数循环完成后结束ROW */ }
+	</if>{/* 结束精品海鲜 */ }
+	
+	<if condition="isset($productPos)" >
+		
+		<for start="0" end="4">
+			<assign name="pro" value="$productPos[$i]" /> {/* 将循环数组赋值给一个变量 */}
+			<if condition ="$i eq 0" >
+				<div class="row  featrues"><!-- Start Row -->
+					<div class="col-xs-8" style="padding-left: 0px;">
+							<a  href="{:U('Article/detail?id='.$pro['id'])}"><img src="{:get_cover($pro['cover_id'],'path')}" alt="" /></a>
+							<p>
+								<a  href="{:U('Article/detail?id='.$pro['id'])}">{$pro.title}</a>
+							</p>
+					</div>
+					<div class="col-xs-4">
+						<h2>厨师精选</h2>
+						<span class="wave-icon pull-left">
+							<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+						</span>
+					</div>
+				</div> <!-- End Row -->
+			<div class="row"> {/*第一条循环完成后新增ROW */ }
+			<else />
+					<div class="col-xs-4" style="text-align:center; background-color:#ecf0f1; padding:5px 10px; ">
+						<a  href="{:U('Article/detail?id='.$pro['id'])}">{$pro.title}</a>
+					</div>
+			</if>
+		</for>
+	</div> {/*剩余条数循环完成后结束ROW */ }
+	
+	</if>
+
+		<div class="row adviced">
+		<div class="col-xs-4">
+			<h2>本周推荐</h2>
+			<span class="wave-icon pull-right">
+					<img src="{$Think.THEME_PATH}images/water-wave.png" alt="" />
+				</span>
+		</div>
+		<div class="col-xs-8" style="padding-right: 0px;">
+					<img src="{$Think.THEME_PATH}images/cai-04.png" alt="" />
+					<p>
+						这里是本周推荐菜名
+					</p>
+		</div>
+		
+	</div>
+	<address class="row">
+		<p class="col-xs-12 bg-primary"><span class="glyphicon glyphicon-earphone"></span>  联系电话：2133219</p>
+		<p class="col-xs-12 bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：中山北路复兴里</p>
+	</address>
+	</section><!-- End Container Fluid -->
+
+</block>
