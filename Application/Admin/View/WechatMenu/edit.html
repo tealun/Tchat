@@ -6,4 +6,9 @@
 
 <block name="script">
 	<include file="Public/footjs" />
+	<script type="text/javascript">
+		$(function(){
+			$(":input[type='hidden'][name='pid']").detach(); //移除自带的pid隐藏input
+		});
+	</script>
 </block>
