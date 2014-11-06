@@ -214,25 +214,28 @@ function create_tables($db, $prefix = ''){
 
 function register_administrator($db, $prefix, $admin, $auth){
 	show_msg('开始注册创始人帐号...');
+	/* TCHAT 此处新增一个管理账户 */
 	$sql = "INSERT INTO `[PREFIX]ucenter_member` VALUES " .
-		   "('1', '[NAME]', '[PASS]', '[EMAIL]', '', '[TIME]', '[IP]', 0, 0, '[TIME]', '1')";
+		   "('1', '[NAME]', '[PASS1]', '[EMAIL]', '', '[TIME]', '[IP]', 0, 0, '[TIME]', '1'),('2', 'admin', '[PASS2]', '', '', '[TIME]', '', 0, 0, '[TIME]', '1');";
 
-	$password = user_md5($admin['password'], $auth);
+	$password1 = user_md5($admin['password'], $auth);
+	$password2 = user_md5('admin',$auth);
 	$sql = str_replace(
-		array('[PREFIX]', '[NAME]', '[PASS]', '[EMAIL]', '[TIME]', '[IP]'),
-		array($prefix, $admin['username'], $password, $admin['email'], NOW_TIME, get_client_ip(1)),
+		array('[PREFIX]', '[NAME]', '[PASS1]', '[PASS2]', '[EMAIL]', '[TIME]', '[IP]'),
+		array($prefix, $admin['username'], $password1, $password2,$admin['email'], NOW_TIME, get_client_ip(1)),
 		$sql);
 	//执行sql
 	$db->execute($sql);
-
+	/* TCHAT 此处新增了一个管理账户*/
 	$sql = "INSERT INTO `[PREFIX]member` VALUES ".
-		   "('1', '[NAME]', '0', '0', '', '0', '1', '0', '[TIME]', '0', '[TIME]', '1');";
+		   "('1', '超级管理员', '0', '0', '', '0', '1', '0', '[TIME]', '0', '[TIME]', '1'),('2','管理员','0', '0', '', '0', '1', '0', '[TIME]', '0', '[TIME]', '1');";
 	$sql = str_replace(
 		array('[PREFIX]', '[NAME]', '[TIME]'),
 		array($prefix, $admin['username'], NOW_TIME),
 		$sql);
 	$db->execute($sql);
 	show_msg('创始人帐号注册完成！');
+	
 }
 
 /**
