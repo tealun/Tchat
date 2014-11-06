@@ -46,8 +46,8 @@ class ReplyEvent {
       case 'news' :
 
 		$news = $this -> getNews($segmentModel);
-
-        $reply = !empty($news)?get_news_arr($news):get_text_arr("哎呀，仓库里空空如也，啥也没找到！>_<|||\n你有哆啦A梦的口袋么？");
+		$content = M('Tchat_text')->where('`id` = "5"')->getField('content');//分类下无文章时回复的文本信息内容
+        $reply = !empty($news)?get_news_arr($news):get_text_arr($content);
         unset($news);
         break;
       //document类型回复其实也是图文类型的方式，它是一篇或多篇图文的集合，reply_id的值可以多个,以英文半角逗号分隔。

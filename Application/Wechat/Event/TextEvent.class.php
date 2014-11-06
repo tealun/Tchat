@@ -39,7 +39,7 @@ class TextEvent {
 		if ($reply = $this -> keywordMatch($keyword)){
 				return $reply;
 			}else{//查询没有结果时，回复信息
-					$content = "/::< 抱歉，没有为您找到想要的结果。";
+					$content = M('Tchat_text')->where('`id` = "4"')->getField('content'); //查找指定文本内容
 					if(get_ot_config('WECHAT_CUSTOM_SERVICE')) //检测是否开启多客服，开启则提示可联系客服
 					  $content .= "\n--------------------\n是否转接到在线客服咨询?\n回复“1”或“是”立刻转接\n(1分钟内有效)";
 							
