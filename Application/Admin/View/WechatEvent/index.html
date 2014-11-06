@@ -24,7 +24,7 @@
 						<tr class="success">
 							<td style="width: 40%; text-align: center">回复内容：</td>
 							<if condition="$vo['reply_type'] eq 'news' " >
-						      	      <td style="width: 60%; text-align: left">[<strong> {$vo.reply_id|get_category_title} </strong>]分类</td>
+						      	      <td style="width: 60%; text-align: left">[<strong> {$vo.reply_id|get_category_title} </strong>]</td>
 						    <elseif  condition="$vo['reply_type'] eq 'text'" />
 						      	      <td style="width: 60%; text-align: left"> {$vo.reply_id|get_tchat_text}</td>
 						     <else />
@@ -34,7 +34,7 @@
 						</tbody>
 			        </table>
 			        <p>
-			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>'1'))}">编辑</a>
+			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>$i))}">编辑</a>
 				        <a href="{:U('setStatus?id='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="btn btn-large ajax-get">{$vo.status|show_status_op}</a>
 					</p>
 			      </div>
