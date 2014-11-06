@@ -108,7 +108,6 @@ class TchatMenuModel extends Model {
     /**
      * 更新菜单信息
      * @return boolean 更新状态
-     * @author 麦当苗儿 <zuojiazi@vip.qq.com>
      */
     public function update(){
         $data = $this->create();
@@ -122,9 +121,6 @@ class TchatMenuModel extends Model {
         }else{
             $res = $this->save();
         }
-
-        //更新菜单缓存
-        S('tchat_menu_list', null);
 
         //记录行为
        // action_log('update_tchat_menu', 'tchat_menu', $data['id'] ? $data['id'] : $res, UID);
