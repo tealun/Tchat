@@ -215,6 +215,10 @@ INSERT INTO `onethink_auth_extend` VALUES ('2','24','1');
 INSERT INTO `onethink_auth_extend` VALUES ('2','31','1');
 INSERT INTO `onethink_auth_extend` VALUES ('2','32','1');
 INSERT INTO `onethink_auth_extend` VALUES ('2','33','1');
+INSERT INTO `onethink_auth_extend` VALUES ('2','80','1');
+INSERT INTO `onethink_auth_extend` VALUES ('2','81','1');
+INSERT INTO `onethink_auth_extend` VALUES ('2','82','1');
+INSERT INTO `onethink_auth_extend` VALUES ('2','83','1');
 
 INSERT INTO `onethink_auth_extend` VALUES ('4','1','1');
 INSERT INTO `onethink_auth_extend` VALUES ('4','2','1');
@@ -542,7 +546,7 @@ INSERT INTO `onethink_menu` VALUES ('504', '删除', '501', '3', 'Admin/Product/
 
 INSERT INTO `onethink_menu` VALUES ('520', '新增产品', '500', '0', 'Admin/Product/add', '0', '新增一种产品', '产品管理', '0');
 
-INSERT INTO `onethink_menu` VALUES ('521', '查看分类', '500', '0', 'Admin/ProductCategory/index', '0', '查看当前的产品分类', '分类管理', '0');
+INSERT INTO `onethink_menu` VALUES ('521', '查看分类', '500', '0', 'Admin/ProductCategory/index', '0', '查看当前的产品分类', '产品分类', '0');
 INSERT INTO `onethink_menu` VALUES ('522', '新增', '521', '0', 'Admin/ProductCategory/add', '0', '新增一个产品分类', '', '0');
 INSERT INTO `onethink_menu` VALUES ('523', '编辑', '521', '0', 'Admin/ProductCategory/edit', '0', '编辑一个产品分类', '', '0');
 INSERT INTO `onethink_menu` VALUES ('524', '操作', '521', '0', 'Admin/ProductCategory/operate', '0', '操作一个产品分类', '', '0');
@@ -791,7 +795,7 @@ CREATE TABLE `onethink_tchat_events` (
 -- Records of `onethink_tchat_events`
 -- -----------------------------
 INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2','1','当客户新关注公众帐号时的回复内容设置');
-INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21','1','当客户扫描带二维码事件时的回复内容。<br /><strong>注意：</strong>如果客户是通过扫描二维码关注帐号时，回复内容为“关注事件”中设置的内容，如果是已经关注的客户扫描，则回复本设置中的内容。');
+INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21','1','已关注客户扫描带二维码事件时的回复内容。<br /><strong>注意：</strong>如果客户是通过扫描二维码关注帐号时，回复内容为“关注事件”中设置的内容，如果是已经关注的客户扫描，则回复本设置中的内容。');
 INSERT INTO `onethink_tchat_events` VALUES ('3','上报地理位置','LOCATION','','','-1','客户上报地理位置事件的回复内容。');
 
 -- -----------------------------
@@ -975,6 +979,8 @@ CREATE TABLE `onethink_tchat_text` (
 INSERT INTO `onethink_tchat_text` VALUES ('1','感谢您的关注，如需了解如何使用请回复“帮助”或“?”','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('2','您可以通过回复如下关键字获取我们的信息\n帮助：获得账号的使用帮助\n新闻：了解我们的最新新闻或动态\n活动：了解我们的最新活动\n优惠：了解我们的最新优惠\n建议：给我们提提您的建议','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('3','非常感谢您的配合，祝您生活愉快。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('4','/::< 抱歉，没有为您找到想要的结果。','2','1393292899','1393292899');
+INSERT INTO `onethink_tchat_text` VALUES ('5','哎呀，仓库里空空如也，啥也没找到！>_<|||\n你有哆啦A梦的口袋么？','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('55','哎呀，真不好意思，这个活动已经截止啦，好遗憾没能在那个疯狂的日子里见到你的身影，不过我们还有很多其他的活动正在进行，您可以回复“优惠”或“活动”，看看我们有哪些活动吧，这次可不要再错过咯。','2','1393292899','1393292899');
 INSERT INTO `onethink_tchat_text` VALUES ('56','感谢您的配合，您的建议我们会送达相关部门处理，如有需要我们会跟您取得联系，谢谢。','2','1393292899','1393292899');
 
