@@ -13,25 +13,33 @@
 </block>
 
 <block name="body">
-	<section class="container-fluid"> <!-- Start Container Fluid -->
+
+<div class="container">
 	<div class="row">
-		<div class="indexList">
-			<ul>
-				<li class="row-fluid">
-					<div class="col-md-4 offset1"> 海鲜批发 </div>
-					<div class="co-md-4 offset1">海鲜加工</div>
-				</li>
-				<li class="row-fluid">
-					<div class="col-md-4 offset1"> 就餐环境 </div>
-					<div class="col-md-4 offset1">实景照片</div>
-				</li>
-			</ul>
-		</div>
+		<div class="box">
+				<div style="background-image:url('{$Think.THEME_PATH}images/boxbackground01.jpg')" class="img">
+				<img draggable="false" src="{$Think.THEME_PATH}images/blank_5_2.png">
+				</div>	
+				<div class="btn_box show">
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>平价批发</span></a>
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>海鲜加工</span></a>
+				
+						<a href="{:U('Home/article/detail?id=13')}" class="btn"><span>关于我们</span></a>
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>就餐环境</span></a>
+	
+				</div>
+		   </div>
 	</div>
-	<address class="row">
-		<p class="col-xs-12 bg-primary"><span class="glyphicon glyphicon-earphone"></span>  联系电话：2133219</p>
-		<p class="col-xs-12 bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：中山北路复兴里</p>
-	</address>
-	</section><!-- End Container Fluid -->
+</div>
+
+<div class="container">
+		<address class="row">
+			<p class="col-xs-12 bg-primary"><span class="glyphicon glyphicon-earphone"></span>  联系电话：2133219</p>
+			<p class="col-xs-12 bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：中山北路复兴里</p>
+		</address>
+</div>	
 
 </block>
