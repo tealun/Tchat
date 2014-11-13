@@ -58,13 +58,16 @@ input, select, button {
 	overflow: hidden;
 }
 
-.container-fluid{
-	padding:0 1%;
-}
-
 .container-fluid > h1, h2, h3 {
 	border-left: 4px solid #FFFF99;
 	padding-left: 10px;
+}
+
+.spaceRectify{
+	margin-left:-15px;
+	margin-right:-15px;
+	padding-left:15px;
+	padding-right:15px;
 }
 
 span .text {
@@ -257,7 +260,6 @@ span .text {
 }
 
 .footer {
-	width: 95%;
 	overflow: hidden;
 	margin: 15px auto 0 auto;
 	border-top: 1px solid #666666;
@@ -339,7 +341,6 @@ span .text {
 }
 
 #contents {
-	width: 95%;
 	overflow: hidden;
 	margin: 10px auto;
 }
