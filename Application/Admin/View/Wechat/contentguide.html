@@ -1,0 +1,41 @@
+<extend name="Public/base"/>
+<block name="body">
+<if condition="$segment eq 'category'" >
+	<div class="container">
+	<volist name="guideList" id="vo">
+		<eq name="i" value="1" >
+		<div class="row">
+			<div class="span1">编号</div>
+			<div class="span3">分类名</div>
+			<div class="span8">网址</div>
+		</div>
+		</eq>
+		<div class="row">
+			<div class="span1">{$vo.id}</div>
+			<div class="span3">{$vo.title}</div>
+			<div class="span8">http://{$_SERVER}/Home/category/id/{$vo.id}.html</div>
+		</div>
+	</volist>
+	</div>
+<elseif condition="$segment eq 'article'" />
+	<div class="container">
+		<volist name="guideList" id="vo">
+		<eq name="i" value="1" >
+		<div class="row">
+			<div class="span1">编号</div>
+			<div class="span5">文章标题</div>
+			<div class="span6">网址</div>
+		</div>
+		</eq>
+		<div class="row">
+			<div class="span1">{$vo.id}</div>
+			<div class="span5"><a href="http://{$_SERVER['SERVER_NAME']}/Home/article/detail/id/{$vo.id}.html" target="_blank">{$vo.title}</a></div>
+			<div class="span6">http://{$_SERVER['SERVER_NAME']}/Home/article/detail/id/{$vo.id}.html</div>
+		</div>
+	</volist>
+	    <div class="page">
+        {$_page}
+    </div>
+	</div>
+</if>
+</block>
