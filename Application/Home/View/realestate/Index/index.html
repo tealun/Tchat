@@ -3,40 +3,7 @@
 <block name="header"></block>
 
 <block name="body">
-
-<div class="module">
-		<div class="banner">
-			<ul>
-				    <li><a href="#">
-				    	<img src="{$Think.THEME_PATH}images/banner_01.png" alt=""></a>
-				    <div class="inner">
-						<p>华鼎·雍王府，准现房热销</p>
-					</div>
-				    </li>
-				    
-				    <li><a href="#">
-				    	<img src="{$Think.THEME_PATH}images/banner_02.png" alt=""></a>
-				    <div class="inner">
-						<p>精致户型，阳光满屋</p>
-					</div>
-				    </li>
-
-				    <li><a href="#">
-				    	<img src="{$Think.THEME_PATH}images/banner_03.png" alt=""></a>
-				    <div class="inner">
-						<p>皇家园林，王府风范</p>
-					</div>
-				    </li>
-
-				    <li><a href="#">
-				    	<img src="{$Think.THEME_PATH}images/banner_04.png" alt=""></a>
-				    <div class="inner">
-						<p>I just wanted to show you another slide.</p>
-					</div>
-				    </li>
-			</ul>
-		</div>
-</div>
+{:hook('homeSlide')}
 <hr />
 <ul class="link_box">
     <li><a href="#"><img src="{$Think.THEME_PATH}images/favorite.png" alt=""></a><br />
@@ -46,7 +13,7 @@
     <li><a href="{:U('Home/Article/lists?category=activity_news')}"><img src="{$Think.THEME_PATH}images/tag.png" alt=""></a><br />
     	<span>优惠活动</span></li>
     <li><a href=""><img src="{$Think.THEME_PATH}images/pencil.png" alt=""></a><br />
-    	<span>房贷计算</span></li>
+    	<span>旗下楼盘</span></li>
 </ul>
 <hr />
 <volist name="category" id="vo" >

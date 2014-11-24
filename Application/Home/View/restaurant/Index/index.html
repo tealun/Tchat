@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					{:hook('homeLogo')}
-					<h1 class="hidden">兄弟海鲜大排档</h1>
+					<h1 class="hidden">{:C('WEB_SITE_TITLE')}</h1>
 				</div>
 		    </div>	
 	</div>
@@ -37,8 +37,8 @@
 
 <div class="container">
 		<address class="row">
-			<p class="col-xs-12 bg-primary"><span class="glyphicon glyphicon-earphone"></span>  联系电话：2133219</p>
-			<p class="col-xs-12 bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：中山北路复兴里</p>
+			<p class="col-xs-12 bg-primary"><span class="glyphicon glyphicon-earphone"></span>  热线电话：<a href="tel:{:C('COMPANY_TELEPHONE')}">{:C('COMPANY_TELEPHONE')}</a></p>
+			<p class="col-xs-12 bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：{:C('COMPANY_ADDRESS')}</p>
 		</address>
 </div>	
 
