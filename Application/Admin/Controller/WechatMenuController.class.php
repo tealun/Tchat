@@ -35,7 +35,7 @@ class WechatMenuController extends WechatController {
 	 */
 	public function viewMenu() {
 		if ($this -> getRZ()) {
-			$tree = D('Tchat_menu') -> getTree(0, 'id,sort,name,pid,status');
+			$tree = D('Tchat_menu') -> getTree(0, 'id,sort,event_key,name,pid,status');
 			$this -> assign('tree', $tree);
 			C('_TCHAT_GET_MENU_TREE_', true);
 			//标记系统获取分类树模板

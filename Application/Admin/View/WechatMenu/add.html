@@ -4,9 +4,7 @@
 	<include file="Public/create" />
 </block>
 
-	<block name="script">
-		
-		
+<block name="script">
 <include file="Public/footjs" />
 <if condition="isset($pidInfo)" >
 	<!-- 如果获取到指定PID的条目数据的话，就加载JS代码将数据写入到表单中 -->
@@ -21,4 +19,5 @@
 
 		</script>
 </if>
-	</block>
+	<include file="editjs" />
+</block>
