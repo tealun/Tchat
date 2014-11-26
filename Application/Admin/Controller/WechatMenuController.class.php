@@ -234,12 +234,15 @@ class WechatMenuController extends WechatController {
 
 		//POST提交地址
 		$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
-		$rs = vpost($url, $content);
+		$response = vpost($url, $content);
+		
+		$rs = json_decode($response,true);
 
-		if ($rs) {
+		if ($rs['errcode'] == 0) {
 			$this -> success('更新成功！');
 		} else {
-			$this -> error('更新失败！');
+			$errMessage = get_wechat_response($rs['errcode']);
+			$this -> error('更新失败！'.$errMessage);
 		}
 		
 		}else{

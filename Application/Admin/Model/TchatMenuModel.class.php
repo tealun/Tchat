@@ -11,13 +11,16 @@ namespace Admin\Model;
 use Think\Model;
 
 /**
- * 带参数二维码模型
+ * 自定义菜单模型
  */
 class TchatMenuModel extends Model {
 
     /* 自动验证规则 */
     protected $_validate = array(
-        array('name', '', '名称已经存在', self::VALUE_VALIDATE, 'unique', self::MODEL_BOTH),
+        array('name', 'checkName', '名称已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
+        array('name', 'require', '名称不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
+        array('event_key', 'checkEventKey', '系统标识已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
+        array('event_key', 'require', '系统标识不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
         array('name', '1,4', '标题长度不能超过4个汉字', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
 		array('pid','checkPid','一级菜单数目不能超过3个,同一级别二级菜单数目不能超过5个', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
    );
@@ -151,6 +154,51 @@ class TchatMenuModel extends Model {
     }
 
 
+    /**
+     * 检查标识是否已存在(只需在同一根节点下不重复)
+     * @param string $name
+     * @return true无重复，false已存在
+     * @author huajie <banhuajie@163.com>
+     */
+    protected function checkName(){
+        $name = I('post.name');
+        $pid = I('post.pid', 0);
+        $id = I('post.id', 0);
+
+        //获取根节点
+        if($pid == 0){
+        	$root = 0;
+        }else{
+        	$root = $this->getFieldById($pid, 'root');
+        	$root = $root == 0 ? $pid : $root;
+        }
+
+        $map = array('root'=>$root, 'name'=>$name, 'id'=>array('neq',$id));
+        $res = $this->where($map)->getField('id');
+        if($res){
+        	return false;
+        }
+        return true;
+    }
+	
+	
+    /**
+     * 检查标识是否已存在(只需在同一根节点下不重复)
+     * @param string $key
+     * @return true无重复，false已存在
+     * @author huajie <banhuajie@163.com>
+     */
+    protected function checkEventKey(){
+        $eventKey = I('post.event_key');
+		$id = I('post.id');
+        $map = array('event_key'=>$eventKey, 'id'=>array('neq',$id));
+        $res = $this->where($map)->getField('id');
+        if($res){
+        	return false;
+        }
+        return true;
+    }
+	
     /**
      * 查询后解析扩展信息
      * @param  array $data 菜单数据
