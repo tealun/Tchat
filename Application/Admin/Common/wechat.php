@@ -80,8 +80,8 @@ function get_access_token(){
 
   $str = file_get_contents($url);
   $arr = json_decode($str, true);
-  $accessToken = S('accessToken')?S('accessToken'):save_access_token();
-  return $accessToken;
+
+  return S('accessToken')?S('accessToken'):save_access_token();
 }
 
 /**
@@ -97,7 +97,7 @@ function save_access_token(){
   $arr = json_decode($str, true);
   /* 存储获取到的access_token，有限期为获取到的有限期，正常情况下为 7200 */
   S('accessToken',$arr['access_token'],$arr['expires_in']);
-  return $accessToken = S('accessToken');
+  return S('accessToken');
 }
 
 /**
@@ -297,8 +297,6 @@ function decodeUnicode($str)
 
 function get_wechat_response($errcode){
 	$statusArr = array(
-	'-1' => '系统繁忙',
-	'0' => '请求成功',
 	'40001' => '获取access_token时AppSecret错误，或者access_token无效',
 	'40002' => '不合法的凭证类型',
 	'40003' => '不合法的OpenID',
@@ -381,11 +379,9 @@ function get_wechat_response($errcode){
 	'50001' => '用户未授权该api'
 	);
 	
-	foreach ($statusArr as $key => $value) {
-		if ($errcode == $key){
-			return $value;
-		}else{
-			return FALSE;
-		}
+	if($errcode == -1){
+		return '系统繁忙';
+	}else{
+		return $statusArr[$errcode];
 	}
 }

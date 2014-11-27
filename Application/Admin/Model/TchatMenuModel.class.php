@@ -21,7 +21,7 @@ class TchatMenuModel extends Model {
         array('name', 'require', '名称不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
         array('event_key', 'checkEventKey', '系统标识已经存在', self::VALUE_VALIDATE, 'callback', self::MODEL_BOTH),
         array('event_key', 'require', '系统标识不能为空', self::MUST_VALIDATE, 'regex', self::MODEL_BOTH),
-        array('name', '1,4', '标题长度不能超过4个汉字', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
+        array('name', '1,8', '标题长度不能超过4个汉字', self::MUST_VALIDATE, 'length', self::MODEL_BOTH),
 		array('pid','checkPid','一级菜单数目不能超过3个,同一级别二级菜单数目不能超过5个', self::MUST_VALIDATE, 'callback', self::MODEL_BOTH),
    );
 
@@ -127,7 +127,7 @@ class TchatMenuModel extends Model {
 
         //记录行为
        // action_log('update_tchat_menu', 'tchat_menu', $data['id'] ? $data['id'] : $res, UID);
-
+		S('menuLocalChange',TRUE);
         return $res;
     }
 

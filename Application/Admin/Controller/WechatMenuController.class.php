@@ -205,9 +205,9 @@ class WechatMenuController extends WechatController {
 	 * TODO 对目录条目状态进行操作
 	 * @see Application/Admin/Controller/AdminController::setStatus()
 	 */
-	public function setStatus() {
+	public function setStatus($model='Tchat_keyword_group') {
 		if ($this -> getRZ()) {
-
+		return parent::setStatus('Tchat_menu');
 		} else {
 			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
 		}
@@ -221,29 +221,33 @@ class WechatMenuController extends WechatController {
 	 */
 	public function setMenu() {
 		if (IS_POST) {
-		$tree = D('Tchat_menu') -> getTree(0, 'id,pid,menu_type,name,event_key,url');
-		
-		//清理掉$tree中用于排序和分级而获取到的字段，这些字段不需要发送到服务器		
-		$menu['button'] = $this -> clearTreeArr($tree);
-		
-		//使用PHP的json_decode()函数将数组转换为JSON格式，但汉字会变成 \uxxxx形式的问题
-		$content = json_encode($menu,true);
-		
-		//使用一个函数解决转换过来的JSON数据中汉字变成 \uxxxx形式的问题
-		$content = decodeUnicode($content);
-
-		//POST提交地址
-		$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
-		$response = vpost($url, $content);
-		
-		$rs = json_decode($response,true);
-
-		if ($rs['errcode'] == 0) {
-			$this -> success('更新成功！');
-		} else {
-			$errMessage = get_wechat_response($rs['errcode']);
-			$this -> error('更新失败！'.$errMessage);
-		}
+			$tree = D('Tchat_menu') -> getTree(0, 'id,pid,menu_type,name,event_key,url');
+			
+			//清理掉$tree中用于排序和分级而获取到的字段，这些字段不需要发送到服务器		
+			$menu['button'] = $this -> clearTreeArr($tree);
+			
+			//使用PHP的json_decode()函数将数组转换为JSON格式，但汉字会变成 \uxxxx形式的问题
+			$content = json_encode($menu,true);
+			
+			//使用一个函数解决转换过来的JSON数据中汉字变成 \uxxxx形式的问题
+			$content = decodeUnicode($content);
+	
+			//POST提交地址
+			$url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . get_access_token();
+			
+			$str = vpost($url, $content); //提交到自定义菜单更新端口并获得返回数据
+		    $arr = json_decode($str, true); //将返回的json数据转换为数组形式
+	
+			if ($arr['errmsg'] == 'ok') {
+				S('menuLocalChange',NULL); //清除本地数据状态更改标识
+				$this -> success('更新成功！');
+			}elseif ($arr['errcode'] == 40001){//针对accessToken错误重置一次accessToken
+				save_access_token();
+				$this -> error('抱歉，更新失败，已重置 AccessToken，请重试一次');
+			}else {
+				$errMessage = get_wechat_response($arr['errcode']);
+				$this -> error('抱歉，更新失败！'.$errMessage);
+			}
 		
 		}else{
 			$this -> error('非法操作！');
