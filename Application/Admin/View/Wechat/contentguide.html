@@ -1,53 +1,56 @@
-<if condition="$segment eq 'category'" >
-	<table>
-	<volist name="guideList" id="vo">
-		<eq name="i" value="1" >
-		<thead>
-			<tr>
-				<th width="10%">编号</div>
-				<th width="30%">分类名</div>
-				<th width="60%">网址</div>
-			</tr>
-		</thead>
-		</eq>
-		<if condition="$i%2 eq 0">
-			<tr class="color_back">
-		<else />
-			<tr>
-		</if>
-			<td>{$vo.id}</td>
-			<td>{$vo.title}</td>
-			<td>http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/category/id/{$vo.id}.html</td>
-		</tr>
-	</volist>
-	</table>
-<elseif condition="$segment eq 'article'" />
-	<table>
-	<volist name="guideList" id="vo">
-		<eq name="i" value="1" >
-		<thead>
-			<tr>
-				<th width="10%">编号</div>
-				<th width="30%">文章标题</div>
-				<th width="60%">网址</div>
-			</tr>
-		</thead>
-		</eq>
-		<if condition="$i%2 eq 0">
-			<tr class="color_back">
-		<else />
-			<tr>
-		</if>
-			<td>{$vo.id}</div>
-			<td><a href="http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/article/detail/id/{$vo.id}.html" target="_blank">{$vo.title}</a></td>
-			<td>http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/article/detail/id/{$vo.id}.html</td>
-		</tr>
-	</volist>
-	</table>
-	    <div class="page">
-        {$_page}
-		</div>
-<elseif condition="$segment eq 'text'" />
+<switch name="segment">
+	<case value="category">
+			<table>
+			<volist name="guideList" id="vo">
+				<eq name="i" value="1" >
+				<thead>
+					<tr>
+						<th width="10%">编号</div>
+						<th width="30%">分类名</div>
+						<th width="60%">网址</div>
+					</tr>
+				</thead>
+				</eq>
+				<if condition="$i%2 eq 0">
+					<tr class="color_back">
+				<else />
+					<tr>
+				</if>
+					<td >{$vo.id}</td>
+					<td >{$vo.title}</td>
+					<td >http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/category/id/{$vo.id}.html  <span class="hidden click_copy text-danger">点此复制</span></td>
+				</tr>
+			</volist>
+			</table>
+	</case>
+	<case value="article">
+			<table>
+			<volist name="guideList" id="vo">
+				<eq name="i" value="1" >
+				<thead>
+					<tr>
+						<th width="10%">编号</div>
+						<th width="30%">文章标题</div>
+						<th width="60%">网址</div>
+					</tr>
+				</thead>
+				</eq>
+				<if condition="$i%2 eq 0">
+					<tr class="color_back">
+				<else />
+					<tr>
+				</if>
+					<td >{$vo.id}</div>
+					<td ><a href="http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/article/detail/id/{$vo.id}.html" target="_blank">{$vo.title}</a></td>
+					<td >http://{$_SERVER['SERVER_NAME']}/index.php?s=/Home/article/detail/id/{$vo.id}.html  <span class="hidden click_copy text-danger">点此复制</span></td>
+				</tr>
+			</volist>
+			</table>
+			    <div class="page">
+		        {$_page}
+				</div>
+	</case>
+	<case value="text">
 	<table>
 	<volist name="guideList" id="vo">
 		<eq name="i" value="1" >
@@ -63,11 +66,23 @@
 		<else />
 			<tr>
 		</if>
-			<td>{$vo.id}</div>
-			<td>{$vo.content}</td>
+			<td >{$vo.id}</div>
+			<td >{$vo.content}  <span class="hidden click_copy text-danger">点此复制</span></td>
 		</tr>
 	</volist>
 	</table>
 	    <div class="page">
-        {$_page
-</if>
+        {$_page}
+       </div>
+	</case>
+	<default />参数错误
+</switch>
+<script type="text/javascript" charset="utf-8">
+	$("tr").hover().find("span.click_copy").toggleClass("hidden");
+	
+	$("span.click_copy").click(function(){
+		var thisContent = $(this).text();
+		window.clipboardData.setData('text',thisContent);
+		alert('已复制到剪贴板');
+	});
+</script>

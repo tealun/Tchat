@@ -43,8 +43,8 @@ class WechatController extends AdminController {
 				break;
 				
 			case'text':
-				$guideList = M('tchat_text')->select();
-
+		      $guideList   = M('Tchat_text')->select();
+		      break;
 			default:
 				return FALSE;
 				break;

@@ -96,6 +96,9 @@ $(function(){
 	
 	});
 	
+	/**
+	 *新增及编辑页面查看内容快捷挂件 
+	 */
 	$("span#list_category").click(function(){
 	  $.get("{:U('Admin/Wechat/contentGuide',array('segment'=>'category'))}",function(data,status){
 		$("#dialog").show();
@@ -115,12 +118,13 @@ $(function(){
 		$("#dialog").show();
 		$("div#content_guide").empty().html(data);
 	  });
-	})
-	
+	});
+		
  })
  
  	//关闭灰色 jQuery 遮罩
 	function closeBg() {
 	$("#dialog").hide();
 	}
+	
 </script>
