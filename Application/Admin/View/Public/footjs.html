@@ -95,6 +95,32 @@ $(function(){
 	    showTab();
 	
 	});
-
+	
+	$("span#list_category").click(function(){
+	  $.get("{:U('Admin/Wechat/contentGuide',array('segment'=>'category'))}",function(data,status){
+		$("#dialog").show();
+		$("div#content_guide").empty().html(data);
+	  });
+	});
+	
+	$("span#list_articles").click(function(){
+	  $.get("{:U('Admin/Wechat/contentGuide',array('segment'=>'article'))}",function(data,status){
+		$("#dialog").show();
+		$("div#content_guide").empty().html(data);
+	  });
+	});
+	
+	$("span#list_text").click(function(){
+	  $.get("{:U('Admin/Wechat/contentGuide',array('segment'=>'text'))}",function(data,status){
+		$("#dialog").show();
+		$("div#content_guide").empty().html(data);
+	  });
+	})
+	
  })
+ 
+ 	//关闭灰色 jQuery 遮罩
+	function closeBg() {
+	$("#dialog").hide();
+	}
 </script>

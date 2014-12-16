@@ -11,7 +11,7 @@
   </ul>
   <div class="tab-content">
   <!-- 表单 -->
-  <form id="form" action="{:U('update','','')}" method="post" class="form-horizontal">
+  <form id="form" width="79%" action="{:U('update','','')}" method="post" class="form-horizontal fl">
     <!-- {:get_model_by_id($info['model_id'])}模型 -->
     <volist name=":parse_config_attr($model['field_group'])" id="group">
         <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
@@ -182,5 +182,21 @@
       <input type="hidden" name="model_id" value="{$info.model_id|default=''}"/>
     </div>
   </form>
+  <div id="content_list_ul">
+	  <ul class="fr" width="19%">
+	  	<li><p><span id="list_category" class="btn">查看分类</span></p></li>
+	  	<li><span id="list_articles" class="btn" >查看文章</span></p></li>
+	  	<li><span id="list_text" class="btn" >查看文本</span></p></li>
+	  </ul>	
+  </div>
+
   </div>
 </div>
+
+	<div id="dialog">
+	<div>
+	<p class="text-right"><a href="#" onclick="closeBg();">关闭</a></p>
+	</div>
+	
+	<div id="content_guide">正在加载，请稍后....</div>
+	</div>

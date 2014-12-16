@@ -33,14 +33,18 @@ class WechatController extends AdminController {
 			case 'category':
 				$guideList = D('Category')->where($map)->select();
 				break;
+				
 			case 'article':
 				$Document   =   D('Document');
-				        //只查询pid为0的文章
+				//只查询pid为0的文章
 		        $map['pid'] = 0;
 		        $guideList  = $this->lists($Document,$map,'update_time desc');
-		        int_to_string($guideList );
-				
+		        int_to_string($guideList );				
 				break;
+				
+			case'text':
+				$guideList = M('tchat_text')->select();
+
 			default:
 				return FALSE;
 				break;

@@ -632,3 +632,45 @@ body{
 .copyright a {
     margin: 0 4px;
 }
+
+/* 新增和编辑页面的分类和文章查看挂件 */
+
+#content_list_ul ul{
+	top:30%;
+	right:5%;
+	position:fixed;
+}
+
+#content_list_ul li{
+	padding:10px;
+}
+
+/* 表格样式 */
+thead{
+	color:#155c9f;
+}
+
+tr.color_back td{
+    background: #F5FAFA;
+    color: #797268;
+} 
+
+th {
+    font: bold "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #4f6b72;
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    border-top: 1px solid #C1DAD7;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 6px 6px 12px;
+    background: #CAE8EA;
+} 
+td {
+    border-right: 1px solid #C1DAD7;
+    border-bottom: 1px solid #C1DAD7;
+    background: #fff;
+    padding: 6px 6px 6px 12px;
+    color: #4f6b72;
+}
