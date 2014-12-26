@@ -46,6 +46,18 @@ use Common\Controller\Addon;
 			$this->display('slide');
         }
 		
+		/**
+		 * 实现的homeFeature钩子方法
+		 * 此前台控制首页中特色栏目导航
+		 */
+		public function homeFeature(){
+			$feature = F('homeFeature');
+
+			$this->assign('addons_featureIcons',$feature['icons']);
+			$this->assign('addons_featureList',$feature['list']);
+			$this->display('feature');
+		}
+		
 		//实现的documentDetailAfter钩子方法
 		public function documentDetailBefore(){
 			$beforeArticle = F('homeBeforeArticle');

@@ -235,6 +235,23 @@ class HomeControlController extends AdminController {
 	}
 	
 	/**
+	 * 设置首页特色内容展示
+	 * 包含两部分，一为横向图标列表，以为纵向图标+内容列表
+	 */
+	public function feature(){
+		$feature = F('homeFeature');
+		
+		if(is_null($feature['icons'])){
+			$iconsCount = 0;
+		}else{
+			$iconsCount = count($feature['icons']);
+			$this->assign('iconsCount',$iconsCount);
+		}
+		$this->meta_title = '首页特色内容配置';
+		$this->display();
+	}
+	
+	/**
 	 * 清除某项设置
 	 * @param string $part 要清除数据的模块标识
 	 * 注意首字母大写

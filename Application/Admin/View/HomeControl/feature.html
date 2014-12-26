@@ -1,0 +1,205 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	 <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title"> <h2>{$meta_title}</h2> </div> 
+	<div class="data-table">
+		<form action="{:U('saveSlide')}" class="form-horizontal config-form">
+			<fieldset>
+				<notempty name="list">
+						<legend>幻灯片预览</legend>
+						
+							  <div id="myCarousel" class="carousel slide" style="width: 720px; margin:0 auto;">
+								  <!-- Indicators -->
+								  <ol class="carousel-indicators">
+								  	<for start="0" end="$count">
+								  		<li data-target="#myCarousel" data-slide-to="{$i}" <if condition= "$i eq 0"  >class="active"</if>></li>
+								  	</for>
+								  </ol>
+								
+								  <!-- Wrapper for slides -->
+								  <div class="carousel-inner">
+								 <for start="0" end="$count">
+								 	<assign name="slide" value="$list[$i]" /> {/* 将循环数组赋值给一个变量 */}
+								  	<div <if condition= "$i eq 0"  >class="item active"<else /> class="item"  </if> >
+									      <img src="{$slide.image}" alt="{$slide.alt}" style="height: 100%; margin: 0 auto;">
+									      <div class="carousel-caption" style="color: #FFFFFF">
+									        {$slide.caption}
+									      </div>
+								    </div>	
+								 </for>
+						
+								  </div>
+								
+							    <!-- Carousel nav -->
+							    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+							    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+								
+							</div>
+						
+						<else />
+		                    <div class="alert alert-block">
+							    <button type="button" class="close" data-dismiss="alert">&times;</button>
+							    <h4>注意！您还没有设置首页幻灯片</h4>
+							    您的站点还没有设置幻灯片，在站点的首页里将不会有幻灯片轮播展示的模块，您可以在下面的幻灯片设置栏目中进行配置，记得点确定保存哦。
+							    </div>
+						</notempty>
+			</fieldset>
+			
+			<fieldset>
+					<legend>幻灯片设置</legend>
+						<ul id="slides">
+							<notempty name="list">
+								 <for start="0" end="$count">
+								 	<assign name="slide" value="$list[$i]" /> {/* 将循环数组赋值给一个变量 */}
+										<li class="slide{$i+1}">
+											<span class="button button-rounded button-flat-caution slide pull-right">
+												<i class="icon-remove"></i> 删除</span>
+												<div class="row">
+													<div class="span4">
+														<div class="control-group">
+															<h4 style="margin-bottom:15px;">第{$i+1}条</h4>
+															<label for="segment{$i}">类别：</label>
+															<select id="segment{$i}" name="slide{$i}[segment]">
+																<option value="article" <eq name="slide['segment']" value="article">selected="true"</eq>>文章</option>
+																<option value="activity" <eq name="slide['segment']" value="activity">selected="true"</eq>>活动</option>
+																<option value="product" <eq name="slide['segment']" value="product">selected="true"</eq>>产品</option>
+																<option value="plan" <eq name="slide['segment']" value="plan">selected="true"</eq>>套餐</option>
+																<option value="topic" <eq name="slide['segment']" value="topic">selected="true"</eq>>专题</option>
+															</select>
+														</div>
+														
+														<div class="control-group">
+															<label for="item{$i}">条目编号：</label>
+															<input type="text" id="item{$i}" value="{$slide.id}" name="slide{$i}[id]">
+														</div>
+														
+														<div class="control-group">
+															<label for="item{$i}">条目标题：</label>
+															<p>{$slide.caption}</p>
+														</div>
+													</div>
+													
+													<div id="preview{$i}" class="span8">
+														<h4 style="margin-bottom:15px;">图片预览：</h4>
+														<div style="height:280px;width:504px;background-color: #A0A0A0;" id="item{$i}preview">
+															<img src="{$slide.image}" alt="{$slide.alt}" style="height:  100%; margin: 0 auto;" >
+														</div>
+													</div>
+													<script type="text/javascript">
+													$("#item{$i}").change(function(){
+														$("p#clickPreview{$i}").detach();
+														var slideObj = {};
+														slideObj[0] = $("#segment{$i}").val();
+														slideObj[1] = $(this).val();
+														if(slideObj[1] == ""){
+															alert("条目编号必须填写");
+															};
+														$.post( "/Admin/HomeControl/slideAjax",
+															slideObj,
+															function(data){
+																$("#item{$i}preview").find("img").attr({"src":data.image,"alt":data.alt});
+															},"json");
+														});
+														</script>
+												</div>
+											<hr />
+										</li>
+								</for>
+							</notempty>
+							
+						</ul>
+						
+						<span class="btn btn-primary" id="addItem"><i class="icon-plus" ></i> 新增一条</span>
+
+
+			</fieldset>
+			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden"><i class="icon-ok"></i> 确 定</button>
+    		 <a class="btn btn-return" href=""><i class="icon-chevron-left"></i> 返 回</a>
+    		 <notempty name="list">
+    		 <a href="{:U('clear?part=Slide')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i>  清除所有幻灯片</a>
+			</notempty>
+		</form>
+
+	</div>
+
+</block>
+
+<block name="script">
+<if condition="isset($count)">
+	<script type="text/javascript">
+	var count = parseInt({$count});
+	</script>
+<else /> 
+	<script type="text/javascript">
+	var count = parseInt(0); 
+	</script>
+</if>
+	<script type="text/javascript">
+
+		$('#addItem').click(function(){
+			var i = count+1;
+				if(i > 6){
+					alert('为保证幻加载速度及播放顺畅，幻灯片控制在6张，您可以替换掉原有条目中的内容以展示新幻灯片内容。');
+				}else{
+					var slideLi = '<li class="slide'+i+'"><span class="button button-rounded button-flat-caution slide pull-right"><i class="icon-remove"></i> 删除</span><div  class="row"><div class="span4"><div class="control-group">';
+							slideLi += '<h4 style="margin-bottom:15px;">新增第'+i+'条</h4>';
+							slideLi += '<label for="segment'+count+'" >类别：</label>';
+							slideLi +='<select name="slide'+count+'[segment]" id="segment'+count+'" >';
+							slideLi +='<option value="article" selected="true">文章</option>';
+							slideLi +='<option value="activity">活动</option>';
+							slideLi +='<option value="product">产品</option>';
+							slideLi +='<option value="plan">套餐</option>';
+							slideLi +='<option value="topic">专题</option>';
+							slideLi +='</select>';
+							slideLi +='</div>';
+						
+							slideLi +='<div class="control-group">';
+							slideLi +='<label for="item'+count+'">条目编号：</label>';
+							slideLi += '<input type="text" name="slide'+count+'[id]" value="" id="item'+count+'"/>';
+							slideLi +='</div>';
+						
+							slideLi +='</div>';
+							slideLi +='<div class="span8" id="preview'+count+'">';
+							slideLi +='<h4 style="margin-bottom:15px;">图片预览：</h4>';
+							slideLi +='<div id="item'+count+'preview" style="height:280px;width:504px;background-color: #A0A0A0;font-size:40px;text-align:center;line-height:200px;"><p id="clickPreview'+count+'" ><i class="icon-large icon-refresh"></i> 请输入条目编号</p>';
+							slideLi +='<img class="hidden" style="width:100%;" src="" alt="" >';
+							slideLi += '</div></div></div>';
+							slideLi +='<hr /></li>';
+							slideLi +='<script type="text/javascript">';
+							slideLi +='$(".button-flat-caution.slide").click(function(){';
+							slideLi +='$(this).parent("li").detach();});';
+							slideLi +='$("#item'+count+'").change(function(){';
+							slideLi +='$("p#clickPreview'+count+'").detach();';
+							slideLi += 'var slideObj = {};';
+							slideLi +=' slideObj[0] = $("#segment'+count+'").val();';
+							slideLi +=' slideObj[1] = $(this).val();';
+							slideLi +='	if(slideObj[1] == ""){';
+							slideLi +='	alert("条目编号必须填写");';
+							slideLi +='};';
+							slideLi +='$.post(';
+							slideLi +=' "/Admin/HomeControl/slideAjax",';
+							slideLi +='slideObj,';
+							slideLi +=' function(data){';
+							slideLi +='$("#item'+count+'preview").find("img").removeClass("hidden").attr({"src":data.image,"alt":data.alt})';
+							slideLi +='	},';
+							slideLi +='	"json"';
+							slideLi +=');';
+
+							slideLi +='});';
+							slideLi +='</'+'script>';
+							
+			$('#slides').append(slideLi);
+			count = count+1;
+				if(count > 5){
+				$(this).attr('disabled','');	
+				}											
+			}
+		});
+		
+		$(".button-flat-caution.slide").click(function(){
+		$(this).parent("li").detach();});
+		
+	</script>
+			
+</block>
