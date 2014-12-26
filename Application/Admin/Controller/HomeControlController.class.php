@@ -196,6 +196,7 @@ class HomeControlController extends AdminController {
 
 	/**
 	 * 文章页面配置
+	 * 可根据需要在文章页面配置的多个钩子来实现文章挂载内容的配置
 	 * @param string $part 需要配置的选项
 	 */
 	public function article($part){
@@ -236,7 +237,7 @@ class HomeControlController extends AdminController {
 	
 	/**
 	 * 设置首页特色内容展示
-	 * 包含两部分，一为横向图标列表，以为纵向图标+内容列表
+	 * 包含两部分，一为横向图标列表，一为纵向图标+内容列表
 	 */
 	public function feature(){
 		$feature = F('homeFeature');
