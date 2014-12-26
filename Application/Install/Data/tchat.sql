@@ -586,9 +586,10 @@ INSERT INTO `onethink_menu` VALUES ('604', '删除', '601', '0', 'Admin/Album/de
 INSERT INTO `onethink_menu` VALUES ('605', '新增相册', '600', '0', 'Admin/Album/create', '0', '新增一个相册', '相册管理', '0');
 
 INSERT INTO `onethink_menu` VALUES ('651', 'LOGO配置', '68', '0', 'HomeControl/logo', '0', '用于设置前台LOGO', '前台配置', '0');
-INSERT INTO `onethink_menu` VALUES ('652', '幻灯片配置', '68', '0', 'HomeControl/slide', '0', '用于配置首页幻灯片的显示', '前台配置', '0');
+INSERT INTO `onethink_menu` VALUES ('652', '幻灯片配置', '68', '1', 'HomeControl/slide', '0', '用于配置首页幻灯片的显示', '前台配置', '0');
 INSERT INTO `onethink_menu` VALUES ('653', '文前配置', '68', '2', 'HomeControl/article?part=BeforeArticle', '0', '配置位于前台文章页面正文前的部分', '前台配置', '0');
 INSERT INTO `onethink_menu` VALUES ('654', '文尾配置', '68', '3', 'HomeControl/article?part=AfterArticle', '0', '用于配置前台文章末尾展示的内容', '前台配置', '0');
+INSERT INTO `onethink_menu` VALUES ('655', '特色内容配置', '68', '4', 'HomeControl/feature', '0', '用于配置首页特色内容展示', '前台配置', '0');
 
 -- 若有其他板块的目录，可在此添加或在功能板块安装程序中向onethink_menu中添加目录数据，比如针对房地产行业的【地产】板块
 
