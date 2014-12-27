@@ -246,10 +246,22 @@ class HomeControlController extends AdminController {
 			$iconsCount = 0;
 		}else{
 			$iconsCount = count($feature['icons']);
-			$this->assign('iconsCount',$iconsCount);
+			$this->assign('featureIcons',$feature['icons']);
+			$this->assign('featureIconsCount',$iconsCount);
+		}
+		
+		if(null !== $feature['list']){
+			$this->assign('featureList',$feature['list']);
 		}
 		$this->meta_title = '首页特色内容配置';
 		$this->display();
+	}
+	
+	public function saveFeature(){
+		if(IS_POST || IS_AJAX){
+			$feature = I('post.');
+			
+		}
 	}
 	
 	/**

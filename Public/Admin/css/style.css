@@ -674,3 +674,12 @@ td {
     padding: 6px 6px 6px 12px;
     color: #4f6b72;
 }
+
+/* 特色内容栏目样式 */
+
+#feature_icons{}
+#feature_icon_box{
+	width:480px;
+}
+
+#feature_list{}
