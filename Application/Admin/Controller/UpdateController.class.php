@@ -22,17 +22,18 @@ class UpdateController extends AdminController {
 	 */
 	public function index(){
 		$this->meta_title = "系统升级";
+
+		$localVersion = file_get_contents('./Application/Install/Data/local.version');//获取本地版本号
+		$url = "http://www.idutou.com/Tchat/last.version";//定义远程版本URL
+		$lastVersion = file_get_contents($url);//提取最新版本的版本号及升级内容组成数组
+		preg_match_all('/^.+?$/m', $lastVersion, $update);//将获取到的远程最新版本号及更新内容存储为数组
+		$update=$update[0];//结果的二维数组整理成一维数组
 		
-		$localVersion = F('Update/local');
-		$url = "http://www.idutou.com/Tchat/last.version";
-		$lastVersion = file_get_contents($url);
-		
-		if($lastVersion > $localVersion){
-			$update = TRUE;
-		}else{
-			$update = FALSE;
+		/* 版本对比 */
+		if($localVersion && $update[0] > $localVersion){
+			$this->assign("localVersion",$localVersion);
+			$this->assign("update",$update);
 		}
-		
 		$this->display();
 	}
 
