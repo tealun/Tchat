@@ -1,10 +1,18 @@
 <extend name="Base/common"/>
 
-<block name="header"></block>
+<block name="header">
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-8 col-xs-offset-2 col-md-4">
+				{:hook('homeLogo')}
+				</div>
+				<h1 class="hidden">{:C('WEB_SITE_TITLE')}</h1>
+		    </div>	
+	</div>
+		{:hook('homeSlide')}
+</block>
 
 <block name="body">
-{:hook('homeSlide')}
-<hr />
 <ul class="link_box">
     <li><a href="#"><img src="{$Think.THEME_PATH}images/favorite.png" alt=""></a><br />
     	<span>户型精选</span>
