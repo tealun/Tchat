@@ -178,10 +178,12 @@ function write_config($config, $auth){
 function create_tables($db, $prefix = ''){
 	//读取SQL文件
 	$sql = file_get_contents(MODULE_PATH . 'Data/install.sql');
+	//Tchat 载入对Onethink数据的更改
+	$sql .= file_get_contents(MODULE_PATH . 'Data/change.sql');
 	//Tchat 载入Wechat数据
 	$sql .= file_get_contents(MODULE_PATH . 'Data/tchat.sql');
 	
-	if(session('test_data')) {
+	if(session('test_data')) {//Tchat 检测是否需要安装测试数据
 	$sql .= file_get_contents(MODULE_PATH . 'Data/testdata.sql');
 	}
 	$sql = str_replace("\r", "\n", $sql);
