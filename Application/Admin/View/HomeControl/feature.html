@@ -111,9 +111,14 @@
 
 	</div>
 
+<!-- 内容快捷查看挂件开始  -->
+<include file="Public/contentlist" />
+<!-- 内容快捷查看挂件结束 -->
+
 </block>
 
 <block name="script">
+	<include file="Public/footjs" />
 <if condition="isset($count)">
 	<script type="text/javascript">
 	var count = parseInt({$count});

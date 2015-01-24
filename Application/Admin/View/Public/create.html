@@ -182,21 +182,9 @@
       <input type="hidden" name="model_id" value="{$info.model_id|default=''}"/>
     </div>
   </form>
-  <div id="content_list_ul">
-	  <ul class="fr" width="19%">
-	  	<li><p><span id="list_category" class="btn">查看分类</span></p></li>
-	  	<li><span id="list_articles" class="btn" >查看文章</span></p></li>
-	  	<li><span id="list_text" class="btn" >查看文本</span></p></li>
-	  </ul>	
-  </div>
-
   </div>
 </div>
 
-	<div id="dialog">
-	<div>
-	<p class="text-right"><a href="#" onclick="closeBg();">关闭</a></p>
-	</div>
-	
-	<div id="content_guide">正在加载，请稍后....</div>
-	</div>
+<!-- 内容快捷查看挂件开始  -->
+<include file="Public/contentlist" />
+<!-- 内容快捷查看挂件结束 -->
