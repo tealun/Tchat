@@ -35,7 +35,8 @@
 	<div class="row">
 		<span id="rightBackup" class="button button-action">立即备份</span>
 		<if condition="isset($update)">
-		<span id="rightUpdate" class="button button-caution">点击升级</a>
+		<span id="onlineUpdate" class="button button-caution">在线升级</span>
+		<span id="manualUpdate" class="button button-caution">手动升级</span>
 		</if>
 	</div>
 </div>
@@ -43,7 +44,17 @@
 </block>
 
 <block name="script">
-
-	</script>
+<script type="text/javascript" charset="utf-8">
+	$("#manualUpdate").click(function(){
+		var url='{:U("update")}';
+		  $.post(url,
+			  {
+			    method:"manual"
+			  },
+			  function(status){
+			    alert("Status: " + status);
+			  });
+	});
+</script>
 			
 </block>
