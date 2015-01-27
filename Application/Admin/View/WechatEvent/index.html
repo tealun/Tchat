@@ -3,10 +3,11 @@
 	<div class="page-header">
 		<h2>{$meta_title}</h2>
 	</div>
-
+<volist name="_list" id="vo">
+	<if condition="$i%3 eq 1">
 	<div class="row-fluid">
 		<ul class="thumbnails">
-			<volist name="_list" id="vo">
+	</if>
 			  <li class="span4">
 			    <div class="thumbnail">
 			      <img alt="{$vo.event_name}" style="width: 100%; " src="__PUBLIC__/Admin/images/default/{$vo.event_type}_banner.jpg" />
@@ -34,16 +35,17 @@
 						</tbody>
 			        </table>
 			        <p>
-			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>$i))}">编辑</a>
+			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>$vo['id']))}">编辑</a>
 				        <a href="{:U('setStatus?id='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="btn btn-large ajax-get">{$vo.status|show_status_op}</a>
 					</p>
 			      </div>
 			    </div>
-			  </li>		
-			</volist>
+			  </li>
+	<if condition="$i%3 eq 0">	
 		</ul>
 	</div>
-
+	</if>
+</volist>
   <!-- 分页 -->
     <div class="page">
         {$_page}

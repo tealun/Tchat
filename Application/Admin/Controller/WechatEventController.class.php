@@ -24,7 +24,7 @@ class WechatEventController extends WechatController {
 	public function index() {
 		$map['status'] = array('gt',-1);
 		$this -> getLists($map);
-		
+
 		$this->assign('meta_title','事件设置');
 		$this->display();
 	}
@@ -78,7 +78,7 @@ class WechatEventController extends WechatController {
     private function getLists($map){
       $list   = $this->lists('Tchat_events',$map,'id');
       col_to_string($list);
-    $this->assign('_list', $list);
+      $this->assign('_list', $list);
     }
 
 }
