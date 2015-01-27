@@ -24,6 +24,7 @@ class UpdateController extends AdminController {
 		$this->meta_title = "系统升级";
 		$localVersion = file_get_contents('./Application/Install/Data/local.version');//获取本地版本号
 		$lastVersion=$this->getLastVersion();
+
 		/* 版本对比 */
 		if($localVersion && $lastVersion[0] > $localVersion){
 			$this->assign("localVersion",$localVersion);
@@ -48,11 +49,11 @@ class UpdateController extends AdminController {
 		if(IS_POST || IS_AJAX){
 			if(I('post.method') !== 'online'){//手动更新
 				$returnMessage = $this->updateDataBase();
-				$this->ajaxReturn($returnMessage);
 			}//TODO 增加自动在线更新功能
 			
 			$lastVersion = $this->getLastVersion();
 			file_put_contents('./Application/Install/Data/local.version', $lastVersion[0]);
+			$this->ajaxReturn($returnMessage);
 		}
 	}
 	/**
@@ -86,15 +87,13 @@ class UpdateController extends AdminController {
 	 * 获取服务器最新版本数据
 	 */
 	private function getLastVersion(){
-		$lastVersion = S('Tchat_Last_Version');
-		if($lastVersion){
-			return $lastVersion;
-		}else{
+		if(S('Tchat_Last_Version')){
 			$url = "http://www.idutou.com/Tchat/last.version";//定义远程版本URL
 			$lastVersion = file_get_contents($url);//提取最新版本的版本号及升级内容组成数组
 			preg_match_all('/^.+?$/m', $lastVersion, $update);//将获取到的远程最新版本号及更新内容存储为数组
 			$update=$update[0];//结果的二维数组整理成一维数组
-			return S('Tchat_Last_Version',$update,3600);
+			S('Tchat_Last_Version',$update,3600);
 		}
+		return S('Tchat_Last_Version');
 	}
 }
