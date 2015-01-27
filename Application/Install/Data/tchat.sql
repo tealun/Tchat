@@ -458,7 +458,7 @@ INSERT INTO `onethink_menu` VALUES ('328', '回收站', '300', '0', 'Admin/Wecha
 INSERT INTO `onethink_menu` VALUES ('329', '还原', '328', '0', 'Admin/WechatKeyword/restore', '0', '还原一组关键词组', '', '0');
 INSERT INTO `onethink_menu` VALUES ('330', '彻底删除', '328', '0', 'Admin/WechatKeyword/clear', '0', '彻底删除一组关键词组', '', '0');
 
--- 原本活动归到微信下的，但出于管理方便，另行开设顶级菜单，占了此处几个ID
+-- 原本活动归到微信下的，但出于管理方便，另行开设顶级菜单，占了此处340-360的ID
 
 INSERT INTO `onethink_menu` VALUES ('361', '客户列表', '300', '0', 'Admin/WechatClient/index', '0', '查看客户列表', '客户管理', '0');
 INSERT INTO `onethink_menu` VALUES ('362', '客户分组', '300', '0', 'Admin/WechatClient/group', '0', '查看和管理客户分组', '客户管理', '0');
@@ -497,6 +497,11 @@ INSERT INTO `onethink_menu` VALUES ('430','事件列表','300','0','Admin/Wechat
 INSERT INTO `onethink_menu` VALUES ('431','编辑','430','0','Admin/WechatEvent/edit','0','设置某一事件回复内容','','0');
 INSERT INTO `onethink_menu` VALUES ('432','更新','430','0','Admin/WechatEvent/update','0','更新事件设置内容','','0');
 INSERT INTO `onethink_menu` VALUES ('433','更改状态','430','0','Admin/WechatEvent/setStatus','0','更改事件状态','','0');
+
+INSERT INTO `onethink_menu` VALUES ('440','创建群发消息','300','0','Admin/WechatMass/createMassMessage','0','创建一条新的群发消息','群发管理','0');
+INSERT INTO `onethink_menu` VALUES ('441','查看群发消息','300','0','Admin/WechatMass/listMassMessage','0','查看当前所有的群发消息','群发管理','0');
+INSERT INTO `onethink_menu` VALUES ('441','草稿箱','300','0','Admin/WechatMass/listMassMessage','0','查看当前所有的群发消息','群发管理','0');
+INSERT INTO `onethink_menu` VALUES ('441','回收站','300','0','Admin/WechatMass/listMassMessage','0','查看当前所有的群发消息','群发管理','0');
 
 -- 新增活动板块管理目录
 
@@ -781,8 +786,8 @@ CREATE TABLE `onethink_tchat_events` (
 INSERT INTO `onethink_tchat_events` VALUES ('1','客户关注','subscribe','text','2','1','当客户新关注公众帐号时的回复内容设置');
 INSERT INTO `onethink_tchat_events` VALUES ('2','扫描二维码','SCAN','news','21','1','已关注客户扫描带二维码事件时的回复内容。<br /><strong>注意：</strong>如果客户是通过扫描二维码关注帐号时，回复内容为“关注事件”中设置的内容，如果是已经关注的客户扫描，则回复本设置中的内容。');
 INSERT INTO `onethink_tchat_events` VALUES ('3','上报地理位置','LOCATION','','','-1','客户上报地理位置事件的回复内容。');
-INSERT INTO `onethink_tchat_events` VALUES ('4','关键词没有结果','KeywordNoMatch','','','1','客户在发送关键词后没有查找到关键词对应内容时的回复。');
-INSERT INTO `onethink_tchat_events` VALUES ('5','分类中没有文章','No','','','1','查找某个分类下的内容却没有任何正常状态下的文章时的回复。');
+INSERT INTO `onethink_tchat_events` VALUES ('4','关键词没有结果','KeywordNoMatch','text','4','1','客户在发送关键词后没有查找到关键词对应内容时的回复。');
+INSERT INTO `onethink_tchat_events` VALUES ('5','分类中没有文章','CategoryNoArticle','text','5','1','查找某个分类下的内容却没有任何正常状态下的文章时的回复。');
 
 -- -----------------------------
 -- Table structure for `onethink_tchat_keyword`
