@@ -295,6 +295,10 @@ function decodeUnicode($str)
         $str);
 }
 
+/**
+ * 返回微信回复的错误信息
+ * @param $errcode string 出错的代码编号
+ */
 function get_wechat_response($errcode){
 	$statusArr = array(
 	'40001' => '获取access_token时AppSecret错误，或者access_token无效',
