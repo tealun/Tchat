@@ -23,14 +23,16 @@ class WechatMassController extends WechatController {
 	 */
 	public function createMassMessage($copyId=''){
 		
+		$this->display('create');
 	}
 	
 	/**
 	 * 编辑一条群发消息
 	 * 只针对状态为本地草稿的才可编辑
 	 */
-	public function editeMassMessage(){
+	public function editMassMessage(){
 		
+		$this->display('edit');
 	}
 	
 	/**
@@ -43,7 +45,7 @@ class WechatMassController extends WechatController {
 
         $this->assign('list', $list);
         $this->meta_title = '查看已发送的消息';
-        $this->display();
+        $this->display('list');
 	}
 	
 	/**
@@ -87,11 +89,21 @@ class WechatMassController extends WechatController {
 	}
 	
 	/**
+	 * 设置状态
+	 * 设置一条群发消息的状态，主要是本地删除和本地恢复操作
+	 * -1为本地删除[回收站] 0为本地[草稿]未上传 1为已上传微信端[待发送] 2为已提交在[发送中]可刷新状态 3为发送[成功] 4为发送[失败]可重发
+	 */
+	public function setStatus(){
+		
+	}
+	
+	/**
 	 * 刷新消息的发送状态
+	 * 当消息上传到微信端后，消息状态为发送中时，可通过本方法获取一条群发消息的最新状态，并更新到状态中
 	 * @param $messageId string 微信服务器上的msg_id
 	 */
 	public function renewSendStatus($messageId){
-		
+
 	}
 	
 	/**
