@@ -46,6 +46,7 @@ class UpdateController extends AdminController {
 	 * 分为手动更新和自动在线更新两种情况
 	 */
 	public function update(){
+
 		if(IS_POST || IS_AJAX){
 			if(I('post.method') !== 'online'){//手动更新
 				$returnMessage = $this->updateDataBase();
@@ -59,25 +60,26 @@ class UpdateController extends AdminController {
 	/**
 	 * 更新数据库
 	 */
-	private function updateDataBase($prefix=''){
+	private function updateDataBase(){
 		/*读取更新数据*/
 		$sql = file_get_contents('./Application/Install/Data/update.sql');
 		$sql = str_replace("\r", "\n", $sql);
 		$sql = explode(";\n", $sql);//将字符串整理为数组
 
 		/*替换表前缀*/
-		$orginal = C('ORIGINAL_TABLE_PREFIX');//获取表前缀
-		$sql = str_replace(" `{$orginal}", " `{$prefix}", $sql);
-		
+		$orginal = 'onethink_';
+		$prefix = C('DB_PREFIX');//获取表前缀
+		$sql = str_replace(" `{$orginal}}", " `{$prefix}", $sql);
 		$Model = M(); //建立空模型
 		
 		/*遍历整理后的sql数组*/
 		foreach ($sql as $value) {
 			$value = trim($value);
+
 			if(empty($value)){
 				continue;
 			}else{
-			  $Model->query($value);
+			  $Model->execute($value);
 			}
 	}
 		return '更新完成';

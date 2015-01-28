@@ -28,15 +28,16 @@
 					&times;
 				</button>
 				<h4>恭喜，您的Tchat已经是最新版本</h4>
-				<p>我们建议您定期备份您的站点数据!</p>
+				<p>我们建议您定期备份您的站点数据!如果您已上传最新的升级文件，您也可以自行手动升级，请注意备份您的数据再操作。</p>
 			</div>
 		</if>
 	</div>
 	<div class="row">
 		<span id="rightBackup" class="button button-action">立即备份</span>
-		<if condition="isset($update)">
-		<span id="onlineUpdate" class="button button-caution">在线升级</span>
 		<span id="manualUpdate" class="button button-caution">手动升级</span>
+		<if condition="isset($update)">
+		<span id="manualUpdate" class="button button-caution">手动升级</span>
+		<span id="onlineUpdate" class="button button-caution">在线升级</span>
 		</if>
 	</div>
 </div>
