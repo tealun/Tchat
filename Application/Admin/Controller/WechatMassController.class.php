@@ -23,6 +23,7 @@ class WechatMassController extends WechatController {
 	 */
 	public function createMassMessage($copyId=''){
 		
+		$this->meta_title = '新建群发消息';
 		$this->display('create');
 	}
 	
@@ -32,7 +33,19 @@ class WechatMassController extends WechatController {
 	 */
 	public function editMassMessage(){
 		
+		$this->meta_title = '编辑群发消息';
 		$this->display('edit');
+	}
+	
+	/**
+	 * 保存草稿
+	 * 用于保存编辑中的草稿方法
+	 */
+	public function saveDraft(){
+		if(IS_POST || IS_AJAX){
+			$data = I('.post');
+			return D('Mass_message')->update($data);
+		}
 	}
 	
 	/**

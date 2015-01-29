@@ -1,7 +1,85 @@
 <extend name="Public/base"/>
 
 <block name="body">
-	<include file="Public/create" />
+<div class="main-title cf">
+	<h1>{$meta_title}</h1>
+</div>
+
+<hr />
+
+<div id="mass-control-box container">
+	
+	<div id="select-content" class="step-box">
+		<section class="gallery">
+			<h2>请选择群发消息类型</h2>
+			<ul>
+		    <li>
+		    <span class="button button-circle" >文本消息</span>
+		    <div id="textmessageinput" class="hidden">
+		    	<h3>请输入文本消息内容</h3>
+		    	<textarea name="text-message" rows="8" cols="40"></textarea>
+		    </div>
+		    </li>
+		    <li>
+		    <span class="button button-circle" >图文消息</span>
+		    </li>
+		    <li>
+			<span class="button button-circle" >图片</span>
+			</li>
+		    <li>
+			<span class="button button-circle" >音频</span>
+			</li>
+		    <li>
+			<span class="button button-circle" >视频</span>
+			</li>
+		   </ul>
+		   
+		 </section>
+		 
+	</div>
+	<form action="{:U('update')}" method="get" accept-charset="utf-8">
+	  {// 隐藏输入框，用于保存草稿后获取当前信息的一些属性 }
+	  <input type="hidden" name="id" value="" />
+	  <input type="hidden" name="msgtype" value="" />
+	  <input type="hidden" name="mag_id" value="" />
+	  <input type="hidden" name="status" value="" />
+	  <input type="hidden" name="group_id" value="" />
+	  <input type="hidden" name="touser" value="" />
+	  
+	  {// 消息输入框，根据选择的消息类型不同，由JS导入不同的输入控件内容 }
+	  <div id="messageSelectArea" class="step-box">
+	  	<span class="button-action hidden">确定</span>
+	  </div>
+	  
+	  {/*   用于展示图文及多媒体信息上传状态的地方
+			点击上面的消息输入框的确定后
+			保存草稿的同时上传到微信服务器
+			上传完成后存储msg_id 并显示继续按钮
+			上传失败后显示重新上传按钮  */ }
+	  <div id="upload-status" class="step-box">
+		This is Upload Box, shows the status of uploading.
+	  </div>
+	
+	{/*   用于选择发送的用户分组或指定用户
+		     点击确定后存储选择的用户草稿
+		     并显示最终的信息预览给用户以最后确认发送*/ }
+	  <div id="select-touser" class="step-box">
+		This is a box use to select users who you want send mass message to.
+		<span class="button-action hidden">确定</span>
+	  </div>
+	
+	  <div id="message_preview" class="step-box">
+	  	
+	  	<span class="button-action hidden">立即发送</span>
+	  </div>
+	  
+	</form>
+	
+	<div id="send-status" class="step-box">
+		This is a box that shows the send status;
+	</div>
+</div>
+
 </block>
 
 <block name="script">
@@ -11,9 +89,18 @@
 	/**
 	 * @author Tealun Du
 	 */
-		$(function(){
-			
-		}
+	//点击选择群发类型时事件绑定
+	$(".button-circle").bind({
+	    click:function(){
+	    	$(".button-highlight").removeClass("button-highlight");
+	    	$(this).addClass("button-highlight");
+	    	},
+	    mouseover:function(){$(this).addClass("button-primary");},  
+	    mouseout:function(){$(this).removeClass("button-primary");}  
+	  });
+	  
+	$(".step_box").addClass("hidden");
+	
 	</script>
 
 </block>
