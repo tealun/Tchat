@@ -687,3 +687,36 @@ td {
 }
 
 #feature_list{}
+
+#categoryList,#articleList {
+  background-color: #DDD;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #333;
+  font: 12px/20px "MicroSoft YaHei","Courier New","Andale Mono",monospace;
+  margin-left: 10px;
+  padding: 5px 10px;
+  line-height:1.5em;
+  word-wrap: break-word;
+}
+
+#articleList{
+	overflow: scroll;
+	height:400px;
+}
+
+#categoryList ul li{
+  display:block;
+  border-bottom: 1px solid #ecede8;
+  color: #666;
+  padding:10px 5px;
+  overflow: hidden;
+}
+
+#categoryList ul li:last-child {
+    border-bottom:0;
+}
+
+#categoryList ul li:hover {
+  background-color:#ecede8;
+}

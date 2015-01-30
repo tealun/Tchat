@@ -23,7 +23,16 @@ class WechatMassController extends WechatController {
 	 */
 	public function createMassMessage($copyId=''){
 		
-		$this->meta_title = '新建群发消息';
+		if(IS_POST || IS_AJAX){
+			if(I('post.cateId')){
+				var_dump(D('Document')->lists(I('post.cateId')));
+			}
+		}
+		
+		$tree = D('Category')->getTree(0,'id,title,sort');
+        $this->assign('tree', $tree);
+        C('_SYS_GET_CATEGORY_TREE_', true); //标记系统获取分类树模板
+        $this->meta_title = '新建群发消息';
 		$this->display('create');
 	}
 	
@@ -32,7 +41,9 @@ class WechatMassController extends WechatController {
 	 * 只针对状态为本地草稿的才可编辑
 	 */
 	public function editMassMessage(){
-		
+		$tree = D('Category')->getTree(0,'id,title,sort');
+        $this->assign('tree', $tree);
+        C('_SYS_GET_CATEGORY_TREE_', true); //标记系统获取分类树模板
 		$this->meta_title = '编辑群发消息';
 		$this->display('edit');
 	}
