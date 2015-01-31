@@ -13,58 +13,11 @@
 		<section class="gallery">
 			<h2>第一步：选择并输入消息内容</h2>
 			<ul>
-		    <li>
-			    <span class="button button-circle" >文本消息</span>
-			    <div id="text" class="hidden">
-			    	<h3>请输入文本消息内容</h3>
-			    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
-			    </div>
-		    </li>
-		    <li>
-			    <span class="button button-circle" >图文消息</span>
-			    <div id="mpnews" class="hidden">
-			    	<h3>请选择要发送的文章</h3>
-			    	<div class="row">
-			    		<div id="categoryList" class="span2">
-			    			<ul>
-			    			<foreach name="tree" item="vo">
-			    			<li data-id="{$vo['id']}" class="categoryItem">
-								{$vo['title']}
-							</li>
-							</foreach>
-							</ul>
-			    		</div>
-			    		<div id="articleList" class="span6">
-							
-			    		</div>
-			    		<div id="newsPreview" class="span4">
-			    			
-			    		</div>
-			    	</div>
-			    	<input type="text" name="content" value="" alt="图文消息文章ID列表" >
-			    </div>
-		    </li>
-		    <li>
-				<span class="button button-circle" >图片</span>
-			    <div id="image" class="hidden">
-			    	<h3>请选择要发送的图片或上传图片</h3>
-			    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
-			    </div>
-			</li>
-		    <li>
-				<span class="button button-circle" >音频</span>
-				<div id="voice" class="hidden">
-			    	<h3>请上传要发送的音乐文件或语音文件</h3>
-			    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
-			    </div>
-			</li>
-		    <li>
-				<span class="button button-circle" >视频</span>
-				<div id="mpvideo" class="hidden">
-			    	<h3>请上传要发送的视频</h3>
-			    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
-			    </div>
-			</li>
+		    <li msgtype="text" class="button button-circle">文本消息</li>
+		    <li	msgtype="mpnews" class="button button-circle">图文消息</li>
+		    <li msgtype="image" class="button button-circle">图片</li>
+		    <li msgtype="voice" class="button button-circle">音频</li>
+		    <li msgtype="mpvideo" class="button button-circle">视频</li>
 		   </ul>
 		   
 		 </section>
@@ -82,7 +35,52 @@
 	  {// 消息输入框，根据选择的消息类型不同，由JS导入不同的输入控件内容 }
 	  <div id="messageSelectArea" class="step-box">
 	  	<div id="showBox">
-	  		This is message type select area.
+	  		
+  			<div id="text" class="hidden">
+		    	<h3>请输入文本消息内容</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+		    <div id="mpnews" class="hidden">
+			    	<h3>请选择要发送的文章</h3>
+			    	<div class="row">
+			    		<div id="categoryList" class="span2">
+			    			<ul>
+			    			<foreach name="tree" item="vo">
+			    			<li data-id="{$vo['id']}" class="categoryItem">
+								{$vo['title']}
+							</li>
+							</foreach>
+							</ul>
+			    		</div>
+			    		<div class="span6">
+							<ul id="articleList" >
+								<li>test01</li>
+								<li>test02</li>
+							</ul>
+			    		</div>
+			    		<div id="newsPreview" class="span4">
+			    			
+			    		</div>
+			    	</div>
+			    	<input type="text" name="content" value="" alt="图文消息文章ID列表" >
+			 </div>
+			 
+		 	<div id="image" class="hidden">
+		    	<h3>请选择要发送的图片或上传图片</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+	    	<div id="voice" class="hidden">
+		    	<h3>请上传要发送的音乐文件或语音文件</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+			<div id="mpvideo" class="hidden">
+		    	<h3>请上传要发送的视频</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
 	  	</div>
 	  	<span id="messageSave" class="button button-action">确定</span>
 		<span id="messageClear" class="button button-caution">清除</span>
@@ -128,13 +126,15 @@
 	 * @author Tealun Du
 	 */
 	//点击选择群发类型时事件绑定
-	$(".button-circle").bind({
+	$("li.button-circle").bind({
 	    click:function(){
 	    	$(".button-highlight").removeClass("button-highlight");
 	    	$(this).addClass("button-highlight");
-	    	var html = $(this).next().html();
-	    	$("#messageSelectArea").show().find("div").empty().html(html);
-	    	var msgtype = $(this).next().attr("id");
+	    	
+			var msgtype = $(this).attr("msgtype");
+	    	$("#messageSelectArea").show();
+	    	$("#"+msgtype).show().siblings().hide();
+
 	    	$("input[name='msgtype']").val(msgtype);
 	    },
 	    mouseover:function(){$(this).addClass("button-primary");},  
@@ -146,23 +146,34 @@
 	
 	//清除消息输入框内容
 	$("#messageClear").click(function(){
-		$("#showBox").find(":input,:text,:image,textArea").val("");
+		$("#messageSelectArea").find(":input,:text,:image,textArea").val("");
 	});
-	
-	//保存消息内容草稿
-	$("#messageSave").click(function(){saveMessage();});
-	
 	
 	//点击分类列表获取相应分类下文章
 	$(".categoryItem").click(function(){
 		var cateId = $(this).attr("data-id");
-		alert(cateId);
-		/*$.post("{:U('createMassMessage')}",
+		$.post("{:U('createMassMessage')}",
 			  {cateId:cateId},
-			  function(data,status){
-			    $('#articleList').html(data);
-			  });*/
+			  function(data){
+			  	var html = "";//定义一个空字符串对象
+			  	//转换接收到的JSON字符串为object对象
+			  	var jsonObj = JSON.parse(data);
+			  	//遍历转换后的JSON数据转换为列表
+			  	for(var k in jsonObj){
+			  		html += "<li data-id="+k+" class='articleItem'>"+jsonObj[k]+"</li>";
+			  	};
+			  		html +="<script type='text/javascript'>";
+			  		html +="$('ul#articleList li').click(function(){";
+			    	html +="alert($(this).attr('data-id'));";
+			    	html +="});";
+			    	html +="<"+"/script>";
+			    			
+			    $('#articleList').empty().html(html);
+			  });
 	});
+	
+	//保存消息内容草稿
+	$("#messageSave").click(function(){saveMessage();});
 	
 	//保存草稿
 	function saveMessage(){

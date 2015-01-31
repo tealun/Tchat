@@ -25,7 +25,14 @@ class WechatMassController extends WechatController {
 		
 		if(IS_POST || IS_AJAX){
 			if(I('post.cateId')){
-				var_dump(D('Document')->lists(I('post.cateId')));
+				$catIdarr = M('Category')->where(array('id'=>I('post.cateId'),'pid'=>I('post.cateId'),'_logic'=>'OR'))->getField('id',true);
+				$map['category_id'] = array('in',$catIdarr);//在指定目录及其子目录下的文档
+		
+				/*根据条件取出相应记录，限制10条*/
+			    $articles = M('Document')->where($map)->getField('id,title',10);
+				$articles = json_encode($articles,TRUE);
+				$articles = decodeUnicode($articles);
+				$this->ajaxReturn($articles);
 			}
 		}
 		
@@ -94,6 +101,10 @@ class WechatMassController extends WechatController {
 		$this->getLists($map);
 		$this->meta_title = '群发消息回收站';
 		$this->display(); // 输出模板
+	}
+	
+	public function getArticles(){
+		
 	}
 	
 	/**
