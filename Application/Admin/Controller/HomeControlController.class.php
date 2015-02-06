@@ -28,18 +28,17 @@ class HomeControlController extends AdminController {
 		var_dump($presentTheme);
 		
 	    $themePath="./Application/Home/View";
-	    if(file_exists($themePath)){
-	        $dir=opendir($themePath);
+        $dir=opendir($themePath);
 	        while(false!==($file=readdir($dir))){
 	            if($file!="."&& $file!=".."){
 	                if(is_dir($themePath."/".$file)){
-	                    $themes[] = $file;
+	                    $themes[$file] =$this->findThemeInfo($file) ;
 	                }else{
 	                    continue;
 	                }
 	            }
 	        }
-		}
+
 		
 		var_dump($themes);
 		
@@ -336,6 +335,10 @@ class HomeControlController extends AdminController {
 				);
 			$this->ajaxReturn($status,'json');
 		}
+	}
+	
+	private function findThemeInfo($theme){
+		
 	}
 	
 }

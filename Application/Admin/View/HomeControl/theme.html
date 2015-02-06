@@ -1,7 +1,19 @@
 <extend name="Public/base"/>
 
 <block name="body">
-This just for test.
+<div class="container">
+	<div class="row">
+		
+	<volist name="themes" id="vo">
+			<if condition="$i%4 eq 0 and $i gt 3" >
+			</div>
+				<div class="row">
+			</if>
+		<div class="span4">
+			<img src="{$vo['image']}" alt="{$vo['title']}" />
+		</div>
+	</volist>
+</div>
 </block>
 
 <block name="script">
