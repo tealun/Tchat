@@ -14,6 +14,38 @@ namespace Admin\Controller;
  * 
  */
 class HomeControlController extends AdminController {
+	
+	/**
+	 * 查看并设置前台主题模板
+	 * TODO 还没编辑完成
+	 */
+	public function theme(){
+		$homeConfig = file_get_contents('./Application/Home/Conf/config.php');
+		preg_match("/'DEFAULT.*THEME'\s*=>\s*'(.*)'/m",$homeConfig,$match);
+		$presentTheme = $match[1];
+		unset($homeConfig);
+		
+		var_dump($presentTheme);
+		
+	    $themePath="./Application/Home/View";
+	    if(file_exists($themePath)){
+	        $dir=opendir($themePath);
+	        while(false!==($file=readdir($dir))){
+	            if($file!="."&& $file!=".."){
+	                if(is_dir($themePath."/".$file)){
+	                    $themes[] = $file;
+	                }else{
+	                    continue;
+	                }
+	            }
+	        }
+		}
+		
+		var_dump($themes);
+		
+		$this->meta_title = "设置前台主题模板";
+		$this->display();
+	}
 
 	/**
 	 *首页 LOGO设置
