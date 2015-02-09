@@ -720,3 +720,30 @@ td {
 #categoryList ul li:hover {
   background-color:#ecede8;
 }
+
+/*主题模板管理样式*/
+
+.themeList {
+	margin-bottom:15px;
+}
+.themeInfo {
+  border: 1px solid #DDDDDD;
+  padding: 5px;
+}
+
+.themeInfo h2 {
+  border-bottom: 1px solid #DDDDDD;
+  color:#353535;
+  font-size: 1.5em;
+  margin: 15px 0;
+  padding:0 20px;
+}
+
+.themeInfo p {
+  color:#8D8D8D;
+  padding:0 20px;
+}
+
+.themeInfo p span {
+  margin:10px auto;
+}

@@ -20,30 +20,77 @@ class HomeControlController extends AdminController {
 	 * TODO 还没编辑完成
 	 */
 	public function theme(){
+		
+		/*接收和更改模板*/
+		if(IS_POST || IS_AJAX){
+			
+			if(!I('post.theme')){
+				$this->error("非法操作！");
+			}else{
+				$theme = I('post.theme');
+				$filename = './Application/Home/Conf/config.php';
+				$homeConfig = file_get_contents($filename);
+				preg_match("/'DEFAULT_THEME'\s*=>\s*'.*'/m",$homeConfig,$match);
+				
+				$replace = "'DEFAULT_THEME' =>  '".$theme."'";
+				$homeConfig = str_replace($match[0], $replace, $homeConfig);
+
+				if(file_put_contents($filename, $homeConfig)){
+					unset($homeConfig);
+					$this->ajaxReturn('1');
+				}else{
+					unset($homeConfig);
+					$this->ajaxReturn('0');
+				}	
+			}
+			
+		}
+		
+		/*获取当前主题模板*/ 
 		$homeConfig = file_get_contents('./Application/Home/Conf/config.php');
-		preg_match("/'DEFAULT.*THEME'\s*=>\s*'(.*)'/m",$homeConfig,$match);
+		preg_match("/'DEFAULT_THEME'\s*=>\s*'(.*)'/m",$homeConfig,$match);
 		$presentTheme = $match[1];
 		unset($homeConfig);
 		
-		var_dump($presentTheme);
-		
+		/*获取当前已经安装的模板*/
 	    $themePath="./Application/Home/View";
         $dir=opendir($themePath);
 	        while(false!==($file=readdir($dir))){
 	            if($file!="."&& $file!=".."){
 	                if(is_dir($themePath."/".$file)){
-	                    $themes[$file] =$this->findThemeInfo($file) ;
+	                    $themes[$file] =$this->findThemeInfo($file);
 	                }else{
 	                    continue;
 	                }
 	            }
 	        }
-
 		
-		var_dump($themes);
-		
+		/*赋值变量并调用后台模板文件*/
+		$this->assign('present_theme',$presentTheme);
+		$this->assign('themes',$themes);
 		$this->meta_title = "设置前台主题模板";
 		$this->display();
+	}
+	
+	/**
+	 * 查找指定主题的相关信息
+	 * @param string $theme 指定的主题模板标识符(文件夹名)
+	 */
+	private function findThemeInfo($theme){
+		$themePath="./Application/Home/View/".$theme; //路径
+		$themeString = file_get_contents($themePath."/about.txt"); //主题信息
+		preg_match_all('/^.+?$/m', $themeString, $info);
+		$info = $info[0]; // 将info二维数组的0键位数组提取为一维数组。
+		foreach ($info as $value) {
+			if(empty($value)){
+				continue;
+			}
+			preg_match('/^(.+):(.+)/', $value, $match);
+			$arr[$match[1]] = $match[2];
+		}
+		$arr['name']=$theme; //主题标识符
+		$arr['image'] = $themePath."/".$theme.".png";// 预览图
+		return $arr;
 	}
 
 	/**
@@ -335,10 +382,6 @@ class HomeControlController extends AdminController {
 				);
 			$this->ajaxReturn($status,'json');
 		}
-	}
-	
-	private function findThemeInfo($theme){
-		
 	}
 	
 }
