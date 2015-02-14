@@ -1,0 +1,113 @@
+<extend name="Public/base"/>
+<block name="body">
+	<div class="main-title">
+		<h2>{$meta_title}</h2>
+	</div>
+	<div class="cf">
+
+	</div>
+		<div class="tb-unit posr">
+		<div class="tb-unit-bar">
+		<if condition="S('menuLocalChange') eq TRUE">
+			<div class="alert alert-block">
+				<h4>注意！本地菜单还没有生成到公众平台</h4>
+				您已经更改了某个菜单的配置选项，但还没有生成到微信公众平台，请确认内容后点击下面的“生成到公众号”按钮生成菜单。否则，公众号的菜单不会更新到最新。
+			</div>
+		</if>
+    <button class="btn submit-btn ajax-post" id="setMenu" type="submit">生成至公众帐号</button>
+    <span class="help-inline menumsg"></span>
+		</div>
+		<div class="category">
+			<div class="hd cf">
+				<div class="fold">折叠</div>
+				<div class="order">排序</div>
+				<div class="name">系统标识</div>
+				<div class="name">显示名称</div>
+			</div>
+			
+			{:R('WechatMenu/tree', array($tree))}
+			<span style="line-height: 40px;margin: 0 10px;">添加一级菜单</span><a title="添加一级菜单" href="{:U('add?pid=0')}"><i class="icon-add"></i> </a>
+		</div>
+	</div>
+	<!-- /表格列表 -->
+	
+	<div style="margin: 5px;padding: 5px;background-color: #FF6600;color: #F3F3F3;border:#F4BF75 solid 1px;">注意：本页面仅可实时编辑排序及菜单名称，详细的菜单配置请点击菜单后面的<span style="background-color:#F2777A;color:#FFFFFF;margin:2px;padding:2px; border-radius: 2px;">编辑</span>链接进入编辑页面。</div>
+
+
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+		(function($){
+			/* 菜单展开收起 */
+			$(".category dd").prev().find(".fold i").addClass("icon-unfold")
+				.click(function(){
+					var self = $(this);
+					if(self.hasClass("icon-unfold")){
+						self.closest("dt").next().slideUp("fast", function(){
+							self.removeClass("icon-unfold").addClass("icon-fold");
+						});
+					} else {
+						self.closest("dt").next().slideDown("fast", function(){
+							self.removeClass("icon-fold").addClass("icon-unfold");
+						});
+					}
+				});
+
+			/* 二级菜单删除新增按钮 */
+			$(".category dd .add-sub-cate").remove();
+
+			/* 实时更新菜单信息 */
+			$(".category")
+				.on("submit", "form", function(){
+					var self = $(this);
+					$.post(
+						self.attr("action"),
+						self.serialize(),
+						function(data){
+							/* 提示信息 */
+							var name = data.status ? "success" : "error", msg;
+							msg = self.find(".msg").addClass(name).text(data.info)
+									  .css("display", "inline-block");
+							setTimeout(function(){
+								msg.fadeOut(function(){
+									msg.text("").removeClass(name);
+								});
+							}, 2000);
+						},
+						"json"
+					);
+					return false;
+				})
+                .on("focus","input",function(){
+                    $(this).data('param',$(this).closest("form").serialize());
+
+                })
+                .on("blur", "input", function(){
+                    if($(this).data('param')!=$(this).closest("form").serialize()){
+                        $(this).closest("form").submit();
+                    }
+                });
+                
+		/*重新生成菜单*/
+		$('#setMenu').click(function(){
+			var setMenuUrl = '{:U("setMenu","","")}';
+			$.post(
+				setMenuUrl,
+				'',
+				function(menuMsg){
+					/* 菜单生成后提示信息 */
+					var name = menuMsg.status ? "success" : "error", msg;
+					msg = $(".menumsg").addClass(name).text(menuMsg.info)
+							  .css("display", "inline-block");
+					setTimeout(function(){
+						msg.fadeOut(function(){
+							msg.text("").removeClass(name);
+						});
+					}, 2000);
+				},
+			'json');
+		});
+		})(jQuery);
+	</script>
+</block>

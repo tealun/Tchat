@@ -1,0 +1,184 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div class="main-title cf">
+	<h1>{$meta_title}</h1>
+</div>
+
+<hr />
+
+<div id="mass-control-box container">
+	
+	<div id="select-content" class="step-box">
+		<section class="gallery">
+			<h2>第一步：选择并输入消息内容</h2>
+			<ul>
+		    <li msgtype="text" class="button button-circle">文本消息</li>
+		    <li	msgtype="mpnews" class="button button-circle">图文消息</li>
+		    <li msgtype="image" class="button button-circle">图片</li>
+		    <li msgtype="voice" class="button button-circle">音频</li>
+		    <li msgtype="mpvideo" class="button button-circle">视频</li>
+		   </ul>
+		   
+		 </section>
+		 
+	</div>
+	<form action="{:U('update')}" method="get" accept-charset="utf-8">
+	  {// 隐藏输入框，用于保存草稿后获取当前信息的一些属性 }
+	  <input type="hidden" name="id" value="" />
+	  <input type="hidden" name="msgtype" value="" />
+	  <input type="hidden" name="mag_id" value="" />
+	  <input type="hidden" name="status" value="" />
+	  <input type="hidden" name="group_id" value="" />
+	  <input type="hidden" name="touser" value="" />
+	  
+	  {// 消息输入框，根据选择的消息类型不同，由JS导入不同的输入控件内容 }
+	  <div id="messageSelectArea" class="step-box">
+	  	<div id="showBox">
+	  		
+  			<div id="text" class="hidden">
+		    	<h3>请输入文本消息内容</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+		    <div id="mpnews" class="hidden">
+			    	<h3>请选择要发送的文章</h3>
+			    	<div class="row">
+			    		<div id="categoryList" class="span2">
+			    			<ul>
+			    			<foreach name="tree" item="vo">
+			    			<li data-id="{$vo['id']}" class="categoryItem">
+								{$vo['title']}
+							</li>
+							</foreach>
+							</ul>
+			    		</div>
+			    		<div class="span6">
+							<ul id="articleList" >
+								<li>test01</li>
+								<li>test02</li>
+							</ul>
+			    		</div>
+			    		<div id="newsPreview" class="span4">
+			    			
+			    		</div>
+			    	</div>
+			    	<input type="text" name="content" value="" alt="图文消息文章ID列表" >
+			 </div>
+			 
+		 	<div id="image" class="hidden">
+		    	<h3>请选择要发送的图片或上传图片</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+	    	<div id="voice" class="hidden">
+		    	<h3>请上传要发送的音乐文件或语音文件</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+			<div id="mpvideo" class="hidden">
+		    	<h3>请上传要发送的视频</h3>
+		    	<textarea name="text-message" rows="8" style="width: 100%;"></textarea>
+		    </div>
+		    
+	  	</div>
+	  	<span id="messageSave" class="button button-action">确定</span>
+		<span id="messageClear" class="button button-caution">清除</span>
+	  </div>
+	  
+	  {/*   用于展示图文及多媒体信息上传状态的地方
+			点击上面的消息输入框的确定后
+			保存草稿的同时上传到微信服务器
+			上传完成后存储msg_id 并显示继续按钮
+			上传失败后显示重新上传按钮  */ }
+	  <div id="upload-status" class="step-box">
+		This is Upload Box, shows the status of uploading.
+	  </div>
+	
+	{/*   用于选择发送的用户分组或指定用户
+		     点击确定后存储选择的用户草稿
+		     并显示最终的信息预览给用户以最后确认发送*/ }
+	  <div id="select-touser" class="step-box">
+	  	<h2>第二步：选择发送人群</h2>
+		This is a box use to select users who you want send mass message to.
+		<span class="button-action">确定</span>
+	  </div>
+	
+	  <div id="message_preview" class="step-box">
+	  <h2>第三步：预览并发送</h2>
+	  	<span class="button-action">立即发送</span>
+	  </div>
+	  
+	</form>
+	
+	<div id="send-status" class="step-box">
+		This is a box that shows the send status;
+	</div>
+</div>
+
+</block>
+
+<block name="script">
+<include file="Public/footjs" />
+
+	<script type="text/javascript">
+	/**
+	 * @author Tealun Du
+	 */
+	//点击选择群发类型时事件绑定
+	$("li.button-circle").bind({
+	    click:function(){
+	    	$(".button-highlight").removeClass("button-highlight");
+	    	$(this).addClass("button-highlight");
+	    	
+			var msgtype = $(this).attr("msgtype");
+	    	$("#messageSelectArea").show();
+	    	$("#"+msgtype).show().siblings().hide();
+
+	    	$("input[name='msgtype']").val(msgtype);
+	    },
+	    mouseover:function(){$(this).addClass("button-primary");},  
+	    mouseout:function(){$(this).removeClass("button-primary");}  
+	  });
+	
+	//隐藏除第一项外的其他步骤框
+	$(".step-box:gt(0)").addClass("hidden");
+	
+	//清除消息输入框内容
+	$("#messageClear").click(function(){
+		$("#messageSelectArea").find(":input,:text,:image,textArea").val("");
+	});
+	
+	//点击分类列表获取相应分类下文章
+	$(".categoryItem").click(function(){
+		var cateId = $(this).attr("data-id");
+		$.post("{:U('createMassMessage')}",
+			  {cateId:cateId},
+			  function(data){
+			  	var html = "";//定义一个空字符串对象
+			  	//转换接收到的JSON字符串为object对象
+			  	var jsonObj = JSON.parse(data);
+			  	//遍历转换后的JSON数据转换为列表
+			  	for(var k in jsonObj){
+			  		html += "<li data-id="+k+" class='articleItem'>"+jsonObj[k]+"</li>";
+			  	};
+			  		html +="<script type='text/javascript'>";
+			  		html +="$('ul#articleList li').click(function(){";
+			    	html +="alert($(this).attr('data-id'));";
+			    	html +="});";
+			    	html +="<"+"/script>";
+			    			
+			    $('#articleList').empty().html(html);
+			  });
+	});
+	
+	//保存消息内容草稿
+	$("#messageSave").click(function(){saveMessage();});
+	
+	//保存草稿
+	function saveMessage(){
+		alert($('form').serialize());
+	}
+	</script>
+
+</block>

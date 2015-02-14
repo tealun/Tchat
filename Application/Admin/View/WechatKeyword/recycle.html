@@ -1,0 +1,67 @@
+<extend name="Public/base"/>
+
+<block name="body">
+  <div class="main-title">
+    <h2>{$meta_title}</h2>
+  </div>
+    <div class="cf">
+    <div class="fl">
+            <button class="btn ajax-post" target-form="ids" url="{:U("WechatKeyword/restore")}">还原</button>
+      <button class="btn ajax-post confirm" target-form="ids" url="{:U("WechatKeyword/clean")}">清空</button>
+    </div>
+
+    <!-- 高级搜索 -->
+  <include file="serch" />  
+    <!-- 数据表格 -->
+    <div class="data-table">
+    <table class="">
+    <thead>
+        <tr>
+    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+    <th class="">编号</th>
+    <th class="">标题</th>
+    <th class="">板块</th>
+    <th class="">回复类型</th>
+    <th class="">回复内容</th>
+    <th class="">关键词</th>
+    <th class="">最后更新</th>
+    <th class="">用户</th>
+    <th class="">状态</th>
+    <th class="">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="_list" id="vo">
+    <tr>
+            <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+      <td>{$vo.id} </td>
+      <td><a href="{:U('Article/index?cate_id='.$vo['category_id'].'&pid='.$vo['id'])}">{$vo.name}</a></td>
+      <td><span>{$vo.segment_text}</span></td>
+      <td><span>{$vo.reply_type_text}</span></td>
+      <td><span>{$vo.reply_id}</span></td>
+      <td>{$vo.keywords}</td>
+      <td><span>{$vo.update_time|time_format}</span></td>
+      <td>{$vo.uid}</td>
+      <td>{$vo.status_text}</td>
+      <td><a href="{:U('WechatKeyword/restore?id='.$vo['id'])}">还原</a>
+        <a href="{:U('WechatKeyword/clean?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">清空</a>
+                </td>
+    </tr>
+    </volist>
+  </tbody>
+    </table> 
+
+        
+  </div>
+
+  <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+
+</block>
+
+<!-- 加载底部JS -->
+<block name="script">
+<include file="Public/footjs" />
+</block>

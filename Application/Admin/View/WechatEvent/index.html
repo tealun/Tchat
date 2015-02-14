@@ -1,0 +1,54 @@
+<extend name="Public/base"/>
+<block name="body">
+	<div class="page-header">
+		<h2>{$meta_title}</h2>
+	</div>
+<volist name="_list" id="vo">
+	<if condition="$i%3 eq 1">
+	<div class="row-fluid">
+		<ul class="thumbnails">
+	</if>
+			  <li class="span4">
+			    <div class="thumbnail">
+			      <img alt="{$vo.event_name}" style="width: 100%; " src="__PUBLIC__/Admin/images/default/{$vo.event_type}_banner.jpg" />
+			      <div class="caption">
+			        <h3>{$vo.event_name}</h3>
+			        <p>{$vo.comment}</p>
+			        <hr />
+
+			        <table class="table">
+			        	<tbody>
+			        	 <tr class="info">
+			        	 <td style="width: 40%; text-align: center">回复类别：</td>
+					      <td style="width: 60%; text-align: left">{$vo.reply_type_text}</td>
+						</tr>
+						<tr class="success">
+							<td style="width: 40%; text-align: center">回复内容：</td>
+							<if condition="$vo['reply_type'] eq 'news' " >
+						      	      <td style="width: 60%; text-align: left">[<strong> {$vo.reply_id|get_category_title} </strong>]</td>
+						    <elseif  condition="$vo['reply_type'] eq 'text'" />
+						      	      <td style="width: 60%; text-align: left"> {$vo.reply_id|get_tchat_text}</td>
+						     <else />
+						     		 <td style="width: 60%; text-align: left">{$vo.reply_id}</td>
+						      </if>
+						</tr>
+						</tbody>
+			        </table>
+			        <p>
+			        	<a class="btn btn-large btn-info" href="{:U('edit',array('id'=>$vo['id']))}">编辑</a>
+				        <a href="{:U('setStatus?id='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="btn btn-large ajax-get">{$vo.status|show_status_op}</a>
+					</p>
+			      </div>
+			    </div>
+			  </li>
+	<if condition="$i%3 eq 0">	
+		</ul>
+	</div>
+	</if>
+</volist>
+  <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+
+</block>

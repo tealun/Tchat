@@ -1,0 +1,59 @@
+<!-- 底部
+================================================== -->
+<footer class="footer">
+	<div class="siteMeta">
+		<p class="pull-right">
+			本站由<a href="http://www.onethink.cn" target="_blank">OneThink</a>强力驱动
+		</p>
+	</div>
+	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+		<div class="btn-group btn-group-justified" >
+			<volist name="channel" id="chan">
+				<if condition="$chan['group'] eq '底部导航'" >
+					<div class="btn-group dropup">
+					<notempty name="chan['_']">
+						<button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+							<span>{$chan.title}</span>
+						</button>
+							<ul role="menu" class="dropdown-menu">
+								<volist name="chan['_']" id="subChan">
+									<li>
+										<a href="{$subChan.url}">{$subChan.title}</a>
+									</li>
+									<li class="divider"></li>
+								</volist>
+							</ul>
+							<else />
+							<a href="{$chan.url}" class="btn btn-default" >
+							<span>{$chan.title}</span>
+							</a>
+						</notempty>
+						
+					</div>
+				</if>
+			</volist>
+
+		</div>
+	</nav>
+
+</footer>
+
+<include file="Public/var"/>
+<block name="script">
+	<script src="__STATIC__/flatui/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="__STATIC__/flatui/js/jquery.ui.touch-punch.min.js"></script>
+	<script src="__STATIC__/flatui/js/bootstrap.min.js"></script>
+	<script src="__STATIC__/flatui/js/bootstrap-select.js"></script>
+	<script src="__STATIC__/flatui/js/bootstrap-switch.js"></script>
+	<script src="__STATIC__/flatui/js/flatui-checkbox.js"></script>
+	<script src="__STATIC__/flatui/js/flatui-radio.js"></script>
+	<script src="__STATIC__/flatui/js/jquery.tagsinput.js"></script>
+	<script src="__STATIC__/flatui/js/jquery.placeholder.js"></script>
+</block>
+<!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden">
+	<!-- 用于加载统计代码等隐藏元素 -->
+	<block name="hidden"></block>
+</div>

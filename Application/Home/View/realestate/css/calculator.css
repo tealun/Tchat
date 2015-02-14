@@ -1,0 +1,292 @@
+@charset "utf-8";
+/**
+* Description: 计算器 style 
+* Developers: 付丽丽 <lili14@leju.com>
+**/
+/*房贷计算器 start------------------------------------------*/
+.house_credit_nav{
+	margin: 10px 10px 0;
+	height: 43px;
+	line-height: 43px;
+	-webkit-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	background-color: #e8e8e8;
+}
+.house_credit_nav>li{
+	float: left;
+	width: 33%;
+	height: 43px;
+	font-size: 16px;
+}
+.house_credit_nav>li:nth-of-type(2){
+	width: 34%;
+}
+.house_credit_nav>li>a{
+	display: block;
+	color: #333;
+	text-align: center;
+}
+.house_credit_nav>li>a.cur{
+	background-color: #c11000;
+	-webkit-box-shadow: inset 0 4px 2px rgba(141,0,0,.72);
+	box-shadow: inset 0 4px 2px rgba(141,0,0,.72);
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.42);
+	position: relative;
+}
+.house_credit_nav>li:nth-of-type(1)>a.cur{
+	-webkit-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+}
+.house_credit_nav>li:last-child>a.cur{
+	-webkit-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+}
+.calculator_con{
+	margin: 0 10px;
+}
+.calculator_con ul{
+	-webkit-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+	background-color: #f3f3f3;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.34), inset 0 0 1px #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,.34), inset 0 0 1px #fff;
+	border: solid 1px #d8d8d8;
+}
+.calculator_con ul li{
+	padding: 10px;
+	border-bottom: 1px solid #d8d8d8;
+	font-size: 14px;
+	color: #666;
+}
+.calculator_con ul li:last-child{
+	border-bottom:0;
+}
+.calculator_con ul li h3{
+	color: #333;
+	font-weight: bold;
+	display: inline-block;
+	width: 70px;
+}
+.calculator_con ul li h3.gjj{
+	width: 108px;
+}
+.calculator_con ul li p{
+	color: #999;
+	font-size: 12px;
+	padding: 3px 0 0;
+}
+.calculator_con ul li p.pl{
+	padding-left: 74px;
+}
+.calculator_con ul li>div>em{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 2px 2px #c5c5c5;
+	box-shadow: 0 0 2px 2px #c5c5c5;
+	border: solid 1px #fff;
+	background-image: -webkit-linear-gradient(bottom, #fefefe, #e0e0e0);
+	background-image: -o-linear-gradient(bottom, #fefefe, #e0e0e0);
+	background-image: linear-gradient(to top, #fefefe, #e0e0e0);
+	cursor: pointer;
+	margin-left: 3px;
+}
+.calculator_con ul li>div>em>input[type="radio"]{
+	-webkit-appearance: none;
+	cursor: pointer;
+}
+.calculator_con ul li>div>em>input[type="radio"][checked="checked"]{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #ff8d13;
+	-webkit-box-shadow: inset 0 0 2px #fff;
+	box-shadow: inset 0 0 2px #fff;
+	border: solid 2px #ddd;
+	background-image: -webkit-linear-gradient(top, #e92100, #a30e00);
+	background-image: -o-linear-gradient(top, #e92100, #a30e00);
+	background-image: linear-gradient(to bottom, #e92100, #a30e00);	
+	position: relative;
+	left: 1px;
+	top: 1px;
+}
+.calculator_con ul li input[type="text"]{
+	width: 105px;
+	height: 30px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0 2px 2px rgba(0,0,0,.19);
+	box-shadow: inset 0 2px 2px rgba(0,0,0,.19);
+	border: solid 1px #cecece;
+}
+.calculator_con ul li select{
+	-webkit-appearance: none;
+	border:0;
+	background-color:transparent;
+	width: 180px;
+	height: 30px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #fff;
+	border: solid 1px #cecece;
+	background-image: -webkit-linear-gradient(bottom, rgba(212,212,212,.64), rgba(255,255,255,.64) 87%);
+	background-image: -o-linear-gradient(bottom, rgba(212,212,212,.64), rgba(255,255,255,.64) 87%);
+	background-image: linear-gradient(to top, rgba(212,212,212,.64), rgba(255,255,255,.64) 87%);
+	line-height: 30px;
+	padding: 0 5px;
+	color: #666;
+}
+.calculator_con ul li i.icon-sj{
+	position: absolute;
+	left: 240px;
+	top: 14px;
+	color: #c1c1c1;
+}
+.house_credit_nav>li>a.cur>i,
+.taxes_credit_nav>li>a.cur>i{
+  display:block; 
+  width: 12px;
+  height: 12px;
+  position:absolute; 
+  -webkit-transform:rotate(-135deg);
+  -o-transform:rotate(-135deg);
+  transform:rotate(-135deg);
+  content: ''; 
+  background-color: #f5f5f5;
+  left: 50%;
+  bottom:-5px;
+  margin-left:-6px;
+  border:1px solid #ad2418;
+  border-width:0 1px 1px 0;
+}
+.calculator_con input[type="submit"]{
+	display: block;
+	width: 178px;
+	height: 33px;
+	margin: 20px auto;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #a91322;
+	-webkit-box-shadow: 0 3px 3px rgba(0,0,0,.22);
+	box-shadow: 0 3px 3px rgba(0,0,0,.22);
+	border: solid 1px #c63c02;
+	background-image: -webkit-linear-gradient(top, #e92100, #b40c00);
+	background-image: -o-linear-gradient(top, #e92100, #b40c00);
+	background-image: linear-gradient(to bottom, #e92100, #b40c00);
+	color: #fff;
+	font-size: 20px;
+	text-shadow:-1px -1px 0px #650700;
+	cursor: pointer;
+}
+.calculator_con>ul.results{
+	margin: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background-color: #f3f3f3;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.34), inset 0 0 1px #fff;
+	box-shadow: 0 1px 2px rgba(0,0,0,.34), inset 0 0 1px #fff;
+	border: solid 1px #d8d8d8;
+}
+.calculator_con>ul.results>li{
+	text-align: right;
+	color: #c01000;
+	font-size: 16px;
+	padding-right: 20px;
+	position: relative;
+}
+.calculator_con>ul.results>li>h3{
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+	position: absolute;
+	left: 10px;
+	text-align: left;
+}
+.calculator_con>p{
+	font-size: 12px;
+	color: #999;
+	padding: 0 10px;
+}
+/*税费计算器--------------------------------------------------------*/
+.taxes_credit_nav{
+	margin: 10px 10px 0;
+	height: 43px;
+	line-height: 43px;
+	-webkit-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	background-color: #e8e8e8;
+}
+.taxes_credit_nav>li{
+	float: left;
+	width: 50%;
+	height: 43px;
+	font-size: 16px;
+}
+.taxes_credit_nav>li>a{
+	display: block;
+	color: #333;
+	text-align: center;
+}
+.taxes_credit_nav>li>a.cur{
+	background-color: #c11000;
+	-webkit-box-shadow: inset 0 4px 2px rgba(141,0,0,.72);
+	box-shadow: inset 0 4px 2px rgba(141,0,0,.72);
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(0,0,0,.42);
+	position: relative;
+}
+.taxes_credit_nav>li:nth-of-type(1)>a.cur{
+	-webkit-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+}
+.taxes_credit_nav>li:last-child>a.cur{
+	-webkit-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+}
+.calculator_con>ul>li>h3.in-b{
+	display: inline-block;
+	width: auto;
+}
+.calculator_con>ul>li>input[type="checkbox"]{
+	display: inline-block;
+	position: absolute;
+	right: 15px;
+	bottom: 12px;	
+}
+/*.calculator_con>ul>li>input[type="checkbox"]{
+	-webkit-appearance: none;
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	bottom: 7px;
+	width: 26px;
+	height: 26px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	background-color: #fff;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.19);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.19);
+	border: solid 1px #cacaca;
+	vertical-align: middle;
+	cursor: pointer;
+}
+.calculator_con>ul>li>input[type="checkbox"][checked="checked"]{
+	background-color: #c11000;
+	-webkit-box-shadow: inset 0 1px 2px rgba(141,0,0,.72);
+	box-shadow: inset 0 1px 2px rgba(141,0,0,.72);
+	border: solid 1px #9C140C;
+}
+.calculator_con>ul>li>i.checked_i{
+	position: absolute;
+	right: 15px;
+	top: 8px;
+	color: #fff;
+	cursor: pointer;
+}*/

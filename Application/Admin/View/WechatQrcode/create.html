@@ -1,0 +1,31 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<include file="Public/create" />
+</block>
+
+<!-- 加载底部JS -->
+<block name="script">
+
+	<script type="text/javascript">
+
+		$(function(){
+		//在ticket输入框后添加获取TICKET按钮
+		$('input[name=ticket]').after(
+			'<a class="btn ajax-post" id="getticket">获取TICKET</a>'
+		);	
+						
+		//获取二维码TICKET
+		var ticketPostUrl = '{:U("getTicket","","")}';
+		
+		$('#getticket').click(function(){
+		$.post(ticketPostUrl,
+		'',
+		function(ticket){
+		$('input[name=ticket]').val(ticket.ticket);
+		},
+		'json');
+		});
+		});
+	</script>
+</block>

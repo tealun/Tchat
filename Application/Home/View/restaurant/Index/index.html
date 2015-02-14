@@ -1,0 +1,43 @@
+<extend name="Base/common"/>
+
+<block name="header">
+	<div class="container-fluid">
+			<div class="row">
+				{:hook('homeLogo')}
+				<h1 class="hidden">{:C('WEB_SITE_TITLE')}</h1>
+		    </div>	
+	</div>
+		{:hook('homeSlide')}
+</block>
+
+<block name="body">
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="box">
+				<div style="background-image:url('{$Think.THEME_PATH}images/boxbackground01.jpg')" class="img">
+				<img draggable="false" src="{$Think.THEME_PATH}images/blank_5_2.png">
+				</div>	
+				<div class="btn_box show">
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>平价批发</span></a>
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>海鲜加工</span></a>
+				
+						<a href="{:U('Home/article/detail?id=13')}" class="btn"><span>关于我们</span></a>
+				
+						<a href="{:U('Home/article/detail?id=15')}" class="btn"><span>就餐环境</span></a>
+	
+				</div>
+		   </div>
+	</div>
+</div>
+
+<div class="container-fluid">
+		<address class="row">
+			<p class="bg-primary"><span class="glyphicon glyphicon-earphone"></span>  热线电话：<a href="tel:{:C('COMPANY_TELEPHONE')}">{:C('COMPANY_TELEPHONE')}</a></p>
+			<p class="bg-info"><span class="glyphicon glyphicon-map-marker"></span>  地址：{:C('COMPANY_ADDRESS')}</p>
+		</address>
+</div>	
+
+</block>

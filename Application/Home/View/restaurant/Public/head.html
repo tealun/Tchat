@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><if condition="isset($info)">{$info.title}|<elseif condition="$meta_title" />{$meta_title}|</if>{:C('WEB_SITE_TITLE')}</title>
+<!-- Loading Bootstrap -->
+<link href="__STATIC__/bootstrap3.2.0/css/bootstrap.css" rel="stylesheet">
+<!-- Loading Flat UI CSS-->
+<link href="__STATIC__/flatui/css/flat-ui.css" rel="stylesheet">
+<link href="__ROOT__/Application/Home/View/restaurant/css/style.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Language" content="UTF-8">
+<meta name="keywords" content="{:C('WEB_SITE_KEYWORD')}">
+<meta name="description" content="{:C('WEB_SITE_DESCRIPTION')}">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="__STATIC__/bootstrap/js/html5shiv.js"></script>
+<![endif]-->
+<block name="style"></block>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<script type="text/javascript" src="__STATIC__/jquery-2.0.3.min.js"></script>
+
+<!--<![endif]-->
+<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+{:hook('pageHeader')}

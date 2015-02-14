@@ -1,0 +1,40 @@
+<extend name="Base/common"/>
+
+<block name="body">
+        <!-- Contents
+        ================================================== -->
+        <section id="contents">
+            <article:list name="list" category="$category['id']" child="true">
+                <div class="listTitle">
+                    <h3><a href="{:U('Article/detail?id='.$list['id'])}">{$list.title}</a></h3>
+                </div>
+                <div class="listContent">
+					<!-- 文章图文简介  -->
+					<if condition="$list['cover_id'] gt 0">
+						<empty name="list['description']">
+							<img src="{:get_cover($list['cover_id'],'path')}" alt="" />
+						<else />
+							<p><img src="{:get_cover($list['cover_id'],'path')}" alt="" /></p>
+							<p class="lead">{$list.description}</p>
+						</empty>
+
+					<else />
+						<p class="lead">{$list.description}</p>
+					</if>
+                </div>
+                <div class="listMeta">
+                    <span><a href="{:U('Article/detail?id='.$list['id'])}">查看全文</a></span>
+                    <span class="pull-right">
+
+                        <span>{$list.create_time|timeTip}前发表在 <span>
+                        <a href="{:U('Article/lists?category='.get_category_name($list['category_id']))}">{$list.category_id|get_category_title}</a></span> 
+                        <span>阅读( {$list.view} )</span>&nbsp;&nbsp;
+                    </span>
+                </div>
+                <hr/>
+            </article:list>
+            <div class="onethink pagination pagination-right pagination-large">
+                <article:page cate="$category['id']" listrow="$category['list_row']" />
+            </div>
+        </section>
+</block>

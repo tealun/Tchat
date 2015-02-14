@@ -1,0 +1,66 @@
+<extend name="Public/base"/>
+
+<block name="body">
+<div class="main" id="main" style="min-height: 376px;">
+
+	<div class="container-fluid">
+		<h1>{$meta_title}</h1>
+		<hr />
+		<div class="row themeList">
+	
+		<volist name="themes" id="vo">
+				<if condition="$i%4 eq 0 and $i gt 3" >
+				</div>
+					<div class="row themeList">
+				</if>
+			<div class="span4 themeInfo">
+				<img width="100%" src="{$vo['image']}" alt="{$vo['Title']}" />
+				<h2>{$vo['Title']}</h2>
+				<p>作者：<a href="mailto://{$vo['Email']}" target="_blank">{$vo['Author']}</a></p>
+				<p>版本：{$vo['Version']}</p>
+				<p>版权方：<a href="http://{$vo['Website']}" target="_blank">{$vo['CopyRight']}</a></p>
+				<p>描述：{$vo['Description']}</p>
+				<if condition="$vo['name'] eq $present_theme">
+					<p><span id="{$vo['name']}" class="button button-block disabled">正在使用</span></p>
+				<else />
+					<p><span id="{$vo['name']}" class="button button-block button-action">使用此模板</span></p>
+				</if>
+				
+			</div>
+		</volist>
+		</div>
+	</div>
+	
+</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript" charset="utf-8">
+		$("span.button-block").click(function(){
+			var theme = $(this).attr("id"); //获取点击的主题名称
+        	var url='{:U("theme")}';
+			$.post(url,
+			  {
+			    theme:theme
+			  },
+			  function(status){
+			  	if (status == 0 && status == false) {
+			  		$("#top-alert").fadeIn(function(){
+			  			$(this).find("div.alert-content").html("更换失败，请稍后重试！");
+			  		});
+
+			  	}else{
+			 		$("span.disabled").removeClass("disabled").addClass('button-action').html('使用此模板');
+					$("span#"+theme).removeClass('button-action').addClass('disabled').html('正在使用');
+					$("#top-alert").fadeIn(function(){
+						$(this).find("div.alert-content").html("主题模板更换成功！");
+					});
+			  	}
+			    
+			  });
+
+		});
+
+	</script>
+	
+</block>

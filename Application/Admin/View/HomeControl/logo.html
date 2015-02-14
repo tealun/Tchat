@@ -1,0 +1,78 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	 <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title"> <h2>{$meta_title}</h2> </div> 
+	<div class="data-table">
+		<form action="{:U('saveLogo')}" class="form-horizontal config-form">
+			<fieldset>
+                        <div class="controls">
+                        	<div class="upload-img-box">
+								<notempty name="logo">
+									    <div class="alert alert-info alert-block">
+										    <button type="button" class="close" data-dismiss="alert">&times;</button>
+										    <h4>恭喜，您已经设置了站点LOGO</h4>
+										    您的站点LOGO为如下图片，如果您希望更新图片，并点击【更新图片】->【确定】即可。如果您不希望更新图片您可以不用任何操作。
+										    </div>
+									<div class="upload-pre-item" style="width: 50%;margin: 15px 0;"><img src="{$logo|get_cover='path'}"/></div>
+								<else />
+									    <div class="alert alert-block">
+										    <button type="button" class="close" data-dismiss="alert">&times;</button>
+										    <h4>注意！您还没有设置站点LOGO</h4>
+										    您的站点LOGO还没有设置，如果您希望使用您的站点LOGO图片，您可以上传新的LOGO图，并点击确定即可。如果您不希望更新图片您可以不用任何操作。
+										    </div>
+								</notempty>
+							</div>
+							<input type="file" id="upload_picture_logo">
+							<input type="hidden" name="logo" id="logo_id" value="{$logo||default = ''}"/>
+
+						</div>
+			</fieldset>
+			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden"><i class="icon-ok"></i>  确 定</button>
+    		 <a class="btn btn-return" href=""><i  class="icon-chevron-left"></i>  返 回</a>
+    		 <notempty name="logo">
+    		 <a href="{:U('clear?part=Logo')}" class="btn submit-btn confirm ajax-get"><i class="icon-warning-sign"></i>  清除</a>
+			</notempty>
+		</form>
+	</div>
+
+</block>
+
+<block name="script">
+					<script type="text/javascript">
+					//上传图片
+				    /* 初始化上传插件 */
+					$("#upload_picture_logo").uploadify({
+				        "height"          : 30,
+				        "swf"             : "__STATIC__/uploadify/uploadify.swf",
+				        "fileObjName"     : "download",
+				        "buttonText"      : "<notempty name='logo'><i class='icon-refresh'></i> 更新图片<else /><i class='icon-plus'></i> 上传图片</notempty>",
+				        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+				        "width"           : 120,
+				        'removeTimeout'	  : 1,
+				        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+				        "onUploadSuccess" : uploadPicturelogo,
+				        'onFallback' : function() {
+				            alert('未检测到兼容版本的Flash.');
+				        }
+				    });
+					function uploadPicturelogo(file, data){
+				    	var data = $.parseJSON(data);
+				    	var src = '';
+				        if(data.status){
+				        	$("#logo_id").val(data.id);
+				        	src = data.url || '__ROOT__' + data.path
+				        	$("#logo_id").parent().find('.upload-img-box').html(
+				        		'<p>您的新LOGO图片为：</p><div class="upload-pre-item"><img src="' + src + '"/></div>'
+				        	);
+				        } else {
+				        	updateAlert(data.info);
+				        	setTimeout(function(){
+				                $('#top-alert').find('button').click();
+				                $(that).removeClass('disabled').prop('disabled',false);
+				            },1500);
+				        }
+				    }
+					</script>
+			
+</block>

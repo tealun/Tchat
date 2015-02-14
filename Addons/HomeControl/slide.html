@@ -1,0 +1,39 @@
+<notempty name="addons_slideList">
+	<section class="container-fluid" style="margin: 5px auto;"> 
+		<div class="row">
+
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		  <!-- Indicators -->
+		  <ol class="carousel-indicators">
+		  	<for start="0" end="$addons_slideCount">
+		  		<li data-target="#carousel-example-generic" data-slide-to="{$i}" <if condition= "$i eq 0"  >class="active"</if>></li>
+		  	</for>
+		  </ol>
+		
+		  <!-- Wrapper for slides -->
+		  <div class="carousel-inner" role="listbox">
+		 <for start="0" end="$addons_slideCount">
+		 	<assign name="slide" value="$addons_slideList[$i]" /> {/* 将循环数组赋值给一个变量 */}
+		  	<div <if condition= "$i eq 0"  >class="item active"<else /> class="item"  </if> >
+			      <a href="{$slide.url}" > <img src="{$slide.image}" alt="{$slide.alt}"></a>
+			      <div class="carousel-caption">
+			         {$slide.caption}
+			      </div>
+		    </div>	
+		 </for>
+
+		  </div>
+		
+		  <!-- Controls -->
+		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		    <span class="glyphicon glyphicon-chevron-left"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		    <span class="glyphicon glyphicon-chevron-right"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+		</div>
+	</section>
+</notempty>

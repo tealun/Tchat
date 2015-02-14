@@ -1,0 +1,62 @@
+<extend name="Public/base" />
+
+<block name="body">
+  <div class="main-title cf">
+    <h2>
+	{$meta_title}
+    </h2>
+  </div>
+  <!-- 标签页导航 -->
+<div class="tab-wrap">
+
+  <div class="tab-content">
+  <!-- 表单 -->
+  <form id="form" action="{:U('update')}" method="post" class="form-horizontal">
+    <div class="form-item cf">
+    	<label class="item-label">回复类型<span class="check-tips">（请选择该事件回复的类型）</span></label>
+        <div class="controls">
+        	<select name="reply_type">
+       		 	<option value="text" <eq name="data['reply_type']" value="text">selected="selected"</eq>>文本</option>
+     		   	<option value="news" <eq name="data['reply_type']" value="news">selected="selected"</eq>>分类</option>
+     		   	<option value="document" <eq name="data['reply_type']" value="document">selected="selected"</eq>>文章集合</option>
+     		   	<option value="image" <eq name="data['reply_type']" value="image">selected="selected"</eq>>图片</option>
+   		     	<option value="music" <eq name="data['reply_type']" value="music">selected="selected"</eq>>音乐</option>
+    	    	<option value="url" <eq name="data['reply_type']" value="url">selected="selected"</eq>>链接</option>
+        	</select>
+        </div>
+    </div>
+	
+	<div class="form-item cf">
+    	<label class="item-label">回复内容<span class="check-tips">（请选择上述类型下的内容ID）</span></label>
+        <div class="controls">
+			<input type="text" class="text input-large" name="reply_id" value="{$data[reply_id]}">
+        </div>
+    </div>
+	
+    <div class="form-item cf">
+      <button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+      <a class="btn btn-return" href="{$Think.cookie.__forward__}">返 回</a>
+      <input type="hidden" name="id" value="{$data.id|default=''}"/>
+      <input type="hidden" name="event_type" value="{$data.event_type}"/>
+      <input type="hidden" name="event_name" value="{$data.event_name}"/>
+    </div>
+  </form>
+  </div>
+</div>
+<include file="Public/contentlist" />
+</block>
+
+<!-- 加载底部JS -->
+<block name="script">
+<include file="Public/footjs" />
+<script type="text/javascript">
+
+Think.setValue("type", {$data.type|default='""'});
+Think.setValue("display", {$data.display|default=0});
+
+$('#submit').click(function(){
+  $('#form').submit();
+});
+
+</script>
+</block>

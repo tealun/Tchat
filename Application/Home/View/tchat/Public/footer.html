@@ -1,0 +1,24 @@
+
+    <!-- 底部
+    ================================================== -->
+    <footer class="footer">
+      <div class="container-fluid">
+      		<div class="row">
+      			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<p> <span style="font-family:arial;">Copyright &copy;</span> 1998-{:Date('Y',time())}{:C('WEB_SITE_TITLE')}版权所有 </p>
+				</div>
+				
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<p>本站由 <strong><a href="http://www.onethink.cn" target="_blank">OneThink</a></strong> 强力驱动</p>
+				</div>
+      		</div>
+      </div>
+    </footer>
+
+<include file="Public/var"/>
+<block name="script"></block> <!-- 用于加载js代码 -->
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+  <block name="hidden"></block>
+</div>

@@ -1,0 +1,7 @@
+Title:房地产行业模板
+Author:Tealun Du
+Email:tealun@gmail.com
+Website:www.tealun.com
+Version:1.0
+Description:适用于房地产门户行业网站
+CopyRight:渡头工作室

@@ -1,0 +1,37 @@
+<extend name="Public/base"/>
+
+<block name="body">
+  <link rel="stylesheet" type="text/css" href="__STATIC__/button.css">
+  <style>
+	.gallery ul li{
+		padding:20px;
+	    display: inline-block;
+	    margin: 5px;
+	}
+	.gallery a:hover{
+		color:rgb(255,255,255) !important;
+	}
+  </style>
+  <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+  <div class="main-title cf">
+    <h2>
+      新增活动
+    </h2>
+  </div>
+  <!-- 标签页导航 -->
+<div class="tab-wrap">
+	<section class="gallery">
+        <ul>
+            <li>
+            <span class="button-wrap"><a class="button button-circle button-primary" href="{:U('create',array('model_id'=>6))}">常规活动</a></span>
+            </li>
+            <li>
+            <span class="button-wrap"><a class="button button-circle button-action" href="{:U('create',array('model_id'=>7))}">折扣活动</a></span>
+            </li>
+            <li>
+			<span class="button-wrap"><a class="button button-circle button-highlight" href="{:U('create',array('model_id'=>8))}">优惠券活动</a></span>
+			</li>
+       </ul>
+     </section>
+</div>
+</block>

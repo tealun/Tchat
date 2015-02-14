@@ -1,0 +1,63 @@
+<extend name="Public/base"/>
+
+<block name="body">
+  <div class="main-title">
+    <h2>{$meta_title}</h2>
+  </div>
+    <div class="cf">
+    <div class="fl">
+      <if condition="isset($col)" > <a class="btn" href="{:U('index')}" >全部</a>
+    </div>
+
+    <!-- 高级搜索 -->
+  <include file="serch" />
+
+    <!-- 数据表格 -->
+    <div class="data-table">
+    <table class="">
+    <thead>
+        <tr>
+    <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+    <th class="">编号</th>
+    <th class="">头像</th>
+    <th class="">昵称</th>
+    <th class="">性别</th>
+    <th class="">姓名</th>
+    <th class="">电话</th>
+    <th class="">省份</th>
+    <th class="">城市</th>
+    <th class="">关注时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="_list" id="vo">
+    <tr>
+            <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+      <td>{$vo.id} </td>
+      <td><span><img src="{$vo.headimgurl}" alt="{$vo.nickname}" width="25px" height="25px"/></span></td>
+      <td><span>{$vo.nickname}</span></td>
+      <td><span>{$vo.sex}</span></td>
+      <td><span>{$vo.name}</span></td>
+      <td><span>{$vo.phone}</span></td>
+      <td><span>{$vo.country}</span></td>
+      <td><span>{$vo.city}</span></td>
+      <td><span>{:Date('Y-m-d H:i:s',$vo['subscribe_time'])}</span></td>
+    </tr>
+    </volist>
+  </tbody>
+    </table> 
+
+        
+  </div>
+
+  <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+
+</block>
+
+<!-- 加载底部JS -->
+<block name="script">
+<include file="Public/footjs" />
+</block>
