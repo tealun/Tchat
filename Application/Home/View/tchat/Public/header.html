@@ -9,11 +9,10 @@
 		</div>
 
 		<div class="col-xs-12 col-sm-6 col-md-8" style="padding-left:10px;">
-			<span class="pull-right">关于我们|客服在线|FAQ|</span>
 			
-			<div class="nav-collapse collapse">
+			<ul class="nav pull-right" style="margin-right:0">
 				<if condition="is_login()">
-                    <ul class="nav pull-right" style="margin-right:0">
+                    
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -21,18 +20,18 @@
                                 <li><a href="{:U('User/logout')}">退出</a></li>
                             </ul>
                         </li>
-                    </ul>
+
                 <else/>
-                    <ul class="nav" style="margin-right:0">
                         <li>
                             <a href="{:U('User/login')}">登录</a>
                         </li>
                         <li>
                             <a href="{:U('User/register')}" style="padding-left:0;padding-right:0">注册</a>
                         </li>
-                    </ul>
+                    
                 </if>
-            </div>
+                </ul>
+
 		</div>
     </div>
     
