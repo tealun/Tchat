@@ -296,6 +296,15 @@ function decodeUnicode($str)
 }
 
 /**
+ * 获取微信账号的认证状态
+ * 在微信后台配置中设置WECHAT_ACCOUNT_RZ配置项
+ */
+function get_wechat_renzheng() {
+	//如果账号没有认证过，且账号为订阅号时返回FALSE,否则返回TRUE
+	return C('WECHAT_ACCOUNT_RZ')?TRUE:FALSE;
+}
+
+/**
  * 返回微信回复的错误信息
  * @param $errcode string 出错的代码编号
  */

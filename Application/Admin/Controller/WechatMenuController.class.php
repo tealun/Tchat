@@ -17,33 +17,16 @@ namespace Admin\Controller;
 class WechatMenuController extends WechatController {
 
 	/**
-	 * 获取微信账号的验证状态
-	 * 在微信后台配置中设置WECHAT_ACCOUNT_RZ配置项
-	 */
-	protected function getRZ() {
-		//如果账号没有认证过，且账号为订阅号时返回FALSE,否则返回TRUE
-		if (0 == C('WECHAT_ACCOUNT_RZ') && 0 == C('WECHAT_ACCOUNT_TYPE')) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	/**
 	 * 查看菜单
 	 * 查看现有服务器上的目录
 	 */
 	public function viewMenu() {
-		if ($this -> getRZ()) {
 			$tree = D('Tchat_menu') -> getTree(0, 'id,sort,event_key,name,pid,status');
 			$this -> assign('tree', $tree);
 			C('_TCHAT_GET_MENU_TREE_', true);
 			//标记系统获取分类树模板
 			$this -> assign('meta_title', '查看自定义菜单');
 			$this -> display();
-		} else {
-			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
-		}
 	}
 
 	/**
@@ -116,9 +99,7 @@ class WechatMenuController extends WechatController {
 	 * @param  int  $pid  新增菜单的上级菜单ID
 	 */
 	public function add($pid = 0) {
-		if ($this -> getRZ() == FALSE) {
-			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
-		}else{
+
 			$TchatMenu = D('Tchat_menu');
 			$info['model_id'] = '52';
 			if ($pid) {
@@ -147,7 +128,7 @@ class WechatMenuController extends WechatController {
 			/* 获取菜单信息 */
 			$this -> meta_title = '新增菜单';
 			$this -> display();
-		}
+
 	}
 
 	/**
@@ -206,11 +187,7 @@ class WechatMenuController extends WechatController {
 	 * @see Application/Admin/Controller/AdminController::setStatus()
 	 */
 	public function setStatus($model='Tchat_keyword_group') {
-		if ($this -> getRZ()) {
 		return parent::setStatus('Tchat_menu');
-		} else {
-			$this -> error('您的微信账号为[订阅账号]，且未进行任何认证,不能使用本功能');
-		}
 	}
 
 
