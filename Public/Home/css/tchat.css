@@ -73,7 +73,7 @@
   padding: 5px 10px;
 }
 
-.featrues ul{
+.featrues ul,.footer_guide ul{
 	list-style:none;
 	padding-left:0;
 }
@@ -107,4 +107,8 @@
 	.suport_message{
 		text-align: left;
 	}
+}
+
+.footer_guide{
+	font-size:12px;
 }
