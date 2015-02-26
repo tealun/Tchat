@@ -1,67 +1,82 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-
-        </div>
-    </header>
+	<div class="container">
+		<div class="row">
+			{:hook('homeSlide')}
+		</div>
+	</div>
 </block>
 
 <block name="body">
 	<div class="container">
 		<div class="row featrues">
-			<div class="more_data_link hidden-xs"><span>查看更多</span></div>
-			<ul>
-	            <li class="col-xs-6 col-sm-3">
-	            	<div class="panel panel-default">
-					  <div class="panel-heading">Panel heading without title</div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
+	        <div class="featrues-box">
+	            <div class="box-hd">
+	                <span class="featrues-title"><h3 class="title">特色展示标题</h3></span>
+	                <span class="more-link hidden-xs">查看更多</span>
+	            </div>
+	            <div class="box-bd">
+					<div class="container">
+						<div class="row">
+							<div class="featrues-item col-xs-6 col-sm-3">
+							    <div class="item-content">
+							        <span class="item-thumb">
+							          <img src="./Public/Home/images/id.jpg" alt="ID" />
+							        </span>
+							        <span class="item-title">InDesign</span>
+							        <span class="item-desc">这是关于ID的分类视频教程介绍，这里可以书写详细的或者简洁的说明，请控制在50字以内</span>
+							    </div>
+							</div>
+							<div class="featrues-item col-xs-6 col-sm-3">
+							    <div class="item-content">
+							        <span class="item-thumb">
+							          <img src="./Public/Home/images/ai.jpg" alt="AI" />
+							        </span>
+							        <span class="item-title">Illustrator</span>
+							        <span class="item-desc">这是关于Ai的分类视频教程介绍，这里可以书写详细的或者简洁的说明，请控制在50字以内</span>
+							    </div>
+							</div>
+							<div class="featrues-item col-xs-6 col-sm-3">
+							    <div class="item-content">
+							        <span class="item-thumb">
+							          <img src="./Public/Home/images/ac.jpg" alt="AC" />
+							        </span>
+							        <span class="item-title">Acrobat</span>
+							        <span class="item-desc">这是关于Acrobat的分类视频教程介绍，这里可以书写详细的或者简洁的说明，请控制在50字以内</span>
+							    </div>
+							</div>
+							<div class="featrues-item col-xs-6 col-sm-3">
+							    <div class="item-content">
+							        <span class="item-thumb">
+							          <img src="./Public/Home/images/ps.jpg" alt="PS" />
+							        </span>
+							        <span class="item-title">PhotoShop</span>
+							        <span class="item-desc">这是关于PS的分类视频教程介绍，这里可以书写详细的或者简洁的说明，请控制在50字以内</span>
+							    </div>
+							</div>
+						</div>
 					</div>
-	            </li>
-	            <li class="col-xs-6 col-sm-3">
-	            	<div class="panel panel-default">
-					  <div class="panel-heading">Panel heading without title</div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-	            </li>
-	            <li class="col-xs-6 col-sm-3">
-	            	<div class="panel panel-default">
-					  <div class="panel-heading">Panel heading without title</div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-	            </li>
-	            <li class="col-xs-6 col-sm-3">
-	            	<div class="panel panel-default">
-					  <div class="panel-heading">Panel heading without title</div>
-					  <div class="panel-body">
-					    Panel content
-					  </div>
-					</div>
-	            </li>
-	        </ul>
-	        <div class="visible-xs"><span class="btn btn-primary btn-block">查看更多</span></div>
+		        </div>
+	 	   </div>
+		</div>
+		<div class="row visible-xs">
+			<div style="margin-top: 10px"><span class="btn btn-primary btn-block">查看更多</span></div>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container box-ad">
 		<div class="row ad-holder">
-			<div class="hidden-xs col-sm-8">
-				<div class="row footer_guide">
+			<div class="hidden-xs col-sm-7">
+				<div class="row home-web-guide">
 					<ul class="list-inline">
 					  <li class="col-sm-2">
-					      <strong>关于：</strong>
+					      <p class="item-title">关于：</p>
 						  <ul>
 						  	<li>关于智承</li>
 						  </ul>
 					  </li>
 					  <li class="col-sm-2">
-					      <strong>栏目：</strong>
+					      <p class="item-title">栏目：</p>
 						  <ul>
 						  	<li>新闻动态</li>
 						  	<li>资料下载</li>
@@ -70,7 +85,7 @@
 						  </ul>
 				      </li>
 					  <li class="col-sm-2">
-					      <strong>商务：</strong>
+					      <p class="item-title">商务：</p>
 						  <ul>
 						  	<li>视频列表</li>
 						  	<li>购买方式</li>
@@ -79,21 +94,21 @@
 						  </ul>
 				      </li>
 					  <li class="col-sm-2">
-					      <strong>联系：</strong>
+					      <p class="item-title">联系：</p>
 						  <ul>
 						  	<li>在线提问</li>
 						  	<li>联系我们</li>
 						  </ul>
 				      </li>
 					  <li class="col-sm-2">
-					      <strong>帮助：</strong>
+					      <p class="item-title">帮助：</p>
 						  <ul>
 						  	<li>智承规则</li>
 						  	<li>常见问题</li>
 						  </ul>
 				      </li>
 					  <li class="col-sm-2">
-					      <strong>友链：</strong>
+					     <p class="item-title">友链：</p>
 						  <ul>
 						  	<li>智承论坛</li>
 						  	<li>Tealun Du</li>
@@ -102,9 +117,20 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-			<p><strong>版权信息</strong></p>
-			<p>智承大课堂（binbinke）所发布的所有视频教程版权归原作者所有。如未经授权用作他处，作者将保留追究侵权者法律责任的权利。备案/许可证编号：冀ICP11000251号</p>
+			<div class="col-xs-12 col-sm-5">
+				<div class="row">
+					<div class="col-xs-12 col-md-8">
+						<p class="item-title">版权信息</p>
+						<p>智承大课堂（binbinke）所发布的所有视频教程版权归原作者所有。如未经授权用作他处，作者将保留追究侵权者法律责任的权利。备案/许可证编号：冀ICP11000251号</p>
+					</div>
+					<div class="hidden-xs hidden-sm col-md-4 home-qrcode">
+						<img src="./Public/Home/images/qrcode.jpg" alt="QRcode" />
+					</div>
+					<div class="col-xs-12 hidden-md hidden-lg">
+						<p class="item-title">官方微信号：test</p>
+						<p>长按此微信号可复制粘贴，在微信中添加好友。</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -56,22 +56,25 @@
     
     <div class="row hidden-xs">
     	<div class="container page-holder">
-    		<div class="col-xs-12 col-sm-6 col-md-8">
-    			<strong>{:C('WEB_SITE_TITLE')}</strong>
-    		</div>
-    		<div class="col-sm-6 col-md-4">
-				<div class="input-group" style="margin-top:1em;">
-			      <input type="text" class="form-control" placeholder="输入搜索">
-			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-			      </span>
+    		<div class="row">
+	    		<div class="col-xs-12 col-sm-6 col-md-8">
+	    			<strong>{:C('WEB_SITE_TITLE')}</strong>
+	    		</div>
+	    		<div class="col-sm-6 col-md-4">
+					<div class="input-group" style="margin-top:1em;">
+				      <input type="text" class="form-control" placeholder="输入搜索">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				      </span>
+					</div>
 				</div>
-			</div>
+    		</div>
     	</div>	
     </div>
     
     <nav id="navbar" class="row hidden-xs">
 		<div class="container nav-tchat">
+			<div class="row">
             <ul class="nav">
                 <think:nav name="nav">
                 	<eq name="nav.pid" value="0">
@@ -81,6 +84,7 @@
                     </eq>
                 </think:nav>
             </ul>
+			</div>
         </div>
     </nav>
     

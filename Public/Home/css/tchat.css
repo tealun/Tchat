@@ -11,14 +11,19 @@
  *  Twitter: http://twitter.com/TealunDu
  *  Web: http://www.tealun.com
  */
+/* GLOBLE */
+ul{
+	list-style:none;
+	padding-left:0;
+}
 
 /* HEADER */
 
 /* navbar */
 
 .nav-tchat{
-	border-top:#003366 1px solid;
-	border-bottom:#003366 1px solid;
+	border-top:#dfdfdf 1px solid;
+	border-bottom:#dfdfdf 1px solid;
 }
 
 .nav-tchat ul {
@@ -26,7 +31,7 @@
 }
 .nav-tchat ul li{
 	float:left;
-	border-right:#003366 1px solid;
+	border-right:#dfdfdf 1px solid;
 }
 
 .nav-tchat ul li:last-child{
@@ -46,48 +51,124 @@
 
 
 /* INDEX PAGE */
-.jumbotron{
-	margin:5px auto;
+
+/* slide */
+.slide img{
+	width:100%;
 }
 /* Featrues */
+
 .featrues{
-	margin-top:10px;
-	border-top:#003366 1px solid;
-	border-bottom:#003366 1px solid;
+margin-top:10px;
+border-top:#dfdfdf 1px solid;
 }
 
-.featrues .more_data_link {
-  clear: both;
-  color: red;
-  display: block;
-  font-size: 10px;
-  margin-top: -1.5em;
-  padding: 10px 0;
-  text-align: right;
-}
-
-.featrues .more_data_link span {
-  background: none repeat scroll 0 0 #003366;
-  border-radius: 5px;
-  color: #ffffff;
-  padding: 5px 10px;
-}
-
-.featrues ul,.footer_guide ul{
-	list-style:none;
-	padding-left:0;
-}
-.featrues li{
+.featrues .featrues-title{
 	float:left;
+	margin-left:15px;
 }
 
+.featrues .more-link{
+background: none repeat scroll 0 0 #dfdfdf;
+border-radius: 5px;
+margin-top:0.5em;
+padding: 5px 10px;
+float:right;
+} 
+
+.featrues-box .box-hd {
+  height: 50px;
+  position: relative;
+}
+.featrues-box .box-bd {
+  background: none repeat scroll 0 0 #fff;
+  border-top:1px solid #dfdfdf;
+  border-left:1px solid #dfdfdf;
+}
+.featrues-box .box-hd .title {
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 50px;
+  margin: 0;
+}
+
+.featrues-box .box-hd .more {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.featrues-item {
+  border-right: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf;
+  float: left;
+}
+
+.featrues-item .item-content {
+  margin-left:-15px;
+  margin-right:-15px;
+  padding:15px;
+  border: 6px solid #fff;
+  color: #000;
+  display: block;
+  height: 288px;
+  transition: border-color 0.5s ease 0s;
+}
+.featrues-item .item-content:hover{
+  border: 6px solid #DDDDDD;
+  transition: border-color 0.5s ease 0s;
+}
+.featrues-item .item-thumb {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.featrues-item .item-thumb img {
+  width: 100%;
+}
+
+.featrues-item .item-title {
+  display: block;
+  border-bottom:1px solid #dfdfdf;
+  font-size: 18px;
+  font-weight:bold;
+  line-height:50px;
+}
+
+.featrues-item .item-title a {
+  color: #000;
+}
+
+.featrues-item .item-desc {
+  margin-top:15px;
+  color: #8c8c8c;
+  display: block;
+  font-size: 12px;
+}
+
+.box-ad{
+	margin-top:10px;
+	margin-bottom:5px;
+	background-color:#fafafa;
+}
 .ad-holder{
-	margin-top:15px;
-	margin-bottom:15px;
+	color: #8c8c8c;
+	font-size:12px;
+	padding:15px;
 	min-height:25px;
 	max-height:40px;
 }
-
+.ad-holder .item-title{
+	display:block;
+	margin-right: 15px;
+	padding:5px 0;
+	border-bottom:1px solid #dfdfdf;
+	font-weight:bold;
+}
+.home-web-guide{
+	border-right:1px solid #dfdfdf;
+}
 
 /* FOOTER */
 /* footer */
@@ -109,6 +190,6 @@
 	}
 }
 
-.footer_guide{
-	font-size:12px;
+.home-qrcode img{
+	width: 100%;
 }
