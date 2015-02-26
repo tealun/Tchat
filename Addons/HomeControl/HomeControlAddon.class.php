@@ -52,9 +52,25 @@ use Common\Controller\Addon;
 		 */
 		public function homeFeature(){
 			$feature = F('homeFeature');
-
-			$this->assign('addons_featureIcons',$feature['icons']);
-			$this->assign('addons_featureList',$feature['list']);
+			
+			//赋值特色内容条目
+			if(is_null($feature['items'])){
+				$itemsCount = 0;
+			}else{
+				$itemsCount = count($feature['items']);
+				$this->assign('featureItems',$feature['items']);
+				$this->assign('featureItemsCount',$itemsCount);
+			}
+			
+			//赋值特色内容板块标题
+			if($feature['title']){
+				$this->assign('featureTitle',$feature['title']);
+			}
+			
+			//赋值查看更多转向URL
+			if($feature['moreLinkUrl']){
+				$this->assign('featureMoreLinkUrl',$feature['moreLinkUrl']);
+			}
 			$this->display('feature');
 		}
 		

@@ -315,22 +315,32 @@ class HomeControlController extends AdminController {
 	
 	/**
 	 * 设置首页特色内容展示
-	 * 包含两部分，一为横向图标列表，一为纵向图标+内容列表
+	 * 本方法设置特色内容的数据，排版请在前台模板中进行排版
+	 * 返回数据为数组
 	 */
 	public function feature(){
+		//读取缓存中的特色内容
 		$feature = F('homeFeature');
 		
-		if(is_null($feature['icons'])){
-			$iconsCount = 0;
+		//赋值特色内容条目
+		if(is_null($feature['items'])){
+			$itemsCount = 0;
 		}else{
-			$iconsCount = count($feature['icons']);
-			$this->assign('featureIcons',$feature['icons']);
-			$this->assign('featureIconsCount',$iconsCount);
+			$itemsCount = count($feature['items']);
+			$this->assign('featureItems',$feature['items']);
+			$this->assign('featureItemsCount',$itemsCount);
 		}
 		
-		if(null !== $feature['list']){
-			$this->assign('featureList',$feature['list']);
+		//赋值特色内容板块标题
+		if($feature['title']){
+			$this->assign('featureTitle',$feature['title']);
 		}
+		
+		//赋值查看更多转向URL
+		if($feature['moreLinkUrl']){
+			$this->assign('featureMoreLinkUrl',$feature['moreLinkUrl']);
+		}
+		
 		$this->meta_title = '首页特色内容配置';
 		$this->display();
 	}
