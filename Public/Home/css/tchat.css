@@ -11,24 +11,21 @@
  *  Twitter: http://twitter.com/TealunDu
  *  Web: http://www.tealun.com
  */
-/* GLOBLE */
+/* GLOBLE 全局样式 */
 ul{
 	list-style:none;
 	padding-left:0;
 }
 
-/* HEADER */
+/* HEADER 头部样式 */
 
-/* navbar */
+	/* navbar 主菜单导航栏 */
 
 .nav-tchat{
 	border-top:#dfdfdf 1px solid;
 	border-bottom:#dfdfdf 1px solid;
 }
 
-.nav-tchat ul {
-	list-style: none;
-}
 .nav-tchat ul li{
 	float:left;
 	border-right:#dfdfdf 1px solid;
@@ -38,7 +35,7 @@ ul{
 	border-right:0;
 }
 
-/* page-holder */
+	/* page-holder 页面头部标题栏 */
 .page-holder{
 	padding-bottom:2em;
 }
@@ -50,32 +47,32 @@ ul{
 }
 
 
-/* INDEX PAGE */
+/* INDEX PAGE 首页样式 */
 
-/* slide */
+	/* slide 幻灯片 */
 .slide img{
 	width:100%;
 }
-/* Featrues */
+	/* features 特色内容栏目 */
 
-.featrues{
+.features{
 margin-top:10px;
 border-top:#dfdfdf 1px solid;
 }
 
-.featrues .featrues-title{
+.features .features-title{
 	float:left;
 	margin-left:15px;
 }
 
-.featrues .more-link, .more-link-block{
+.features .more-link, .more-link-block{
 	color:#777;
 	border:1px solid #dfdfdf;
 	border-radius: 5px;
 	padding: 5px 10px;
 }
 
-.featrues .more-link{
+.features .more-link{
 	margin-top:0.5em;
 	float:right;
 }
@@ -86,22 +83,22 @@ border-top:#dfdfdf 1px solid;
 	text-align:center;
 }
 
-.featrues .more-link:hover, .more-link-block:hover{
+.features .more-link:hover, .more-link-block:hover{
 	color:#5e5e5e;
 	background-color:#DDDDDD;
 	transition: background-color 0.5s ease 0s;
 }
 
-.featrues-box .box-hd {
+.features-box .box-hd {
   height: 50px;
   position: relative;
 }
-.featrues-box .box-bd {
+.features-box .box-bd {
   background: none repeat scroll 0 0 #fff;
   border-top:1px solid #dfdfdf;
   border-left:1px solid #dfdfdf;
 }
-.featrues-box .box-hd .title {
+.features-box .box-hd .title {
   color: #333;
   font-size: 18px;
   font-weight: 400;
@@ -109,19 +106,19 @@ border-top:#dfdfdf 1px solid;
   margin: 0;
 }
 
-.featrues-box .box-hd .more {
+.features-box .box-hd .more {
   position: absolute;
   right: 0;
   top: 0;
 }
 
-.featrues-item {
+.features-item {
   border-right: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf;
   float: left;
 }
 
-.featrues-item .item-content {
+.features-item .item-content {
   margin-left:-15px;
   margin-right:-15px;
   padding:15px;
@@ -131,20 +128,20 @@ border-top:#dfdfdf 1px solid;
   height: 288px;
   transition: border-color 0.5s ease 0s;
 }
-.featrues-item .item-content:hover{
+.features-item .item-content:hover{
   border: 6px solid #DDDDDD;
   transition: border-color 0.5s ease 0s;
 }
-.featrues-item .item-thumb {
+.features-item .item-thumb {
   display: block;
   margin-bottom: 10px;
 }
 
-.featrues-item .item-thumb img {
+.features-item .item-thumb img {
   width: 100%;
 }
 
-.featrues-item .item-title {
+.features-item .item-title {
   display: block;
   border-bottom:1px solid #dfdfdf;
   font-size: 18px;
@@ -152,11 +149,11 @@ border-top:#dfdfdf 1px solid;
   line-height:50px;
 }
 
-.featrues-item .item-title a {
+.features-item .item-title a {
   color: #000;
 }
 
-.featrues-item .item-desc {
+.features-item .item-desc {
   margin-top:15px;
   color: #8c8c8c;
   display: block;
@@ -185,8 +182,13 @@ border-top:#dfdfdf 1px solid;
 	border-right:1px solid #dfdfdf;
 }
 
-/* FOOTER */
-/* footer */
+/* 二维码样式 */
+.home-qrcode img{
+	width: 100%;
+}
+
+/* FOOTER 页面底部样式 */
+	/* footer 页脚样式 */
 .footer{
 	background:#003366;
 	color: #FFFFFF;
@@ -203,8 +205,4 @@ border-top:#dfdfdf 1px solid;
 	.suport_message{
 		text-align: left;
 	}
-}
-
-.home-qrcode img{
-	width: 100%;
 }

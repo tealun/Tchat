@@ -71,6 +71,9 @@ use Common\Controller\Addon;
 			if($feature['moreLinkUrl']){
 				$this->assign('featureMoreLinkUrl',$feature['moreLinkUrl']);
 			}
+			
+			$this->assign('featureStyle',$feature['style']);
+			
 			$this->display('feature');
 		}
 		

@@ -1,11 +1,10 @@
-<notempty name="addons_featureIcons">
-	<section class="container-fluid" style="margin: 5px auto;"> 
-		this is test Icon list
-	</section>
-</notempty>
-
-<notempty name="addons_featureList">
-	<section class="container-fluid" style="margin: 5px auto;"> 
-		this is test Feature list
-	</section>
-</notempty>
+<switch name="featureStyle">
+	<case value="bootstrap3">
+		{$featureTitle};{$featureMoreLinkUrl}
+		<volist name="featureItems" id="vo">
+			{$vo.type},{$vo.title},{$vo.name},{$vo.id}
+		</volist>
+	</case>
+	<default />
+	
+</switch>
