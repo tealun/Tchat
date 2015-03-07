@@ -747,3 +747,19 @@ td {
 .themeInfo p span {
   margin:10px auto;
 }
+
+/*特色内容管理样式*/
+.feature-items .add-on{
+	top:0;
+	right:0;
+}
+
+.feature-items ol{
+	list-style:decimal;
+}
+
+.featrues select{
+	height:30px;
+	line-height:30px;
+}
+

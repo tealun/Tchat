@@ -319,6 +319,7 @@ class HomeControlController extends AdminController {
 	 * 返回数据为数组
 	 */
 	public function feature(){
+
 		//读取缓存中的特色内容
 		$feature = F('homeFeature');
 		
@@ -348,7 +349,7 @@ class HomeControlController extends AdminController {
 	public function saveFeature(){
 		if(IS_POST || IS_AJAX){
 			$feature = I('post.');
-			
+			var_dump($feature);
 		}
 	}
 	
