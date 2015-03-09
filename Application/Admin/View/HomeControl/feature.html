@@ -8,23 +8,10 @@
 			<fieldset>
 				<notempty name="featureItems">
 					<div id="feature-items">
-						 	
 						 		<form action="{:U('saveFeature')}" method="post" accept-charset="utf-8">
+
 								       <ol class="row">
-								       	<li class="offset1 span10">
-								       			<div class="input-prepend span6">
-												  <span class="add-on">选择类型</span>
-												  <select name="item[0]['type']" class="span1">
-									                <option value="cat">分类</option>
-									                <option value="article">文章</option>
-									              </select>
-									              <span class="add-on">填写编号</span>
-												    <input class="span1" name="item[0]['id']" type="text">
-											    </div>
-											    <div calss="featrues-item-preview span6">
-											    	请在左侧填写条目信息
-											    </div>
-								       	</li>
+
 								       </ol>
 								       <div class="row">
 								       	<p id="addItem" class="btn btn-default offset1" style="margin-top: 15px;">增加一条</p>
@@ -40,19 +27,33 @@
 						    <h4>注意！您还没有设置特色内容导航的图标设置</h4>
 						    您的站点还没有设置特色内容导航，在站点的首页里将不会有图标导航的模块，您可以在下面的栏目中进行配置，记得点确定保存哦。
 						 </div>
-						 <div class="feature-items">
-						 	
-						 		<form action="{:U('saveFeature')}" method="post" accept-charset="utf-8">
-								       <ol id="featrues-li" class="row">
+					 		<form action="{:U('saveFeature')}" method="post" accept-charset="utf-8">
+					 			
+					 			<div class="control-group">
+									<label class="control-label" for="inputTitle">特色区标题:</label>
+									<div class="controls">
+									<input type="text" id="inputTitle" name="title" class="span4" placeholder="为您的特色展示区取一个标题" value="{$featureTitle}">
+									</div>
+									</div>
+									<div class="control-group">
+									<label class="control-label" for="inputMoreLinkUrl">更多链接的指向：</label>
+									<div class="controls">
+									<input type="text" id="inputMoreLinkUrl" name="moreLinkUrl" class="span4" placeholder="当用户点击更多链接时的指向地址" value="{$featureMoreLinkUrl}">
+									</div>
+									</div>
+								</div>
+					 			<hr />
+								<div class="feature-items">
+							       <ol id="features-li" class="row">
 
-								       </ol>
-								       <div class="row">
-								       	<p id="addItem" class="btn btn-default offset1" style="margin-top: 15px;">增加一条</p>
-								       </div>
-								       
-								 </form>
+							       </ol>
+							       <div class="row">
+							       	<p id="addItem" class="btn btn-default offset1" style="margin-top: 15px;">增加一条</p>
+							       </div>
+							    </div>
+							 </form>
 						 	
-						 </div>
+						 
 </notempty>
 			</fieldset>
 
@@ -90,47 +91,54 @@
 					alert('特色内容请控制在4个，您可以替换掉原有条目中的内容以展示新的内容。');
 				}else{
 
-					var featruesLi = '<li class="offset1 span10"><span class="button button-rounded button-flat-caution slide pull-right"><i class="icon-remove"></i> 删除</span>';
-							featruesLi += '<div class="input-prepend span6">';
-							featruesLi += '<span class="add-on">选择类型</span>';
-							featruesLi +='<select name="item[0][\'type\']" class="span1" id="segment'+count+'" >>';
-							featruesLi +='<option value="cat" selected="true">分类</option>';
-							featruesLi +='<option value="article">文章</option>';
-							featruesLi +='</select>';
-							featruesLi +='<span class="add-on">填写编号</span>';
-							featruesLi +='<input id="item'+count+'" class="span1" name="item['+count+'][\'id\']" type="text">';
-							featruesLi +='</div>';
-							featruesLi +='<div class="span8" id="preview'+count+'">';
-							featruesLi +='<h4 style="margin-bottom:15px;">预览：</h4>';
-							featruesLi +='<div id="item'+count+'preview" style="height:280px;width:504px;background-color: #A0A0A0;font-size:40px;text-align:center;line-height:200px;"><p id="clickPreview'+count+'" ><i class="icon-large icon-refresh"></i> 请输入条目编号</p>';
-							featruesLi +='<img class="hidden" style="width:100%;" src="" alt="" >';
-							featruesLi += '</div></div></div>';
-							featruesLi += '</li>';
+					var featuresLi = '<li id="item'+count+'" class="offset1 span10">';
+							featuresLi += '  <div class="container">';
+							featuresLi += '  <div class="row"><div class="input-prepend span5"><span class="add-on">选择类型</span>';
+							featuresLi +='<select name="item[0][\'type\']" class="span1" id="segment'+count+'" >>';
+							featuresLi +='<option value="category" selected="true">分类</option>';
+							featuresLi +='<option value="article">文章</option>';
+							featuresLi +='</select>';
+							featuresLi +='<span class="offset1 add-on">填写编号</span>';
+							featuresLi +='<input id="item'+count+'id" class="span1" name="item['+count+'][\'id\']" type="text">';
+							featuresLi +='</div>';
+							featuresLi +='<div class="span5" id="preview'+count+'">';
+							featuresLi +='<div style="height:100px;width:100%;background-color: #A0A0A0;font-size:20px;text-align:center;line-height:100px;" id="item'+count+'preview">';
+							featuresLi +='<p id="clickPreview'+count+'" ><i class="icon-large icon-refresh"></i> 请输入条目编号</p>';
+							featuresLi +='<img class="hidden" style="width:100%;" src="" alt="" >';
+							featuresLi += '<h5></h5>';
+							featuresLi += '<p class="item-description"></p>';
+							featuresLi += '</div></div>';
+							featuresLi +='<span class="button button-rounded button-flat-caution slide pull-right"><i class="icon-remove"></i> 删除</span>';
+							featuresLi +='</div></div>';
+							featuresLi += '</li>';
 							
-							featruesLi +='<script type="text/javascript">';
-							featruesLi +='$(".button-flat-caution.slide").click(function(){';
-							featruesLi +='$(this).parent("li").detach();});';
-							featruesLi +='$("#item'+count+'").change(function(){';
-							featruesLi +='$("div#featrues-item-preview'+count+'").detach();';
-							featruesLi += 'var featruesObj = {};';
-							featruesLi +=' featruesObj[0] = $("#segment'+count+'").val();';
-							featruesLi +=' featruesObj[1] = $(this).val();';
-							featruesLi +='	if(featruesObj[1] == ""){';
-							featruesLi +='	alert("条目编号必须填写");';
-							featruesLi +='};';
-							featruesLi +='$.post(';
-							featruesLi +=' "/Admin/HomeControl/slideAjax",';
-							featruesLi +='featruesObj,';
-							featruesLi +=' function(data){';
-							featruesLi +='$("#item'+count+'preview").find("img").removeClass("hidden").attr({"src":data.image,"alt":data.alt})';
-							featruesLi +='	},';
-							featruesLi +='	"json"';
-							featruesLi +=');';
+							featuresLi +='<script type="text/javascript">';
+							featuresLi +='$(".button-flat-caution.slide").click(function(){';
+							featuresLi +='$("#item'+count+'").detach();});';
+							featuresLi +='$("#item'+count+'id").change(function(){';
+							featuresLi +='$("div#features-item-preview'+count+'").detach();';
+							featuresLi += 'var featuresObj = {};';
+							featuresLi +=' featuresObj[0] = $("#segment'+count+'").val();';
+							featuresLi +=' featuresObj[1] = $(this).val();';
+							featuresLi +='	if(featuresObj[1] == ""){';
+							featuresLi +='	alert("条目编号必须填写");';
+							featuresLi +='};';
+							featuresLi +='$.post(';
+							featuresLi +=' "/Admin/HomeControl/slideAjax",';
+							featuresLi +='featuresObj,';
+							featuresLi +=' function(data){';
+							featuresLi +='$("#clickPreview'+count+'").detach();';
+							featuresLi +='$("#item'+count+'preview").find("img").removeClass("hidden").attr({"src":data.image,"alt":data.alt});';
+							featuresLi +='$("#item'+count+'preview").find("h5").empty().append(data.title);';
+							featuresLi +='$("#item'+count+'preview").find("p.item-description").empty().append(data.caption);';
+							featuresLi +='	},';
+							featuresLi +='	"json"';
+							featuresLi +=');';
 
-							featruesLi +='});';
-							featruesLi +='</'+'script>';
+							featuresLi +='});';
+							featuresLi +='</'+'script>';
 							
-			$('#featrues-li').append(featruesLi);
+			$('#features-li').append(featuresLi);
 			count = count+1;
 				if(count > 4){
 				$(this).attr('disabled','');	

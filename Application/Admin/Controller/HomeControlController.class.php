@@ -206,7 +206,17 @@ class HomeControlController extends AdminController {
 		
 		switch ($segment) {
 				case 'category': //内容分类类型
+					$category = M('category')->find($id);
+				
+					$info['segment'] = $segment;
+					$info['id']=$id;
+					$info['url'] = "/Home/category/id/".$id.".html";
+					$info['image'] = get_cover($category['icon'],'path');
+					$info['title']=$category['title'];
+					$info['alt']=$category['title'];
+					$info['caption']=$category['description'];
 					
+					unset($category);
 					break;
 					
 				case 'article'||'product'://文章及产品类型
@@ -349,7 +359,9 @@ class HomeControlController extends AdminController {
 	public function saveFeature(){
 		if(IS_POST || IS_AJAX){
 			$feature = I('post.');
-			var_dump($feature);
+			
+			//读取缓存中的特色内容
+			$feature = F('homeFeature',$feature);
 		}
 	}
 	
