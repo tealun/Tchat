@@ -1,38 +1,55 @@
 <extend name="Base/common"/>
 
 <block name="header">
-    <header class="jumbotron subhead" id="overview">
+    <header class="subhead" id="overview">
         <div class="container">
-
+			<div class="row">
+			  <img src="" alt="ad pics" height="70px" width="100%" />
+			</div>
+			<include file="Public/bread" />
         </div>
     </header>
 </block>
 
 <block name="body">
-    <div class="span9">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-            <article:list name="list" category="$category['id']" child="true">
-                <div class="">
-                    <h3><a href="{:U('Article/detail?id='.$list['id'])}">{$list.title}</a></h3>
-                </div>
-                <div>
-                    <p class="lead">{$list.description}</p>
-                </div>
-                <div>
-                    <span><a href="{:U('Article/detail?id='.$list['id'])}">查看全文</a></span>
-                    <span class="pull-right">
-                        <span class="author">{$list.uid|get_username}</span>
-                        <span>于 {$list.create_time|date='Y-m-d H:i',###}</span> 发表在 <span>
-                        <a href="{:U('Article/lists?category='.get_category_name($list['category_id']))}">{$list.category_id|get_category_title}</a></span> 
-                        <span>阅读( {$list.view} )</span>&nbsp;&nbsp;
-                    </span>
-                </div>
-                <hr/>
-            </article:list>
+	
+	<div class="container">
+		
+	<div class="row">
+		
+	    <div class="col-xs-12 col-md-8 category-list-box">
+		     <section id="contents">
+	            <article:list name="list" category="$category['id']" child="true">
+	                <div class="row">
+	                	<div class="col-md-2 category-list-pic tchat-padding-10">
+	                		<img src="{:get_cover($list['index_pic'],'path')}"  alt="{$list.title}" />
+	                	</div>
+	                	<div class="col-md-10">
+	                    	<h3><a href="{:U('Article/detail?id='.$list['id'])}">{$list.title}</a></h3>
+	                    	<p>{$list.description}</p>
+	                    	<p class="small tchat-padding-5 bg-info">
+			                   <span>
+			                        <span class="glyphicon glyphicon-user"></span> {$list.uid|get_username} | 
+			                        <span class="glyphicon glyphicon-calendar"></span> {$list.create_time|date='Y-m-d H:i',###} | 
+									<span class="glyphicon glyphicon-bookmark"></span> 
+			                        <a href="{:U('Article/lists?category='.get_category_name($list['category_id']))}">{$list.category_id|get_category_title} | </a> 
+			                        <span class="glyphicon glyphicon-eye-open"> {$list.view}</span>
+			                    </span>
+			                    <span class="label label-default pull-right"><a href="{:U('Article/detail?id='.$list['id'])}">查看全文</a></span>
+			                </p>
+	                	</div>
+	                </div>
+	                <hr/>
+	            </article:list>
+	         </section>
+	    </div>
+	    
+	    <div class="hidden-xs col-md-4">
+			<include file="Public/sidebar"/>
+	    </div>
+	</div>
 
-        </section>
+
     </div>
         </div>
 </block>

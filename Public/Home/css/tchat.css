@@ -17,6 +17,22 @@ ul{
 	padding-left:0;
 }
 
+.label a,.label a:hover,.label a:active{
+	color: #fff;
+}
+
+.tchat-padding-5 {
+	padding:5px;
+}
+
+.tchat-padding-10 {
+	padding:10px;
+}
+
+.tchat-padding-15 {
+	padding:15px;
+}
+
 /* HEADER 头部样式 */
 
 	/* navbar 主菜单导航栏 */
@@ -205,4 +221,23 @@ border-top:#dfdfdf 1px solid;
 	.suport_message{
 		text-align: left;
 	}
+}
+
+/* Article Index 页面样式 */
+.category-list-box {
+	padding-top:15px;
+	border-right:1px solid #dfdfdf;
+}
+
+.category-list-pic img{
+	width:100%;
+}
+
+.article-meta {
+	padding:5px;
+}
+
+/* SideBar 样式 */
+.sidebar-list{
+	margin-top:15px;
 }
