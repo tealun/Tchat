@@ -31,14 +31,14 @@ use Common\Controller\Addon;
 		//实现的homeLogo钩子方法
 		public function homeLogo(){
 			$defaultLogo = 'Public/Home/images/logo.png';
-			$logo = F('homeLogo')?F('homeLogo'):$defaultLogo;
+			$logo = F('Tchat/homeLogo')?F('Tchat/homeLogo'):$defaultLogo;
 			$this->assign('logo',$logo);
 			$this->display('logo');
 		}
 		
 		 //实现的homeSlideShow钩子方法
 		public function homeSlide(){
-			$slideList = F('homeSlide'); //获取幻灯片设置的内容
+			$slideList = F('Tchat/homeSlide'); //获取幻灯片设置的内容
 			$slideCount = count($slideList); //读取幻灯片的数量
 			
 			$this->assign('addons_slideList',$slideList);
@@ -51,7 +51,7 @@ use Common\Controller\Addon;
 		 * 此前台控制首页中特色栏目导航
 		 */
 		public function homeFeature(){
-			$feature = F('homeFeature');
+			$feature = F('Tchat/homeFeature');
 			
 			//赋值特色内容条目
 			if(is_null($feature['items'])){
@@ -79,14 +79,14 @@ use Common\Controller\Addon;
 		
 		//实现的documentDetailAfter钩子方法
 		public function documentDetailBefore(){
-			$beforeArticle = F('homeBeforeArticle');
+			$beforeArticle = F('Tchat/homeBeforeArticle');
 			$this->assign('addons_beforeArticle',$beforeArticle);
 			$this->display('beforeArticle');	
 		}
 		
 		//实现的documentDetailAfter钩子方法
 		public function documentDetailAfter(){
-			$afterArticle = F('homeAfterArticle');
+			$afterArticle = F('Tchat/homeAfterArticle');
 			$this->assign('addons_afterArticle',$afterArticle);
 			$this->display('afterArticle');	
 		}

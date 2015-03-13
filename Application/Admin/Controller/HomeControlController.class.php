@@ -97,7 +97,7 @@ class HomeControlController extends AdminController {
 	 *首页 LOGO设置
 	 */
 	public function logo(){
-		$logo=F('homeLogo')?F('homeLogo'):'';
+		$logo=F('Tchat/homeLogo')?F('Tchat/homeLogo'):'';
 		
 		$this -> assign('logo',$logo);		
 		$this->meta_title = 'LOGO配置';
@@ -113,7 +113,7 @@ class HomeControlController extends AdminController {
 		if(IS_POST || IS_AJAX){
 			$logo = I('post.logo');
 			if(!empty($logo)){
-				F('homeLogo',$logo);
+				F('Tchat/homeLogo',$logo);
 				$status = array(
 					'info'=>'LOGO更新成功',
 					'status'=>'1'
@@ -135,7 +135,7 @@ class HomeControlController extends AdminController {
 	 * 首页幻灯片设置
 	 */
 	public function slide(){
-		$list = F('homeSlide'); //获取幻灯片设置的内容
+		$list = F('Tchat/homeSlide'); //获取幻灯片设置的内容
 			if(!$list){
 				$count = 0;
 			}else{
@@ -161,9 +161,9 @@ class HomeControlController extends AdminController {
 					$slides[] = $this->slideInfo($value['segment'], $value['id']);
 				}
 
-				F('homeSlide',NULL);//删除旧的幻灯片数据
+				F('Tchat/homeSlide',NULL);//删除旧的幻灯片数据
 				
-				F('homeSlide',$slides);//更新新的幻灯片数据
+				F('Tchat/homeSlide',$slides);//更新新的幻灯片数据
 				
 				$status = array(
 						'info'=>'幻灯片更新成功',
@@ -288,7 +288,7 @@ class HomeControlController extends AdminController {
 	 * @param string $part 需要配置的选项
 	 */
 	public function article($part){
-		$value = F('home'.$part);
+		$value = F('Tchat/home'.$part);
 		if($value){
 			$this -> assign($part,$value);
 		}
@@ -316,8 +316,8 @@ class HomeControlController extends AdminController {
 		if(IS_POST || IS_AJAX){
 			$part = I('post.part');
 			$value = I('post.'.$part);
-			F('home'.$part,NULL);
-			F('home'.$part,$value);
+			F('Tchat/home'.$part,NULL);
+			F('Tchat/home'.$part,$value);
 			$status = array('info' => '更新成功','status'=>1 );
 		    $this -> ajaxReturn($status,'json');
 		}
@@ -331,7 +331,7 @@ class HomeControlController extends AdminController {
 	public function feature(){
 
 		//读取缓存中的特色内容
-		$feature = F('homeFeature');
+		$feature = F('Tchat/homeFeature');
 		
 		//赋值特色内容条目
 		if(is_null($feature['items'])){
@@ -361,7 +361,8 @@ class HomeControlController extends AdminController {
 			$feature = I('post.');
 			
 			//读取缓存中的特色内容
-			$feature = F('homeFeature',$feature);
+			$status = F('Tchat/homeFeature',$feature);
+
 		}
 	}
 	
@@ -397,7 +398,7 @@ class HomeControlController extends AdminController {
 			}
 			
 			/* 清除数据缓存 */
-			F('home'.$part,NULL);
+			F('Tchat/home'.$part,NULL);
 			
 			$status = array(
 					'info'=>$partname.'清除成功',
