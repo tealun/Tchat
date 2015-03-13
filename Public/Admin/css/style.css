@@ -63,23 +63,35 @@ body{
 }
 
 /* 用户 */
-.header .user-bar {
+/* Tchat change begin */
+.header .user-bar,.header .cache {
     position: relative;
     float: right;
     margin-right: 20px;
 }
-.header .user-bar .user-entrance {
+
+.header .cache .cache-delete,.header .user-bar .user-entrance {
     display: block;
     margin-top: 15px;
     padding-bottom: 15px;
     width: 20px;
     height: 20px;
+}
+
+.header .cache .cache-delete{
+	background: url(../images/bg_icon.png) no-repeat -176px -24px;
+}
+
+.header .user-bar .user-entrance {
     background: url(../images/bg_icon.png) no-repeat -150px 0;
 }
-.header .user-bar .user-entrance:hover {
+
+.header .user-bar .user-entrance:hover,.header .cache .cache-delete:hover {
     border-bottom: 0 none;
     text-decoration: none;
 }
+/* Tchat change end */
+
 .header .user-menu {
     position: absolute;
     top: 50px;
