@@ -1,10 +1,36 @@
-<switch name="featureStyle">
-	<case value="bootstrap3">
-		{$featureTitle};{$featureMoreLinkUrl}
-		<volist name="featureItems" id="vo">
-			{$vo.type},{$vo.title},{$vo.name},{$vo.id}
-		</volist>
-	</case>
-	<default />
+<if condition="isset($featureItems)">
+
+	<div class="container">
+		<div class="row features">
+	        <div class="features-box">
+	            <div class="box-hd">
+	                <span class="features-title"><h3 class="title">{$featureTitle}</h3></span>
+	                <a href="{$featureMoreLinkUrl}" target="_self" class="more-link hidden-xs"><span class="glyphicon glyphicon-chevron-right"></span> 查看更多</a>
+	            </div>
+	            <div class="box-bd">
+					<div class="container">
+						<div class="row">
+							<volist name="featureItems" id="itemli">
+								<div class="features-item col-xs-6 col-sm-3">
+								    <div class="item-content">
+								        <span class="item-thumb">
+								          <img src="{$itemli.image}" alt="{$itemli.alt}" />
+								        </span>
+								        <span class="item-title">{$itemli.title}</span>
+								        <span class="item-desc">{$itemli.caption}</span>
+								    </div>
+								</div>
+							</volist>
+						</div>
+					</div>
+		        </div>
+	 	   </div>
+		</div>
+		<div class="row visible-xs">
+			<span class="more-link-block">
+				<span class="glyphicon glyphicon-chevron-right"></span> 查看更多
+			</span>
+		</div>
+	</div>
 	
-</switch>
+</if>
