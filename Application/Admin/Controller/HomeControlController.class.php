@@ -158,7 +158,7 @@ class HomeControlController extends AdminController {
 				
 				/* 获取每条幻灯片的详细信息 */
 				foreach ($postSlides as $value) {
-					$slides[] = $this->slideInfo($value['segment'], $value['id']);
+					$slides[] = $this->findItemInfo($value['segment'], $value['id']);
 				}
 
 				F('Tchat/homeSlide',NULL);//删除旧的幻灯片数据
@@ -175,9 +175,97 @@ class HomeControlController extends AdminController {
 	}
 	
 	/**
-	 * AJAX获取幻灯片信息
+	 * 文章页面配置
+	 * 可根据需要在文章页面配置的多个钩子来实现文章挂载内容的配置
+	 * @param string $part 需要配置的选项
 	 */
-	public function slideAjax(){
+	public function article($part){
+		$value = F('Tchat/home'.$part);
+		if($value){
+			$this -> assign($part,$value);
+		}
+		switch ($part) {
+			case 'BeforeArticle':
+				$partName = "文前";
+				break;
+			case 'AfterArticle':
+				$partName = "文尾";
+				break;
+			default:
+				
+				break;
+		}
+		
+		$this->meta_title = $partName.'配置';
+		$this->display($part);
+	}
+	
+	/**
+	 * 存储文章相关设置内容
+	 * @param string $part 存储的位置 befor和after
+	 */
+	public function saveArticle(){
+		if(IS_POST || IS_AJAX){
+			$part = I('post.part');
+			$value = I('post.'.$part);
+			F('Tchat/home'.$part,NULL);
+			F('Tchat/home'.$part,$value);
+			$status = array('info' => '更新成功','status'=>1 );
+		    $this -> ajaxReturn($status,'json');
+		}
+	}
+	
+	/**
+	 * 设置首页特色内容展示
+	 * 本方法设置特色内容的数据，排版请在前台模板中进行排版
+	 * 返回数据为数组
+	 */
+	public function feature(){
+
+		//读取缓存中的特色内容
+		$feature = F('Tchat/homeFeature');
+		
+		//赋值特色内容条目
+		if(empty($feature['items'])){
+			$itemsCount = 0;
+		}else{
+			$itemsCount = count($feature['items']);
+			foreach ($feature['items'] as $key => $value) {
+				$feature['items'][$key]=$this->findItemInfo($value['type'],$value['id']);
+			}
+			$itemsCount = count($feature['items']);
+			$this->assign('featureItems',$feature['items']);
+			$this->assign('featureItemsCount',$itemsCount);
+		}
+		
+		//赋值特色内容板块标题
+		if($feature['title']){
+			$this->assign('featureTitle',$feature['title']);
+		}
+		
+		//赋值查看更多转向URL
+		if($feature['moreLinkUrl']){
+			$this->assign('featureMoreLinkUrl',$feature['moreLinkUrl']);
+		}
+		
+		$this->meta_title = '首页特色内容配置';
+		$this->display();
+	}
+	
+	public function saveFeature(){
+		if(IS_POST || IS_AJAX){
+			$feature = I('post.');
+			
+			//读取缓存中的特色内容
+			$status = F('Tchat/homeFeature',$feature);
+
+		}
+	}
+
+	/**
+	 * AJAX获取条目信息
+	 */
+	public function itemAjax(){
 		if(IS_POST||IS_AJAX){
 				$data = I('post.');
 				/* 对POST过来的数据进行过滤分配变量*/
@@ -188,7 +276,7 @@ class HomeControlController extends AdminController {
 					$segment = $data[0];
 					$id = $data[1];
 				}
-			$info = $this->slideInfo($segment,$id);
+			$info = $this->findItemInfo($segment,$id);
 			$this->ajaxReturn($info,'json');
 			}else{
 				$this->error('非法操作！');
@@ -196,13 +284,13 @@ class HomeControlController extends AdminController {
 	}
 	
 	/**
-	 * 获取一条幻灯片的详细信息
-	 * 根据不同类型的幻灯内容设置，获取对应ID的数据
-	 * @param string   $segment     幻灯片所属的内容类型
-	 * @param int         $id                幻灯片所属内容的ID
+	 * 获取一条展示条目的详细信息
+	 * 根据不同类型的条目内容设置，获取对应ID的数据
+	 * @param string   $segment  条目所属的内容类型
+	 * @param int      $id       幻灯片所属内容的ID
 	 * TODO 稍后完善不同内容类型的赋值
 	 */ 
-	public function slideInfo($segment=' ',$id=' '){
+	private function findItemInfo($segment=' ',$id=' '){
 		
 		switch ($segment) {
 				case 'category': //内容分类类型
@@ -282,90 +370,6 @@ class HomeControlController extends AdminController {
 
 	}
 
-	/**
-	 * 文章页面配置
-	 * 可根据需要在文章页面配置的多个钩子来实现文章挂载内容的配置
-	 * @param string $part 需要配置的选项
-	 */
-	public function article($part){
-		$value = F('Tchat/home'.$part);
-		if($value){
-			$this -> assign($part,$value);
-		}
-		switch ($part) {
-			case 'BeforeArticle':
-				$partName = "文前";
-				break;
-			case 'AfterArticle':
-				$partName = "文尾";
-				break;
-			default:
-				
-				break;
-		}
-		
-		$this->meta_title = $partName.'配置';
-		$this->display($part);
-	}
-	
-	/**
-	 * 存储文章相关设置内容
-	 * @param string $part 存储的位置 befor和after
-	 */
-	public function saveArticle(){
-		if(IS_POST || IS_AJAX){
-			$part = I('post.part');
-			$value = I('post.'.$part);
-			F('Tchat/home'.$part,NULL);
-			F('Tchat/home'.$part,$value);
-			$status = array('info' => '更新成功','status'=>1 );
-		    $this -> ajaxReturn($status,'json');
-		}
-	}
-	
-	/**
-	 * 设置首页特色内容展示
-	 * 本方法设置特色内容的数据，排版请在前台模板中进行排版
-	 * 返回数据为数组
-	 */
-	public function feature(){
-
-		//读取缓存中的特色内容
-		$feature = F('Tchat/homeFeature');
-		
-		//赋值特色内容条目
-		if(is_null($feature['items'])){
-			$itemsCount = 0;
-		}else{
-			$itemsCount = count($feature['items']);
-			$this->assign('featureItems',$feature['items']);
-			$this->assign('featureItemsCount',$itemsCount);
-		}
-		
-		//赋值特色内容板块标题
-		if($feature['title']){
-			$this->assign('featureTitle',$feature['title']);
-		}
-		
-		//赋值查看更多转向URL
-		if($feature['moreLinkUrl']){
-			$this->assign('featureMoreLinkUrl',$feature['moreLinkUrl']);
-		}
-		
-		$this->meta_title = '首页特色内容配置';
-		$this->display();
-	}
-	
-	public function saveFeature(){
-		if(IS_POST || IS_AJAX){
-			$feature = I('post.');
-			
-			//读取缓存中的特色内容
-			$status = F('Tchat/homeFeature',$feature);
-
-		}
-	}
-	
 	/**
 	 * 清除某项设置
 	 * @param string $part 要清除数据的模块标识

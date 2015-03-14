@@ -6,27 +6,14 @@
 	<div class="data-table">
 		<form action="{:U('saveFeature')}" class="form-horizontal config-form">
 			<fieldset>
-				<notempty name="featureItems">
-					<div id="feature-items">
-						 		<form action="{:U('saveFeature')}" method="post" accept-charset="utf-8">
 
-								       <ol class="row">
-
-								       </ol>
-								       <div class="row">
-								       	<p id="addItem" class="btn btn-default offset1" style="margin-top: 15px;">增加一条</p>
-								       </div>
-								       
-								 </form>
-
-					</div>
-					
-				<else />
+				<empty name="featureItems">
 	                    <div class="alert alert-block">
 						    <button type="button" class="close" data-dismiss="alert">&times;</button>
 						    <h4>注意！您还没有设置特色内容导航的图标设置</h4>
 						    您的站点还没有设置特色内容导航，在站点的首页里将不会有图标导航的模块，您可以在下面的栏目中进行配置，记得点确定保存哦。
 						 </div>
+				</empty>
 					 		<form action="{:U('saveFeature')}" method="post" accept-charset="utf-8">
 					 			
 					 			<div class="control-group">
@@ -44,16 +31,40 @@
 					 			<hr />
 								<div class="feature-items">
 							       <ol id="features-li" class="row">
-
+									<notempty name="featureItems">
+										<volist name="featureItems" id="itemli">
+											<li id="item{$i-1}" class="offset1 span10">
+												<div class="container">
+													<div class="row">
+														<div class="input-prepend span5">
+															<span class="add-on">选择类型</span>
+															<select name="items[{$i-1}][type]" class="span1" id="segment{$i-1}">
+															<option value="category" selected="true">分类</option>
+															<option value="article">文章</option></select>
+															<span class="offset1 add-on">填写编号</span>
+															<input id="item{$i-1}id" class="span1" name="items[{$i-1}][id]" type="text" value="{$itemli.id}">
+														</div>
+														<div class="span5" id="preview{$i-1}">
+															<div style="height:100px;width:100%;background-color: #A0A0A0;font-size:20px;text-align:center;line-height:100px;" id="item{$i-1}preview">
+																<img style="width:100%;" src="{$itemli.image}" alt="{$itemli.alt}">
+																<h5>{$itemli.title}</h5>
+																<p class="item-description">{$itemli.caption}</p>
+															</div>
+														</div>
+														<span class="button button-rounded button-flat-caution slide pull-right">
+															<i class="icon-remove"></i> 删除
+														</span>
+													</div>
+												</div>
+											</li>
+										</volist>
+									</notempty>
 							       </ol>
 							       <div class="row">
 							       	<p id="addItem" class="btn btn-default offset1" style="margin-top: 15px;">增加一条</p>
 							       </div>
 							    </div>
 							 </form>
-						 	
-						 
-</notempty>
 			</fieldset>
 
 			<button target-form="form-horizontal" type="submit" id="submit" class="btn submit-btn ajax-post hidden"><i class="icon-ok"></i> 确 定</button>
@@ -75,7 +86,7 @@
 	<include file="Public/footjs" />
 <if condition="isset($featureItemsCount)">
 	<script type="text/javascript">
-	var count = parseInt({$count});
+	var count = parseInt({$featureItemsCount});
 	</script>
 <else /> 
 	<script type="text/javascript">
@@ -93,12 +104,12 @@
 					var featuresLi = '<li id="item'+count+'" class="offset1 span10">';
 							featuresLi += '  <div class="container">';
 							featuresLi += '  <div class="row"><div class="input-prepend span5"><span class="add-on">选择类型</span>';
-							featuresLi +='<select name="item[0][\'type\']" class="span1" id="segment'+count+'" >>';
+							featuresLi +='<select name="items[0][type]" class="span1" id="segment'+count+'" >>';
 							featuresLi +='<option value="category" selected="true">分类</option>';
 							featuresLi +='<option value="article">文章</option>';
 							featuresLi +='</select>';
 							featuresLi +='<span class="offset1 add-on">填写编号</span>';
-							featuresLi +='<input id="item'+count+'id" class="span1" name="item['+count+'][\'id\']" type="text">';
+							featuresLi +='<input id="item'+count+'id" class="span1" name="items['+count+'][id]" type="text">';
 							featuresLi +='</div>';
 							featuresLi +='<div class="span5" id="preview'+count+'">';
 							featuresLi +='<div style="height:100px;width:100%;background-color: #A0A0A0;font-size:20px;text-align:center;line-height:100px;" id="item'+count+'preview">';
@@ -123,7 +134,7 @@
 							featuresLi +='	alert("条目编号必须填写");';
 							featuresLi +='};';
 							featuresLi +='$.post(';
-							featuresLi +=' "/Admin/HomeControl/slideAjax",';
+							featuresLi +=' "/Admin/HomeControl/itemAjax",';
 							featuresLi +='featuresObj,';
 							featuresLi +=' function(data){';
 							featuresLi +='$("#clickPreview'+count+'").detach();';
@@ -144,7 +155,7 @@
 				}											
 			}
 		});
-		
+
 		$(".button-flat-caution.slide").click(function(){
 		$(this).parent("li").detach();});
 		
