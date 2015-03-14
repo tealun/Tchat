@@ -24,6 +24,7 @@ UPDATE `onethink_hooks` SET `addons` = 'HomeControl' WHERE `id` = '5' LIMIT 1;
 INSERT INTO `onethink_hooks`  VALUES ('30', 'wechatIndex', '微信控制栏目首页钩子', '1', '1397114797', 'TchatIndex');
 INSERT INTO `onethink_hooks`  VALUES ('31', 'homeSlide', '首页幻灯片位置', '1', '1397114797', 'HomeControl');
 INSERT INTO `onethink_hooks`  VALUES ('32', 'homeLogo', '站点LOGO图片展示', '1', '1397114797', 'HomeControl');
+INSERT INTO `onethink_hooks`  VALUES ('33', 'homeFeature', '站点首页特色栏目展示', '1', '1397114797', 'HomeControl');
 
 -- -----------------------------
 -- Records of  `onethink_attribute`
@@ -399,7 +400,6 @@ INSERT INTO `onethink_auth_rule` VALUES ('602', 'admin', '1', 'Admin/HomeControl
 INSERT INTO `onethink_auth_rule` VALUES ('603', 'admin', '1', 'Admin/HomeControl/article?part=AfterArticle', '文尾配置', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('604', 'admin', '1', 'Admin/HomeControl/feature', '特色内容配置', '1', '');
 INSERT INTO `onethink_auth_rule` VALUES ('605', 'admin', '1', 'Admin/HomeControl/theme', '前台主题模板配置', '1', '');
-
 -- 系统升级权限设置
 
 INSERT INTO `onethink_auth_rule` VALUES ('650', 'admin', '1', 'Admin/Update/index', '查看版本', '1', '');
