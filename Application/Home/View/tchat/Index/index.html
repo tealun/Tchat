@@ -15,51 +15,22 @@
 			<div class="hidden-xs col-sm-7">
 				<div class="row home-web-guide">
 					<ul class="list-inline">
-					  <li class="col-sm-2">
-					      <p class="item-title">关于：</p>
-						  <ul>
-						  	<li>关于智承</li>
-						  </ul>
-					  </li>
-					  <li class="col-sm-2">
-					      <p class="item-title">栏目：</p>
-						  <ul>
-						  	<li>新闻动态</li>
-						  	<li>资料下载</li>
-						  	<li>视频教程</li>
-						  	<li>名师课堂</li>
-						  </ul>
-				      </li>
-					  <li class="col-sm-2">
-					      <p class="item-title">商务：</p>
-						  <ul>
-						  	<li>视频列表</li>
-						  	<li>购买方式</li>
-						  	<li>淘宝网店</li>
-						  	<li>诚征合作</li>
-						  </ul>
-				      </li>
-					  <li class="col-sm-2">
-					      <p class="item-title">联系：</p>
-						  <ul>
-						  	<li>在线提问</li>
-						  	<li>联系我们</li>
-						  </ul>
-				      </li>
-					  <li class="col-sm-2">
-					      <p class="item-title">帮助：</p>
-						  <ul>
-						  	<li>智承规则</li>
-						  	<li>常见问题</li>
-						  </ul>
-				      </li>
-					  <li class="col-sm-2">
-					     <p class="item-title">友链：</p>
-						  <ul>
-						  	<li>智承论坛</li>
-						  	<li>Tealun Du</li>
-						  </ul>
-				      </li>
+						<volist name="channel" id="chan">
+							<if condition="$chan['group'] eq '底部导航'" >
+								<notempty name="chan['_']">
+								  <li class="col-sm-2">
+								      <p class="item-title">{$chan.title}</p>
+									  <ul>
+											<volist name="chan['_']" id="subChan">
+												<li>
+													<a href="{$subChan.url}">{$subChan.title}</a>
+												</li>
+											</volist>
+									  </ul>
+								  </li>
+								</notempty>
+							</if>
+						</volist>
 					</ul>
 				</div>
 			</div>

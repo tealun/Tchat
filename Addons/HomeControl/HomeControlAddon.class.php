@@ -104,7 +104,7 @@ use Common\Controller\Addon;
 				
 					$info['segment'] = $segment;
 					$info['id']=$id;
-					$info['url'] = "/Home/category/id/".$id.".html";
+					$info['url'] = U('Home/Article/lists',array('category'=>$id));
 					$info['image'] = get_cover($category['icon'],'path');
 					$info['title']=$category['title'];
 					$info['alt']=$category['title'];

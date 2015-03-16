@@ -13,7 +13,7 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" href="#">欢迎光临{:C('WEB_SITE_TITLE')}!</a>
+		      <a class="navbar-brand" href="http://{$_SERVER['HTTP_HOST']}">欢迎光临{:C('WEB_SITE_TITLE')}!</a>
 		    </div>
 		
 		    <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,7 +58,7 @@
     	<div class="container page-holder">
     		<div class="row">
 	    		<div class="col-xs-12 col-sm-6 col-md-8">
-	    			<strong>{:C('WEB_SITE_TITLE')}</strong>
+	    			<strong><a herf="http://{$_SERVER['HTTP_HOST']}" target="_self">{:C('WEB_SITE_TITLE')}</a></strong>
 	    		</div>
 	    		<div class="col-sm-6 col-md-4">
 					<div class="input-group" style="margin-top:1em;">
@@ -77,7 +77,7 @@
 			<div class="row">
             <ul class="nav">
                 <think:nav name="nav">
-                	<eq name="nav.pid" value="0">
+                	<eq name="nav.group" value="默认分组">
                     <li>
                         <a href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}</a>
                     </li>
