@@ -60,6 +60,10 @@
 	line-height:24px;
 	background:#CCCCCC;
 	}
+	
+	.dropdown-menu li a{
+	 color:#000;
+	}
     </style>
     <block name="style"></block>
 </head>
@@ -80,7 +84,7 @@
 
         <!-- 用户栏 -->
         <div class="user-bar">
-            <a href="javascript:;" class="user-entrance"><i class="icon-user"></i></a>
+            <a href="javascript:;" class="user-entrance"></a>
             <ul class="nav-list user-menu hidden">
                 <li class="manager">您好，<em title="{:session('user_auth.username')}">{:session('user_auth.username')}</em></li>
                 <li><a href="{:U('User/updatePassword')}">修改密码</a></li>
@@ -89,12 +93,37 @@
             </ul>
         </div>
         
-        <!-- 缓存 -->
-        <div class="cache">
-            <a onclick="$.get('cc.php');alert('缓存清理成功。')"  class="cache-delete" title="清除缓存"><i class="icon-cache"></i></a>
-        </div>
+        <!-- 快捷通道 -->
+        	<div class="btn-group pull-right">
+			    <button class="btn btn-mini">小工具</button>
+			    <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+			    <span class="caret"></span>
+			    </button>
+			    <ul class="dropdown-menu">
+			    <li><a onclick="$.get('cc.php');alert('缓存清理成功。')"  class="cache-delete" title="清除缓存"><i class="icon-cache"></i> 缓存清理</a></li>
+			    <li><a onclick="$.get('cc.php');alert('缓存清理成功。')"  class="cache-delete" title="清除缓存"><i class="icon-cache"></i> 缓存清理</a></li>
+			    </ul>
+		    </div>  
+
+        	<!--  查看内容  -->
+		    <div class="btn-group pull-right">
+		    <button class="btn btn-mini">查看</button>
+		    <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+		    <span class="caret"></span>
+		    </button>
+		    <ul class="dropdown-menu">
+		    	<li><a id="list_category"  class="cache-delete" title="查看分类"><i class="icon-cache"></i> 查看分类</a></li>
+				<li><a id="list_articles"  class="cache-delete" title="查看文章"><i class="icon-cache"></i> 查看文章</a></li>
+				<li><a id="list_text" class="cache-delete" title="查看文本"><i class="icon-cache"></i> 查看文本</a></li>
+		    </ul>
+		    </div>        
     </div>
     <!-- /头部 -->
+    
+<div id="dialog">
+	<button class="close" onclick="closeBg()" type="button">×</button>
+	<div id="content_guide" style="position: relative;top:1em;">正在加载，请稍后....</div>
+</div>
 
     <!-- 边栏 -->
     <div class="sidebar">
@@ -249,6 +278,7 @@
 
         }();
     </script>
+    <include file="Public/footjs" />
     <block name="script"></block>
 </body>
 </html>

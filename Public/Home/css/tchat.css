@@ -56,12 +56,15 @@ ul{
 	padding-bottom:2em;
 }
 
-.page-holder strong{
+.page-holder a{
 	color:#003366;
 	font-size:3em;
 	font-family:'Microsoft Yahei', '微软雅黑', Helvetica,Arial,sans-serif;
 }
-
+.page-holder a:hover{
+	color:#333366;
+	text-decoration:none;
+}
 
 /* INDEX PAGE 首页样式 */
 
@@ -196,6 +199,15 @@ border-top:#dfdfdf 1px solid;
 }
 .home-web-guide{
 	border-right:1px solid #dfdfdf;
+}
+
+.home-web-guide a{
+	color:#8c8c8c;
+	line-height: 1.7em;
+}
+
+.home-web-guide a:hover{
+	color:#000040;
 }
 
 /* 二维码样式 */
